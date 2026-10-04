@@ -1,0 +1,39 @@
+{
+  "source": "/scratch/wgbs_benchmark_v3",
+  "destination": "/scratch/wgbs_benchmark_v4",
+  "date": "2026-10-02",
+  "active_scripts": [
+    "run_epykit.py",
+    "run_r_tool.R",
+    "analysis/run_publication_workflow.py",
+    "analysis/annotate_real_dmrs.R",
+    "src/wgbs_v3/{benchmark,score,provenance,__init__}.py"
+  ],
+  "datasets": [
+    "chr1_3_full_baseline",
+    "calibration_v5_full_null_870001",
+    "chr1_3_206_pilot",
+    "chr1_3_206_null_pilot"
+  ],
+  "real_input": "real_data/cov -> data/real_cov",
+  "historical": [
+    "results -> archive/v3/results",
+    "workbench -> archive/v3/workbench",
+    "development -> archive/v3/development",
+    "notes and analysis scripts -> archive/v3/context"
+  ],
+  "omitted": [
+    "BLUEPRINT downloads and calibration intermediates",
+    "redundant raw GEO archive/gzip inputs",
+    "old root launchers",
+    "unused simulator, tuning and study orchestration from active code"
+  ],
+  "changes": [
+    "Simulation sample paths rebased to v4",
+    "Digest made standalone to omit downloader dependency",
+    "Snapshot includes v4 entry point/helpers",
+    "Single-tool real run skips cross-tool annotation until comparison",
+    "New baseline/epykit/compare entry point"
+  ],
+  "copy_mode": "Independent cp --reflink=auto copies, no hard links or links to v3"
+}

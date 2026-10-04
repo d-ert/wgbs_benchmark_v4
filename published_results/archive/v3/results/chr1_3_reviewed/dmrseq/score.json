@@ -1,0 +1,42 @@
+{
+  "dataset": "data/chr1_3_full_baseline",
+  "eligible_count": 2656784,
+  "dmr": {
+    "matched_regions": 216,
+    "true_regions": 659,
+    "called_regions": 241,
+    "region_precision": 0.8962655601659751,
+    "region_recall": 0.3277693474962064,
+    "region_f1": 0.48,
+    "matched_direction_accuracy": 1.0,
+    "start_boundary_mae_bp": 287.43055555555554,
+    "end_boundary_mae_bp": 251.41203703703704,
+    "fragmented_true_regions": 1,
+    "merged_called_regions": 0,
+    "cpg_tp": 2617,
+    "cpg_fp": 158,
+    "cpg_fn": 3131,
+    "cpg_precision": 0.9430630630630631,
+    "cpg_recall": 0.45528879610299233,
+    "cpg_recall_full_truth": 0.2116286592269125
+  },
+  "dmr_80": {
+    "matched_regions": 72,
+    "true_regions": 659,
+    "called_regions": 241,
+    "region_precision": 0.2987551867219917,
+    "region_recall": 0.10925644916540213,
+    "region_f1": 0.16,
+    "matched_direction_accuracy": 1.0,
+    "start_boundary_mae_bp": 198.88888888888889,
+    "end_boundary_mae_bp": 142.11111111111111,
+    "fragmented_true_regions": 1,
+    "merged_called_regions": 0,
+    "cpg_tp": 2617,
+    "cpg_fp": 158,
+    "cpg_fn": 3131,
+    "cpg_precision": 0.9430630630630631,
+    "cpg_recall": 0.45528879610299233,
+    "cpg_recall_full_truth": 0.2116286592269125
+  }
+}

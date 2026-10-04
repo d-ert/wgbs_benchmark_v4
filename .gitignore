@@ -1,0 +1,13 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+/data/
+/results/
+/archive/
+/vendor310/
+validation/smoke/
+*.sock
+/.agents/
+/.aws/
+/.codex/
+/.github_upload/
