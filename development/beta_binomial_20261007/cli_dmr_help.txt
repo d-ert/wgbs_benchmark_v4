@@ -1,0 +1,113 @@
+usage: epykit dmr [-h] [--method {chain_merge,tile,sliding_window,segment}]
+                  --output OUTPUT [--methylstore METHYLSTORE]
+                  [--samplesheet SAMPLESHEET]
+                  [--treatment-group TREATMENT_GROUP]
+                  [--control-group CONTROL_GROUP]
+                  [--tile-size-bp TILE_SIZE_BP]
+                  [--min-cpgs-per-tile MIN_CPGS_PER_TILE]
+                  [--test {lr,glm,welch_t,fisher,beta_binomial}]
+                  [--empirical-fdr] [--n-perm N_PERM] [--perm-seed PERM_SEED]
+                  [--canonical-only] [--unite] [--no-unite]
+                  [--min-samples-treatment MIN_SAMPLES_TREATMENT]
+                  [--min-samples-control MIN_SAMPLES_CONTROL] [--allow-n1]
+                  [--dmc-results DMC_RESULTS] [--window-bp WINDOW_BP]
+                  [--step-bp STEP_BP] [--min-cpgs MIN_CPGS]
+                  [--min-sites-significant MIN_SITES_SIGNIFICANT]
+                  [--preset {strict,default,permissive}]
+                  [--dis-merge-bp DIS_MERGE_BP] [--pct-sig PCT_SIG]
+                  [--minlen-bp MINLEN_BP] [--use-q-for-sig] [--alpha ALPHA]
+                  [--min-abs-meth-diff MIN_ABS_METH_DIFF]
+                  [--min-mean-qvalue MIN_MEAN_QVALUE] [--no-tsv]
+                  [--tsv TSV_PATH]
+
+options:
+  -h, --help            show this help message and exit
+  --method {chain_merge,tile,sliding_window,segment}
+                        DMR algorithm. 'chain_merge' (default) chains
+                        contiguous significant CpGs from a precomputed DMC
+                        parquet into DSS-style regions; tune via --preset.
+                        'tile' pools reads across CpGs within each fixed-size
+                        tile and runs one test per tile. 'sliding_window'
+                        takes a precomputed DMC parquet and combines per-CpG
+                        p-values with signed Stouffer's Z (legacy). 'segment'
+                        rule-based 3-state segmentation on meth_diff signal
+                        with Stouffer-combined per-segment p-values.
+  --output OUTPUT
+  --methylstore METHYLSTORE
+                        (tile only) Path to filtered Parquet methylstore.
+  --samplesheet SAMPLESHEET
+                        (tile only) CSV: sample_id, group, path.
+  --treatment-group TREATMENT_GROUP
+                        (tile only) Group label for treatment samples.
+  --control-group CONTROL_GROUP
+                        (tile only) Group label for control samples.
+  --tile-size-bp TILE_SIZE_BP
+                        (tile only) Tile width in bp. Default 1000.
+  --min-cpgs-per-tile MIN_CPGS_PER_TILE
+                        (tile only) Minimum CpGs per tile per sample.
+  --test {lr,glm,welch_t,fisher,beta_binomial}
+                        (tile only) Statistical test applied to tile-level
+                        counts. Default 'lr': quasi-binomial LR with
+                        McCullagh-Nelder dispersion.
+  --empirical-fdr       (tile only) permutation-based empirical FDR.
+  --n-perm N_PERM       (tile only) Number of permutations when --empirical-
+                        fdr is set.
+  --perm-seed PERM_SEED
+                        (tile only) Seed for permutation RNG.
+  --canonical-only      (tile only) Test only the fixed human-style chromosome
+                        set (1-22, X, Y, M/MT, with or without a chr prefix)
+                        of the store's partitions; the same set is used by
+                        every --empirical-fdr permutation. The other methods
+                        inherit the DMC parquet's chromosomes and reject the
+                        flag: run epykit dmc --canonical-only instead.
+                        Default: every partition.
+  --unite               (tile only) Intersect: restrict to tiles covered in
+                        ALL samples (default: union, matching ep.tl.dmr).
+  --no-unite            (tile only) Union: test tiles covered in at least one
+                        sample (the default).
+  --min-samples-treatment MIN_SAMPLES_TREATMENT
+                        (tile only) Per-site minimum number of treatment
+                        samples with non-zero coverage. Sites failing the
+                        threshold are NaN'd before FDR. Useful with --no-unite
+                        .
+  --min-samples-control MIN_SAMPLES_CONTROL
+                        (tile only) Per-site minimum number of control samples
+                        with non-zero coverage.
+  --allow-n1            (tile only) Permit n=1 per group. The pooled Fisher
+                        exact engine is used automatically in this case (it is
+                        anti-conservative -- do not trust borderline calls).
+                        Default is to refuse, since between-replicate variance
+                        is ignored under this fallback.
+  --dmc-results DMC_RESULTS
+                        (chain_merge, sliding_window, segment) Parquet file
+                        from 'epykit dmc'
+  --window-bp WINDOW_BP
+  --step-bp STEP_BP
+  --min-cpgs MIN_CPGS   Minimum CpGs per DMR. Default when unset: the active
+                        --preset's value if a preset is given, otherwise 5
+                        (chain_merge, sliding_window, and segment all share
+                        this default).
+  --min-sites-significant MIN_SITES_SIGNIFICANT
+  --preset {strict,default,permissive}
+                        (chain_merge only) Parameter bundle from DMR_PRESETS.
+                        Explicit knob flags override the bundled value.
+  --dis-merge-bp DIS_MERGE_BP
+                        (chain_merge only) Max bp gap between consecutive
+                        significant CpGs in a chain. Highest-leverage knob.
+  --pct-sig PCT_SIG     (chain_merge only) Min fraction of CpGs in a span that
+                        must be significant.
+  --minlen-bp MINLEN_BP
+                        (chain_merge only) Min DMR span length in bp.
+  --use-q-for-sig       (chain_merge only) Gate significance on qvalue instead
+                        of pvalue when a qvalue column is present.
+  --alpha ALPHA
+  --min-abs-meth-diff MIN_ABS_METH_DIFF
+  --min-mean-qvalue MIN_MEAN_QVALUE
+                        (chain_merge, sliding_window, tile) Region-level
+                        q-value cutoff applied as a post-filter, matching
+                        ep.tl.dmr (default 0.05). The filter is strict (q <
+                        cutoff), so set to a value above 1.0 (e.g. 1.1) to
+                        disable -- 1.0 still drops regions with q == 1.0.
+  --no-tsv              Suppress the sibling .tsv auto-emit.
+  --tsv TSV_PATH        Override sibling table path. .csv suffix -> comma
+                        delim.

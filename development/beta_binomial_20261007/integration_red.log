@@ -1,0 +1,210 @@
+FFFFFFFFFF                                                               [100%]
+=================================== FAILURES ===================================
+_____________ test_public_count_engine_runs_and_reports_its_model ______________
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+
+    def test_public_count_engine_runs_and_reports_its_model(synth_md_filtered):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:11: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs0] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'contrast': 'treatment', 'formula': '~ treatment'}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs1] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'covariates': ['age']}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs2] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'smoothing': True}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs3] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'use_smoothed': True}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs4] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'dispersion': 'site'}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs5] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'sep_fallback': True}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs6] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'neighbour_combine': True}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+__ test_unsupported_requests_are_refused_before_running_an_old_engine[knobs7] __
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+knobs = {'empirical_fdr': True}
+
+    @pytest.mark.parametrize('knobs',[
+        {'formula':'~ treatment','contrast':'treatment'},
+        {'covariates':['age']}, {'smoothing':True}, {'use_smoothed':True},
+        {'dispersion':'site'}, {'sep_fallback':True}, {'neighbour_combine':True},
+        {'empirical_fdr':True},
+    ])
+    def test_unsupported_requests_are_refused_before_running_an_old_engine(synth_md_filtered,knobs):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:38: AssertionError
+_________ test_profile_interval_setting_invalidates_count_engine_cache _________
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+
+    def test_profile_interval_setting_invalidates_count_engine_cache(synth_md_filtered):
+>       assert 'beta_binomial' in PUBLIC_ENGINES, 'The count engine is not a public choice'
+E       AssertionError: The count engine is not a public choice
+E       assert 'beta_binomial' in ('lr', 'glm', 'welch_t', 'fisher')
+
+tests/test_beta_binomial_engine.py:46: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_engine.py::test_public_count_engine_runs_and_reports_its_model
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs0]
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs1]
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs2]
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs3]
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs4]
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs5]
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs6]
+FAILED tests/test_beta_binomial_engine.py::test_unsupported_requests_are_refused_before_running_an_old_engine[knobs7]
+FAILED tests/test_beta_binomial_engine.py::test_profile_interval_setting_invalidates_count_engine_cache
+10 failed in 2.08s

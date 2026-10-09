@@ -1,0 +1,877 @@
+{
+  "kind": "known-rho analytical reference development diagnostic",
+  "source_sha256": {
+    "known_rho_diagnostic.py": "5835f562b7642790c239c1a72ce54cef42ae09109ff20dc16daf899d86ca421d",
+    "_count_score.py": "2b6a47f5da952afe6ece12d3622b95849b403509545c3180d6954cdd38571249"
+  },
+  "seed": 202610091,
+  "sites_per_scenario": 5000,
+  "elapsed_seconds": 2.8953364938497543,
+  "limits": "Independent CpGs; fixed known rho; one realization per scenario. BH calls on one null realization do not estimate FDR.",
+  "records": [
+    {
+      "replicates": 3,
+      "mean": 0.01,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.022362072853303053,
+      "rejection_rates": {
+        "0.05": 0.0026,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.01,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.013389668966938884,
+      "rejection_rates": {
+        "0.05": 0.0316,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.01,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0043593501158613,
+      "rejection_rates": {
+        "0.05": 0.003,
+        "0.01": 0.0002,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.01,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.014121347413449593,
+      "rejection_rates": {
+        "0.05": 0.0048,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.01,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.030110536562595845,
+      "rejection_rates": {
+        "0.05": 0.0006,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.01,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.01320011393607148,
+      "rejection_rates": {
+        "0.05": 0.0008,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00033278896431181875,
+      "rejection_rates": {
+        "0.05": 0.049,
+        "0.01": 0.008,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00012328357408218264,
+      "rejection_rates": {
+        "0.05": 0.0562,
+        "0.01": 0.0092,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0023323709760139258,
+      "rejection_rates": {
+        "0.05": 0.0418,
+        "0.01": 0.004,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.003905581150013967,
+      "rejection_rates": {
+        "0.05": 0.039,
+        "0.01": 0.0044,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.001992015768001459,
+      "rejection_rates": {
+        "0.05": 0.0216,
+        "0.01": 0.001,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.003169519618814588,
+      "rejection_rates": {
+        "0.05": 0.0254,
+        "0.01": 0.0012,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 7.501319466545911e-05,
+      "rejection_rates": {
+        "0.05": 0.0576,
+        "0.01": 0.0082,
+        "0.001": 0.0014,
+        "0.0001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00011568360299507526,
+      "rejection_rates": {
+        "0.05": 0.0472,
+        "0.01": 0.0118,
+        "0.001": 0.0014,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00014937552862708166,
+      "rejection_rates": {
+        "0.05": 0.0598,
+        "0.01": 0.0096,
+        "0.001": 0.001,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 3.7842394206345716e-05,
+      "rejection_rates": {
+        "0.05": 0.0468,
+        "0.01": 0.01,
+        "0.001": 0.0012,
+        "0.0001": 0.0004
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0003334531862507359,
+      "rejection_rates": {
+        "0.05": 0.0546,
+        "0.01": 0.0116,
+        "0.001": 0.0006,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.000278402476633698,
+      "rejection_rates": {
+        "0.05": 0.0454,
+        "0.01": 0.0076,
+        "0.001": 0.0006,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.01,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.012879642652414916,
+      "rejection_rates": {
+        "0.05": 0.0144,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.01,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.002476473129166315,
+      "rejection_rates": {
+        "0.05": 0.045,
+        "0.01": 0.003,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.01,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.01455673387912423,
+      "rejection_rates": {
+        "0.05": 0.0044,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.01,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.008515834105266932,
+      "rejection_rates": {
+        "0.05": 0.0046,
+        "0.01": 0.0002,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.01,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.019972315526933276,
+      "rejection_rates": {
+        "0.05": 0.0012,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.01,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.02585567943732306,
+      "rejection_rates": {
+        "0.05": 0.001,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00029763818649694015,
+      "rejection_rates": {
+        "0.05": 0.0522,
+        "0.01": 0.0078,
+        "0.001": 0.0006,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00015620224575691,
+      "rejection_rates": {
+        "0.05": 0.0498,
+        "0.01": 0.0082,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0013248907007535123,
+      "rejection_rates": {
+        "0.05": 0.0448,
+        "0.01": 0.0072,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0009426131257398775,
+      "rejection_rates": {
+        "0.05": 0.0438,
+        "0.01": 0.0062,
+        "0.001": 0.0002,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.000998792307660274,
+      "rejection_rates": {
+        "0.05": 0.0348,
+        "0.01": 0.003,
+        "0.001": 0.0002,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00190836744681204,
+      "rejection_rates": {
+        "0.05": 0.0298,
+        "0.01": 0.0032,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00021246181919488147,
+      "rejection_rates": {
+        "0.05": 0.0576,
+        "0.01": 0.0098,
+        "0.001": 0.0012,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0008777371312754125,
+      "rejection_rates": {
+        "0.05": 0.0402,
+        "0.01": 0.0072,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0001155615780334699,
+      "rejection_rates": {
+        "0.05": 0.0456,
+        "0.01": 0.0078,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 8.426112130677066e-05,
+      "rejection_rates": {
+        "0.05": 0.0536,
+        "0.01": 0.0096,
+        "0.001": 0.001,
+        "0.0001": 0.0004
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00017904582503147764,
+      "rejection_rates": {
+        "0.05": 0.0498,
+        "0.01": 0.0082,
+        "0.001": 0.0008,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00017158920787735515,
+      "rejection_rates": {
+        "0.05": 0.0546,
+        "0.01": 0.009,
+        "0.001": 0.0012,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.01,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.002410702375489251,
+      "rejection_rates": {
+        "0.05": 0.0404,
+        "0.01": 0.0016,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.01,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0004935691627350109,
+      "rejection_rates": {
+        "0.05": 0.0422,
+        "0.01": 0.004,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.01,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.011776761431905616,
+      "rejection_rates": {
+        "0.05": 0.013,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.01,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0008207129286960316,
+      "rejection_rates": {
+        "0.05": 0.019,
+        "0.01": 0.002,
+        "0.001": 0.0002,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.01,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.014047441020012359,
+      "rejection_rates": {
+        "0.05": 0.0024,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.01,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.02043364238269631,
+      "rejection_rates": {
+        "0.05": 0.0038,
+        "0.01": 0.0,
+        "0.001": 0.0,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00047533723153763216,
+      "rejection_rates": {
+        "0.05": 0.0432,
+        "0.01": 0.0104,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00015292911076889018,
+      "rejection_rates": {
+        "0.05": 0.0492,
+        "0.01": 0.0086,
+        "0.001": 0.001,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0008476741516273299,
+      "rejection_rates": {
+        "0.05": 0.0478,
+        "0.01": 0.0076,
+        "0.001": 0.0002,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0007203828178918057,
+      "rejection_rates": {
+        "0.05": 0.044,
+        "0.01": 0.0076,
+        "0.001": 0.0002,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0008929167698190835,
+      "rejection_rates": {
+        "0.05": 0.0446,
+        "0.01": 0.006,
+        "0.001": 0.0002,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0004652692164573027,
+      "rejection_rates": {
+        "0.05": 0.0354,
+        "0.01": 0.005,
+        "0.001": 0.0008,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 2.6297713841063967e-05,
+      "rejection_rates": {
+        "0.05": 0.0494,
+        "0.01": 0.0116,
+        "0.001": 0.002,
+        "0.0001": 0.0004
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 1.4289948828323361e-05,
+      "rejection_rates": {
+        "0.05": 0.0502,
+        "0.01": 0.0086,
+        "0.001": 0.0004,
+        "0.0001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.05,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.0007604797022767612,
+      "rejection_rates": {
+        "0.05": 0.0478,
+        "0.01": 0.009,
+        "0.001": 0.0004,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.05,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00032888228060254984,
+      "rejection_rates": {
+        "0.05": 0.054,
+        "0.01": 0.013,
+        "0.001": 0.0006,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.2,
+      "depths": "equal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 0.00047555823387448006,
+      "rejection_rates": {
+        "0.05": 0.0536,
+        "0.01": 0.0108,
+        "0.001": 0.0006,
+        "0.0001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.2,
+      "depths": "unequal",
+      "sites": 5000,
+      "estimable": 5000,
+      "minimum_p": 8.550447205039857e-05,
+      "rejection_rates": {
+        "0.05": 0.0498,
+        "0.01": 0.0106,
+        "0.001": 0.0008,
+        "0.0001": 0.0002
+      },
+      "bh_calls_05": 0
+    }
+  ]
+}

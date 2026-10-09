@@ -1,0 +1,3902 @@
+{
+  "kind": "estimated-rho development diagnostic",
+  "source_sha256": {
+    "estimated_rho_diagnostic.py": "8d2a14e5a20919cd32ab7b9401358c076bac7019b76c0f051b52b44f942e5789",
+    "_count_score.py": "2b6a47f5da952afe6ece12d3622b95849b403509545c3180d6954cdd38571249",
+    "_dispersion_prior.py": "22549827f42b67c04cf621285e1d24eda6dafdc858c15d42b4c9c6fa8fff0e64",
+    "_beta_binomial.py": "b1d807f0824be699f32a95f3cbd694388c501403b778e8a1ac241fba4a7ed9a3"
+  },
+  "seeds": "202610092+replicates (training); 202610102+replicates (test)",
+  "elapsed_seconds": 107.37383932992816,
+  "records": [
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4541457500308752,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.019262324379428184,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.01894914335908883,
+      "rejection_rates": {
+        "0.05": 0.0016,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.7090564519166946,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.01968564160318272,
+      "iteration_converged": 0.9846,
+      "minimum_p": 0.02033679555006342,
+      "rejection_rates": {
+        "0.05": 0.0006,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.38596449978649616,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.017150041890911412,
+      "iteration_converged": 0.9048,
+      "minimum_p": 0.020463259115741685,
+      "rejection_rates": {
+        "0.05": 0.0004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6404646933078766,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.018553388034449433,
+      "iteration_converged": 0.8816,
+      "minimum_p": 0.024973698913949332,
+      "rejection_rates": {
+        "0.05": 0.0004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4489347580820322,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.019565771543972373,
+      "iteration_converged": 0.9992,
+      "minimum_p": 0.011078327913445422,
+      "rejection_rates": {
+        "0.05": 0.011,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.7053330540657043,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.019835806836210747,
+      "iteration_converged": 0.9942,
+      "minimum_p": 0.012696418851496317,
+      "rejection_rates": {
+        "0.05": 0.009,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4190457332879305,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.018622531133384176,
+      "iteration_converged": 0.8804,
+      "minimum_p": 0.002132185804093572,
+      "rejection_rates": {
+        "0.05": 0.0216,
+        "0.01": 0.0008,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6771181058138609,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.01933585102964727,
+      "iteration_converged": 0.8538,
+      "minimum_p": 0.004057674553423281,
+      "rejection_rates": {
+        "0.05": 0.022,
+        "0.01": 0.0014,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4490898810327053,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.02010584212833347,
+      "iteration_converged": 0.9994,
+      "minimum_p": 0.0009485191855375242,
+      "rejection_rates": {
+        "0.05": 0.0608,
+        "0.01": 0.0066,
+        "0.001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.7147639691829681,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.02010584212833347,
+      "iteration_converged": 0.9988,
+      "minimum_p": 0.0005873251971842881,
+      "rejection_rates": {
+        "0.05": 0.0614,
+        "0.01": 0.0138,
+        "0.001": 0.001
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.45149814896285534,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.02010584212833347,
+      "iteration_converged": 0.8762,
+      "minimum_p": 8.57153177941939e-05,
+      "rejection_rates": {
+        "0.05": 0.1022,
+        "0.01": 0.017,
+        "0.001": 0.002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.7220980767160654,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.02010584212833347,
+      "iteration_converged": 0.858,
+      "minimum_p": 3.674218681219311e-05,
+      "rejection_rates": {
+        "0.05": 0.1206,
+        "0.01": 0.0412,
+        "0.001": 0.0058
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.35914311930537224,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.01714557630004626,
+      "iteration_converged": 0.9994,
+      "minimum_p": 0.0010081651269317243,
+      "rejection_rates": {
+        "0.05": 0.0224,
+        "0.01": 0.0032,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6184019632637501,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.019715427399316473,
+      "iteration_converged": 0.9976,
+      "minimum_p": 0.001982704546402208,
+      "rejection_rates": {
+        "0.05": 0.0134,
+        "0.01": 0.002,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.31933150067925453,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.011811300648793249,
+      "iteration_converged": 0.6576,
+      "minimum_p": 0.004259257193026525,
+      "rejection_rates": {
+        "0.05": 0.0066,
+        "0.01": 0.0004,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5794276688247919,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.016510525875417032,
+      "iteration_converged": 0.7888,
+      "minimum_p": 0.022980855588939173,
+      "rejection_rates": {
+        "0.05": 0.003,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.36412458308041096,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.018910890071381917,
+      "iteration_converged": 0.9992,
+      "minimum_p": 0.0007160389122754968,
+      "rejection_rates": {
+        "0.05": 0.0502,
+        "0.01": 0.007,
+        "0.001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6225519068539143,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.02092430969296732,
+      "iteration_converged": 0.9972,
+      "minimum_p": 0.0012915772551417074,
+      "rejection_rates": {
+        "0.05": 0.0384,
+        "0.01": 0.0058,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.36330864764750004,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.01634411562308001,
+      "iteration_converged": 0.5948,
+      "minimum_p": 1.3285392075696309e-05,
+      "rejection_rates": {
+        "0.05": 0.0666,
+        "0.01": 0.0172,
+        "0.001": 0.0016
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6214454378932714,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.019720060979446504,
+      "iteration_converged": 0.707,
+      "minimum_p": 0.00026068988257507507,
+      "rejection_rates": {
+        "0.05": 0.0404,
+        "0.01": 0.0036,
+        "0.001": 0.0006
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.3928978219628334,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.023739801237685737,
+      "iteration_converged": 0.999,
+      "minimum_p": 0.00012541455521861746,
+      "rejection_rates": {
+        "0.05": 0.1544,
+        "0.01": 0.0448,
+        "0.001": 0.003
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6519026271998882,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.025103041620097355,
+      "iteration_converged": 0.9954,
+      "minimum_p": 1.0564752278499694e-05,
+      "rejection_rates": {
+        "0.05": 0.1598,
+        "0.01": 0.0528,
+        "0.001": 0.0108
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.38650636933743954,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.02720186889620797,
+      "iteration_converged": 0.6592,
+      "minimum_p": 5.372534083528642e-07,
+      "rejection_rates": {
+        "0.05": 0.2162,
+        "0.01": 0.0898,
+        "0.001": 0.026
+      },
+      "bh_calls_05": 185
+    },
+    {
+      "replicates": 3,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6623166874051094,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.028255943690659983,
+      "iteration_converged": 0.6832,
+      "minimum_p": 7.327425105084505e-08,
+      "rejection_rates": {
+        "0.05": 0.2308,
+        "0.01": 0.1026,
+        "0.001": 0.0318
+      },
+      "bh_calls_05": 269
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.17312690243124962,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.10727221037191027,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.04650273636493329,
+      "rejection_rates": {
+        "0.05": 0.0002,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.3082021716982126,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.1121034401976308,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.04186960885566954,
+      "rejection_rates": {
+        "0.05": 0.0004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.3177536278963089,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.10677576419946253,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.08017221483387597,
+      "rejection_rates": {
+        "0.05": 0.0,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5872139874845743,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.1119151229158642,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.08173144833994204,
+      "rejection_rates": {
+        "0.05": 0.0,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.17225445993244648,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.10835930331620125,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.009252996090701331,
+      "rejection_rates": {
+        "0.05": 0.0042,
+        "0.01": 0.0002,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.45094214379787445,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.11259136645647957,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.006159478354433341,
+      "rejection_rates": {
+        "0.05": 0.0046,
+        "0.01": 0.0004,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.32332476414740086,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.10789994528032192,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.024252364664986942,
+      "rejection_rates": {
+        "0.05": 0.0016,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5949847772717476,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.11241389650979855,
+      "iteration_converged": 0.9974,
+      "minimum_p": 0.019361545710567647,
+      "rejection_rates": {
+        "0.05": 0.0022,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.3320021480321884,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.11267743044054068,
+      "iteration_converged": 0.9998,
+      "minimum_p": 0.0001298729317574286,
+      "rejection_rates": {
+        "0.05": 0.058,
+        "0.01": 0.0104,
+        "0.001": 0.0006
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6151896603405476,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.11424084017866637,
+      "iteration_converged": 0.9984,
+      "minimum_p": 2.033928633543784e-05,
+      "rejection_rates": {
+        "0.05": 0.064,
+        "0.01": 0.014,
+        "0.001": 0.0018
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.3390731252729893,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.1119871585007019,
+      "iteration_converged": 0.9912,
+      "minimum_p": 0.00013164132250718767,
+      "rejection_rates": {
+        "0.05": 0.0548,
+        "0.01": 0.0124,
+        "0.001": 0.0022
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 3,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.020105842128333468,
+          0.02155245893467073,
+          0.08451746997859143,
+          0.11688357670480255
+        ],
+        "training_digest": "a30944083902154a56c7c4bde21775218d393f2b0bbb365343cf46d56ea9dfa6",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6127534005790949,
+      "training_seconds": 6.415646648034453,
+      "estimable": 5000,
+      "median_rho": 0.11387235598971937,
+      "iteration_converged": 0.9778,
+      "minimum_p": 3.1101118439171277e-08,
+      "rejection_rates": {
+        "0.05": 0.0674,
+        "0.01": 0.019,
+        "0.001": 0.0054
+      },
+      "bh_calls_05": 9
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.34030940383672714,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.021121621976357554,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.022241230438532076,
+      "rejection_rates": {
+        "0.05": 0.004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.017496844753623,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.0216470413970897,
+      "iteration_converged": 0.9966,
+      "minimum_p": 0.023745869718893947,
+      "rejection_rates": {
+        "0.05": 0.004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5615592803806067,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.018917979252737107,
+      "iteration_converged": 0.994,
+      "minimum_p": 0.028224683657656183,
+      "rejection_rates": {
+        "0.05": 0.0016,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9730353709310293,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.020403469034968175,
+      "iteration_converged": 0.9938,
+      "minimum_p": 0.03187071876198179,
+      "rejection_rates": {
+        "0.05": 0.0012,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.34631142765283585,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.021647041401059053,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.008801241692921158,
+      "rejection_rates": {
+        "0.05": 0.0182,
+        "0.01": 0.0004,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.0385514236986637,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.02184934768631916,
+      "iteration_converged": 0.994,
+      "minimum_p": 0.00662287931949766,
+      "rejection_rates": {
+        "0.05": 0.0182,
+        "0.01": 0.0008,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5921730119735003,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.020979552743194893,
+      "iteration_converged": 0.985,
+      "minimum_p": 0.005483565768545592,
+      "rejection_rates": {
+        "0.05": 0.0304,
+        "0.01": 0.0014,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.007273068651557,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.02152823900451073,
+      "iteration_converged": 0.9786,
+      "minimum_p": 0.005577452906421082,
+      "rejection_rates": {
+        "0.05": 0.0316,
+        "0.01": 0.0014,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.3626046571880579,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.022100614048252067,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.00043462684180707074,
+      "rejection_rates": {
+        "0.05": 0.081,
+        "0.01": 0.0064,
+        "0.001": 0.0004
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.065815843641758,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.022079888200521713,
+      "iteration_converged": 0.9954,
+      "minimum_p": 0.0002498767906695055,
+      "rejection_rates": {
+        "0.05": 0.0894,
+        "0.01": 0.0194,
+        "0.001": 0.0016
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.6501139961183071,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.02323217471721837,
+      "iteration_converged": 0.9572,
+      "minimum_p": 7.971089022023681e-05,
+      "rejection_rates": {
+        "0.05": 0.139,
+        "0.01": 0.0272,
+        "0.001": 0.0008
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.0671376269310713,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.02266957134199895,
+      "iteration_converged": 0.9484,
+      "minimum_p": 1.2967587197706216e-06,
+      "rejection_rates": {
+        "0.05": 0.1642,
+        "0.01": 0.059,
+        "0.001": 0.0106
+      },
+      "bh_calls_05": 6
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4971823878586292,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.021150979142940205,
+      "iteration_converged": 0.9998,
+      "minimum_p": 0.002244116898997759,
+      "rejection_rates": {
+        "0.05": 0.0176,
+        "0.01": 0.0016,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9106269907206297,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.022553911526678135,
+      "iteration_converged": 0.9986,
+      "minimum_p": 0.0036779571990710703,
+      "rejection_rates": {
+        "0.05": 0.0118,
+        "0.01": 0.0006,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4947797320783138,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.019297796134267665,
+      "iteration_converged": 0.9928,
+      "minimum_p": 0.008967798411657912,
+      "rejection_rates": {
+        "0.05": 0.0028,
+        "0.01": 0.0002,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9089445769786835,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.021059425291309143,
+      "iteration_converged": 0.986,
+      "minimum_p": 0.014264463088440664,
+      "rejection_rates": {
+        "0.05": 0.002,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.41982406564056873,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.022165474164874,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0008482399642520959,
+      "rejection_rates": {
+        "0.05": 0.0552,
+        "0.01": 0.0082,
+        "0.001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9583356194198132,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.023631597232440002,
+      "iteration_converged": 0.995,
+      "minimum_p": 0.000831073307793141,
+      "rejection_rates": {
+        "0.05": 0.044,
+        "0.01": 0.005,
+        "0.001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5050877667963505,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.021322298799430303,
+      "iteration_converged": 0.9566,
+      "minimum_p": 0.00018920785646026777,
+      "rejection_rates": {
+        "0.05": 0.051,
+        "0.01": 0.0108,
+        "0.001": 0.001
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9216284826397896,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.02266651393730055,
+      "iteration_converged": 0.933,
+      "minimum_p": 0.0014994296352293598,
+      "rejection_rates": {
+        "0.05": 0.0358,
+        "0.01": 0.005,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.30404822528362274,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.02897500813776599,
+      "iteration_converged": 1.0,
+      "minimum_p": 4.251164956214699e-05,
+      "rejection_rates": {
+        "0.05": 0.1432,
+        "0.01": 0.0452,
+        "0.001": 0.0074
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9691745582967997,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.03138715778687295,
+      "iteration_converged": 0.9878,
+      "minimum_p": 1.161270416204215e-06,
+      "rejection_rates": {
+        "0.05": 0.1526,
+        "0.01": 0.054,
+        "0.001": 0.0112
+      },
+      "bh_calls_05": 22
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5766718108206987,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.03977423599215098,
+      "iteration_converged": 0.8378,
+      "minimum_p": 6.882519096508915e-07,
+      "rejection_rates": {
+        "0.05": 0.166,
+        "0.01": 0.0678,
+        "0.001": 0.0224
+      },
+      "bh_calls_05": 126
+    },
+    {
+      "replicates": 5,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.0032855961471796,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.04291841727476428,
+      "iteration_converged": 0.8196,
+      "minimum_p": 1.6013011922342843e-10,
+      "rejection_rates": {
+        "0.05": 0.2046,
+        "0.01": 0.0912,
+        "0.001": 0.03
+      },
+      "bh_calls_05": 212
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.26734221540391445,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.1222653180716359,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0425340768961092,
+      "rejection_rates": {
+        "0.05": 0.0004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4795319028198719,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12397385472093855,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.043593801972101685,
+      "rejection_rates": {
+        "0.05": 0.0004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5119843725115061,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12169289565300181,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0661490923688188,
+      "rejection_rates": {
+        "0.05": 0.0,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9409769792109728,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.1237206262750031,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.06793836012349683,
+      "rejection_rates": {
+        "0.05": 0.0,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.2676509413868189,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12267192875796784,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.019490954739413986,
+      "rejection_rates": {
+        "0.05": 0.0024,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.48092289827764034,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.1241975605568956,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.015609916029350565,
+      "rejection_rates": {
+        "0.05": 0.0024,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5171402487903833,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12228723311471246,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.045684106841768005,
+      "rejection_rates": {
+        "0.05": 0.0004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9447948262095451,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12399892888645148,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0470552581000306,
+      "rejection_rates": {
+        "0.05": 0.0004,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.27430009096860886,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12440446156402556,
+      "iteration_converged": 1.0,
+      "minimum_p": 7.792881872033182e-05,
+      "rejection_rates": {
+        "0.05": 0.0478,
+        "0.01": 0.0092,
+        "0.001": 0.0012
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9471971038728952,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12526854616599004,
+      "iteration_converged": 0.9998,
+      "minimum_p": 6.496250771107547e-06,
+      "rejection_rates": {
+        "0.05": 0.0504,
+        "0.01": 0.0112,
+        "0.001": 0.0024
+      },
+      "bh_calls_05": 1
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5251837447285652,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.1242377288880987,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0002073806358300703,
+      "rejection_rates": {
+        "0.05": 0.0438,
+        "0.01": 0.007,
+        "0.001": 0.0012
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 5,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.022051653971454848,
+          0.025061063205436468,
+          0.08860231498593696,
+          0.1264279264065383
+        ],
+        "training_digest": "65630c24fbe53133612fc03e90fc685d8d240aebf39508bbe2f8f698cc5fbc09",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9649670701473951,
+      "training_seconds": 7.877279045060277,
+      "estimable": 5000,
+      "median_rho": 0.12516090522642032,
+      "iteration_converged": 0.9964,
+      "minimum_p": 1.7325672565296314e-05,
+      "rejection_rates": {
+        "0.05": 0.0474,
+        "0.01": 0.009,
+        "0.001": 0.0018
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5746696088463068,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.0237555029748924,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.007834583075401256,
+      "rejection_rates": {
+        "0.05": 0.0136,
+        "0.01": 0.0002,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.835588639602065,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.024395284523843118,
+      "iteration_converged": 0.999,
+      "minimum_p": 0.008386792654569845,
+      "rejection_rates": {
+        "0.05": 0.012,
+        "0.01": 0.0002,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9723444115370512,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.02118996495754499,
+      "iteration_converged": 0.9998,
+      "minimum_p": 0.02392075336397591,
+      "rejection_rates": {
+        "0.05": 0.0018,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.7794808242470026,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.022916981797843336,
+      "iteration_converged": 0.9998,
+      "minimum_p": 0.025729116905212176,
+      "rejection_rates": {
+        "0.05": 0.0014,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5805426873266697,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.024511394664824715,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.00313422366452736,
+      "rejection_rates": {
+        "0.05": 0.0354,
+        "0.01": 0.0034,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.8634346816688776,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.024791803198275536,
+      "iteration_converged": 0.9986,
+      "minimum_p": 0.0026460298530539108,
+      "rejection_rates": {
+        "0.05": 0.0338,
+        "0.01": 0.0034,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.075765237212181,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.024115677861941215,
+      "iteration_converged": 0.9992,
+      "minimum_p": 0.0004889293337152641,
+      "rejection_rates": {
+        "0.05": 0.0444,
+        "0.01": 0.004,
+        "0.001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.8839271795004606,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.02458445270839463,
+      "iteration_converged": 0.9976,
+      "minimum_p": 0.00047782853812576505,
+      "rejection_rates": {
+        "0.05": 0.0454,
+        "0.01": 0.0042,
+        "0.001": 0.0004
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.612192053347826,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.026314048130054585,
+      "iteration_converged": 1.0,
+      "minimum_p": 8.474391612919526e-05,
+      "rejection_rates": {
+        "0.05": 0.1352,
+        "0.01": 0.0304,
+        "0.001": 0.0028
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.909766947850585,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.025727515117402948,
+      "iteration_converged": 0.9936,
+      "minimum_p": 4.3053951808870675e-05,
+      "rejection_rates": {
+        "0.05": 0.1358,
+        "0.01": 0.0394,
+        "0.001": 0.0056
+      },
+      "bh_calls_05": 6
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.1165882721543312,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.029008831669873468,
+      "iteration_converged": 0.985,
+      "minimum_p": 7.825504714212586e-05,
+      "rejection_rates": {
+        "0.05": 0.188,
+        "0.01": 0.0522,
+        "0.001": 0.0034
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.02,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.9305368326604366,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.02715064376284205,
+      "iteration_converged": 0.973,
+      "minimum_p": 3.8690633027549206e-07,
+      "rejection_rates": {
+        "0.05": 0.2086,
+        "0.01": 0.0778,
+        "0.001": 0.0156
+      },
+      "bh_calls_05": 38
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4945886731147766,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.022425806033767252,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0009065863677916241,
+      "rejection_rates": {
+        "0.05": 0.0216,
+        "0.01": 0.0026,
+        "0.001": 0.0002
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.7504812143743038,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.023716267947464634,
+      "iteration_converged": 0.9998,
+      "minimum_p": 0.0013632984814558589,
+      "rejection_rates": {
+        "0.05": 0.0164,
+        "0.01": 0.0012,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9532171431928873,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.020003578256965082,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.002416957566359141,
+      "rejection_rates": {
+        "0.05": 0.0044,
+        "0.01": 0.0006,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.7723967973142862,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.021954960065353624,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.010025875639786108,
+      "rejection_rates": {
+        "0.05": 0.0034,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4937504902482033,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.023909039084651012,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0007445598986896687,
+      "rejection_rates": {
+        "0.05": 0.0534,
+        "0.01": 0.0088,
+        "0.001": 0.0004
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.75000561773777,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.02488192035850023,
+      "iteration_converged": 0.999,
+      "minimum_p": 0.0015509985033168108,
+      "rejection_rates": {
+        "0.05": 0.0444,
+        "0.01": 0.0052,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9613934624940157,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.023348210709514518,
+      "iteration_converged": 0.9926,
+      "minimum_p": 2.132926213552047e-05,
+      "rejection_rates": {
+        "0.05": 0.05,
+        "0.01": 0.0096,
+        "0.001": 0.0008
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.7667823489755392,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.024303479475772306,
+      "iteration_converged": 0.9832,
+      "minimum_p": 0.0006401309226460311,
+      "rejection_rates": {
+        "0.05": 0.0408,
+        "0.01": 0.0046,
+        "0.001": 0.0004
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5018728226423264,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.041356928606657066,
+      "iteration_converged": 1.0,
+      "minimum_p": 4.183885578052697e-06,
+      "rejection_rates": {
+        "0.05": 0.1186,
+        "0.01": 0.0408,
+        "0.001": 0.0068
+      },
+      "bh_calls_05": 1
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.76045330055058,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.036607572152021,
+      "iteration_converged": 0.9956,
+      "minimum_p": 1.6707672761271047e-05,
+      "rejection_rates": {
+        "0.05": 0.1304,
+        "0.01": 0.0432,
+        "0.001": 0.009
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9788799528032541,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.0725373857031804,
+      "iteration_converged": 0.942,
+      "minimum_p": 1.9139271627360345e-07,
+      "rejection_rates": {
+        "0.05": 0.1274,
+        "0.01": 0.0492,
+        "0.001": 0.0132
+      },
+      "bh_calls_05": 37
+    },
+    {
+      "replicates": 10,
+      "mean": 0.1,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.7859740070998669,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.05660250375296827,
+      "iteration_converged": 0.8908,
+      "minimum_p": 1.0563741813828098e-07,
+      "rejection_rates": {
+        "0.05": 0.1712,
+        "0.01": 0.0748,
+        "0.001": 0.0242
+      },
+      "bh_calls_05": 150
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.49000034481287,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.03934173497545081,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.0015964179454603464,
+      "rejection_rates": {
+        "0.05": 0.0178,
+        "0.01": 0.003,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.905680488795042,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.1109488630087225,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.047186490277993785,
+      "rejection_rates": {
+        "0.05": 0.0002,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9551538918167353,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.0005439381834669607,
+      "iteration_converged": 0.8734,
+      "minimum_p": 3.472422630496723e-05,
+      "rejection_rates": {
+        "0.05": 0.0408,
+        "0.01": 0.0076,
+        "0.001": 0.0006
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.0,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.8252677861601114,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.06315644024386671,
+      "iteration_converged": 0.7156,
+      "minimum_p": 0.026632383963565123,
+      "rejection_rates": {
+        "0.05": 0.0008,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.4925523605197668,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.11120376170347074,
+      "iteration_converged": 1.0,
+      "minimum_p": 6.47300761275164e-05,
+      "rejection_rates": {
+        "0.05": 0.0126,
+        "0.01": 0.0026,
+        "0.001": 0.0006
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9199573621153831,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.11862569011899007,
+      "iteration_converged": 1.0,
+      "minimum_p": 0.011823042296615413,
+      "rejection_rates": {
+        "0.05": 0.0032,
+        "0.01": 0.0,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9701342061161995,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.11425947874281714,
+      "iteration_converged": 0.853,
+      "minimum_p": 2.1071841108791057e-09,
+      "rejection_rates": {
+        "0.05": 0.0354,
+        "0.01": 0.0126,
+        "0.001": 0.0044
+      },
+      "bh_calls_05": 1
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.025,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.8380457647144794,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.11682210647233265,
+      "iteration_converged": 0.9366,
+      "minimum_p": 0.009061010398099558,
+      "rejection_rates": {
+        "0.05": 0.0024,
+        "0.01": 0.0002,
+        "0.001": 0.0
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.5040057804435492,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.12267927795552178,
+      "iteration_converged": 1.0,
+      "minimum_p": 3.422553863797525e-06,
+      "rejection_rates": {
+        "0.05": 0.0468,
+        "0.01": 0.0092,
+        "0.001": 0.0016
+      },
+      "bh_calls_05": 1
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "equal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.9300176650285721,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.1225985793450414,
+      "iteration_converged": 1.0,
+      "minimum_p": 1.9953653483227963e-06,
+      "rejection_rates": {
+        "0.05": 0.0466,
+        "0.01": 0.0088,
+        "0.001": 0.0014
+      },
+      "bh_calls_05": 1
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "shared",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 0.97295106574893,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.1227084158885732,
+      "iteration_converged": 0.9992,
+      "minimum_p": 0.00021332492984462597,
+      "rejection_rates": {
+        "0.05": 0.0464,
+        "0.01": 0.0102,
+        "0.001": 0.0006
+      },
+      "bh_calls_05": 0
+    },
+    {
+      "replicates": 10,
+      "mean": 0.5,
+      "rho": 0.12,
+      "depths": "unequal",
+      "mode": "group",
+      "sites": 5000,
+      "prior": {
+        "bin_rho": [
+          0.025074990200662603,
+          0.02615419497738855,
+          0.11259503055549107,
+          0.12243676597638088
+        ],
+        "training_digest": "e3079d050221fe67271b6b329f9cee36c5e26c9063ed64b39bb9e1822849787d",
+        "converged": [
+          true,
+          true,
+          true,
+          true
+        ]
+      },
+      "fit_seconds": 1.8402199689298868,
+      "training_seconds": 5.397191327065229,
+      "estimable": 5000,
+      "median_rho": 0.12262776079147213,
+      "iteration_converged": 0.9984,
+      "minimum_p": 0.00022378012813425999,
+      "rejection_rates": {
+        "0.05": 0.047,
+        "0.01": 0.0102,
+        "0.001": 0.0006
+      },
+      "bh_calls_05": 0
+    }
+  ],
+  "bootstrap": [
+    {
+      "observed_m": [
+        2,
+        1,
+        0,
+        4,
+        7,
+        0,
+        0,
+        2,
+        2,
+        14
+      ],
+      "fixed_n": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        5,
+        10,
+        20,
+        50,
+        100
+      ],
+      "observed_statistic": 7.900750061976981e-08,
+      "normal_p": 0.9997757284330655,
+      "bb_f_p": 0.8684321924487374,
+      "null_count_bootstrap_p": 0.9995001249687578,
+      "monte_carlo_se": 0.00035337666912411535,
+      "resamples": 4000,
+      "tail_exceedances": 3998,
+      "generated_null_rho": 0.021593591601786616,
+      "limits": "Conditional plug-in null parameters; each replicate refits rho against the frozen observed-count prior. Not a posterior-predictive integration over parameter uncertainty or genome-wide tail guarantee."
+    },
+    {
+      "observed_m": [
+        2,
+        3,
+        13,
+        17,
+        32,
+        2,
+        5,
+        10,
+        32,
+        43
+      ],
+      "fixed_n": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        5,
+        10,
+        20,
+        50,
+        100
+      ],
+      "observed_statistic": 0.6407366728220705,
+      "normal_p": 0.42344416312290867,
+      "bb_f_p": 0.217642871284375,
+      "null_count_bootstrap_p": 0.42939265183704073,
+      "monte_carlo_se": 0.007825493020321204,
+      "resamples": 4000,
+      "tail_exceedances": 1717,
+      "generated_null_rho": 0.12267193576797467,
+      "limits": "Conditional plug-in null parameters; each replicate refits rho against the frozen observed-count prior. Not a posterior-predictive integration over parameter uncertainty or genome-wide tail guarantee."
+    },
+    {
+      "observed_m": [
+        4,
+        6,
+        18,
+        39,
+        42,
+        3,
+        7,
+        5,
+        10,
+        37
+      ],
+      "fixed_n": [
+        5,
+        10,
+        20,
+        50,
+        100,
+        5,
+        10,
+        20,
+        50,
+        100
+      ],
+      "observed_statistic": 5.100938007183268,
+      "normal_p": 0.02391290871964091,
+      "bb_f_p": 0.025757987226593587,
+      "null_count_bootstrap_p": 0.025243689077730568,
+      "monte_carlo_se": 0.00247993423126935,
+      "resamples": 4000,
+      "tail_exceedances": 100,
+      "generated_null_rho": 0.12469865432944842,
+      "limits": "Conditional plug-in null parameters; each replicate refits rho against the frozen observed-count prior. Not a posterior-predictive integration over parameter uncertainty or genome-wide tail guarantee."
+    }
+  ],
+  "recommendation": "Experimental only pending independent held-out calibration.",
+  "limits": "Independent sites, one realization per scenario; BH calls do not estimate FDR."
+}

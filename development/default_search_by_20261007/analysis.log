@@ -1,0 +1,32 @@
+  24 genes were dropped because they have exons located on both strands of the
+  same reference sequence or on more than one reference sequence, so cannot be
+  represented by a single genomic range.
+  Use 'single.strand.genes.only=FALSE' to get all the genes in a GRangesList
+  object, or use suppressMessages() to suppress this message.
+'select()' returned 1:1 mapping between keys and columns
+Warning message:
+In `[.data.table`(support, , `:=`(n_tools, rowSums(.SD)), .SDcols = tools) :
+  A shallow copy of this data.table was taken so that := can add or remove 1 columns by reference. At an earlier point, this data.table was copied by R (or was created manually using structure() or similar). Avoid names<- and attr<- which in R currently (and oddly) may copy the whole data.table. Use set* syntax instead to avoid copying: ?set, ?setnames and ?setattr. It's also not unusual for data.table-agnostic packages to produce tables affected by this issue. If this message doesn't help, please report your use case to the data.table issue tracker so the root cause can be fixed or this message improved.
+Failed to connect to bus: Operation not permitted (consider using --machine=<user>@.host --user to connect to bus of other user)
+Warning message:
+In system("timedatectl", intern = TRUE) :
+  running command 'timedatectl' had status 1
+                dataset  version matching  called_regions  matched_regions  region_precision  region_recall  region_f1  runtime_s  peak_rss_gib
+genome_autosomes_signal original      dmr            3623             1202          0.331769       0.415486   0.368938 370.962971      6.108704
+genome_autosomes_signal original   dmr_80            3623              689          0.190174       0.238161   0.211479 370.962971      6.108704
+genome_autosomes_signal  revised      dmr             980              891          0.909184       0.307985   0.460108 375.908535      6.144253
+genome_autosomes_signal  revised   dmr_80             980              587          0.598980       0.202904   0.303124 375.908535      6.144253
+  genome_autosomes_null original      dmr            1869                0          0.000000            NaN   0.000000 363.431200      6.121384
+  genome_autosomes_null original   dmr_80            1869                0          0.000000            NaN   0.000000 363.431200      6.121384
+  genome_autosomes_null  revised      dmr               0                0               NaN            NaN        NaN 373.348503      6.120346
+  genome_autosomes_null  revised   dmr_80               0                0               NaN            NaN        NaN 373.348503      6.120346
+           tool  reciprocal_threshold  calls  paper_total  calls_overlapping_paper  caller_overlap_fraction  paper_regions_covered  one_to_one_matches  discordant_pairs
+epykit_original                   0.0    431         3271                      158                 0.366589                    160                 158                 0
+epykit_original                   0.5    431         3271                       99                 0.229698                     99                  99                 0
+epykit_original                   0.8    431         3271                       30                 0.069606                     30                  30                 0
+ epykit_revised                   0.0     56         3271                       52                 0.928571                     53                  52                 0
+ epykit_revised                   0.5     56         3271                       39                 0.696429                     39                  39                 0
+ epykit_revised                   0.8     56         3271                       10                 0.178571                     10                  10                 0
+            DSS                   0.0    253         3271                      180                 0.711462                    180                 179                 0
+            DSS                   0.5    253         3271                      130                 0.513834                    130                 130                 0
+            DSS                   0.8    253         3271                       60                 0.237154                     60                  60                 0

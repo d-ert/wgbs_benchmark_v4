@@ -1,0 +1,83 @@
+{
+  "GSE263850": {
+    "source": "/scratch/wgbs_benchmark_v4/development/gse263850_20261009/metadata/GSE263850_family.soft.gz",
+    "source_sha256": "7c4f1df74dfa8e99f429e3357faee92daab8efee79a69ab50df1bf986ba48645",
+    "samples": {
+      "GSM8200106": {
+        "!Sample_title": [
+          "Het-AKAP11-KO-Clone 16_WGBS_DNAme"
+        ],
+        "!Sample_characteristics_ch1": [
+          "tissue: iPSCs were derived from lymphoblasts",
+          "cell line: SBP009",
+          "cell type: neurons",
+          "genotype: Het-AKAP11-KO"
+        ]
+      },
+      "GSM8200107": {
+        "!Sample_title": [
+          "Het-AKAP11-KO-Clone 20_WGBS_DNAme"
+        ],
+        "!Sample_characteristics_ch1": [
+          "tissue: iPSCs were derived from lymphoblasts",
+          "cell line: SBP009",
+          "cell type: neurons",
+          "genotype: Het-AKAP11-KO"
+        ]
+      },
+      "GSM8200108": {
+        "!Sample_title": [
+          "Het-AKAP11-KO-Clone 21_WGBS_DNAme"
+        ],
+        "!Sample_characteristics_ch1": [
+          "tissue: iPSCs were derived from lymphoblasts",
+          "cell line: SBP009",
+          "cell type: neurons",
+          "genotype: Het-AKAP11-KO"
+        ]
+      },
+      "GSM8200109": {
+        "!Sample_title": [
+          "WT_SBP009_Rep1_WGBS_DNAme"
+        ],
+        "!Sample_characteristics_ch1": [
+          "tissue: iPSCs were derived from lymphoblasts",
+          "cell line: SBP009",
+          "cell type: neurons",
+          "genotype: WT"
+        ]
+      },
+      "GSM8200110": {
+        "!Sample_title": [
+          "WT_SBP009_Rep2_WGBS_DNAme"
+        ],
+        "!Sample_characteristics_ch1": [
+          "tissue: iPSCs were derived from lymphoblasts",
+          "cell line: SBP009",
+          "cell type: neurons",
+          "genotype: WT"
+        ]
+      },
+      "GSM8200111": {
+        "!Sample_title": [
+          "WT_SBP009_Rep3_WGBS_DNAme"
+        ],
+        "!Sample_characteristics_ch1": [
+          "tissue: iPSCs were derived from lymphoblasts",
+          "cell line: SBP009",
+          "cell type: neurons",
+          "genotype: WT"
+        ]
+      }
+    },
+    "interpretation": "Three AKAP11 knockout clones and three WT counterpart replicates share parental line SBP009. No donor pairing. GEO metadata alone does not establish independent population donors or all aspects of differentiation-batch independence.",
+    "paper": "https://www.nature.com/articles/s41380-025-03040-x"
+  },
+  "GSE64177": {
+    "source": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE64177",
+    "study": "Mycobacterium tuberculosis infection of monocyte-derived dendritic cells",
+    "design": "Six infected/uninfected donor pairs; supplied sample sheet contains matched donors DC81/DC82/DC83/DC87/DC89/DC91.",
+    "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4665002/"
+  },
+  "purpose": "Readiness/provenance only; neither paper list nor assay effect is ground-truth biological precision."
+}

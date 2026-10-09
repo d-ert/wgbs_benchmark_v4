@@ -1,0 +1,24 @@
+n5_d20_imbTrue_assocFalse_signalFalse profile seconds 9.853625105693936
+{"label": "n5_d20_imbTrue_assocFalse_signalFalse", "method": "CR_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.043666666666666666, "fpr001": 0.0005333333333333334, "fpr1e5": 3.3333333333333335e-05, "AP": null, "seconds": 26.039602449163795}
+{"label": "n5_d20_imbTrue_assocFalse_signalFalse", "method": "count_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.04516666666666667, "fpr001": 0.0006333333333333333, "fpr1e5": 3.3333333333333335e-05, "AP": null, "seconds": 26.04058833606541}
+n5_d20_imbTrue_assocFalse_signalTrue profile seconds 8.241342885419726
+{"label": "n5_d20_imbTrue_assocFalse_signalTrue", "method": "CR_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": 0.0, "fpr05": 0.04266917925766396, "fpr001": 0.0009758723962714945, "fpr1e5": 0.0, "AP": 0.3328486615738466, "seconds": 24.35867276415229}
+{"label": "n5_d20_imbTrue_assocFalse_signalTrue", "method": "count_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": 0.0, "fpr05": 0.043678702426220684, "fpr001": 0.0010768247131271664, "fpr1e5": 0.0, "AP": 0.3316061579903733, "seconds": 24.362764799967408}
+n5_d60_imbTrue_assocFalse_signalFalse profile seconds 27.332345347851515
+{"label": "n5_d60_imbTrue_assocFalse_signalFalse", "method": "CR_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.042466666666666666, "fpr001": 0.0007666666666666667, "fpr1e5": 0.0, "AP": null, "seconds": 43.86054713279009}
+{"label": "n5_d60_imbTrue_assocFalse_signalFalse", "method": "count_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.04136666666666667, "fpr001": 0.0007, "fpr1e5": 0.0, "AP": null, "seconds": 43.86148501932621}
+n5_d60_imbTrue_assocFalse_signalTrue profile seconds 27.658065913245082
+{"label": "n5_d60_imbTrue_assocFalse_signalTrue", "method": "CR_posterior_tail", "tp": 51, "fp": 3, "fdp": 0.05555555555555555, "recall": 0.16293929712460065, "fpr05": 0.04119648330919257, "fpr001": 0.0010779128911644828, "fpr1e5": 0.0, "AP": 0.5544083045407024, "seconds": 44.17510771751404}
+{"label": "n5_d60_imbTrue_assocFalse_signalTrue", "method": "count_posterior_tail", "tp": 49, "fp": 3, "fdp": 0.057692307692307696, "recall": 0.15654952076677317, "fpr05": 0.03964698352814363, "fpr001": 0.001178967224711153, "fpr1e5": 0.0, "AP": 0.5511569671219341, "seconds": 44.17929248325527}
+n10_d20_imbTrue_assocFalse_signalFalse profile seconds 16.547586044296622
+{"label": "n10_d20_imbTrue_assocFalse_signalFalse", "method": "CR_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.043, "fpr001": 0.0004, "fpr1e5": 3.3333333333333335e-05, "AP": null, "seconds": 46.13238939270377}
+{"label": "n10_d20_imbTrue_assocFalse_signalFalse", "method": "count_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.041633333333333335, "fpr001": 0.00036666666666666667, "fpr1e5": 3.3333333333333335e-05, "AP": null, "seconds": 46.13339717499912}
+n10_d20_imbTrue_assocFalse_signalTrue profile seconds 16.61850487627089
+{"label": "n10_d20_imbTrue_assocFalse_signalTrue", "method": "CR_posterior_tail", "tp": 116, "fp": 4, "fdp": 0.03333333333333333, "recall": 0.39057239057239057, "fpr05": 0.04191495808504191, "fpr001": 0.0006733326600006734, "fpr1e5": 3.366663300003367e-05, "AP": 0.6890685119947992, "seconds": 46.21657343953848}
+{"label": "n10_d20_imbTrue_assocFalse_signalTrue", "method": "count_posterior_tail", "tp": 116, "fp": 4, "fdp": 0.03333333333333333, "recall": 0.39057239057239057, "fpr05": 0.041005958994041004, "fpr001": 0.000605999394000606, "fpr1e5": 3.366663300003367e-05, "AP": 0.6926425135491926, "seconds": 46.220789121463895}
+n5_d20_imbTrue_assocTrue_signalFalse profile seconds 7.659492833539844
+{"label": "n5_d20_imbTrue_assocTrue_signalFalse", "method": "CR_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.037066666666666664, "fpr001": 0.0006666666666666666, "fpr1e5": 0.0, "AP": null, "seconds": 23.703213265165687}
+{"label": "n5_d20_imbTrue_assocTrue_signalFalse", "method": "count_posterior_tail", "tp": 0, "fp": 0, "fdp": 0, "recall": null, "fpr05": 0.036333333333333336, "fpr001": 0.0006333333333333333, "fpr1e5": 0.0, "AP": null, "seconds": 23.704104252159595}
+n5_d20_imbTrue_assocTrue_signalTrue profile seconds 7.755642481148243
+{"label": "n5_d20_imbTrue_assocTrue_signalTrue", "method": "CR_posterior_tail", "tp": 12, "fp": 0, "fdp": 0.0, "recall": 0.03669724770642202, "fpr05": 0.034947595457149594, "fpr001": 0.0004381087183634954, "fpr1e5": 0.0, "AP": 0.5396975365044095, "seconds": 23.831852620467544}
+{"label": "n5_d20_imbTrue_assocTrue_signalTrue", "method": "count_posterior_tail", "tp": 13, "fp": 0, "fdp": 0.0, "recall": 0.039755351681957186, "fpr05": 0.034644289421359484, "fpr001": 0.0004381087183634954, "fpr1e5": 0.0, "AP": 0.5445877481910967, "seconds": 23.83589152060449}

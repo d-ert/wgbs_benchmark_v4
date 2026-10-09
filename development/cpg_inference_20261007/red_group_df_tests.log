@@ -1,0 +1,27 @@
+.FF                                                                      [100%]
+=================================== FAILURES ===================================
+_________ test_one_informative_group_contributes_only_its_residual_df __________
+
+    def test_one_informative_group_contributes_only_its_residual_df():
+        # Identical background gives the implementation's fixed prior weight=4.
+        # Only the five case replicates contribute an estimable Pearson residual.
+        result = _boundary_site(100)
+>       assert result[-1][0] == 4 + 4
+E       assert 12.0 == (4 + 4)
+
+tests/test_default_eb_uncertainty.py:33: AssertionError
+____________ test_no_informative_group_uses_prior_uncertainty_only _____________
+
+    def test_no_informative_group_uses_prior_uncertainty_only():
+        background = np.tile([3,4,5,6,7], (100,1))
+        case = np.vstack([[20]*5,background])
+        control = np.vstack([[0]*5,background])
+        result = _score_finalize(*_group(case), *_group(control), dispersion='eb')
+>       assert result[-1][0] == 4
+E       assert 12.0 == 4
+
+tests/test_default_eb_uncertainty.py:42: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_default_eb_uncertainty.py::test_one_informative_group_contributes_only_its_residual_df
+FAILED tests/test_default_eb_uncertainty.py::test_no_informative_group_uses_prior_uncertainty_only
+2 failed, 1 passed in 0.22s

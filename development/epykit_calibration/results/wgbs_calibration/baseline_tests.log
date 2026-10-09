@@ -1,0 +1,109 @@
+.....F...........................................                        [100%]
+=================================== FAILURES ===================================
+__________ test_max_t_with_failed_and_empty_permutations_matches_main __________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x75c4d3102dd0>
+
+    def test_max_t_with_failed_and_empty_permutations_matches_main(monkeypatch):
+        """One permutation raises, one yields zero survivors, three succeed.
+        Main's max_t excluded both kinds from the denominator, so
+        emp_p = (#successful perms with min null p <= p_obs + 1) / (3 + 1)."""
+        script = [
+            RuntimeError("engine blew up"),
+            None,
+            [0.5, 0.9],  # min 0.5
+            [0.05, 0.7],  # min 0.05
+            [0.001],  # min 0.001
+        ]
+        observed = _observed(pvalues=[0.01, 0.3, 1e-5])
+        monkeypatch.setattr(dmr_mod, "call_dmr_tile_based", _scripted_engine(script))
+>       implicit = _run(observed, n_perm=5)
+
+tests/test_dmr_region_fdr_mode.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_dmr_region_fdr_mode.py:50: in _run
+    return dmr_mod.empirical_fdr_for_dmr(
+src/epykit/dmr.py:2050: in empirical_fdr_for_dmr
+    emp_p, emp_q, fdr_set = _aggregate_region_perm_results(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _aggregate_region_perm_results(
+        *,
+        observed_pvalues: np.ndarray,
+        results: list[_PermResult],
+        n_perm: int,
+        fdr_method: str,
+        label: str = "region-fdr",
+    ) -> tuple[np.ndarray, np.ndarray, float]:
+        """Shared permutation-FDR aggregation for any region caller.
+    
+        ``results`` holds one ``(is_self_or_mirror, survivor_pvalues or None)``
+        per permutation; ``None`` means the engine failed for that permutation.
+        Returns ``(empirical_pvalue, empirical_qvalue, fdr_set)`` aligned with
+        ``observed_pvalues``. Non-finite observed p-values come back as NaN in
+        both mode.
+    
+        ``fdr_method="max_t"`` uses one minimum score per complete label-shuffled
+        scan, including empty scans (+infinity). Failed scans abort inference.
+        The +1 Monte Carlo correction is applied once; empirical_qvalue is a
+        compatibility alias for the scan-adjusted p-value, without a second BH.
+        Complete-null family-wise control requires exchangeable sample labels.
+    
+        ``fdr_method="region"`` is the count-ratio target-decoy FDR of
+        :func:`_region_count_ratio_fdr`: self/mirror assignments and failed
+        runs are excluded, a clean zero-survivor run counts as a zero
+        contribution, and zero usable assignments yield NaN estimates with a
+        ``UserWarning``.
+        """
+        obs_p = np.asarray(observed_pvalues, dtype=np.float64)
+        obs_finite_mask = np.isfinite(obs_p)
+        obs_safe = np.where(obs_finite_mask, obs_p, 1.0)
+    
+        if fdr_method == "region":
+            n_self = sum(1 for is_self, _ in results if is_self)
+            n_failed = sum(1 for is_self, arr in results if (not is_self) and arr is None)
+            null_pools = [arr for is_self, arr in results if (not is_self) and arr is not None]
+            n_perm_used = len(null_pools)
+            if n_self or n_failed:
+                logger.info(
+                    "%s[region]: excluded %d self/mirror and %d failed permutation(s); n_perm_used=%d.",
+                    label,
+                    n_self,
+                    n_failed,
+                    n_perm_used,
+                )
+            if n_perm_used == 0:
+                warnings.warn(
+                    f"{label}: all {n_perm} permutations were self/mirror assignments "
+                    f"or failed; the region empirical FDR is undefined and is "
+                    f"reported as NaN. Raise n_perm or use larger groups.",
+                    UserWarning,
+                    stacklevel=3,
+                )
+            finite_p, finite_q, fdr_set = _region_count_ratio_fdr(
+                observed_pvalues=obs_p[obs_finite_mask],
+                null_pools=null_pools,
+                n_perm_used=n_perm_used,
+            )
+            # Missing statistics must not count as observed survivors or lower
+            # finite regions' q-values through the suffix minimum.
+            emp_p = np.full_like(obs_p, np.nan)
+            emp_q = np.full_like(obs_p, np.nan)
+            emp_p[obs_finite_mask] = finite_p
+            emp_q[obs_finite_mask] = finite_q
+            logger.info("%s[region]: set-level FDR=%.4f", label, fdr_set)
+            return emp_p, emp_q, fdr_set
+    
+        # A successful empty scan is a null maximum of -infinity (min-P of
+        # +infinity). It MUST remain in the randomization denominator. Failed
+        # permutations cannot be omitted conditionally on computational success.
+        if len(results) != n_perm or any(arr is None for _, arr in results):
+>           raise RuntimeError("Incomplete permutation scan; refusing biased inference")
+E           RuntimeError: Incomplete permutation scan; refusing biased inference
+
+src/epykit/dmr.py:1890: RuntimeError
+------------------------------ Captured log call -------------------------------
+WARNING  epykit.dmr:dmr.py:2043 permutation 0 failed: engine blew up
+=========================== short test summary info ============================
+FAILED tests/test_dmr_region_fdr_mode.py::test_max_t_with_failed_and_empty_permutations_matches_main
+1 failed, 48 passed, 2 deselected, 12 warnings in 3.55s

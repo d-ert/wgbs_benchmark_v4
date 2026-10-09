@@ -1,0 +1,110 @@
+[
+  {
+    "dataset": "genome_autosomes_signal",
+    "tool": "epykit",
+    "raw_dmr_rows": 3623,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_signal",
+    "tool": "DSS",
+    "raw_dmr_rows": 1816,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_signal",
+    "tool": "methylKit",
+    "raw_dmr_rows": 4315,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_signal",
+    "tool": "BSmooth",
+    "raw_dmr_rows": 1300,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_signal",
+    "tool": "dmrseq",
+    "raw_dmr_rows": 1448,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_signal",
+    "tool": "DMRcate",
+    "raw_dmr_rows": 1,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_null",
+    "tool": "epykit",
+    "raw_dmr_rows": 1869,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_null",
+    "tool": "DSS",
+    "raw_dmr_rows": 73,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_null",
+    "tool": "methylKit",
+    "raw_dmr_rows": 3047,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_null",
+    "tool": "BSmooth",
+    "raw_dmr_rows": 193,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_null",
+    "tool": "dmrseq",
+    "raw_dmr_rows": 0,
+    "score_matches": true
+  },
+  {
+    "dataset": "genome_autosomes_null",
+    "tool": "DMRcate",
+    "raw_dmr_rows": 0,
+    "score_matches": true
+  },
+  {
+    "source_file": "analysis/annotate_real_dmrs.R",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "analysis/run_publication_workflow.py",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "benchmark.py",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "run_epykit.py",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "run_r_tool.R",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "src/wgbs_v3/__init__.py",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "src/wgbs_v3/benchmark.py",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "src/wgbs_v3/provenance.py",
+    "snapshot_matches": true
+  },
+  {
+    "source_file": "src/wgbs_v3/score.py",
+    "snapshot_matches": true
+  }
+]

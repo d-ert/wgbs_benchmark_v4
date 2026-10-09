@@ -1,0 +1,100 @@
+{
+  "seed": 202610091,
+  "prior": {
+    "log_rho_mean": -2.3025850929940455,
+    "log_rho_sd": 1.0
+  },
+  "notes": "5000 synthetic independent sites, 5+5 replicates, warmed compiled kernels, three timing repeats. Objective counts on 100 sites use Python outer loop with compiled objective. No performance extrapolation or inferential equivalence claimed.",
+  "rows": [
+    {
+      "depth": 10,
+      "method": "fixed_rho",
+      "sites": 5000,
+      "median_seconds": 0.023415207862854004,
+      "repeats": [
+        0.023415207862854004,
+        0.02424757368862629,
+        0.023340296000242233
+      ]
+    },
+    {
+      "depth": 10,
+      "method": "continuous_MAP_rho",
+      "sites": 5000,
+      "median_seconds": 0.5517249237746,
+      "repeats": [
+        0.5531134475022554,
+        0.5501394346356392,
+        0.5517249237746
+      ],
+      "mean_objective_evaluations_per_site": 47.0
+    },
+    {
+      "depth": 10,
+      "method": "MAP_plus_conditional_CI",
+      "sites": 100,
+      "median_seconds": 0.033258648589253426,
+      "repeats": null
+    },
+    {
+      "depth": 20,
+      "method": "fixed_rho",
+      "sites": 5000,
+      "median_seconds": 0.030514979735016823,
+      "repeats": [
+        0.030514979735016823,
+        0.030856700614094734,
+        0.030341170728206635
+      ]
+    },
+    {
+      "depth": 20,
+      "method": "continuous_MAP_rho",
+      "sites": 5000,
+      "median_seconds": 0.7765065506100655,
+      "repeats": [
+        0.7762960884720087,
+        0.7765065506100655,
+        0.7799885235726833
+      ],
+      "mean_objective_evaluations_per_site": 47.0
+    },
+    {
+      "depth": 20,
+      "method": "MAP_plus_conditional_CI",
+      "sites": 100,
+      "median_seconds": 0.04195000045001507,
+      "repeats": null
+    },
+    {
+      "depth": 80,
+      "method": "fixed_rho",
+      "sites": 5000,
+      "median_seconds": 0.08032936044037342,
+      "repeats": [
+        0.08059174008667469,
+        0.08032936044037342,
+        0.07930742017924786
+      ]
+    },
+    {
+      "depth": 80,
+      "method": "continuous_MAP_rho",
+      "sites": 5000,
+      "median_seconds": 2.1870012152940035,
+      "repeats": [
+        2.1870012152940035,
+        2.191206770017743,
+        2.1863110195845366
+      ],
+      "mean_objective_evaluations_per_site": 47.0
+    },
+    {
+      "depth": 80,
+      "method": "MAP_plus_conditional_CI",
+      "sites": 100,
+      "median_seconds": 0.10367325507104397,
+      "repeats": null
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+Verifying frozen input and original harness hashes...
+Registered S3 methods overwritten by 'backports':
+  method                    from 
+  as.character.Rconcordance tools
+  print.Rconcordance        tools
+Setting options('download.file.method.GEOquery'='auto')
+Setting options('GEOquery.inmemory.gpl'=FALSE)
+
+R dependencies OK
+Source frozen. Waiting for held-out validation and package checks before timing...
+Running full genome_autosomes_signal...
+genome_autosomes_signal completed and scored.
+Running full genome_autosomes_null...
+/home/mlegrand/.local/lib/python3.10/site-packages/sklearn/metrics/_classification.py:534: UserWarning: A single label was found in 'y_true' and 'y_pred'. For the confusion matrix to have the correct shape, use the 'labels' parameter to pass all known labels.
+  warnings.warn(
+genome_autosomes_null completed and scored.
+Running all twelve GSE64177 samples, without a benchmark memory cap...
+Complete: /scratch/wgbs_benchmark_v4/results/beta_binomial_20261007_full

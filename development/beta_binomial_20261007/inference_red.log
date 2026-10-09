@@ -1,0 +1,34 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+___________ test_factorized_count_prior_em_matches_direct_likelihood ___________
+
+    def test_factorized_count_prior_em_matches_direct_likelihood():
+>       assert hasattr(bb,'fit_prior'), 'Count-likelihood empirical prior is missing'
+E       AssertionError: Count-likelihood empirical prior is missing
+E       assert False
+E        +  where False = hasattr(bb, 'fit_prior')
+
+tests/test_beta_binomial_inference.py:9: AssertionError
+______ test_profile_dispersion_map_and_f_reference_match_direct_objective ______
+
+    def test_profile_dispersion_map_and_f_reference_match_direct_objective():
+>       assert hasattr(bb,'test_counts'), 'Moderated count-likelihood testing is missing'
+E       AssertionError: Moderated count-likelihood testing is missing
+E       assert False
+E        +  where False = hasattr(bb, 'test_counts')
+
+tests/test_beta_binomial_inference.py:34: AssertionError
+______ test_missing_replicates_mask_inference_and_set_local_reference_df _______
+
+    def test_missing_replicates_mask_inference_and_set_local_reference_df():
+>       assert hasattr(bb,'test_counts'), 'Count-likelihood testing is missing'
+E       AssertionError: Count-likelihood testing is missing
+E       assert False
+E        +  where False = hasattr(bb, 'test_counts')
+
+tests/test_beta_binomial_inference.py:54: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_inference.py::test_factorized_count_prior_em_matches_direct_likelihood
+FAILED tests/test_beta_binomial_inference.py::test_profile_dispersion_map_and_f_reference_match_direct_objective
+FAILED tests/test_beta_binomial_inference.py::test_missing_replicates_mask_inference_and_set_local_reference_df
+3 failed in 0.37s

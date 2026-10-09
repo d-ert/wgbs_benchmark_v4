@@ -1,0 +1,9 @@
+{
+  "status": "superseded",
+  "seed_base": 71072001,
+  "algorithm": "count-likelihood-eb-bb-lognormal-F-v2-development",
+  "source_sha256": "4222f1ae25590f4a6161be3e5d00e97801e5513181748f1d2dac5d306d573f23",
+  "truth_used_by_inference": false,
+  "purpose": "Held-out calibration and prior-start sensitivity; no retuning",
+  "reason": "Evaluation used v2 prior sampler; replaced by label-invariant v3 with fresh seeds. Final source-hash assertion detected the repair; results preserved as development evidence."
+}

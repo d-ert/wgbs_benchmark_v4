@@ -1,0 +1,35 @@
+  tool             rule  caller_total  paper_total  calls_with_overlap  paper_with_overlap  overlap_pairs  concordant_calls  concordant_paper  concordant_pairs  discordant_pairs  caller_overlap_fraction  paper_recovered_fraction  one_to_one_concordant_matches
+epykit      any_overlap           431         3271                 158                 160            160               158               160               160                 0                 0.366589                  0.048915                            158
+epykit reciprocal_25pct           431         3271                 137                 137            137               137               137               137                 0                 0.317865                  0.041883                            137
+epykit reciprocal_50pct           431         3271                  99                  99             99                99                99                99                 0                 0.229698                  0.030266                             99
+epykit reciprocal_80pct           431         3271                  30                  30             30                30                30                30                 0                 0.069606                  0.009172                             30
+   DSS      any_overlap           253         3271                 180                 180            181               180               180               181                 0                 0.711462                  0.055029                            179
+   DSS reciprocal_25pct           253         3271                 171                 171            171               171               171               171                 0                 0.675889                  0.052278                            171
+   DSS reciprocal_50pct           253         3271                 130                 130            130               130               130               130                 0                 0.513834                  0.039743                            130
+   DSS reciprocal_80pct           253         3271                  60                  60             60                60                60                60                 0                 0.237154                  0.018343                             60
+
+DIRECTION
+   tool             rule direction  caller_total  paper_total  concordant_calls  concordant_paper  caller_overlap_fraction  paper_recovered_fraction
+epykit      any_overlap      hypo           298         1714               149               151                 0.500000                  0.088098
+epykit      any_overlap     hyper           133         1557                 9                 9                 0.067669                  0.005780
+epykit reciprocal_50pct      hypo           298         1714                93                93                 0.312081                  0.054259
+epykit reciprocal_50pct     hyper           133         1557                 6                 6                 0.045113                  0.003854
+   DSS      any_overlap      hypo           234         1714               177               177                 0.756410                  0.103267
+   DSS      any_overlap     hyper            19         1557                 3                 3                 0.157895                  0.001927
+   DSS reciprocal_50pct      hypo           234         1714               130               130                 0.555556                  0.075846
+   DSS reciprocal_50pct     hyper            19         1557                 0                 0                 0.000000                  0.000000
+
+RECOVERY SETS
+             rule direction  total  both  epykit_only  DSS_only  neither
+     any_overlap       all   3271    87           73        93     3018
+     any_overlap      hypo   1714    86           65        91     1472
+     any_overlap     hyper   1557     1            8         2     1546
+reciprocal_50pct       all   3271    53           46        77     3095
+reciprocal_50pct      hypo   1714    53           40        77     1544
+reciprocal_50pct     hyper   1557     0            6         0     1551
+
+SIZES
+ direction  total  median_length_bp  below_50bp  fewer_than_5_cpgs  length_ge50_and_cpg_ge5
+      all   3271             119.0         746               2479                      733
+     hypo   1714             142.0         327               1222                      465
+    hyper   1557             100.0         419               1257                      268

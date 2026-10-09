@@ -1,0 +1,13 @@
+rule,direction,total,both,epykit_only,DSS_only,neither
+any_overlap,all,3271,87,73,93,3018
+any_overlap,hypo,1714,86,65,91,1472
+any_overlap,hyper,1557,1,8,2,1546
+reciprocal_25pct,all,3271,82,55,89,3045
+reciprocal_25pct,hypo,1714,81,50,88,1495
+reciprocal_25pct,hyper,1557,1,5,1,1550
+reciprocal_50pct,all,3271,53,46,77,3095
+reciprocal_50pct,hypo,1714,53,40,77,1544
+reciprocal_50pct,hyper,1557,0,6,0,1551
+reciprocal_80pct,all,3271,6,24,54,3187
+reciprocal_80pct,hypo,1714,6,21,54,1633
+reciprocal_80pct,hyper,1557,0,3,0,1554

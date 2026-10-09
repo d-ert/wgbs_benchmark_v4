@@ -1,0 +1,14 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______ test_log_prior_projection_uses_latent_dispersion_mixture_moments _______
+
+    def test_log_prior_projection_uses_latent_dispersion_mixture_moments():
+>       assert hasattr(bb,'project_log_prior'), 'Continuous prior projection is missing'
+E       AssertionError: Continuous prior projection is missing
+E       assert False
+E        +  where False = hasattr(bb, 'project_log_prior')
+
+tests/test_beta_binomial_inference.py:116: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_inference.py::test_log_prior_projection_uses_latent_dispersion_mixture_moments
+1 failed in 0.33s

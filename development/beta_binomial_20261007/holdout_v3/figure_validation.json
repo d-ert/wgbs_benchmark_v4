@@ -1,0 +1,17 @@
+{
+  "status": "verified",
+  "metrics_sha256": "3cf7ee672ec14480f455a62e343865c8a7b2c5e7df23952f8377a6357876e9ef",
+  "plotted_signal_scenarios": 7,
+  "null_scenarios": 16,
+  "numerical_checks": [
+    "recall denominator",
+    "observed FDP denominator",
+    "tail interval ordering"
+  ],
+  "rendered_checks": [
+    "PNG labels and marks inspected",
+    "zero discoveries display undefined FDP",
+    "prior uncertainty omission stated beside intervals"
+  ],
+  "intervals": "descriptive site-binomial intervals; shared-prior uncertainty omitted"
+}

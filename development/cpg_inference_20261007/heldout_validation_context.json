@@ -1,0 +1,15 @@
+{
+  "seeds": [
+    8641021,
+    8642023,
+    8643019
+  ],
+  "n_sites_per_run": 100000,
+  "scenario_count": 5,
+  "comparison": "Same generated counts per version; default lr/eb/adaptive; BH q <= .05",
+  "model": "Independent beta-binomial counts with heterogeneous means/rho, Poisson depths; signal prevalence1%, delta .2",
+  "scope": "Held-out seeds for bounded uncertainty patch; not genome-wide validation or spatially correlated validation",
+  "source_before": "f73e66d",
+  "source_after": "/scratch/epykit-calibration-fresh_20261007",
+  "inference_uses": "observed counts only"
+}

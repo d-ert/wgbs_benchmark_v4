@@ -1,0 +1,220 @@
+FFFFFFFFFFFF                                                             [100%]
+=================================== FAILURES ===================================
+____________________ test_logpmf_matches_scipy[0.01-0.001] _____________________
+
+mu = 0.01, rho = 0.001
+
+    @pytest.mark.parametrize('mu,rho', [(.01,.001),(.5,.15),(.95,.35),(.3,1e-7)])
+    def test_logpmf_matches_scipy(mu, rho):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+_____________________ test_logpmf_matches_scipy[0.5-0.15] ______________________
+
+mu = 0.5, rho = 0.15
+
+    @pytest.mark.parametrize('mu,rho', [(.01,.001),(.5,.15),(.95,.35),(.3,1e-7)])
+    def test_logpmf_matches_scipy(mu, rho):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+_____________________ test_logpmf_matches_scipy[0.95-0.35] _____________________
+
+mu = 0.95, rho = 0.35
+
+    @pytest.mark.parametrize('mu,rho', [(.01,.001),(.5,.15),(.95,.35),(.3,1e-7)])
+    def test_logpmf_matches_scipy(mu, rho):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+_____________________ test_logpmf_matches_scipy[0.3-1e-07] _____________________
+
+mu = 0.3, rho = 1e-07
+
+    @pytest.mark.parametrize('mu,rho', [(.01,.001),(.5,.15),(.95,.35),(.3,1e-7)])
+    def test_logpmf_matches_scipy(mu, rho):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+___________________ test_binomial_limit_and_point_mass_means ___________________
+
+    def test_binomial_limit_and_point_mass_means():
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+________________ test_uneven_coverage_mean_is_beta_binomial_mle ________________
+
+    def test_uneven_coverage_mean_is_beta_binomial_mle():
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+_______________ test_true_two_group_lr_matches_independent_fits ________________
+
+    def test_true_two_group_lr_matches_independent_fits():
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+_____________ test_zero_coverage_does_not_become_zero_methylation ______________
+
+    def test_zero_coverage_does_not_become_zero_methylation():
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+____________________ test_invalid_counts_are_refused[m0-n0] ____________________
+
+m = [2], n = [1]
+
+    @pytest.mark.parametrize('m,n', [([2],[1]),([-1],[10]),([1.5],[10]),([1],[10.5])])
+    def test_invalid_counts_are_refused(m,n):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+____________________ test_invalid_counts_are_refused[m1-n1] ____________________
+
+m = [-1], n = [10]
+
+    @pytest.mark.parametrize('m,n', [([2],[1]),([-1],[10]),([1.5],[10]),([1],[10.5])])
+    def test_invalid_counts_are_refused(m,n):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+____________________ test_invalid_counts_are_refused[m2-n2] ____________________
+
+m = [1.5], n = [10]
+
+    @pytest.mark.parametrize('m,n', [([2],[1]),([-1],[10]),([1.5],[10]),([1],[10.5])])
+    def test_invalid_counts_are_refused(m,n):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+____________________ test_invalid_counts_are_refused[m3-n3] ____________________
+
+m = [1], n = [10.5]
+
+    @pytest.mark.parametrize('m,n', [([2],[1]),([-1],[10]),([1.5],[10]),([1],[10.5])])
+    def test_invalid_counts_are_refused(m,n):
+>       bb = _core()
+
+tests/test_beta_binomial_likelihood.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _core():
+        spec = importlib.util.find_spec('epykit._beta_binomial')
+>       assert spec is not None, 'The genuine beta-binomial likelihood core is missing'
+E       AssertionError: The genuine beta-binomial likelihood core is missing
+E       assert None is not None
+
+tests/test_beta_binomial_likelihood.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_likelihood.py::test_logpmf_matches_scipy[0.01-0.001]
+FAILED tests/test_beta_binomial_likelihood.py::test_logpmf_matches_scipy[0.5-0.15]
+FAILED tests/test_beta_binomial_likelihood.py::test_logpmf_matches_scipy[0.95-0.35]
+FAILED tests/test_beta_binomial_likelihood.py::test_logpmf_matches_scipy[0.3-1e-07]
+FAILED tests/test_beta_binomial_likelihood.py::test_binomial_limit_and_point_mass_means
+FAILED tests/test_beta_binomial_likelihood.py::test_uneven_coverage_mean_is_beta_binomial_mle
+FAILED tests/test_beta_binomial_likelihood.py::test_true_two_group_lr_matches_independent_fits
+FAILED tests/test_beta_binomial_likelihood.py::test_zero_coverage_does_not_become_zero_methylation
+FAILED tests/test_beta_binomial_likelihood.py::test_invalid_counts_are_refused[m0-n0]
+FAILED tests/test_beta_binomial_likelihood.py::test_invalid_counts_are_refused[m1-n1]
+FAILED tests/test_beta_binomial_likelihood.py::test_invalid_counts_are_refused[m2-n2]
+FAILED tests/test_beta_binomial_likelihood.py::test_invalid_counts_are_refused[m3-n3]
+12 failed in 0.25s

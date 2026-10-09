@@ -1,0 +1,16 @@
+..........                                                               [100%]
+=============================== warnings summary ===============================
+tests/test_beta_binomial_engine.py::test_public_count_engine_runs_and_reports_its_model
+  /scratch/epykit-calibration-fresh_20261007/tests/test_beta_binomial_engine.py:13: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md,test='beta_binomial',beta_binomial_ci=False,tsv=False)
+
+tests/test_beta_binomial_engine.py::test_profile_interval_setting_invalidates_count_engine_cache
+  /scratch/epykit-calibration-fresh_20261007/tests/test_beta_binomial_engine.py:48: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md,test='beta_binomial',beta_binomial_ci=False,tsv=False)
+
+tests/test_beta_binomial_engine.py::test_profile_interval_setting_invalidates_count_engine_cache
+  /scratch/epykit-calibration-fresh_20261007/tests/test_beta_binomial_engine.py:50: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md,test='beta_binomial',beta_binomial_ci=True,tsv=False)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+10 passed, 3 warnings in 86.03s (0:01:26)

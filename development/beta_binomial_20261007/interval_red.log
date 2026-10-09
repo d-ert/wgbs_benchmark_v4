@@ -1,0 +1,39 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______ test_difference_profile_interval_inverts_the_same_conditional_lr _______
+
+    def test_difference_profile_interval_inverts_the_same_conditional_lr():
+        m = np.array([[0,1,5,17,39,1,1,1,3,5], [0,0,0,0,0,0,0,0,0,0]])
+        n = np.tile([4,7,13,23,40,4,7,13,23,40],(2,1))
+        prior = dict(rho_grid=np.array([.15]),rho_weights=np.array([1.]))
+>       result = bb.test_counts(m,n,5,prior=prior,reference='F',intervals=True)
+
+tests/test_beta_binomial_inference.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+m = array([[ 0,  1,  5, 17, 39,  1,  1,  1,  3,  5],
+       [ 0,  0,  0,  0,  0,  0,  0,  0,  0,  0]])
+n = array([[ 4,  7, 13, 23, 40,  4,  7, 13, 23, 40],
+       [ 4,  7, 13, 23, 40,  4,  7, 13, 23, 40]])
+n_case = 5
+
+    def test_counts(m,n,n_case,*,prior=None,reference='adaptive',intervals=False):
+        """Conditional BB LR with count-likelihood EB profile-MAP dispersion.
+    
+        Adaptive uses the methylSig-inspired F(1,n_valid-2) approximation.
+        This reference is not an exact null law or posterior-uncertainty integral.
+        Explicit chi2 is available for calibration diagnostics.
+        """
+        m,n = _counts(m,n,2)
+        if not isinstance(n_case,(int,np.integer)) or not 0<n_case<m.shape[1]:
+            raise ValueError('n_case must split the columns into two nonempty groups')
+        if reference not in {'adaptive','F','chi2'}:
+            raise ValueError('reference must be adaptive, F or chi2')
+        if intervals:
+>           raise NotImplementedError('Beta-binomial intervals are not implemented yet')
+E           NotImplementedError: Beta-binomial intervals are not implemented yet
+
+src/epykit/_beta_binomial.py:358: NotImplementedError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_inference.py::test_difference_profile_interval_inverts_the_same_conditional_lr
+1 failed in 0.38s

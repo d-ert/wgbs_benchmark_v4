@@ -1,0 +1,21 @@
+        version  nrep  depth  imbalance  signal  runs    tp_mean    fp_mean  fdp_mean  recall_mean  raw_null_fpr05  raw_null_fpr001  average_precision
+ local_group_df     3     20      False   False     3   0.000000   0.000000  0.000000          NaN        0.024660         0.000467                NaN
+ local_group_df     3     20      False    True     3   0.000000   0.000000  0.000000     0.000000        0.024594         0.000437           0.081809
+ local_group_df     5     20      False   False     3   0.000000   0.000000  0.000000          NaN        0.029190         0.000430                NaN
+ local_group_df     5     20      False    True     3   0.000000   0.000000  0.000000     0.000000        0.029064         0.000441           0.224385
+ local_group_df     5     20       True   False     3   0.000000   0.333333  0.333333          NaN        0.057100         0.001707                NaN
+ local_group_df     5     20       True    True     3   0.000000   0.000000  0.000000     0.000000        0.057289         0.001730           0.113994
+ local_group_df     5     60       True   False     3   0.000000   0.666667  0.666667          NaN        0.063847         0.002333                NaN
+ local_group_df     5     60       True    True     3   0.000000   0.000000  0.000000     0.000000        0.064811         0.002507           0.242585
+ local_group_df    10     20       True   False     3   0.000000   0.000000  0.000000          NaN        0.060850         0.002207                NaN
+ local_group_df    10     20       True    True     3 163.333333  27.333333  0.142419     0.171520        0.059436         0.001945           0.492847
+region_fix_only     3     20      False   False     3   0.000000  21.666667  1.000000          NaN        0.037887         0.002490                NaN
+region_fix_only     3     20      False    True     3   4.666667  18.000000  0.830556     0.004970        0.038019         0.002359           0.073960
+region_fix_only     5     20      False   False     3   0.000000  17.666667  1.000000          NaN        0.040327         0.002080                NaN
+region_fix_only     5     20      False    True     3  10.000000  17.333333  0.654729     0.010654        0.040220         0.002046           0.167047
+region_fix_only     5     20       True   False     3   0.000000 169.000000  1.000000          NaN        0.065140         0.005080                NaN
+region_fix_only     5     20       True    True     3  35.666667 190.333333  0.842811     0.037320        0.065232         0.005237           0.098355
+region_fix_only     5     60       True   False     3   0.000000 227.333333  1.000000          NaN        0.070803         0.005810                NaN
+region_fix_only     5     60       True    True     3  96.333333 272.666667  0.738554     0.101206        0.071871         0.006061           0.172064
+region_fix_only    10     20       True   False     3   0.000000  66.333333  1.000000          NaN        0.066897         0.004477                NaN
+region_fix_only    10     20       True    True     3 279.666667 192.666667  0.408109     0.293577        0.065716         0.004190           0.389198

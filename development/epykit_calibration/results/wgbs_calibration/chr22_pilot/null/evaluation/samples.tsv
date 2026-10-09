@@ -1,0 +1,11 @@
+sample_id	group	path
+control_1	control	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/control_1.cov.gz
+control_2	control	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/control_2.cov.gz
+control_3	control	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/control_3.cov.gz
+control_4	control	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/control_4.cov.gz
+control_5	control	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/control_5.cov.gz
+treatment_1	treatment	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/treatment_1.cov.gz
+treatment_2	treatment	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/treatment_2.cov.gz
+treatment_3	treatment	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/treatment_3.cov.gz
+treatment_4	treatment	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/treatment_4.cov.gz
+treatment_5	treatment	/scratch/wgbs_benchmark_v4/data/genome_autosomes_null/counts/treatment_5.cov.gz

@@ -1,0 +1,75 @@
+Starting DMRcate: all 12 samples, no memory or timeout cap
+DMRcate: ok
+Starting BSmooth: all 12 samples, no memory or timeout cap
+BSmooth: ok
+Starting dmrseq: all 12 samples, no memory or timeout cap
+dmrseq: ok
+Starting methylKit: all 12 samples, no memory or timeout cap
+methylKit: ok
+/scratch/wgbs_benchmark_v4/results/real_uncapped_20261008/source_snapshot/compare.py:67: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  'paper_directions':pd.DataFrame(directions),'paper_overlap_pairs':pd.concat(all_pairs,ignore_index=True),
+  24 genes were dropped because they have exons located on both strands of the
+  same reference sequence or on more than one reference sequence, so cannot be
+  represented by a single genomic range.
+  Use 'single.strand.genes.only=FALSE' to get all the genes in a GRangesList
+  object, or use suppressMessages() to suppress this message.
+'select()' returned 1:1 mapping between keys and columns
+Warning message:
+In `[.data.table`(support, , `:=`(n_tools, rowSums(.SD)), .SDcols = tools) :
+  A shallow copy of this data.table was taken so that := can add or remove 1 columns by reference. At an earlier point, this data.table was copied by R (or was created manually using structure() or similar). Avoid names<- and attr<- which in R currently (and oddly) may copy the whole data.table. Use set* syntax instead to avoid copying: ?set, ?setnames and ?setattr. It's also not unusual for data.table-agnostic packages to produce tables affected by this issue. If this message doesn't help, please report your use case to the data.table issue tracker so the root cause can be fixed or this message improved.
+Warning messages:
+1: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr13, chr14, chr3
+  - in 'y': chrX
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+2: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr21, chr22, chr9
+  - in 'y': chr6, chr15, chr18, chr20, chrX
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+3: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chrX
+  - in 'y': chr13, chr6, chr20, chr14, chr3, chr18, chr15
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+4: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr21, chr22, chr9
+  - in 'y': chr3, chr6, chr13, chr14, chr15, chr18, chr20
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+5: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr21, chr9, chr22
+  - in 'y': chrX
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+6: In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr21
+  - in 'y': chr3, chr4, chr5, chr6, chr11, chr13, chr14, chr15, chr18, chr20, chrX
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+Independent GenomicRanges paper-overlap counts passed for all completed call sets and all thresholds.
+/scratch/wgbs_benchmark_v4/results/real_uncapped_20261008/source_snapshot/compare.py:72: UserWarning: Pandas requires version '3.0.5' or newer of 'xlsxwriter' (version '1.4.5' currently installed).
+  with pd.ExcelWriter(out/'real_comparison.xlsx') as writer:
+# GSE64177 real-data comparison
+
+| tool                 |   calls |   calls_overlapping_paper |   overlap_fraction |   paper_regions_covered |   minutes |   peak_rss_gib |
+|:---------------------|--------:|--------------------------:|-------------------:|------------------------:|----------:|---------------:|
+| epykit               |      56 |                        52 |              0.929 |                      53 |     4.128 |          4.854 |
+| epykit_original      |     431 |                       158 |              0.367 |                     160 |     4.262 |          4.955 |
+| epykit_beta_binomial |      48 |                        46 |              0.958 |                      47 |    41.457 |          4.835 |
+| DSS                  |     253 |                       180 |              0.711 |                     180 |    67.010 |         31.437 |
+| DMRcate              |       0 |                         0 |            nan     |                       0 |    14.583 |         47.878 |
+| BSmooth              |     134 |                        67 |              0.500 |                      67 |   249.365 |         26.530 |
+| dmrseq               |      12 |                        12 |              1.000 |                      12 |   500.315 |         16.913 |
+| methylKit            |      58 |                        28 |              0.483 |                      28 |   245.725 |         34.831 |
+
+Epykit uses the region-only correction and legacy CpG engine. BB remains experimental. New R calls use the recorded statistical settings and all twelve samples with no benchmark memory or time cap. The models omit donor pairing. Paper agreement is descriptive, not biological precision or FDR. Matches use direction-concordant, 1-based inclusive hg19 intervals at any, 50%, and 80% reciprocal base-pair overlap. Four-call-set historical comparisons are retained as separate source runs. Failed calls are excluded and recorded in the run manifest.
+
+Complete: /scratch/wgbs_benchmark_v4/results/real_uncapped_20261008

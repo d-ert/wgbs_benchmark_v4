@@ -1,0 +1,47 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_subsampled_prior_and_pvalues_are_invariant_to_group_relabeling ______
+
+    def test_subsampled_prior_and_pvalues_are_invariant_to_group_relabeling():
+        rng = np.random.default_rng(4710921)
+        sites,nrep = 6000,3
+        mean = rng.uniform(.01,.99,sites)
+        rho = rng.choice([.002,.04,.25],sites,p=[.4,.4,.2])
+        n = np.full((sites,2*nrep),20,dtype=np.int64)
+        k = (1-rho)/rho
+        latent = rng.beta((mean*k)[:,None],((1-mean)*k)[:,None],size=n.shape)
+        m = rng.binomial(n,latent)
+        order = np.r_[np.arange(nrep,2*nrep),np.arange(nrep)]
+        prior = bb.estimate_prior(m,n,nrep)
+        swapped = bb.estimate_prior(m[:,order],n[:,order],nrep)
+        np.testing.assert_allclose([prior['log_rho_mean'],prior['log_rho_sd']],
+                                  [swapped['log_rho_mean'],swapped['log_rho_sd']],atol=1e-9,rtol=0)
+        a = bb.test_lognormal(m,n,nrep,prior=prior)
+        b = bb.test_lognormal(m[:,order],n[:,order],nrep,prior=swapped)
+>       np.testing.assert_allclose(a['pvalue'],b['pvalue'],atol=1e-7,rtol=0)
+
+tests/test_beta_binomial_inference.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<function assert_allclose.<locals>.compare at 0x78c2eaedf880>, array([0.12327755, 0.33701844, 0.17744747, ..., 0.5321...7671,
+       0.48746791]), array([0.12327755, 0.33701844, 0.17744747, ..., 0.53218561, 0.30637671,
+       0.48746791]))
+kwds = {'equal_nan': True, 'err_msg': '', 'header': 'Not equal to tolerance rtol=0, atol=1e-07', 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Not equal to tolerance rtol=0, atol=1e-07
+E           
+E           Mismatched elements: 3 / 6000 (0.05%)
+E           Max absolute difference: 4.38002898e-07
+E           Max relative difference: 4.38002898e-07
+E            x: array([0.123278, 0.337018, 0.177447, ..., 0.532186, 0.306377, 0.487468])
+E            y: array([0.123278, 0.337018, 0.177447, ..., 0.532186, 0.306377, 0.487468])
+
+/usr/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_inference.py::test_subsampled_prior_and_pvalues_are_invariant_to_group_relabeling
+1 failed in 12.71s

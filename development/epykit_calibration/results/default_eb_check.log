@@ -1,0 +1,7 @@
+/scratch/epykit-calibration/benchmark/scripts/check_default_eb.py:19: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+  ep.tl.dmc(md,test='lr',dispersion='eb',reference='adaptive',smoothing=False,chromosomes=['chr22'],tsv=False)
+/scratch/epykit-calibration/benchmark/scripts/check_default_eb.py:19: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+  ep.tl.dmc(md,test='lr',dispersion='eb',reference='adaptive',smoothing=False,chromosomes=['chr22'],tsv=False)
+dataset  called_regions  matched_regions  region_precision  region_recall  region_f1  p_below_05  p_below_001  dml_tp  dml_fp
+ signal              47               15          0.319149       0.238095   0.272727    0.065461     0.000219       0       0
+   null              18                0          0.000000            NaN   0.000000    0.064922     0.000177       0       1

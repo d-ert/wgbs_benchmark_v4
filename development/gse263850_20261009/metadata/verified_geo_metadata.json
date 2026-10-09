@@ -1,0 +1,44 @@
+{
+  "study": "GSE263850",
+  "samples": [
+    {
+      "accession": "GSM8200106",
+      "title": "Het-AKAP11-KO-Clone 16_WGBS_DNAme",
+      "genotype": "Het-AKAP11-KO",
+      "assembly": "GRCh38"
+    },
+    {
+      "accession": "GSM8200107",
+      "title": "Het-AKAP11-KO-Clone 20_WGBS_DNAme",
+      "genotype": "Het-AKAP11-KO",
+      "assembly": "GRCh38"
+    },
+    {
+      "accession": "GSM8200108",
+      "title": "Het-AKAP11-KO-Clone 21_WGBS_DNAme",
+      "genotype": "Het-AKAP11-KO",
+      "assembly": "GRCh38"
+    },
+    {
+      "accession": "GSM8200109",
+      "title": "WT_SBP009_Rep1_WGBS_DNAme",
+      "genotype": "WT",
+      "assembly": "GRCh38"
+    },
+    {
+      "accession": "GSM8200110",
+      "title": "WT_SBP009_Rep2_WGBS_DNAme",
+      "genotype": "WT",
+      "assembly": "GRCh38"
+    },
+    {
+      "accession": "GSM8200111",
+      "title": "WT_SBP009_Rep3_WGBS_DNAme",
+      "genotype": "WT",
+      "assembly": "GRCh38"
+    }
+  ],
+  "strand_collapsed": true,
+  "min_coverage": 5,
+  "source_url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE263nnn/GSE263850/soft/GSE263850_family.soft.gz"
+}

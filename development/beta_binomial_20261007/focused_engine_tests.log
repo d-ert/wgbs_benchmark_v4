@@ -1,0 +1,67 @@
+.......................................................                  [100%]
+=============================== warnings summary ===============================
+tests/test_dmc_stages.py::test_open_input_store_builds_and_removes_the_smoothed_store
+tests/test_dmc_stages.py::test_open_input_store_builds_and_removes_the_smoothed_store
+  /scratch/epykit-calibration-fresh_20261007/src/epykit/_smoothed_store.py:116: RuntimeWarning: invalid value encountered in cast
+    np.round(beta * cov).astype(np.int64),
+
+tests/test_dmc_stages.py::test_materialize_false_never_assembles_the_table
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_stages.py:207: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", materialize=False)
+
+tests/test_dmc_metadata.py::test_main_path_writes_canonical_record
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:149: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", tsv=False)
+
+tests/test_dmc_metadata.py::test_resume_hit_path_writes_canonical_record
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:169: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", resumable=True, tsv=False)
+
+tests/test_dmc_metadata.py::test_resume_hit_path_writes_canonical_record
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:172: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", resumable=True, tsv=False)
+
+tests/test_dmc_metadata.py::test_contrast_path_writes_canonical_record
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:211: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, formula="~ group", contrast="group", tsv=False)
+
+tests/test_dmc_metadata.py::test_contrast_path_ignores_power_stack_with_a_notice
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:270: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, formula="~ group", contrast="group", tsv=False)
+
+tests/test_dmc_metadata.py::test_contrast_path_ignores_power_stack_with_a_notice
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:275: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, formula="~ group", contrast="group", power_stack="lr+", tsv=False)
+
+tests/test_dmc_metadata.py::test_engine_emits_canonical_columns[lr-kwargs0]
+tests/test_dmc_metadata.py::test_engine_emits_canonical_columns[welch_t-kwargs1]
+tests/test_dmc_metadata.py::test_engine_emits_canonical_columns[glm-kwargs2]
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:329: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test=engine, tsv=False, **kwargs)
+
+tests/test_dmc_metadata.py::test_fisher_emits_canonical_columns
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_metadata.py:335: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md_n1, test="fisher", allow_n1=True, tsv=False)
+
+tests/test_dmc_lr.py::test_lr_meth_diff_ci_is_asymmetric_near_boundary
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_lr.py:66: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr")
+
+tests/test_dmc_streaming_store.py::test_materialize_true_default_populates_varm
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_streaming_store.py:145: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", tsv=False)
+
+tests/test_dmc_streaming_store.py::test_materialize_false_keeps_only_store
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_streaming_store.py:165: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", materialize=False)
+
+tests/test_dmc_streaming_store.py::test_materialize_false_dmr_equivalent
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_streaming_store.py:188: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", materialize=False)
+
+tests/test_dmc_streaming_store.py::test_materialize_false_dmr_equivalent
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmc_streaming_store.py:194: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend, or log2_odds_ratio_bb for the beta_binomial engine. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr", materialize=True, tsv=False)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+55 passed, 18 warnings in 9.47s

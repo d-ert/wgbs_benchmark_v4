@@ -1,0 +1,189 @@
+{
+  "passed": 791,
+  "failed": 28,
+  "skipped": 6,
+  "errors": 0,
+  "elapsed_seconds": 391.724,
+  "failure_categories": {
+    "missing_bioframe": 25,
+    "missing_optional_diptest": 1,
+    "stale_test_expectation": 2
+  },
+  "failures": [
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_chrom_name_mismatch_raises",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_matching_chrom_names_do_not_raise",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_intron_does_not_overextend_into_nested_exon",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_equal_priority_overlap_breaks_ties_deterministically",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_default_now_includes_multi_columns",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_multi_false_opts_out_of_extra_columns",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_multi_adds_four_columns_with_correct_dtypes",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_nearest_tss_can_differ_from_best_pick",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_nearest_tss_minus_strand_sign_flip",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_all_overlapping_captures_one_to_many",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_no_overlap_site_gets_empty_lists_and_still_finds_nearest",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_multi_annotation_reuses_built_features_cache",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_gene_type_filter_excludes_lincrna_from_nearest_tss",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_gene_type_filter_string_or_list_both_accepted",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_gene_type_filter_makes_distinct_cache_entry",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_refgene_source_produces_legacy_columns",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_refgene_source_supports_multi_annotation",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_refgene_gene_type_filter_works",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_refgene_and_gtf_caches_dont_collide",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_source_auto_detects_gtf",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_source_auto_detects_refgene",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_source_explicit_override_for_unusual_filename",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_annotate_multi",
+      "test": "test_default_surfaces_utr_tts_noncoding",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_coordinate_convention",
+      "test": "test_one_based_cov_annotates_to_correct_gene",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required. pip install bioframe"
+    },
+    {
+      "class": "tests.test_dmr_region_fdr_mode",
+      "test": "test_max_t_with_failed_and_empty_permutations_matches_main",
+      "category": "stale_test_expectation",
+      "message": "RuntimeError: Incomplete permutation scan; refusing biased inference"
+    },
+    {
+      "class": "tests.test_engine_oracles",
+      "test": "test_lr_matches_g_test_at_unit_dispersion",
+      "category": "stale_test_expectation",
+      "message": "assert False\n +  where False = <function isclose at 0x7ed9ecb2b3f0>(0.008589689937437557, 1.5145940806898643e-06, rtol=1e-09, atol=1e-12)\n +    where <function isclose at 0x7ed9ecb2b3f0> = np.isclose"
+    },
+    {
+      "class": "tests.test_filter",
+      "test": "test_blacklist_drops_exactly_the_sites_inside_bed_intervals",
+      "category": "missing_bioframe",
+      "message": "ImportError: bioframe is required for blacklist filtering. Install it with: pip install bioframe"
+    },
+    {
+      "class": "tests.test_qc_clinical",
+      "test": "test_sex_check_unimodal_cohort_falls_back_to_threshold",
+      "category": "missing_optional_diptest",
+      "message": "AssertionError: Expected all-female assignment; got {'S0': 'female', 'S1': 'female', 'S2': 'female', 'S3': 'female', 'S4': 'male', 'S5': 'female', 'S6': 'female', 'S7': 'female'}\nassert False\n +  where False = all(<generator object test_sex_check_unimodal_cohort_falls_back_to_threshold.<locals>.<genexpr> at 0x7ed8083234c0>)"
+    }
+  ],
+  "diagnosis": {
+    "missing_bioframe": "25 annotation/blacklist tests enter an import guard; dependency is declared by the package but unavailable in the test environment. One failure independently reproduced.",
+    "missing_optional_diptest": "Absent optional diptest activates clustering in an all-female fixture; this accounts for the sex-QC failure.",
+    "stale_test_expectation": "The G-test oracle expects chi-square under adaptive reference, whereas source uses F(1,4); independent SciPy calculation matches the actual result. The permutation test expects failed scans dropped, whereas source intentionally raises and the new complete-scan tests pass."
+  },
+  "source_modified": false,
+  "scope": "Baseline package tests; not an evaluation of newly implemented improvements."
+}

@@ -1,0 +1,16 @@
+{
+  "bh_qvalues_applied": false,
+  "chroms": [
+    {
+      "file": "chrom=chr22.parquet",
+      "n_sites": 351004,
+      "name": "chr22"
+    }
+  ],
+  "completed_at": "2026-10-06T22:49:31",
+  "epykit_version": "0.0.0+unknown",
+  "input_methylstore": "/scratch/wgbs_benchmark_v4/results/genome_baseline/simulated/genome_autosomes_null/epykit/store/.cache/raw",
+  "input_sig": "f65827bdb1b71edaae010dc8d23694e2d3da24613a3c57465c275d188515a259",
+  "test": "lr",
+  "total_sites": 351004
+}

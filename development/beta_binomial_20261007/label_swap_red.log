@@ -1,0 +1,42 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_subsampled_prior_and_pvalues_are_invariant_to_group_relabeling ______
+
+    def test_subsampled_prior_and_pvalues_are_invariant_to_group_relabeling():
+        rng = np.random.default_rng(4710921)
+        sites,nrep = 6000,3
+        mean = rng.uniform(.01,.99,sites)
+        rho = rng.choice([.002,.04,.25],sites,p=[.4,.4,.2])
+        n = np.full((sites,2*nrep),20,dtype=np.int64)
+        k = (1-rho)/rho
+        latent = rng.beta((mean*k)[:,None],((1-mean)*k)[:,None],size=n.shape)
+        m = rng.binomial(n,latent)
+        order = np.r_[np.arange(nrep,2*nrep),np.arange(nrep)]
+        prior = bb.estimate_prior(m,n,nrep)
+        swapped = bb.estimate_prior(m[:,order],n[:,order],nrep)
+>       np.testing.assert_allclose([prior['log_rho_mean'],prior['log_rho_sd']],
+                                  [swapped['log_rho_mean'],swapped['log_rho_sd']],atol=1e-9,rtol=0)
+
+tests/test_beta_binomial_inference.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<function assert_allclose.<locals>.compare at 0x73a6607c7880>, array([-3.74715982,  1.72137728]), array([-3.95016634,  1.85191347]))
+kwds = {'equal_nan': True, 'err_msg': '', 'header': 'Not equal to tolerance rtol=0, atol=1e-09', 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Not equal to tolerance rtol=0, atol=1e-09
+E           
+E           Mismatched elements: 2 / 2 (100%)
+E           Max absolute difference: 0.20300653
+E           Max relative difference: 0.0704872
+E            x: array([-3.74716 ,  1.721377])
+E            y: array([-3.950166,  1.851913])
+
+/usr/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_inference.py::test_subsampled_prior_and_pvalues_are_invariant_to_group_relabeling
+1 failed in 9.00s

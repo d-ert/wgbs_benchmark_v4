@@ -1,0 +1,14 @@
+{
+  "status": "verified",
+  "dataset": "genome_autosomes_signal",
+  "source_hashes_preserved": true,
+  "region_settings_preserved": true,
+  "prior_files_verified": 22,
+  "coverage_export_rows": 16070989,
+  "ratio_checks": [
+    "precision",
+    "recall",
+    "F1 at 50% and 80%"
+  ],
+  "independent_membership_and_BH_checks": "scheduled after all timed runs complete"
+}

@@ -1,0 +1,152 @@
+{
+  "status": "verified",
+  "sources": {
+    "regions": {
+      "file": "results/beta_binomial_20261007_full/comparison/all_tool_region_comparison.csv",
+      "sha256": "3b3ac9f1cf2e558f7043a2832839cd981ff379a43462de04ad698ada268c80e5",
+      "rows": 32
+    },
+    "cpg": {
+      "file": "results/beta_binomial_20261007_full/comparison/all_tool_cpg_comparison.csv",
+      "sha256": "4a362b0eb000b53ae2d1d3028eec387df0abad4fcf123f6b04d192aa23df6c38",
+      "rows": 16
+    },
+    "real_performance": {
+      "file": "results/real_uncapped_20261008/comparison/real_performance.csv",
+      "sha256": "927ede87cb277f71f02adaf70dcb4720102ed646176caf747f8689c2fd490a15",
+      "rows": 8
+    },
+    "paper_agreement": {
+      "file": "results/real_uncapped_20261008/comparison/paper_comparison.csv",
+      "sha256": "70b978cb07a8a6bcd331ae9b9e7428ac767fcaf61b55f135102764ba06f99947",
+      "rows": 24
+    },
+    "heldout": {
+      "file": "development/beta_binomial_20261007/holdout_v3/metrics.csv",
+      "sha256": "3cf7ee672ec14480f455a62e343865c8a7b2c5e7df23952f8377a6357876e9ef",
+      "rows": 23
+    },
+    "strata": {
+      "file": "development/epykit_calibration/reports/cpg_strata.csv",
+      "sha256": "a630c0f102fc3f4ea939780a2cd9bfeefc11b0e941755bed2dd36cae76516cde",
+      "rows": 32
+    }
+  },
+  "run_states": {
+    "default_search_by_20261007": {
+      "status": "complete",
+      "stage": null,
+      "active_tool": null,
+      "started_at": null,
+      "updated_at": null
+    },
+    "GSE263850_paper_smoke_20261009": {
+      "status": "complete",
+      "stage": "complete",
+      "active_tool": null,
+      "started_at": "2026-10-09T08:37:50.640788+00:00",
+      "updated_at": "2026-10-09T08:38:35.645838+00:00"
+    },
+    "beta_binomial_20261007": {
+      "status": "interrupted",
+      "stage": "partial_signal_fit",
+      "active_tool": null,
+      "started_at": null,
+      "updated_at": null
+    },
+    "beta_binomial_20261007_full": {
+      "status": "complete",
+      "stage": "complete",
+      "active_tool": null,
+      "started_at": null,
+      "updated_at": null
+    },
+    "genome_baseline": {
+      "status": "failed",
+      "stage": null,
+      "active_tool": null,
+      "started_at": null,
+      "updated_at": null
+    },
+    "GSE263850_paper_20261009": {
+      "status": "running",
+      "stage": "benchmarking",
+      "active_tool": "BSmooth",
+      "started_at": "2026-10-09T08:42:14.384214+00:00",
+      "updated_at": "2026-10-09T09:16:26.714789+00:00"
+    },
+    "real_uncapped_20261008": {
+      "status": "complete",
+      "stage": "complete",
+      "active_tool": null,
+      "started_at": "2026-10-08T09:25:59.028854+00:00",
+      "updated_at": "2026-10-09T02:16:09.722636+00:00"
+    }
+  },
+  "cpg_byte_equality": [
+    {
+      "dataset": "genome_autosomes_signal",
+      "original_sha256": "b2cfa576d002e801555b8943d1ace1deb07caa43fad420e2f0b4834d8daaacdd",
+      "revised_sha256": "b2cfa576d002e801555b8943d1ace1deb07caa43fad420e2f0b4834d8daaacdd",
+      "identical": true
+    },
+    {
+      "dataset": "genome_autosomes_null",
+      "original_sha256": "a45b0fe67230cd747cf3b678f4413a855a6188b403933a84b2bcadcc679b480f",
+      "revised_sha256": "a45b0fe67230cd747cf3b678f4413a855a6188b403933a84b2bcadcc679b480f",
+      "identical": true
+    },
+    {
+      "dataset": "real",
+      "original_sha256": "b33b3b0d1fd36bf2fba1575683c15490f18bc76a139c0826b1edf3ec8efb38af",
+      "revised_sha256": "b33b3b0d1fd36bf2fba1575683c15490f18bc76a139c0826b1edf3ec8efb38af",
+      "identical": true
+    }
+  ],
+  "source_hashes": {
+    "dmc.py": {
+      "original": "25c84a06ee536d77557639e95b0302a391b501d2cc518f50eb073e0f0fb186bb",
+      "region_fix": "25c84a06ee536d77557639e95b0302a391b501d2cc518f50eb073e0f0fb186bb",
+      "bb_snapshot": "37e3b509191058bd4d2e9d8c12a4bb0a5eaad408d95ab863f436c58a32efe829",
+      "fresh_checkout": "37e3b509191058bd4d2e9d8c12a4bb0a5eaad408d95ab863f436c58a32efe829",
+      "epykit3_checkout": "25c84a06ee536d77557639e95b0302a391b501d2cc518f50eb073e0f0fb186bb"
+    },
+    "dmr.py": {
+      "original": "244a92ed2b8bd7028d933c9ed47057d147cdb1e71ac732fedf45197ae2ffe9e7",
+      "region_fix": "490964047d052ced5baa4601e519790b2df771f75ad9fc0a0e0c6c40a6961467",
+      "bb_snapshot": "490964047d052ced5baa4601e519790b2df771f75ad9fc0a0e0c6c40a6961467",
+      "fresh_checkout": "490964047d052ced5baa4601e519790b2df771f75ad9fc0a0e0c6c40a6961467",
+      "epykit3_checkout": "244a92ed2b8bd7028d933c9ed47057d147cdb1e71ac732fedf45197ae2ffe9e7"
+    },
+    "_beta_binomial.py": {
+      "original": null,
+      "region_fix": null,
+      "bb_snapshot": "09ab9a8da96973d1e901339253803f10c2705a85a6645a5c9e7e5c6f1b2a1037",
+      "fresh_checkout": "09ab9a8da96973d1e901339253803f10c2705a85a6645a5c9e7e5c6f1b2a1037",
+      "epykit3_checkout": null
+    },
+    "_region_search.py": {
+      "original": null,
+      "region_fix": "41ca6f15dc629918f68512a680b2ee67977a240630f9b78269186413fe24f2b3",
+      "bb_snapshot": "41ca6f15dc629918f68512a680b2ee67977a240630f9b78269186413fe24f2b3",
+      "fresh_checkout": "41ca6f15dc629918f68512a680b2ee67977a240630f9b78269186413fe24f2b3",
+      "epykit3_checkout": null
+    },
+    "_dmc_stages.py": {
+      "original": "479d7b04bd8f361d2381a1a5241900ab5ca2868fdbbb66c49ad73468f6fbb991",
+      "region_fix": "479d7b04bd8f361d2381a1a5241900ab5ca2868fdbbb66c49ad73468f6fbb991",
+      "bb_snapshot": "22a239da7c4f26d6c53f363bb1f2a6400f60b847b59c821362be670f730968ef",
+      "fresh_checkout": "22a239da7c4f26d6c53f363bb1f2a6400f60b847b59c821362be670f730968ef",
+      "epykit3_checkout": "479d7b04bd8f361d2381a1a5241900ab5ca2868fdbbb66c49ad73468f6fbb991"
+    }
+  },
+  "checks": [
+    "region metric arithmetic",
+    "CpG confusion totals",
+    "real overlap fractions",
+    "raw candidate row counts",
+    "complete-family BY reproduced",
+    "original vs region-fix CpG TSV equality"
+  ],
+  "script_sha256": "c377094d0c1b9dc0beb8e66683647becf0022eafef373731f97b079e3ad3e5bd"
+}

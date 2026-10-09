@@ -1,0 +1,24 @@
+methylKit configuration: overdispersion=MN, adjust=BH
+Received list of locations.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+Reading file.
+uniting...
+two groups detected:
+ will calculate methylation difference as the difference of
+treatment (group: 1) - control (group: 0)
+two groups detected:
+ will calculate methylation difference as the difference of
+treatment (group: 1) - control (group: 0)
+Failed to connect to bus: Operation not permitted (consider using --machine=<user>@.host --user to connect to bus of other user)
+Warning in system("timedatectl", intern = TRUE) :
+  running command 'timedatectl' had status 1

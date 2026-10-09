@@ -1,0 +1,5 @@
+{
+  "purpose": "Compare reference distributions at fixed LR statistics; no fitted data or tuning",
+  "interpretation": "Heavier F tails can reduce power. This does not establish that chi-square is calibrated for estimated dispersion.",
+  "benchmark_settings_changed": false
+}

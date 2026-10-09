@@ -1,0 +1,11 @@
+dataset,q_cutoff,calls,mean_effect_below_10pct
+genome_autosomes_signal,0.05,3623,496
+genome_autosomes_signal,0.01,2745,145
+genome_autosomes_signal,0.001,1912,21
+genome_autosomes_signal,0.0001,1525,8
+genome_autosomes_signal,1e-05,1315,2
+genome_autosomes_null,0.05,1869,339
+genome_autosomes_null,0.01,946,60
+genome_autosomes_null,0.001,156,2
+genome_autosomes_null,0.0001,8,0
+genome_autosomes_null,1e-05,1,0

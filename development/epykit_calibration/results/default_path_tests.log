@@ -1,0 +1,266 @@
+...................................................F                     [100%]
+=================================== FAILURES ===================================
+_________________ test_one_based_cov_annotates_to_correct_gene _________________
+
+sites = shape: (1, 2)
+┌───────┬──────┐
+│ chrom ┆ pos  │
+│ ---   ┆ ---  │
+│ str   ┆ i64  │
+╞═══════╪══════╡
+│ chr1  ┆ 5000 │
+└───────┴──────┘
+annotation = '/tmp/pytest-of-mlegrand/pytest-31/test_one_based_cov_annotates_t0/g.gtf'
+
+    def annotate_features(
+        sites: pl.DataFrame,
+        annotation: str,
+        *,
+        source: str = "auto",
+        features: list[str] | tuple[str, ...] = (
+            "promoter",
+            "5UTR",
+            "exon",
+            "intron",
+            "3UTR",
+            "TTS",
+            "noncoding",
+        ),
+        promoter_upstream_bp: int = 2000,
+        promoter_downstream_bp: int = 200,
+        multi_annotation: bool = True,
+        gene_type_filter: str | list[str] | None = None,
+    ) -> pl.DataFrame:
+        """Annotate DMC / DMR sites with gene-level genomic features.
+    
+        Parameters
+        ----------
+        sites : polars DataFrame
+            Per-site or per-region table with at least ``chrom`` and either
+            ``pos`` (single-base sites) or ``start`` + ``end`` (regions).
+        annotation : str
+            Path to a gene-model file. Format is auto-detected from the
+            extension: ``.gtf`` / ``.gtf.gz`` -> GENCODE/Ensembl GTF;
+            ``refGene.txt`` / ``refGene.txt.gz`` -> UCSC RefSeq (HOMER's
+            default catalog). Pass ``source=`` to override if your filename
+            doesn't follow the convention.
+        source : {"auto", "gtf", "refgene"}, keyword-only, default "auto"
+            Format override for the annotation file. ``"auto"`` infers from
+            the extension; the explicit values are an escape hatch for
+            unusually-named files.
+        features : sequence of str, keyword-only
+            Feature classes to build overlap intervals for. Sites that don't
+            hit any are reported as ``feature_type="intergenic"`` automatically
+            -- "intergenic" is the fallback, not something you opt into.
+            Default builds the full HOMER-style set
+            (promoter / 5UTR / exon / intron / 3UTR / TTS / noncoding) so
+            ``feature_type`` value-counts can be compared directly against
+            HOMER's vocabulary without a custom kwarg. Pass a narrower tuple
+            (e.g. ``("promoter", "exon", "intron")``) to skip the UTR / TTS /
+            noncoding builders when you don't need fine-grained categories
+            or your annotation source can't supply them (refGene has no UTR
+            coordinates and no biotype, so the UTR / noncoding builders are
+            silently no-ops on refGene sources).
+        promoter_upstream_bp, promoter_downstream_bp : int, keyword-only
+            Promoter window around each gene's TSS. Default ``(-2000, +200)``
+            matches the conventional "core promoter" definition.
+        multi_annotation : bool, keyword-only, default True
+            If True (default), also adds four annotatr-style columns alongside
+            the single-best pick. Set to False to get only the legacy four-
+            column output (``gene_id``, ``gene_name``, ``feature_type``,
+            ``distance_to_tss``) -- useful for narrow storage or when downstream
+            code asserts on exact column sets. New columns when True:
+    
+              - ``nearest_tss_gene`` (Utf8) -- gene whose TSS is closest to the
+                site center (HOMER's rule).
+              - ``nearest_tss_distance`` (Int32) -- signed bp distance from
+                site center to that TSS, flipped for ``-`` strand so positive
+                is downstream in transcription direction.
+              - ``all_overlapping_genes`` (List[Utf8]) -- every gene whose
+                feature interval overlaps the site (one-to-many).
+              - ``all_overlapping_features`` (List[Utf8]) -- every feature type
+                that overlaps (e.g. ``["intron", "promoter"]``).
+        gene_type_filter : str or sequence of str or None, keyword-only
+            If set, only genes whose ``gene_type`` matches are used to build
+            overlap intervals and the nearest-TSS index. Typical:
+            ``"protein_coding"`` to drop lincRNAs / pseudogenes / novel
+            predictions. Works on both GTF (via ``gene_type`` /
+            ``gene_biotype`` attribute) and refGene (NM_* -> protein_coding,
+            NR_* -> non-coding). A bare string is treated as a 1-element list.
+    
+        Examples
+        --------
+        >>> # GTF, auto-detected
+        >>> annotate_features(sites, "genes.gtf.gz", gene_type_filter="protein_coding")
+        >>> # UCSC RefSeq (HOMER's default catalog), auto-detected
+        >>> annotate_features(sites, "refGene.txt.gz")
+        >>> # Unusually-named file; explicit override
+        >>> annotate_features(sites, "my_genes.tsv", source="refgene")
+        """
+        # Resolve source (auto-detect if needed)
+        if source == "auto":
+            source = _detect_annotation_source(annotation)
+        elif source not in ("gtf", "refgene"):
+            raise ValueError(f"source must be 'auto', 'gtf', or 'refgene'; got {source!r}")
+    
+        # Normalize gene_type_filter to tuple or None
+        if isinstance(gene_type_filter, str):
+            gene_type_filter_norm: tuple[str, ...] | None = (gene_type_filter,)
+        elif gene_type_filter is None:
+            gene_type_filter_norm = None
+        else:
+            gene_type_filter_norm = tuple(gene_type_filter)
+        try:
+>           import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E           ModuleNotFoundError: No module named 'bioframe'
+
+src/epykit/annotate.py:1236: ModuleNotFoundError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('/tmp/pytest-of-mlegrand/pytest-31/test_one_based_cov_annotates_t0')
+
+    def test_one_based_cov_annotates_to_correct_gene(tmp_path):
+        """End-to-end: a 1-based Bismark CpG -> 0-based store pos -> annotate maps
+        it to the gene it physically sits in (pins the ingestion->annotation chain)."""
+        from epykit.annotate import annotate_features
+    
+        # Cytosine at 1-based 5001 -> 0-based store pos 5000.
+        _write_cov(tmp_path / "t1.bismark.cov.gz", [("chr1", 5001, 5001, 80.0, 8, 2)])
+        _write_cov(tmp_path / "c1.bismark.cov.gz", [("chr1", 5001, 5001, 80.0, 8, 2)])
+        sheet = tmp_path / "sheet.csv"
+        _sheet(sheet, {"t1": ("treatment", tmp_path / "t1.bismark.cov.gz"),
+                       "c1": ("control", tmp_path / "c1.bismark.cov.gz")})
+        md = ep.read_bismark(str(sheet), treatment_group="treatment",
+                             control_group="control", store_dir=str(tmp_path / "store"))
+        assert _store_pos(md, "t1", "chr1") == [5000]
+    
+        gtf = tmp_path / "g.gtf"
+        gtf.write_text(
+            'chr1\tt\tgene\t4001\t6000\t.\t+\t.\tgene_id "g1"; gene_name "G1";\n'
+            'chr1\tt\texon\t4001\t6000\t.\t+\t.\tgene_id "g1"; gene_name "G1";\n'
+        )
+        sites = pl.DataFrame({"chrom": ["chr1"], "pos": [5000]})
+>       out = annotate_features(sites, str(gtf))
+
+tests/test_coordinate_convention.py:130: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+sites = shape: (1, 2)
+┌───────┬──────┐
+│ chrom ┆ pos  │
+│ ---   ┆ ---  │
+│ str   ┆ i64  │
+╞═══════╪══════╡
+│ chr1  ┆ 5000 │
+└───────┴──────┘
+annotation = '/tmp/pytest-of-mlegrand/pytest-31/test_one_based_cov_annotates_t0/g.gtf'
+
+    def annotate_features(
+        sites: pl.DataFrame,
+        annotation: str,
+        *,
+        source: str = "auto",
+        features: list[str] | tuple[str, ...] = (
+            "promoter",
+            "5UTR",
+            "exon",
+            "intron",
+            "3UTR",
+            "TTS",
+            "noncoding",
+        ),
+        promoter_upstream_bp: int = 2000,
+        promoter_downstream_bp: int = 200,
+        multi_annotation: bool = True,
+        gene_type_filter: str | list[str] | None = None,
+    ) -> pl.DataFrame:
+        """Annotate DMC / DMR sites with gene-level genomic features.
+    
+        Parameters
+        ----------
+        sites : polars DataFrame
+            Per-site or per-region table with at least ``chrom`` and either
+            ``pos`` (single-base sites) or ``start`` + ``end`` (regions).
+        annotation : str
+            Path to a gene-model file. Format is auto-detected from the
+            extension: ``.gtf`` / ``.gtf.gz`` -> GENCODE/Ensembl GTF;
+            ``refGene.txt`` / ``refGene.txt.gz`` -> UCSC RefSeq (HOMER's
+            default catalog). Pass ``source=`` to override if your filename
+            doesn't follow the convention.
+        source : {"auto", "gtf", "refgene"}, keyword-only, default "auto"
+            Format override for the annotation file. ``"auto"`` infers from
+            the extension; the explicit values are an escape hatch for
+            unusually-named files.
+        features : sequence of str, keyword-only
+            Feature classes to build overlap intervals for. Sites that don't
+            hit any are reported as ``feature_type="intergenic"`` automatically
+            -- "intergenic" is the fallback, not something you opt into.
+            Default builds the full HOMER-style set
+            (promoter / 5UTR / exon / intron / 3UTR / TTS / noncoding) so
+            ``feature_type`` value-counts can be compared directly against
+            HOMER's vocabulary without a custom kwarg. Pass a narrower tuple
+            (e.g. ``("promoter", "exon", "intron")``) to skip the UTR / TTS /
+            noncoding builders when you don't need fine-grained categories
+            or your annotation source can't supply them (refGene has no UTR
+            coordinates and no biotype, so the UTR / noncoding builders are
+            silently no-ops on refGene sources).
+        promoter_upstream_bp, promoter_downstream_bp : int, keyword-only
+            Promoter window around each gene's TSS. Default ``(-2000, +200)``
+            matches the conventional "core promoter" definition.
+        multi_annotation : bool, keyword-only, default True
+            If True (default), also adds four annotatr-style columns alongside
+            the single-best pick. Set to False to get only the legacy four-
+            column output (``gene_id``, ``gene_name``, ``feature_type``,
+            ``distance_to_tss``) -- useful for narrow storage or when downstream
+            code asserts on exact column sets. New columns when True:
+    
+              - ``nearest_tss_gene`` (Utf8) -- gene whose TSS is closest to the
+                site center (HOMER's rule).
+              - ``nearest_tss_distance`` (Int32) -- signed bp distance from
+                site center to that TSS, flipped for ``-`` strand so positive
+                is downstream in transcription direction.
+              - ``all_overlapping_genes`` (List[Utf8]) -- every gene whose
+                feature interval overlaps the site (one-to-many).
+              - ``all_overlapping_features`` (List[Utf8]) -- every feature type
+                that overlaps (e.g. ``["intron", "promoter"]``).
+        gene_type_filter : str or sequence of str or None, keyword-only
+            If set, only genes whose ``gene_type`` matches are used to build
+            overlap intervals and the nearest-TSS index. Typical:
+            ``"protein_coding"`` to drop lincRNAs / pseudogenes / novel
+            predictions. Works on both GTF (via ``gene_type`` /
+            ``gene_biotype`` attribute) and refGene (NM_* -> protein_coding,
+            NR_* -> non-coding). A bare string is treated as a 1-element list.
+    
+        Examples
+        --------
+        >>> # GTF, auto-detected
+        >>> annotate_features(sites, "genes.gtf.gz", gene_type_filter="protein_coding")
+        >>> # UCSC RefSeq (HOMER's default catalog), auto-detected
+        >>> annotate_features(sites, "refGene.txt.gz")
+        >>> # Unusually-named file; explicit override
+        >>> annotate_features(sites, "my_genes.tsv", source="refgene")
+        """
+        # Resolve source (auto-detect if needed)
+        if source == "auto":
+            source = _detect_annotation_source(annotation)
+        elif source not in ("gtf", "refgene"):
+            raise ValueError(f"source must be 'auto', 'gtf', or 'refgene'; got {source!r}")
+    
+        # Normalize gene_type_filter to tuple or None
+        if isinstance(gene_type_filter, str):
+            gene_type_filter_norm: tuple[str, ...] | None = (gene_type_filter,)
+        elif gene_type_filter is None:
+            gene_type_filter_norm = None
+        else:
+            gene_type_filter_norm = tuple(gene_type_filter)
+        try:
+            import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+        except ImportError as exc:
+>           raise ImportError("bioframe is required. pip install bioframe") from exc
+E           ImportError: bioframe is required. pip install bioframe
+
+src/epykit/annotate.py:1238: ImportError
+=========================== short test summary info ============================
+FAILED tests/test_coordinate_convention.py::test_one_based_cov_annotates_to_correct_gene
+1 failed, 51 passed, 5 warnings in 10.12s

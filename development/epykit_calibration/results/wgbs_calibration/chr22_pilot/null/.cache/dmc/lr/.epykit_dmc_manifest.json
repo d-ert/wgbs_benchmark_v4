@@ -1,0 +1,18 @@
+{
+  "bh_method": "fdr_bh",
+  "bh_qvalue_col": "qvalue",
+  "bh_qvalues_applied": true,
+  "chroms": [
+    {
+      "file": "chrom=chr22.parquet",
+      "n_sites": 351004,
+      "name": "chr22"
+    }
+  ],
+  "completed_at": "2026-10-06T22:48:54",
+  "epykit_version": "0.0.0+unknown",
+  "input_methylstore": "/scratch/epykit-calibration/benchmark/results/wgbs_calibration/chr22_pilot/null/raw",
+  "input_sig": "42ab3836871f4349bf907deab57682ee14a4096f4b4ff63c3f3ab5a568beedd2",
+  "test": "lr",
+  "total_sites": 351004
+}

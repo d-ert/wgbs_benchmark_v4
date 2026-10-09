@@ -1,0 +1,180 @@
+{
+  "captured_at": "2026-10-09T09:25:17.765223+00:00",
+  "run_state": {
+    "status": "running",
+    "stage": "benchmarking",
+    "active_tool": "BSmooth",
+    "updated_at": "2026-10-09T09:16:26.714789+00:00"
+  },
+  "completed_tools": [
+    "DSS",
+    "epykit",
+    "DMRcate"
+  ],
+  "completion_records": {
+    "DSS": {
+      "status": "ok",
+      "monitoring": {
+        "exit_code": 0,
+        "wall_seconds": 1158.1695486940444,
+        "peak_process_tree_rss_bytes": 12634939392,
+        "command": [
+          "/usr/bin/python3",
+          "-m",
+          "wgbs_real.run_tool",
+          "DSS",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/input",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/real/DSS",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/source_snapshot",
+          "paper_aligned"
+        ],
+        "termination_reason": null,
+        "memory_limit_gib": null,
+        "timeout_seconds": null,
+        "memory_measure": "sum of sampled process-tree RSS; shared pages can be counted repeatedly"
+      },
+      "profile": "paper_aligned"
+    },
+    "epykit": {
+      "status": "ok",
+      "monitoring": {
+        "exit_code": 0,
+        "wall_seconds": 167.49204388447106,
+        "peak_process_tree_rss_bytes": 5108568064,
+        "command": [
+          "/usr/bin/python3",
+          "-m",
+          "wgbs_real.run_tool",
+          "epykit",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/input",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/real/epykit",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/source_snapshot",
+          "paper_aligned"
+        ],
+        "termination_reason": null,
+        "memory_limit_gib": null,
+        "timeout_seconds": null,
+        "memory_measure": "sum of sampled process-tree RSS; shared pages can be counted repeatedly"
+      },
+      "profile": "paper_aligned"
+    },
+    "DMRcate": {
+      "status": "ok",
+      "monitoring": {
+        "exit_code": 0,
+        "wall_seconds": 680.2217373754829,
+        "peak_process_tree_rss_bytes": 32589688832,
+        "command": [
+          "/usr/bin/python3",
+          "-m",
+          "wgbs_real.run_tool",
+          "DMRcate",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/input",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/real/DMRcate",
+          "/scratch/wgbs_benchmark_v4/results/GSE263850_paper_20261009/source_snapshot",
+          "paper_aligned"
+        ],
+        "termination_reason": null,
+        "memory_limit_gib": null,
+        "timeout_seconds": null,
+        "memory_measure": "sum of sampled process-tree RSS; shared pages can be counted repeatedly"
+      },
+      "profile": "paper_aligned"
+    }
+  },
+  "independent_match_checks": [
+    {
+      "tool": "DSS",
+      "calls": 922,
+      "independent_50pct_matches": 659
+    },
+    {
+      "tool": "epykit",
+      "calls": 51,
+      "independent_50pct_matches": 15
+    },
+    {
+      "tool": "DMRcate",
+      "calls": 223,
+      "independent_50pct_matches": 27
+    }
+  ],
+  "epykit": {
+    "sites": 22020939,
+    "raw_seed_sites": 1151,
+    "bh_calls": 145,
+    "pre_q_candidates": 51,
+    "after_q_candidates": 51
+  },
+  "settings": {
+    "DSS": {
+      "model": "DMLfit.multiFactor + DMLtest.multiFactor",
+      "formula": "~group",
+      "smoothing": true,
+      "smoothing_span": 500,
+      "p_threshold": 1e-05,
+      "delta": 0,
+      "minlen": 50,
+      "minCG": 3,
+      "dis_merge_requested": 100,
+      "dis_merge_effective": 50,
+      "pct_sig": 0.5,
+      "region_significance": "native raw-p heuristic"
+    },
+    "epykit": {
+      "test": "lr",
+      "dispersion": "eb",
+      "smoothing": true,
+      "smoothing_span": 500,
+      "raw_seed_alpha": 1e-05,
+      "min_abs_meth_diff": 0,
+      "minlen": 51,
+      "min_cpgs": 4,
+      "dis_merge": 100,
+      "pct_sig": 0.5,
+      "region_significance": "accepted complete-interval-family BY q<=0.05 retained"
+    },
+    "DMRcate": {
+      "raw_CpG_gate": 1e-05,
+      "lambda_bp": 100,
+      "C": 2,
+      "min_cpgs": 4,
+      "minlen": 51,
+      "native_region_q": 0.05,
+      "difference": "raw-p candidate count drives native smoothed-rank threshold; lambda controls both merging and smoothing"
+    },
+    "BSmooth": {
+      "smoothing": true,
+      "h": 500,
+      "ns": 70,
+      "maxGap": 100,
+      "min_cpgs": 4,
+      "minlen": 51,
+      "min_abs_meth_diff": 0,
+      "score_cutoff": 4.417173413469023,
+      "difference": "normal-score equivalent of raw p=1e-5; native statistic has no calibrated CpG p"
+    },
+    "methylKit": {
+      "test": "native MN overdispersion",
+      "CpG_adjust": "BH",
+      "raw_seed_alpha": 1e-05,
+      "smoothing": false,
+      "minlen_strict": 50,
+      "min_cpgs_strict": 3,
+      "dis_merge": 100,
+      "pct_sig": 0.5,
+      "region_significance": "raw-p CpG aggregation; no nominal region FDR"
+    },
+    "dmrseq": {
+      "smooth": true,
+      "bpSpan": 500,
+      "maxGap": 100,
+      "minNumRegion": 4,
+      "cutoff": 0.01,
+      "maxPerms": 100,
+      "region_q": 0.05,
+      "difference": "zero candidate cutoff is rejected by native API; 1% candidate cutoff, no raw CpG p gate"
+    }
+  },
+  "note": "Frozen partial real-study evidence. Remaining tools were not complete at capture; no pending output treated as zero."
+}

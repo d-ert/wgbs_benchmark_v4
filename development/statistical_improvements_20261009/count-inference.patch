@@ -1,0 +1,3159 @@
+diff --git a/docs/advanced/statistical-inference.md b/docs/advanced/statistical-inference.md
+new file mode 100644
+index 0000000..4967126
+--- /dev/null
++++ b/docs/advanced/statistical-inference.md
+@@ -0,0 +1,55 @@
++# Statistical inference status
++
++The corrected chain-merge caller adjusts over its complete coordinate-defined
++interval family. This addresses search multiplicity only when each fixed
++interval's raw p-value is valid. Its signed Stouffer statistic still assumes
++independent CpG scores; correlated/smoothed data require additional calibration.
++
++The legacy sliding-window and rule-segmentation callers select boundaries from
++the same observations that supply their p-values. Their p/q columns are
++exploratory ranking outputs. Selected-span BH and per-chromosome segment BH
++are not demonstrated genome-wide region FDR control. The API records this
++status in `dmr_params.inference_status`.
++
++Complete-scan max-T randomization includes successful empty scans and retains
++self/mirror assignments. Its adjusted p-values control complete-null FWER under
++exchangeable assignments. Strong control under partial alternatives needs
++additional assumptions. Failed scans abort inference; no second BH correction
++is applied to these adjusted p-values.
++
++Count-ratio regional FDR is an estimate using eligible permutation survivor
++counts. It excludes self/mirror assignments, retains successful empty scans,
++and aborts on failed scans. Outputs include requested/used permutation counts,
++null-region counts, and the Monte Carlo standard error of the untruncated
++set-level count ratio. This is not a standard error or confidence bound for
++each selected q-value. Zero sampled null counts, including a zero sample
++standard error, do not prove zero error. Record the design, assignment scheme,
++Monte Carlo resolution and limitations with reported estimates.
++
++Missing count coverage is not zero methylation. Smoothing averages alter
++sampling variance and induce dependence; unsmoothed binomial/BB variances
++cannot automatically be reused for smoothed pseudo-counts.
++
++The development `bb_score` backend separates count sampling depth from
++biological dispersion and supports nuisance regression through quasi-score
++IRLS. Its mean-stratified count-mixture prior retains rho=0. Shared and separate
++group dispersion variants record posterior standard deviations, iteration
++convergence and low-support fallback. These quantities do not imply reference
++degrees of freedom. Normal score tails and interior response intervals condition
++on plug-in dispersion and do not integrate fitted-mean, dispersion or learned-
++prior uncertainty. Boundary intervals are unavailable. General contrast effects
++standardize the orthogonal nuisance design and compare the observed range along
++the contrast projection; these counterfactuals may not describe actual subjects.
++
++Initial estimated-dispersion development diagnostics found anti-conservative
++small-sample tails, including when a learned mean trend understates heterogeneous
++site dispersion. This backend remains experimental. A fixed-design count null
++bootstrap can diagnose an analytical tail conditional on estimated generating
++parameters; a few such diagnostics do not establish genome-wide FDR or resolve
++model misspecification. Preserve the corrected workflow as the comparison
++baseline until independent evaluation supports a new recommendation.
++
++Relevant precedents include the [DSS general-design count model](https://bioconductor.org/packages/release/bioc/vignettes/DSS/inst/doc/DSS.html)
++and [edgeR quasi-likelihood inference](https://bioconductor.org/packages/release/bioc/vignettes/edgeR/inst/doc/edgeRUsersGuide.pdf).
++The present working model must earn its own calibration; results from those
++implementations do not validate this score approximation.
+diff --git a/src/epykit/_beta_binomial.py b/src/epykit/_beta_binomial.py
+index 81d07ed..ce062e4 100644
+--- a/src/epykit/_beta_binomial.py
++++ b/src/epykit/_beta_binomial.py
+@@ -12,7 +12,7 @@ import numpy as np
+ from numba import njit
+ from scipy import special, stats
+ 
+-ALGORITHM_REVISION = 'count-likelihood-eb-bb-lognormal-F-v3-experimental'
++ALGORITHM_REVISION = 'count-likelihood-eb-bb-lognormal-F-v4-relative-diagnostics-experimental'
+ 
+ 
+ @njit(cache=True)
+@@ -35,15 +35,14 @@ def _rising_correction(z: float, count: int) -> float:
+ 
+ 
+ @njit(cache=True)
+-def _logpmf(m: int, n: int, mu: float, rho: float) -> float:
++def _relative_logpmf(m: int, n: int, mu: float, rho: float) -> float:
+     if n == 0:
+         return 0.0
+     if mu <= 0.0:
+         return 0.0 if m == 0 else -math.inf
+     if mu >= 1.0:
+         return 0.0 if m == n else -math.inf
+-    result = (math.lgamma(n+1) - math.lgamma(m+1) - math.lgamma(n-m+1)
+-              + m*math.log(mu) + (n-m)*math.log1p(-mu))
++    result = m*math.log(mu) + (n-m)*math.log1p(-mu)
+     if rho == 0.0:
+         return result
+     k = (1-rho)/rho
+@@ -51,6 +50,12 @@ def _logpmf(m: int, n: int, mu: float, rho: float) -> float:
+             + _rising_correction((1-mu)*k,n-m) - _rising_correction(k,n))
+ 
+ 
++@njit(cache=True)
++def _logpmf(m: int, n: int, mu: float, rho: float) -> float:
++    return (_relative_logpmf(m, n, mu, rho)
++            + math.lgamma(n+1) - math.lgamma(m+1) - math.lgamma(n-m+1))
++
++
+ @njit(cache=True)
+ def _digamma_trigamma(x: float) -> tuple[float,float]:
+     d = 0.0
+@@ -126,6 +131,29 @@ def _group_loglik(m,n,mu,rho,start,stop):
+     return total
+ 
+ 
++@njit(cache=True)
++def _relative_group_loglik(m,n,mu,rho,start,stop):
++    """Parameter-dependent likelihood only, including stable binomial limits."""
++    total = 0.0
++    if 0 < mu < 1 and rho >= 1e-5:
++        k = (1-rho)/rho
++        a,b = mu*k,(1-mu)*k
++        base = math.lgamma(k)-math.lgamma(a)-math.lgamma(b)
++        for j in range(start,stop):
++            if n[j] > 0:
++                total += (math.lgamma(m[j]+a)+math.lgamma(n[j]-m[j]+b)
++                          -math.lgamma(n[j]+k)+base)
++        return total
++    for j in range(start,stop):
++        total += _relative_logpmf(m[j],n[j],mu,rho)
++    return total
++
++
++def _count_log_coefficient(m,n):
++    nf,mf = n.astype(float),m.astype(float)
++    return (special.gammaln(nf+1)-special.gammaln(mf+1)-special.gammaln(nf-mf+1)).sum(axis=-1)
++
++
+ @njit(cache=True)
+ def _fit_mean(m,n,rho,start,stop):
+     total_m = 0
+@@ -168,7 +196,7 @@ def _fit_mean(m,n,rho,start,stop):
+             break
+         mu = proposal
+     _,information = _score_information(m,n,mu,rho,start,stop)
+-    return mu,_group_loglik(m,n,mu,rho,start,stop),information,converged
++    return mu,_relative_group_loglik(m,n,mu,rho,start,stop),information,converged
+ 
+ 
+ @njit(cache=True)
+@@ -222,7 +250,7 @@ def fit_mean(m,n,rho):
+     mu,ll,information,converged = _fit_mean(m,n,rho,0,len(m))
+     if not converged:
+         raise RuntimeError('Beta-binomial mean optimization did not converge')
+-    return mu,ll,information
++    return mu,ll+float(_count_log_coefficient(m,n)),information
+ 
+ 
+ def fit_fixed_dispersion(m,n,n_case,rho):
+@@ -234,7 +262,9 @@ def fit_fixed_dispersion(m,n,n_case,rho):
+     if not np.all(convergence):
+         raise RuntimeError(f'Beta-binomial mean optimization failed at {(~convergence).sum()} sites')
+     names = ('mu_case','mu_control','mu_null','lr','information_case','information_control','loglik_full')
+-    return {name:output[:,j] for j,name in enumerate(names)}
++    result = {name:output[:,j] for j,name in enumerate(names)}
++    result['loglik_full'] = output[:,6]+_count_log_coefficient(m,n)
++    return result
+ 
+ 
+ def _mixture_loglik(m,n,mean_grid,rho_grid):
+@@ -361,8 +391,8 @@ def _difference_loglik(m,n,n_case,rho,delta,initial):
+     """Profile the common nuisance mean with mu_case-mu_control=delta."""
+     lo,hi = max(0.,-delta),min(1.,1-delta)
+     if hi<=lo:
+-        return (_group_loglik(m,n,lo+delta,rho,0,n_case)
+-                +_group_loglik(m,n,lo,rho,n_case,len(m)))
++        return (_relative_group_loglik(m,n,lo+delta,rho,0,n_case)
++                +_relative_group_loglik(m,n,lo,rho,n_case,len(m)))
+     left,right = lo,hi
+     epsilon = min(1e-10,(hi-lo)*1e-5)
+     mu = max(lo+epsilon,min(hi-epsilon,initial))
+@@ -382,12 +412,12 @@ def _difference_loglik(m,n,n_case,rho,delta,initial):
+         if candidate==mu:
+             break
+         mu = candidate
+-    best = (_group_loglik(m,n,mu+delta,rho,0,n_case)
+-            +_group_loglik(m,n,mu,rho,n_case,len(m)))
++    best = (_relative_group_loglik(m,n,mu+delta,rho,0,n_case)
++            +_relative_group_loglik(m,n,mu,rho,n_case,len(m)))
+     # Finite endpoint likelihoods matter when a group has only zeros or ones.
+     for endpoint in (lo,hi):
+-        ll = (_group_loglik(m,n,endpoint+delta,rho,0,n_case)
+-              +_group_loglik(m,n,endpoint,rho,n_case,len(m)))
++        ll = (_relative_group_loglik(m,n,endpoint+delta,rho,0,n_case)
++              +_relative_group_loglik(m,n,endpoint,rho,n_case,len(m)))
+         best = max(best,ll)
+     return best
+ 
+@@ -452,6 +482,7 @@ def test_counts(m,n,n_case,*,prior=None,reference='adaptive',intervals=False):
+         raise RuntimeError(f'Beta-binomial likelihood optimization failed at {(~converged).sum()} sites')
+     names = ('mu_case','mu_control','mu_null','lr','information_case','information_control','loglik_full','rho')
+     result = {name:output[:,j] for j,name in enumerate(names)}
++    result['loglik_full'] = output[:,6]+_count_log_coefficient(m,n)
+     n_case_valid = (n[:,:n_case]>0).sum(1)
+     n_ctrl_valid = (n[:,n_case:]>0).sum(1)
+     df = np.maximum(n_case_valid+n_ctrl_valid-2,1)
+@@ -476,13 +507,16 @@ def _log_dispersion_objective(m,n,n_case,z,center,sd):
+ 
+ 
+ @njit(cache=True)
+-def _lognormal_batch(m,n,n_case,center,sd):
++def _lognormal_batch_diagnostics(m,n,n_case,center,sd):
+     output = np.empty((len(m),8))
+     convergence = np.ones(len(m),dtype=np.bool_)
++    diagnostics = np.zeros((len(m),6),dtype=np.float64)
+     lower,upper = math.log(1e-6),math.log(.95)
+-    grid = np.linspace(lower,upper,17)
++    base_grid = np.linspace(lower,upper,17)
+     ratio = (math.sqrt(5)-1)/2
+     for i in range(len(m)):
++        grid = base_grid
++        evaluations = 0
+         ma,na = np.sum(m[i,:n_case]),np.sum(n[i,:n_case])
+         mb,nb = np.sum(m[i,n_case:]),np.sum(n[i,n_case:])
+         if (ma==0 or ma==na) and (mb==0 or mb==nb):
+@@ -495,38 +529,73 @@ def _lognormal_batch(m,n,n_case,center,sd):
+             lr = max(0.,2*(ll-lc)) if math.isfinite(a) and math.isfinite(b) else math.nan
+             output[i] = a,b,c,lr,ia,ib,ll,rho
+             convergence[i] = ca and cc
++            diagnostics[i] = 1.,1.,(1. if z <= lower+1e-5 or z >= upper-1e-5 else 0.),0.,0.,0.
+             continue
+         values = np.empty(len(grid))
+         best_index = 0
+         for j in range(len(grid)):
+             values[j] = _log_dispersion_objective(m[i],n[i],n_case,grid[j],center,sd)[0]
++            evaluations += 1
+             if values[j]>values[best_index]:
+                 best_index = j
++        # Multiple sampled modes need a denser bracket search. This is a
++        # numerical diagnostic/fallback, not proof of a global optimum.
++        n_peaks = int(values[0] > values[1])+int(values[-1] > values[-2])
++        for j in range(1,len(grid)-1):
++            if values[j] >= values[j-1] and values[j] >= values[j+1]:
++                n_peaks += 1
++        fallback = n_peaks > 1 or not np.all(np.isfinite(values))
++        if fallback:
++            grid = np.linspace(lower,upper,65)
++            values = np.empty(len(grid))
++            best_index = 0
++            for j in range(len(grid)):
++                values[j] = _log_dispersion_objective(m[i],n[i],n_case,grid[j],center,sd)[0]
++                evaluations += 1
++                if values[j] > values[best_index]:
++                    best_index = j
+         lo = grid[max(0,best_index-1)]
+         hi = grid[min(len(grid)-1,best_index+1)]
+         x1,x2 = hi-ratio*(hi-lo),lo+ratio*(hi-lo)
+         f1 = _log_dispersion_objective(m[i],n[i],n_case,x1,center,sd)[0]
+         f2 = _log_dispersion_objective(m[i],n[i],n_case,x2,center,sd)[0]
++        evaluations += 2
+         for _ in range(28):
+             if hi-lo<1e-5:
+                 break
+             if f1>f2:
+                 hi,x2,f2 = x2,x1,f1
+                 x1 = hi-ratio*(hi-lo)
++                evaluations += 1
+                 f1 = _log_dispersion_objective(m[i],n[i],n_case,x1,center,sd)[0]
+             else:
+                 lo,x1,f1 = x1,x2,f2
+                 x2 = lo+ratio*(hi-lo)
++                evaluations += 1
+                 f2 = _log_dispersion_objective(m[i],n[i],n_case,x2,center,sd)[0]
+         z = (lo+hi)/2
+-        if values[best_index]>_log_dispersion_objective(m[i],n[i],n_case,z,center,sd)[0]:
++        final_value = _log_dispersion_objective(m[i],n[i],n_case,z,center,sd)[0]
++        evaluations += 1
++        if values[best_index] > final_value:
+             z = grid[best_index]
++            final_value = values[best_index]
+         _,a,b,ia,ib,ll,ca = _log_dispersion_objective(m[i],n[i],n_case,z,center,sd)
+         rho = math.exp(z)
+         c,lc,_,cc = _fit_mean(m[i],n[i],rho,0,m.shape[1])
+         lr = max(0.,2*(ll-lc)) if math.isfinite(a) and math.isfinite(b) else math.nan
+         output[i] = a,b,c,lr,ia,ib,ll,rho
+         convergence[i] = ca and cc
++        evaluations += 1
++        gap = max(0.,max(values[best_index],max(f1,f2))-final_value)
++        diagnostics[i] = (evaluations*1.,(1. if hi-lo < 1e-5 else 0.),
++                          (1. if z <= lower+1e-5 or z >= upper-1e-5 else 0.),gap,(1. if fallback else 0.),hi-lo)
++    return output,convergence,diagnostics
++
++
++@njit(cache=True)
++def _lognormal_batch(m,n,n_case,center,sd):
++    """Compatibility kernel: fitting diagnostics are exposed by test_lognormal."""
++    output,convergence,_ = _lognormal_batch_diagnostics(m,n,n_case,center,sd)
+     return output,convergence
+ 
+ 
+@@ -544,11 +613,21 @@ def test_lognormal(m,n,n_case,*,prior,reference='adaptive',intervals=False):
+         raise ValueError('Log-dispersion prior requires a finite center and positive sd')
+     if reference not in {'adaptive','F','chi2'}:
+         raise ValueError('reference must be adaptive, F or chi2')
+-    output,converged = _lognormal_batch(m,n,n_case,center,sd)
++    output,converged,diagnostics = _lognormal_batch_diagnostics(m,n,n_case,center,sd)
+     if not np.all(converged):
+         raise RuntimeError(f'Beta-binomial optimization failed at {(~converged).sum()} sites')
++    if not np.all(diagnostics[:,1]):
++        raise RuntimeError('Beta-binomial dispersion bracket did not converge')
+     names = ('mu_case','mu_control','mu_null','lr','information_case','information_control','loglik_full','rho')
+     result = {name:output[:,j] for j,name in enumerate(names)}
++    result['loglik_full'] = output[:,6]+_count_log_coefficient(m,n)
++    result.update(rho_objective_evaluations=diagnostics[:,0].astype(np.int64),
++                  rho_search_converged=diagnostics[:,1].astype(bool),
++                  rho_search_boundary=diagnostics[:,2].astype(bool),
++                  rho_objective_gap=diagnostics[:,3],
++                  rho_fallback_used=diagnostics[:,4].astype(bool),
++                  rho_bracket_width=diagnostics[:,5],
++                  rho_search_note='local bracket convergence; not a global-optimum certificate')
+     na,nb = (n[:,:n_case]>0).sum(1),(n[:,n_case:]>0).sum(1)
+     df = np.maximum(na+nb-2,1)
+     p = stats.chi2.sf(result['lr'],1) if reference=='chi2' else stats.f.sf(result['lr'],1,df)
+diff --git a/src/epykit/_count_blocks.py b/src/epykit/_count_blocks.py
+new file mode 100644
+index 0000000..954ca74
+--- /dev/null
++++ b/src/epykit/_count_blocks.py
+@@ -0,0 +1,134 @@
++"""Bounded count blocks aligned to a predeclared coordinate universe."""
++
++from __future__ import annotations
++
++from pathlib import Path
++
++import numpy as np
++import polars as pl
++import pyarrow.parquet as pq
++
++from ._beta_binomial import _counts
++
++ALGORITHM_REVISION = "sorted-parquet-count-blocks-v1"
++MAX_BLOCK_SIZE = 32768
++
++
++def sample_parts(store, chrom, sample):
++    return sorted((Path(store) / f"sample={sample}" / f"chrom={chrom}").glob("*.parquet"))
++
++
++def canonical_sites(store, chrom, samples, *, intersect=False):
++    """Coordinate-only union/intersection; counts and group effects are unread.
++
++    Strand is descriptive, resolved to the first known value across samples.
++    Counts are validated separately; duplicate input coordinates are fatal.
++    """
++    frames = []
++    for sample in samples:
++        parts = sample_parts(store, chrom, sample)
++        if not parts:
++            if intersect:
++                return pl.DataFrame(schema={"pos": pl.Int32, "strand": pl.String})
++            continue
++        frames.append(pl.scan_parquet(parts).select("pos", "strand").unique(subset=["pos"]))
++    if not frames:
++        return pl.DataFrame(schema={"pos": pl.Int32, "strand": pl.String})
++    combined = (
++        pl.concat(frames)
++        .group_by("pos")
++        .agg(
++            pl.len().alias("_support"),
++            pl.col("strand").filter(pl.col("strand") != "*").first().fill_null("*").alias("strand"),
++        )
++    )
++    if intersect:
++        combined = combined.filter(pl.col("_support") == len(samples))
++    return combined.select("pos", "strand").sort("pos").collect(engine="streaming")
++
++
++def _sample_batches(store, chrom, sample, block_size):
++    previous = None
++    for path in sample_parts(store, chrom, sample):
++        for batch in pq.ParquetFile(path).iter_batches(
++            batch_size=block_size, columns=["pos", "N_meth", "coverage"], use_threads=False
++        ):
++            pos = batch.column(0).to_numpy(zero_copy_only=False)
++            m, n = _counts(
++                batch.column(1).to_numpy(zero_copy_only=False),
++                batch.column(2).to_numpy(zero_copy_only=False),
++                1,
++            )
++            if (
++                not np.issubdtype(pos.dtype, np.integer)
++                or np.any(np.diff(pos) <= 0)
++                or (len(pos) and previous is not None and pos[0] <= previous)
++            ):
++                raise ValueError(
++                    f"{sample}/{chrom} coordinates must be strictly increasing; "
++                    "duplicate or unsorted records are not supported"
++                )
++            if len(pos):
++                previous = pos[-1]
++                yield pos, m, n
++
++
++class _Cursor:
++    def __init__(self, batches):
++        self.batches = iter(batches)
++        self.current = next(self.batches, None)
++        self.offset = 0
++
++    def fill(self, positions, m, n):
++        end = positions[-1]
++        while self.current is not None:
++            pos, source_m, source_n = self.current
++            stop = np.searchsorted(pos, end, side="right")
++            part = pos[self.offset : stop]
++            if len(part):
++                index = np.searchsorted(positions, part)
++                match = index < len(positions)
++                match[match] &= positions[index[match]] == part[match]
++                m[index[match]] = source_m[self.offset : stop][match]
++                n[index[match]] = source_n[self.offset : stop][match]
++            self.offset = stop
++            if stop < len(pos):
++                break
++            self.current, self.offset = next(self.batches, None), 0
++
++    def validate_remaining(self):
++        for _ in self.batches:
++            pass
++
++
++def iter_count_blocks(store, chrom, samples, canonical_positions, *, block_size=32768):
++    """Yield (coordinates, M, N) with <=32768 rows and missing counts at N=0.
++
++    Inputs follow sorted single-coordinate CpG stores. Arrow input batches and
++    output count matrices are bounded by block_size; no whole-chromosome
++    sample matrix is built. Decoding also depends on source Parquet row groups.
++    Consume the iterator fully to validate records beyond the declared family.
++    """
++    if not isinstance(block_size, (int, np.integer)) or not 1 <= block_size <= MAX_BLOCK_SIZE:
++        raise ValueError("score block_size must be in [1,32768]")
++    positions = np.asarray(canonical_positions)
++    if (
++        positions.ndim != 1
++        or not np.issubdtype(positions.dtype, np.integer)
++        or np.any(np.diff(positions) <= 0)
++    ):
++        raise ValueError("Canonical positions must be a strictly increasing integer vector")
++    if len(set(samples)) != len(samples):
++        raise ValueError("Samples must be unique")
++    cursors = [_Cursor(_sample_batches(store, chrom, s, block_size)) for s in samples]
++    for start in range(0, len(positions), block_size):
++        block = positions[start : start + block_size]
++        m, n = (
++            np.zeros((len(block), len(samples)), dtype=np.int64),
++            np.zeros((len(block), len(samples)), dtype=np.int64),
++        )
++        for j, cursor in enumerate(cursors):
++            cursor.fill(block, m[:, j], n[:, j])
++        yield block, m, n
++    for cursor in cursors:
++        cursor.validate_remaining()
+diff --git a/src/epykit/_count_score.py b/src/epykit/_count_score.py
+new file mode 100644
+index 0000000..f21a69d
+--- /dev/null
++++ b/src/epykit/_count_score.py
+@@ -0,0 +1,356 @@
++"""Experimental quasi-score inference with depth-aware biological variance.
++
++These are working-model score/IRLS calculations, not BB likelihood fits.
++Normal tails and interior delta-method intervals require calibration with
++small biological sample sizes. Coverage is conditioned on, and N=0 is missing.
++"""
++
++from __future__ import annotations
++
++import numpy as np
++from scipy import linalg, special, stats
++
++from ._beta_binomial import _check_rho, _counts
++
++ALGORITHM_REVISION = "bb-quasi-score-v2-conditional-eb-experimental"
++
++
++def _inputs(m, n, design, rho):
++    m, n = _counts(m, n, 2)
++    x = np.asarray(design, dtype=float)
++    if x.ndim != 2 or x.shape[0] != m.shape[1] or not np.isfinite(x).all():
++        raise ValueError("Design must be a finite sample-by-coefficient matrix")
++    if x.shape[1] and np.linalg.matrix_rank(x) != x.shape[1]:
++        raise ValueError("Design is rank deficient")
++    r = _check_rho(rho)
++    if r.ndim == 1 and r.shape == (len(m),):
++        r = r[:, None]
++    try:
++        r = np.broadcast_to(r, m.shape)
++    except ValueError as exc:
++        raise ValueError("rho must broadcast by site/sample") from exc
++    return m.astype(float), n.astype(float), x, r
++
++
++def _rank_mask(observed, x):
++    if not x.shape[1]:
++        return observed.any(axis=1)
++    if observed.all():
++        return np.ones(len(observed), dtype=bool)
++    patterns, inverse = np.unique(observed, axis=0, return_inverse=True)
++    valid = np.array(
++        [
++            mask.sum() >= x.shape[1] and np.linalg.matrix_rank(x[mask]) == x.shape[1]
++            for mask in patterns
++        ]
++    )
++    return valid[inverse]
++
++
++def _solve_systems(information, rhs, valid):
++    """Batched solve, isolating numerical singularities instead of adding ridge."""
++    result = np.full_like(rhs, np.nan, dtype=float)
++    usable = valid.copy()
++    indices = np.flatnonzero(valid)
++    if not len(indices):
++        return result, usable
++    try:
++        result[indices] = np.linalg.solve(information[indices], rhs[indices])
++    except np.linalg.LinAlgError:
++        for i in indices:
++            try:
++                result[i] = np.linalg.solve(information[i], rhs[i])
++            except np.linalg.LinAlgError:
++                usable[i] = False
++    usable &= np.isfinite(result).all(axis=(1, 2))
++    return result, usable
++
++
++def _information(x, weights):
++    return np.einsum("sp,bs,sq->bpq", x, weights, x, optimize=True)
++
++
++def _objective(m, n, x, beta, inflation):
++    eta = beta @ x.T
++    return ((m * eta - n * np.logaddexp(0.0, eta)) / inflation).sum(axis=1)
++
++
++def _fit(m, n, x, rho, max_iter, tol):
++    sites, samples = m.shape
++    p = x.shape[1]
++    observed = n > 0
++    inflation = 1 + (n - 1) * rho
++    effective = np.divide(n, inflation)
++    valid = _rank_mask(observed, x)
++    beta = np.zeros((sites, p))
++    converged = np.zeros(sites, dtype=bool)
++    iterations = np.zeros(sites, dtype=np.int32)
++    if not p:
++        return dict(
++            coefficients=beta,
++            mu=np.full((sites, samples), 0.5),
++            information=np.empty((sites, 0, 0)),
++            effective_weights=effective,
++            valid_counts=observed.sum(axis=1),
++            converged=valid,
++            estimable=valid,
++            boundary=np.zeros(sites, dtype=bool),
++            iterations=iterations,
++        )
++
++    gamma = special.logit((m + 0.5) / (n + 1))
++    initial = _information(x, effective)
++    initial_rhs = ((effective * gamma) @ x)[..., None]
++    solved, valid = _solve_systems(initial, initial_rhs, valid)
++    beta[valid] = solved[valid, :, 0]
++    # A constant in the design span permits common exact endpoint means.
++    constant_fit = x @ np.linalg.lstsq(x, np.ones(samples), rcond=None)[0]
++    has_constant = np.allclose(constant_fit, 1.0, atol=1e-10, rtol=0.0)
++    total_m, total_n = m.sum(axis=1), n.sum(axis=1)
++    endpoint = valid & has_constant & ((total_m == 0) | (total_m == total_n))
++    converged[endpoint] = True
++    active = valid & ~endpoint
++
++    for _ in range(max_iter):
++        indices = np.flatnonzero(active)
++        if not len(indices):
++            break
++        mu = np.clip(special.expit(beta @ x.T), 1e-12, 1 - 1e-12)
++        info = _information(x, effective * mu * (1 - mu))
++        gradient = ((m - n * mu) / inflation) @ x
++        delta, solvable = _solve_systems(info, gradient[..., None], active)
++        active &= solvable
++        indices = np.flatnonzero(active)
++        if not len(indices):
++            break
++        step = delta[indices, :, 0]
++        max_step = np.max(np.abs(step), axis=1)
++        done = (max_step <= tol) | (np.max(np.abs(gradient[indices]), axis=1) <= tol)
++        converged[indices[done]] = True
++        active[indices[done]] = False
++        indices = indices[~done]
++        step = step[~done]
++        if not len(indices):
++            continue
++        step *= np.minimum(1.0, 5 / np.maximum(np.max(np.abs(step), axis=1), 1e-20))[:, None]
++        old_value = _objective(m[indices], n[indices], x, beta[indices], inflation[indices])
++        scale = np.ones(len(indices))
++        proposal = beta[indices] + step
++        for _ in range(20):
++            value = _objective(m[indices], n[indices], x, proposal, inflation[indices])
++            bad = value < old_value - 1e-10
++            if not bad.any():
++                break
++            scale[bad] *= 0.5
++            proposal = beta[indices] + scale[:, None] * step
++        beta[indices] = proposal
++        iterations[indices] += 1
++
++    mu = special.expit(beta @ x.T)
++    mu[endpoint] = (total_m[endpoint] > 0)[:, None].astype(float)
++    info = _information(x, effective * mu * (1 - mu))
++    boundary = endpoint | (((mu < 1e-6) | (mu > 1 - 1e-6)) & observed).any(axis=1)
++    mu[~valid] = np.nan
++    beta[~valid | endpoint] = np.nan
++    return dict(
++        coefficients=beta,
++        mu=mu,
++        information=info,
++        effective_weights=effective,
++        valid_counts=observed.sum(axis=1),
++        converged=converged,
++        estimable=valid,
++        boundary=boundary,
++        iterations=iterations,
++    )
++
++
++def fit_quasi_means(m, n, design, rho, *, max_iter=40, tol=1e-8):
++    """Fit mean regression under fixed biological rho using quasi-score IRLS.
++
++    `effective_weights` are N/[1+(N-1)rho], separate from the information
++    weights that also include mu(1-mu). Boundary coefficients are unavailable
++    for identical endpoint observations even though their point means exist.
++    """
++    if max_iter < 1 or not np.isfinite(tol) or tol <= 0:
++        raise ValueError("Require positive iteration budget and tolerance")
++    return _fit(*_inputs(m, n, design, rho), max_iter, tol)
++
++
++def test_score(m, n, design, contrast, rho, *, intervals=True):
++    """Efficient one-dimensional null score with nuisance terms projected out.
++
++    The contrast is a coefficient vector c testing c beta=0. Response effects
++    compare standardized counterfactuals at the observed minimum/maximum of
++    Xv, where v=c/(c'c), holding the orthogonal nuisance design fixed. A binary
++    treatment coefficient compares its observed 0/1 levels, with sign reversed
++    for a negative contrast and unchanged by positive rescaling. General
++    contrasts use the observed range, which may not represent actual subjects.
++    Intervals are interior conditional
++    delta-method approximations, not an inversion of the null score test.
++    """
++    mf, nf, x, r = _inputs(m, n, design, rho)
++    c = np.asarray(contrast, dtype=float)
++    if c.shape != (x.shape[1],) or not np.isfinite(c).all() or not np.any(c):
++        raise ValueError("Require a finite nonzero one-dimensional contrast")
++    basis = linalg.null_space(c[None, :])
++    nuisance = x @ basis
++    direction = x @ (c / (c @ c))
++    null = _fit(mf, nf, nuisance, r, 40, 1e-8)
++    full = _fit(mf, nf, x, r, 40, 1e-8)
++    valid = full["estimable"] & null["estimable"] & (null["valid_counts"] > x.shape[1])
++    endpoint = (
++        valid
++        & null["boundary"]
++        & full["boundary"]
++        & ((mf.sum(axis=1) == 0) | (mf.sum(axis=1) == nf.sum(axis=1)))
++    )
++    regular = valid & null["converged"] & ~endpoint
++    inflation = 1 + (nf - 1) * r
++    residual = (mf - nf * null["mu"]) / inflation
++    weights = full["effective_weights"] * null["mu"] * (1 - null["mu"])
++    score = residual @ direction
++    variance = weights @ (direction * direction)
++    if nuisance.shape[1]:
++        cross = (weights * direction) @ nuisance
++        solved, regular = _solve_systems(null["information"], cross[..., None], regular)
++        score -= np.einsum("bp,bp->b", solved[:, :, 0], residual @ nuisance)
++        variance -= np.einsum("bp,bp->b", cross, solved[:, :, 0])
++    regular &= (variance > 0) & np.isfinite(variance) & np.isfinite(score)
++    statistic = np.full(len(mf), np.nan)
++    pvalue = np.full(len(mf), np.nan)
++    statistic[regular] = score[regular] ** 2 / variance[regular]
++    pvalue[regular] = np.exp(np.log(2.0) + stats.norm.logsf(np.sqrt(statistic[regular])))
++    pvalue[endpoint], statistic[endpoint] = 1.0, 0.0
++    score[~regular & ~endpoint], variance[~regular & ~endpoint] = np.nan, np.nan
++    score[endpoint], variance[endpoint] = 0.0, 0.0
++
++    low, high = float(direction.min()), float(direction.max())
++    x0 = x - np.outer(direction - low, c)
++    x1 = x0 + (high - low) * c
++    mean0 = special.expit(full["coefficients"] @ x0.T)
++    mean1 = special.expit(full["coefficients"] @ x1.T)
++    effect = (mean1 - mean0).mean(axis=1)
++    effect[endpoint] = 0.0
++    lo, hi = np.full(len(mf), np.nan), np.full(len(mf), np.nan)
++    interval_ok = valid & full["converged"] & ~full["boundary"]
++    if intervals:
++        identity = np.broadcast_to(np.eye(x.shape[1]), full["information"].shape)
++        covariance, interval_ok = _solve_systems(full["information"], identity, interval_ok)
++        gradient = ((mean1 * (1 - mean1)) @ x1 - (mean0 * (1 - mean0)) @ x0) / x.shape[0]
++        effect_var = np.einsum("bp,bpq,bq->b", gradient, covariance, gradient)
++        interval_ok &= (effect_var > 0) & np.isfinite(effect_var)
++        half = stats.norm.ppf(0.975) * np.sqrt(effect_var[interval_ok])
++        lo[interval_ok] = np.maximum(-1.0, effect[interval_ok] - half)
++        hi[interval_ok] = np.minimum(1.0, effect[interval_ok] + half)
++    else:
++        interval_ok[:] = False
++    return dict(
++        score=score,
++        variance=variance,
++        statistic=statistic,
++        pvalue=pvalue,
++        effect=effect,
++        ci_lo=lo,
++        ci_hi=hi,
++        interval_available=interval_ok,
++        estimable=regular | endpoint,
++        converged=null["converged"],
++        full_converged=full["converged"],
++        mu_null=null["mu"],
++        mu_full=full["mu"],
++        coefficients=full["coefficients"],
++        valid_counts=null["valid_counts"],
++        effective_weights=full["effective_weights"],
++        effect_estimand="standardized response contrast over observed design-projection range",
++        reference="normal approximation conditional on supplied rho",
++    )
++
++
++def test_counts(m, n, design, contrast, *, prior, n_case, dispersion_mode="shared", intervals=True):
++    """Experimental plug-in EB biological-dispersion score for count regressions.
++
++    At most four mean/posterior updates use a fixed learned prior. A shared rho
++    is the default; separate group dispersions require >=3 covered replicates
++    per group, otherwise use the explicit shared fallback. Posterior standard
++    deviations diagnose uncertainty but do not adjust normal reference tails.
++    The fitted-mean, dispersion and prior uncertainty are not integrated into
++    the reference law. Development null bootstrap is required before use as a
++    recommended small-sample inference engine.
++    """
++    from ._dispersion_prior import posterior_dispersion
++
++    m, n = _counts(m, n, 2)
++    if not isinstance(n_case, (int, np.integer)) or not 0 < n_case < m.shape[1]:
++        raise ValueError("n_case must split two nonempty groups")
++    if dispersion_mode not in ("shared", "group"):
++        raise ValueError("dispersion_mode must be shared or group")
++    x = np.asarray(design, dtype=float)
++    grid = _check_rho(prior["rho_grid"])
++    weights = np.asarray(prior["pooled_rho_weights"], dtype=float)
++    if (
++        weights.shape != grid.shape
++        or not np.isfinite(weights).all()
++        or np.any(weights < 0)
++        or weights.sum() <= 0
++    ):
++        raise ValueError("Invalid pooled dispersion prior")
++    initial = float((weights / weights.sum()) @ grid)
++    rho = np.full(m.shape, initial)
++    iterations = np.zeros(len(m), dtype=np.int32)
++    stable = np.zeros(len(m), dtype=bool)
++    group_support = ((n[:, :n_case] > 0).sum(axis=1) >= 3) & ((n[:, n_case:] > 0).sum(axis=1) >= 3)
++    fallback = ~group_support if dispersion_mode == "group" else np.zeros(len(m), bool)
++    posterior_sd = np.full(m.shape, np.nan)
++    last_mean = np.full(m.shape, np.nan)
++    for iteration in range(4):
++        fit = fit_quasi_means(m, n, x, rho)
++        usable = fit["estimable"] & fit["converged"]
++        fallback |= ~usable
++        pm, pn = np.where(usable[:, None], m, 0), np.where(usable[:, None], n, 0)
++        mu = np.where(usable[:, None], fit["mu"], 0.5)
++        shared = posterior_dispersion(pm, pn, mu, prior)
++        updated = np.broadcast_to(shared["rho_mean"][:, None], m.shape).copy()
++        uncertainty = np.broadcast_to(np.sqrt(shared["rho_variance"])[:, None], m.shape).copy()
++        if dispersion_mode == "group":
++            groups = posterior_dispersion(
++                pm,
++                pn,
++                mu,
++                prior,
++                group_labels=np.r_[np.zeros(n_case, int), np.ones(m.shape[1] - n_case, int)],
++            )
++            for label, (lo, hi) in enumerate(((0, n_case), (n_case, m.shape[1]))):
++                rows = group_support & usable
++                updated[rows, lo:hi] = groups["rho_mean"][rows, label, None]
++                uncertainty[rows, lo:hi] = np.sqrt(groups["rho_variance"][rows, label, None])
++        change = np.max(np.abs(updated - rho), axis=1)
++        mean_change = np.max(np.abs(mu - last_mean), axis=1)
++        now_stable = (change <= 1e-4) & (mean_change <= 1e-5) & usable
++        # Retain completed rows exactly, so iteration budget is explicit.
++        active = ~stable
++        rho[active], posterior_sd[active] = updated[active], uncertainty[active]
++        iterations[active] = iteration + 1
++        last_mean = mu
++        stable |= now_stable
++        if stable.all():
++            break
++    result = test_score(m, n, x, contrast, rho, intervals=intervals)
++    result.update(
++        rho=rho.mean(axis=1),
++        rho_case=rho[:, :n_case].mean(axis=1),
++        rho_control=rho[:, n_case:].mean(axis=1),
++        rho_uncertainty=posterior_sd.mean(axis=1),
++        rho_case_uncertainty=posterior_sd[:, :n_case].mean(axis=1),
++        rho_control_uncertainty=posterior_sd[:, n_case:].mean(axis=1),
++        dispersion_iterations=iterations,
++        dispersion_converged=stable,
++        dispersion_fallback=fallback,
++        dispersion_mode=dispersion_mode,
++        experimental=True,
++        prior_revision=prior.get("algorithm_revision", "unknown"),
++        algorithm_revision=ALGORITHM_REVISION,
++        reference="normal approximation conditional on plug-in EB rho; "
++        "fitted-mean, dispersion and prior uncertainty not integrated",
++    )
++    return result
+diff --git a/src/epykit/_count_score_store.py b/src/epykit/_count_score_store.py
+new file mode 100644
+index 0000000..6d421f6
+--- /dev/null
++++ b/src/epykit/_count_score_store.py
+@@ -0,0 +1,356 @@
++"""Experimental count-score store: bounded prior training and streamed fitting."""
++
++from __future__ import annotations
++
++import hashlib
++import json
++from pathlib import Path
++
++import numpy as np
++import polars as pl
++import pyarrow.parquet as pq
++
++from . import _cache, _count_blocks, _count_score, _dispersion_prior
++from ._dmc_store import DMCStore, _chrom_filename
++
++ALGORITHM_REVISION = "bb-score-store-v1-complete-family"
++
++
++def _sha(path):
++    h = hashlib.sha256()
++    with Path(path).open("rb") as fh:
++        for block in iter(lambda: fh.read(1048576), b""):
++            h.update(block)
++    return h.hexdigest()
++
++
++def _coordinate_hash(positions, chrom, seed):
++    salt = int.from_bytes(hashlib.blake2b(str(chrom).encode(), digest_size=8).digest(), "little")
++    with np.errstate(over="ignore"):
++        z = (
++            np.asarray(positions, dtype=np.uint64)
++            ^ np.uint64(salt)
++            ^ np.uint64(seed & ((1 << 64) - 1))
++        )
++        z = z + np.uint64(0x9E3779B97F4A7C15)
++        z = (z ^ (z >> np.uint64(30))) * np.uint64(0xBF58476D1CE4E5B9)
++        z = (z ^ (z >> np.uint64(27))) * np.uint64(0x94D049BB133111EB)
++        return z ^ (z >> np.uint64(31))
++
++
++def _training_coordinates(md, cfg, samples, chromosomes, intersect):
++    cap = max(1, (cfg.score_prior_max_groups + 1) // 2)
++    selected = []
++    for chrom in chromosomes:
++        sites = _count_blocks.canonical_sites(md.store, chrom, samples, intersect=intersect)
++        pos = sites["pos"].to_numpy()
++        if not len(pos):
++            continue
++        keys = _coordinate_hash(pos, chrom, cfg.score_prior_seed)
++        indices = np.argsort(keys, kind="stable")[:cap]
++        selected.extend((int(keys[i]), str(chrom), int(pos[i])) for i in indices)
++        selected = sorted(selected)[:cap]
++    grouped = {}
++    for _, chrom, pos in selected:
++        grouped.setdefault(chrom, []).append(pos)
++    return {c: np.array(sorted(p), dtype=np.int64) for c, p in grouped.items()}
++
++
++def _fallback_prior(reason):
++    weights = np.full(len(_dispersion_prior.RHO_GRID), 1 / len(_dispersion_prior.RHO_GRID)).tolist()
++    return dict(
++        rho_grid=_dispersion_prior.RHO_GRID.tolist(),
++        mean_bin_edges=_dispersion_prior.MEAN_BIN_EDGES.tolist(),
++        rho_weights_by_bin=[weights] * 4,
++        pooled_rho_weights=weights,
++        algorithm_revision=_dispersion_prior.ALGORITHM_REVISION,
++        n_training_groups=0,
++        training_status="unavailable: " + reason,
++        limitations="No usable training groups; uniform grid fallback, experimental only",
++    )
++
++
++def _train(md, cfg, samples, chromosomes, intersect, x, n_case, block_size):
++    selected = _training_coordinates(md, cfg, samples, chromosomes, intersect)
++    ms, ns = [], []
++    for chrom, positions in selected.items():
++        for _, m, n in _count_blocks.iter_count_blocks(
++            md.store, chrom, samples, positions, block_size=block_size
++        ):
++            ms.append(m)
++            ns.append(n)
++    if not ms:
++        return _fallback_prior("empty coordinate family")
++    m, n = np.vstack(ms), np.vstack(ns)
++    has_groups = ((n[:, :n_case] > 0).sum(axis=1) >= 2) | ((n[:, n_case:] > 0).sum(axis=1) >= 2)
++    if not has_groups.any():
++        prior = _fallback_prior("no group with two covered replicates")
++    else:
++        # Integrate a common group mean for simple designs, condition on
++        # per-sample fitted means for nuisance designs, recording approximation.
++        simple = np.allclose(x[:n_case], x[0]) and np.allclose(x[n_case:], x[n_case])
++        try:
++            prior = _dispersion_prior.fit_dispersion_prior(
++                m,
++                n,
++                n_case,
++                design=None if simple else x,
++                max_training=cfg.score_prior_max_groups,
++                seed=cfg.score_prior_seed,
++            )
++        except ValueError as exc:
++            if not str(exc).startswith("Dispersion training requires two covered replicates"):
++                raise
++            prior = _fallback_prior("no usable conditional-regression training group")
++    prior.update(
++        samples_case=samples[:n_case],
++        samples_control=samples[n_case:],
++        selected_coordinates={c: p.tolist() for c, p in selected.items()},
++        coordinate_sampling="seeded coordinate hash; independent of counts, group effects and truth",
++        design=x.tolist(),
++    )
++    return prior
++
++
++def _frame(chrom, positions, strands, m, n, x, c, fit, cfg, n_case):
++    covered = n > 0
++    n_a, n_b = covered[:, :n_case].sum(axis=1), covered[:, n_case:].sum(axis=1)
++    eligible = (n_a >= max(2, cfg.min_samples_treatment)) & (n_b >= max(2, cfg.min_samples_control))
++    p = np.where(eligible, fit["pvalue"], np.nan)
++    beta = np.divide(m, n, out=np.zeros(m.shape), where=covered)
++
++    def descriptive_mean(lo, hi):
++        support = covered[:, lo:hi].sum(axis=1)
++        return np.divide(
++            beta[:, lo:hi].sum(axis=1), support, out=np.full(len(m), np.nan), where=support > 0
++        )
++
++    a, b = descriptive_mean(0, n_case), descriptive_mean(n_case, n.shape[1])
++    meth_a, meth_b = m[:, :n_case].sum(axis=1), m[:, n_case:].sum(axis=1)
++    unmeth_a, unmeth_b = n[:, :n_case].sum(axis=1) - meth_a, n[:, n_case:].sum(axis=1) - meth_b
++    odds = np.log2((meth_a + 0.5) / (unmeth_a + 0.5)) - np.log2((meth_b + 0.5) / (unmeth_b + 0.5))
++    data = dict(
++        chrom=[chrom] * len(m),
++        pos=positions,
++        strand=strands,
++        n_case=n_a,
++        n_control=n_b,
++        mean_beta_case=a,
++        mean_beta_control=b,
++        pvalue=p,
++        pvalue_for_correction=np.nan_to_num(p, nan=1.0),
++        log2_odds_ratio_pooled=odds,
++        log2_odds_ratio=np.full(len(m), np.nan),
++        coef_treatment_log2=fit["coefficients"] @ c / np.log(2.0),
++        meth_diff=fit["effect"],
++        meth_diff_raw=a - b,
++        meth_diff_ci_lo=fit["ci_lo"],
++        meth_diff_ci_hi=fit["ci_hi"],
++        score_stat=fit["statistic"],
++        score_variance=fit["variance"],
++        score=fit["score"],
++        score_valid_samples=fit["valid_counts"],
++        score_converged=fit["converged"],
++        score_full_converged=fit["full_converged"],
++        score_estimable=eligible & fit["estimable"],
++        interval_available=eligible & fit["interval_available"],
++    )
++    for field in (
++        "rho",
++        "rho_case",
++        "rho_control",
++        "rho_uncertainty",
++        "rho_case_uncertainty",
++        "rho_control_uncertainty",
++        "dispersion_iterations",
++        "dispersion_converged",
++        "dispersion_fallback",
++    ):
++        data[field] = fit[field]
++    # Canonical schema stays consistent across engine stores.
++    from .dmc import _EMPTY_SCHEMA
++
++    return pl.DataFrame(data).with_columns(
++        [pl.col(name).cast(dtype) for name, dtype in _EMPTY_SCHEMA.items()]
++    )
++
++
++def _cache_valid(path, fingerprint):
++    try:
++        store = DMCStore.open(path)
++        manifest = store.manifest
++        if manifest.get("fingerprint") != fingerprint or not manifest.get("complete"):
++            return None
++        if _sha(store.path / manifest["prior_file"]) != manifest["prior_sha256"]:
++            return None
++        for entry in manifest["chroms"]:
++            p = store.path / _chrom_filename(entry["name"])
++            if _sha(p) != entry["sha256"]:
++                return None
++        return store
++    except (OSError, ValueError, KeyError):
++        return None
++
++
++def run_count_score_store(md, cfg, *, design, contrast, out_dir=None):
++    """Own bounded observed-count training, fitting and exact global correction.
++
++    Design rows follow md.treatment_ids + md.control_ids. Explicit out_dir is
++    for isolated direct callers/benchmarks; otherwise use a content-keyed cache.
++    Model work blocks also cap dense-information memory at approximately 128MiB.
++    Existing correction currently uses global vectors, never a genome-wide
++    sample matrix. The planned disk-backed correction can replace that step.
++    """
++    cfg.validate()
++    cfg.validate_resolved()
++    samples = list(md.treatment_ids) + list(md.control_ids)
++    n_case = len(md.treatment_ids)
++    if min(n_case, len(md.control_ids)) < 2 or len(set(samples)) != len(samples):
++        raise ValueError("bb_score requires two unique biological replicates per group")
++    if len(samples) != md.obs.height:
++        raise ValueError(
++            "bb_score supports the declared two groups only; extra samples are unassigned"
++        )
++    x, c = np.asarray(design, dtype=float), np.asarray(contrast, dtype=float)
++    if x.ndim != 2 or x.shape[0] != len(samples) or x.shape[1] >= len(samples):
++        raise ValueError("bb_score design needs sample-aligned rows and residual replication")
++    if c.ndim == 2 and c.shape[0] == 1:
++        c = c[0]
++    if c.shape != (x.shape[1],) or not np.isfinite(c).all() or not np.any(c):
++        raise ValueError("bb_score supports one finite nonzero scalar contrast")
++    if not np.isfinite(x).all() or np.linalg.matrix_rank(x) != x.shape[1]:
++        raise ValueError("bb_score design must be finite and full rank")
++    from .dmc import resolve_dmc_chromosomes
++
++    chromosomes = resolve_dmc_chromosomes(
++        md.store, cfg.chromosomes, canonical_only=cfg.canonical_only
++    )
++    intersect = md.uns.get("unite", {}).get("type") == "intersect"
++    inputs = []
++    for chrom in chromosomes:
++        for sample in samples:
++            for p in _count_blocks.sample_parts(md.store, chrom, sample):
++                stat = p.stat()
++                inputs.append((str(p.resolve()), stat.st_size, stat.st_mtime_ns))
++    params = dict(
++        algorithm_revision=ALGORITHM_REVISION,
++        score_revision=_count_score.ALGORITHM_REVISION,
++        prior_revision=_dispersion_prior.ALGORITHM_REVISION,
++        blocks_revision=_count_blocks.ALGORITHM_REVISION,
++        tail_revision="normal-plugin-v1",
++        samples=samples,
++        n_case=n_case,
++        design=x.tolist(),
++        contrast=c.tolist(),
++        inputs=inputs,
++        chromosomes=chromosomes,
++        intersect=intersect,
++        min_samples_case=cfg.min_samples_treatment,
++        min_samples_control=cfg.min_samples_control,
++        fdr_method=cfg.fdr_method,
++        **cfg.score_options(),
++    )
++    fingerprint = hashlib.sha256(
++        json.dumps(params, sort_keys=True, separators=(",", ":")).encode()
++    ).hexdigest()
++    root = (
++        Path(out_dir)
++        if out_dir is not None
++        else Path(md.analysis_root or Path(md.store).parent) / ".cache/dmc/bb_score" / fingerprint
++    )
++    cached = _cache_valid(root, fingerprint)
++    if cached is not None:
++        cached._manifest["_cache_hit"] = True  # transient outcome provenance; not written
++        return cached
++    if out_dir is not None and root.exists() and any(root.iterdir()):
++        raise ValueError(
++            "bb_score output directory is nonempty and has no valid matching completed cache"
++        )
++    root.mkdir(parents=True, exist_ok=True)
++    block_size = min(
++        cfg.score_block_size, max(1, 134217728 // (8 * (8 * x.shape[1] ** 2 + 12 * len(samples))))
++    )
++    prior = _train(md, cfg, samples, chromosomes, intersect, x, n_case, block_size)
++    prior_path = root / "dispersion_prior.json"
++    _cache.write_json(prior_path, prior)
++    prior_hash = _sha(prior_path)
++    entries, total, untestable = [], 0, 0
++    for chrom in chromosomes:
++        sites = _count_blocks.canonical_sites(md.store, chrom, samples, intersect=intersect)
++        if not len(sites):
++            continue
++        pos = sites["pos"].to_numpy()
++        strands = sites["strand"].to_numpy()
++        target = root / _chrom_filename(chrom)
++        temporary = target.with_suffix(".parquet.tmp")
++        writer, offset = None, 0
++        try:
++            for positions, m, n in _count_blocks.iter_count_blocks(
++                md.store, chrom, samples, pos, block_size=block_size
++            ):
++                fit = _count_score.test_counts(
++                    m,
++                    n,
++                    x,
++                    c,
++                    prior=prior,
++                    n_case=n_case,
++                    dispersion_mode=cfg.score_dispersion,
++                    intervals=cfg.score_ci,
++                )
++                frame = _frame(
++                    chrom,
++                    positions,
++                    strands[offset : offset + len(m)],
++                    m,
++                    n,
++                    x,
++                    c,
++                    fit,
++                    cfg,
++                    n_case,
++                )
++                table = frame.to_arrow()
++                if writer is None:
++                    writer = pq.ParquetWriter(temporary, table.schema, compression="zstd")
++                writer.write_table(table, row_group_size=block_size)
++                untestable += int(frame["pvalue"].is_nan().sum())
++                offset += len(m)
++        finally:
++            if writer is not None:
++                writer.close()
++        temporary.replace(target)
++        entries.append(
++            dict(name=chrom, n_sites=offset, prior_file=prior_path.name, prior_sha256=prior_hash)
++        )
++        total += offset
++    manifest = dict(
++        test="bb_score",
++        algorithm_revision=ALGORITHM_REVISION,
++        fingerprint=fingerprint,
++        parameters=params,
++        chroms=entries,
++        total_sites=total,
++        hypothesis_count=total,
++        untestable_sites=untestable,
++        complete=False,
++        prior_file=prior_path.name,
++        prior_sha256=prior_hash,
++        actual_block_size=block_size,
++        inference_status="experimental",
++        missing_hypothesis_policy="retain p=1 for correction, NaN statistic status",
++    )
++    store = DMCStore(path=root, test="bb_score", _manifest=manifest)
++    store.write_manifest(manifest.copy())
++    if total:
++        from .dmc import apply_multiple_testing_correction
++
++        store = apply_multiple_testing_correction(
++            store, method=cfg.fdr_method, pvalue_col="pvalue_for_correction"
++        )
++    completed = store.manifest
++    for entry in completed["chroms"]:
++        entry["sha256"] = _sha(root / _chrom_filename(entry["name"]))
++    completed["complete"] = True
++    store.write_manifest(completed)
++    return store
+diff --git a/src/epykit/_dispersion_prior.py b/src/epykit/_dispersion_prior.py
+new file mode 100644
+index 0000000..e5902ea
+--- /dev/null
++++ b/src/epykit/_dispersion_prior.py
+@@ -0,0 +1,323 @@
++"""Bounded, observed-count EB priors for biological beta-binomial rho.
++
++The empirical mean strata and conditional regression variant are working
++approximations. Neither removes fitted-mean or learned-prior uncertainty.
++The zero-rho atom is retained; sequencing depth enters the likelihood.
++"""
++
++from __future__ import annotations
++
++import hashlib
++
++import numpy as np
++from numba import njit
++from scipy import special
++
++from ._beta_binomial import _check_rho, _counts, _fit_mixture, _mixture_loglik, _relative_logpmf
++
++ALGORITHM_REVISION = "mean-stratified-count-mixture-v2-bounded-experimental"
++MEAN_BIN_EDGES = np.array([0.0, 0.05, 0.15, 0.30, 0.50])
++MEAN_GRID = (1 - np.cos(np.linspace(0, np.pi, 41))) / 2
++RHO_GRID = np.r_[0.0, np.geomspace(1e-4, 0.8, 25)]
++
++
++@njit(cache=True)
++def _small_rho_relative_loglik(m, n, mu, rho):
++    result = np.zeros(len(m))
++    for i in range(len(m)):
++        for j in range(m.shape[1]):
++            if n[i, j] > 0:
++                result[i] += _relative_logpmf(m[i, j], n[i, j], mu[i, j], rho)
++    return result
++
++
++def _bin_index(means, edges):
++    folded = np.minimum(means, 1 - means)
++    return np.clip(np.searchsorted(edges, folded, side="right") - 1, 0, len(edges) - 2)
++
++
++def _conditional_loglik(m, n, mu, rho_grid):
++    """Normalized count likelihood at fixed per-sample means, bounded by rows.
++
++    Smallest positive training rho is 1e-4, keeping concentration manageable.
++    Endpoint means are degenerate counts. Missing observations add zero.
++    """
++    covered = n > 0
++    mu = np.where(covered, mu, 0.5)
++    choose = special.gammaln(n + 1) - special.gammaln(m + 1) - special.gammaln(n - m + 1)
++    result = np.empty((len(m), len(rho_grid)))
++    binomial = choose + special.xlogy(m, mu) + special.xlog1py(n - m, -mu)
++    interior = (mu > 0) & (mu < 1)
++    for i, rho in enumerate(rho_grid):
++        if rho == 0:
++            logp = binomial
++        elif rho < 1e-5:
++            result[:, i] = _small_rho_relative_loglik(m, n, mu, rho) + choose.sum(axis=1)
++            continue
++        else:
++            k = (1 - rho) / rho
++            a, b = np.where(interior, mu, 0.5) * k, np.where(interior, 1 - mu, 0.5) * k
++            logp = choose + special.betaln(m + a, n - m + b) - special.betaln(a, b)
++            logp = np.where(interior, logp, binomial)
++        result[:, i] = np.where(covered, logp, 0.0).sum(axis=1)
++    return result
++
++
++def _fit_rho_mixture(log_likelihood, initial=None, max_iter=400, tol=1e-5):
++    shift = log_likelihood.max(axis=1)
++    if not np.isfinite(shift).all():
++        raise ValueError("Dispersion grid gives zero likelihood to observed counts")
++    likelihood = np.exp(log_likelihood - shift[:, None])
++    weights = (
++        np.full(likelihood.shape[1], 1 / likelihood.shape[1])
++        if initial is None
++        else np.array(initial, dtype=float, copy=True)
++    )
++    previous, converged = -np.inf, False
++    for iteration in range(max_iter):
++        weighted = likelihood * weights
++        marginal = weighted.sum(axis=1)
++        loglik = float((np.log(marginal) + shift).sum())
++        if abs(loglik - previous) <= tol * len(likelihood):
++            converged = True
++            break
++        previous = loglik
++        weights = np.maximum((weighted / marginal[:, None]).mean(axis=0), 1e-300)
++        weights /= weights.sum()
++    return dict(rho_weights=weights, loglik=loglik, converged=converged, iterations=iteration + 1)
++
++
++def _bounded_groups(m, n, n_case, mu, max_training, seed):
++    width = max(n_case, m.shape[1] - n_case)
++    groups_m, groups_n, groups_mu = [], [], []
++    for lo, hi in ((0, n_case), (n_case, m.shape[1])):
++        gm, gn = (
++            np.zeros((len(m), width), dtype=np.int64),
++            np.zeros((len(m), width), dtype=np.int64),
++        )
++        gm[:, : hi - lo], gn[:, : hi - lo] = m[:, lo:hi], n[:, lo:hi]
++        order = np.lexsort((gm, gn), axis=1)
++        gm, gn = np.take_along_axis(gm, order, 1), np.take_along_axis(gn, order, 1)
++        groups_m.append(gm)
++        groups_n.append(gn)
++        if mu is not None:
++            gu = np.full((len(m), width), 0.5)
++            gu[:, : hi - lo] = mu[:, lo:hi]
++            groups_mu.append(np.take_along_axis(gu, order, 1))
++    gm, gn = np.vstack(groups_m), np.vstack(groups_n)
++    gu = np.vstack(groups_mu) if mu is not None else None
++    valid = (gn > 0).sum(axis=1) >= 2
++    if gu is not None:
++        valid &= np.isfinite(np.where(gn > 0, gu, 0.0)).all(axis=1)
++    gm, gn = gm[valid], gn[valid]
++    gu = gu[valid] if gu is not None else None
++    if not len(gm):
++        raise ValueError(
++            "Dispersion training requires two covered replicates in at least one group"
++        )
++    # Content-based seeded priorities preserve row, group and within-group swaps.
++    prefix = str(int(seed)).encode()
++    fingerprints = []
++    for i in range(len(gm)):
++        h = hashlib.blake2b(digest_size=16)
++        h.update(prefix)
++        h.update(gm[i].astype("<i8").tobytes())
++        h.update(gn[i].astype("<i8").tobytes())
++        if gu is not None:
++            h.update(np.round(np.where(gn[i] > 0, gu[i], 0.5), 12).astype("<f8").tobytes())
++        fingerprints.append(h.hexdigest())
++    indices = np.argsort(fingerprints, kind="stable")[:max_training]
++    digest = hashlib.sha256("".join(fingerprints[i] for i in indices).encode()).hexdigest()
++    return (
++        gm[indices],
++        gn[indices],
++        gu[indices] if gu is not None else None,
++        digest,
++        int(valid.sum()),
++    )
++
++
++def fit_dispersion_prior(m, n, n_case, *, design=None, max_training=4096, seed=20261009):
++    """Learn pooled/mean-stratified mixing weights from observed counts only.
++
++    Each training unit is a replicate group with at least two covered samples.
++    Sparse strata (<64 non-endpoint groups) use the pooled prior. Sampling uses
++    seeded content hashes so group and row permutations do not change it.
++    """
++    m, n = _counts(m, n, 2)
++    if not isinstance(n_case, (int, np.integer)) or not 0 < n_case < m.shape[1]:
++        raise ValueError("n_case must split two nonempty groups")
++    if not isinstance(max_training, (int, np.integer)) or max_training < 1:
++        raise ValueError("max_training must be positive")
++    available = ((n[:, :n_case] > 0).sum(axis=1) >= 2) | ((n[:, n_case:] > 0).sum(axis=1) >= 2)
++    indices = np.flatnonzero(available)
++    if not len(indices):
++        raise ValueError(
++            "Dispersion training requires two covered replicates in at least one group"
++        )
++    if len(indices) > max_training:
++        # Bound sites before conditional regression or group-matrix allocation.
++        # Canonical group order makes priorities invariant to swapping groups.
++        width = max(n_case, m.shape[1] - n_case)
++        prefix = str(int(seed)).encode()
++        priorities = []
++        for i in indices:
++            payloads = []
++            for lo, hi in ((0, n_case), (n_case, m.shape[1])):
++                row = np.zeros((2, width), dtype="<i8")
++                row[0, : hi - lo], row[1, : hi - lo] = m[i, lo:hi], n[i, lo:hi]
++                payloads.append(row.tobytes())
++            priorities.append(
++                hashlib.blake2b(prefix + b"".join(sorted(payloads)), digest_size=16).hexdigest()
++            )
++        indices = indices[np.argsort(priorities, kind="stable")[:max_training]]
++    m, n = m[indices], n[indices]
++    mu = None
++    if design is not None:
++        from ._count_score import fit_quasi_means
++
++        x = np.asarray(design)
++        if x.ndim != 2 or x.shape[0] != m.shape[1]:
++            raise ValueError("Design must be sample-aligned")
++        mean_block = min(
++            max_training, 32768, max(1, 134217728 // (8 * (8 * x.shape[1] ** 2 + 12 * m.shape[1])))
++        )
++        mu = np.empty(m.shape, dtype=float)
++        for lo in range(0, len(m), mean_block):
++            hi = lo + mean_block
++            fit = fit_quasi_means(m[lo:hi], n[lo:hi], design, 0.05)
++            mu[lo:hi] = fit["mu"]
++            mu[lo:hi][~fit["converged"]] = np.nan
++    gm, gn, gu, digest, n_available = _bounded_groups(m, n, n_case, mu, max_training, seed)
++    if gu is None:
++        means = gm.sum(axis=1) / gn.sum(axis=1)
++        loglik = _mixture_loglik(gm, gn, MEAN_GRID, RHO_GRID)
++        initial_mean = np.full(len(MEAN_GRID), 1 / len(MEAN_GRID))
++
++        def fit_subset(mask, initial=None):
++            starts = [np.full(len(RHO_GRID), 1 / len(RHO_GRID))]
++            if initial is not None:
++                starts.append(initial)
++            else:
++                warm = np.exp(-0.5 * ((np.log(np.maximum(RHO_GRID, 1e-5)) - np.log(0.05)) / 2) ** 2)
++                starts.append(warm / warm.sum())
++            fits = [_fit_mixture(loglik[mask], initial_mean, s, 1e-5, 400) for s in starts]
++            return max(fits, key=lambda f: f["loglik"])
++
++        method = "integrated replicate-group mean count mixture"
++    else:
++        means = np.where(gn > 0, gu, 0.0).sum(axis=1) / (gn > 0).sum(axis=1)
++        loglik = _conditional_loglik(gm, gn, gu, RHO_GRID)
++
++        def fit_subset(mask, initial=None):
++            return _fit_rho_mixture(loglik[mask], initial)
++
++        method = "conditional fitted per-sample means"
++    pooled = fit_subset(np.ones(len(gm), dtype=bool))
++    bin_indices = _bin_index(means, MEAN_BIN_EDGES)
++    informative = (gm.sum(axis=1) > 0) & (gm.sum(axis=1) < gn.sum(axis=1))
++    weights, fallback, counts, convergence = [], [], [], []
++    for i in range(len(MEAN_BIN_EDGES) - 1):
++        mask = bin_indices == i
++        enough = int((mask & informative).sum()) >= 64
++        fitted = fit_subset(mask, pooled["rho_weights"]) if enough else pooled
++        weights.append(fitted["rho_weights"].tolist())
++        fallback.append(not enough)
++        counts.append(int((mask & informative).sum()))
++        convergence.append(bool(fitted["converged"]))
++    return dict(
++        rho_grid=RHO_GRID.tolist(),
++        mean_grid=MEAN_GRID.tolist(),
++        mean_bin_edges=MEAN_BIN_EDGES.tolist(),
++        rho_weights_by_bin=weights,
++        pooled_rho_weights=pooled["rho_weights"].tolist(),
++        bin_fallback=fallback,
++        bin_informative_groups=counts,
++        bin_converged=convergence,
++        pooled_converged=bool(pooled["converged"]),
++        n_training_groups=len(gm),
++        n_available_groups=n_available,
++        n_training_sites=len(m),
++        n_available_sites=int(available.sum()),
++        training_digest=digest,
++        seed=int(seed),
++        max_training=int(max_training),
++        training_method=method,
++        design_columns=None if design is None else int(np.asarray(design).shape[1]),
++        algorithm_revision=ALGORITHM_REVISION,
++        limitations="Empirical observed-mean strata; approximate within-stratum mean/rho "
++        "independence; fitted regression mean and learned-prior uncertainty "
++        "are not fully integrated. Analytical score reference is experimental.",
++    )
++
++
++def posterior_dispersion(m, n, mu, prior, *, group_labels=None):
++    """Conditional count-likelihood posterior rho moments, retaining rho=0.
++
++    Group labels request separate posteriors. This does not add a reference df.
++    No observations retain the appropriate prior and report valid_counts=0.
++    """
++    m, n = _counts(m, n, 2)
++    mu = np.asarray(mu, dtype=float)
++    try:
++        mu = np.broadcast_to(mu, m.shape)
++    except ValueError as exc:
++        raise ValueError("Means must broadcast to site-by-sample counts") from exc
++    covered = n > 0
++    if np.any(covered & (~np.isfinite(mu) | (mu < 0) | (mu > 1))):
++        raise ValueError("Covered observations require finite means in [0,1]")
++    if group_labels is not None:
++        labels = np.asarray(group_labels)
++        if labels.shape != (m.shape[1],):
++            raise ValueError("group_labels must label each sample")
++        unique = np.unique(labels)
++        fits = [
++            posterior_dispersion(m[:, labels == v], n[:, labels == v], mu[:, labels == v], prior)
++            for v in unique
++        ]
++        return dict(
++            {
++                key: np.stack([f[key] for f in fits], axis=1)
++                for key in ("weights", "rho_mean", "rho_variance", "valid_counts", "bin_index")
++            },
++            group_labels=unique,
++        )
++    grid = _check_rho(prior["rho_grid"])
++    if grid.ndim != 1 or not len(grid) or np.any(np.diff(grid) <= 0):
++        raise ValueError("Prior rho grid must be strictly increasing")
++    edges = np.asarray(prior["mean_bin_edges"], dtype=float)
++    weights = np.asarray(prior["rho_weights_by_bin"], dtype=float)
++    if (
++        edges.ndim != 1
++        or len(edges) < 2
++        or not np.isfinite(edges).all()
++        or np.any(np.diff(edges) <= 0)
++        or edges[0] != 0
++        or edges[-1] != 0.5
++        or weights.shape != (len(edges) - 1, len(grid))
++        or not np.isfinite(weights).all()
++        or np.any(weights < 0)
++        or np.any(weights.sum(axis=1) <= 0)
++    ):
++        raise ValueError("Invalid mean-stratified dispersion prior")
++    counts = covered.sum(axis=1)
++    means = np.divide(
++        np.where(covered, mu, 0.0).sum(axis=1), counts, out=np.full(len(m), 0.5), where=counts > 0
++    )
++    indices = _bin_index(means, edges)
++    selected = weights[indices] / weights[indices].sum(axis=1)[:, None]
++    with np.errstate(divide="ignore"):
++        logw = _conditional_loglik(m, n, mu, grid) + np.log(selected)
++    normalizer = special.logsumexp(logw, axis=1)
++    if not np.isfinite(normalizer).all():
++        raise ValueError("Conditional fitted means give zero count likelihood")
++    posterior = np.exp(logw - normalizer[:, None])
++    mean = posterior @ grid
++    variance = np.maximum(0.0, posterior @ (grid * grid) - mean * mean)
++    return dict(
++        weights=posterior,
++        rho_mean=mean,
++        rho_variance=variance,
++        valid_counts=counts,
++        bin_index=indices,
++    )
+diff --git a/src/epykit/_dmc_config.py b/src/epykit/_dmc_config.py
+index dae8119..80fbbc7 100644
+--- a/src/epykit/_dmc_config.py
++++ b/src/epykit/_dmc_config.py
+@@ -69,6 +69,12 @@ class DMCConfig:
+     csv_full: bool = False
+     csv_alpha: float = 0.05
+     beta_binomial_ci: bool = True
++    score_dispersion: str = "shared"
++    score_ci: bool = True
++    score_reference: str = "normal"
++    score_block_size: int = 32768
++    score_prior_max_groups: int = 4096
++    score_prior_seed: int = 20261009
+ 
+     def __post_init__(self) -> None:
+         if self.min_samples_treatment is None:
+@@ -87,6 +93,22 @@ class DMCConfig:
+         """
+         if self.test != "auto":
+             engine_spec(self.test)
++        if self.test == "bb_score":
++            if self.score_dispersion not in ('shared','group') or self.score_reference!='normal':
++                raise ValueError('bb_score requires score_dispersion=shared/group and score_reference=normal')
++            if (not isinstance(self.score_block_size,int) or not 1<=self.score_block_size<=32768 or
++                not isinstance(self.score_prior_max_groups,int) or self.score_prior_max_groups<1 or
++                not isinstance(self.score_prior_seed,int)):
++                raise ValueError('Invalid bb_score block size, prior training limit or seed')
++            incompatible = [name for name,on in (
++                ('smoothing',self.smoothing),('use_smoothed',self.use_smoothed),
++                ('sep_fallback',self.sep_fallback),('neighbour_combine',self.neighbour_combine),
++                ('empirical_fdr',self.empirical_fdr),('glm_backend',self.glm_backend!='cpu'),
++                ('backend',self.backend!='sequential'),('n_workers',self.n_workers not in (None,1)),
++                ('fdr_method',self.fdr_method not in ('fdr_bh','fdr_by')),
++            ) if on]
++            if incompatible:
++                raise ValueError('Unsupported bb_score options: '+', '.join(incompatible))
+         if self.test == "beta_binomial":
+             incompatible = [name for name,on in (
+                 ('formula',self.formula is not None),('contrast',self.contrast is not None),
+@@ -210,8 +232,17 @@ class DMCConfig:
+             from ._beta_binomial import ALGORITHM_REVISION
+             params.update(beta_binomial_ci=self.beta_binomial_ci,
+                           beta_binomial_revision=ALGORITHM_REVISION)
++        if selected_test == 'bb_score':
++            from ._count_score import ALGORITHM_REVISION
++            from ._dispersion_prior import ALGORITHM_REVISION as PRIOR_REVISION
++            params.update(score_revision=ALGORITHM_REVISION,score_prior_revision=PRIOR_REVISION,
++                          **self.score_options())
+         return params
+ 
++    def score_options(self) -> dict[str,Any]:
++        return {name:getattr(self,name) for name in ('score_dispersion','score_ci','score_reference',
++            'score_block_size','score_prior_max_groups','score_prior_seed')}
++
+     def to_uns(
+         self,
+         *,
+@@ -297,6 +328,7 @@ class DMCConfig:
+             metadata.update(statistical_model='per-replicate beta-binomial',
+                 beta_binomial_revision=ALGORITHM_REVISION,beta_binomial_ci=self.beta_binomial_ci,
+                 beta_binomial_prior='count-likelihood EB with continuous log-rho shrinkage',
++                beta_binomial_optimization='local bracket diagnostics, dense-grid multimode fallback; not a global-optimum certificate',
+                 beta_binomial_reference='chi2 asymptotic diagnostic' if self.reference=='chi2'
+                     else 'methylSig-inspired F(1,n_valid-2) approximation',
+                 beta_binomial_df_column='bb_df records n_valid-2, the F denominator df; '
+@@ -305,4 +337,17 @@ class DMCConfig:
+                     if self.beta_binomial_ci else 'not computed',
+                 beta_binomial_limitations='shared within-site rho; no covariate adjustment; '
+                     'small-sample reference is approximate; low site power with few replicates')
++        if test_used == 'bb_score':
++            from ._count_score import ALGORITHM_REVISION
++            from ._dispersion_prior import ALGORITHM_REVISION as PRIOR_REVISION
++            metadata.update(**self.score_options(),reference=None,
++                statistical_model='depth-aware per-replicate count quasi-score regression',
++                inference_status='experimental',score_revision=ALGORITHM_REVISION,
++                score_prior_revision=PRIOR_REVISION,
++                score_tail='normal approximation conditional on plug-in EB rho; nuisance '
++                           'and prior uncertainty not integrated',
++                score_limitations='Development null tails can be anti-conservative; '
++                                  'no demonstrated genome-wide calibration.',
++                score_interval='interior conditional delta-method; boundary intervals unavailable'
++                               if self.score_ci else 'not computed')
+         return metadata
+diff --git a/src/epykit/_dmc_engines.py b/src/epykit/_dmc_engines.py
+index d751464..c198b02 100644
+--- a/src/epykit/_dmc_engines.py
++++ b/src/epykit/_dmc_engines.py
+@@ -29,6 +29,8 @@ class EngineSpec:
+     effect_column: str
+     """The effect-size column the engine emits: a pooled log2 odds ratio for
+     the count engines, the logit coefficient in log2 units for the GLMs."""
++    blockwise_store: bool = False
++    """Runs through its bounded whole-store dispatcher, not a chromosome runner."""
+ 
+ 
+ # Public engines first, in CLI choice order.
+@@ -66,6 +68,13 @@ ENGINES = MappingProxyType(
+                 power_stack_applies=False,
+                 effect_column="log2_odds_ratio_bb",
+             ),
++            EngineSpec(
++                name="bb_score",
++                public=True,
++                power_stack_applies=False,
++                effect_column="coef_treatment_log2",
++                blockwise_store=True,
++            ),
+             EngineSpec(
+                 name="glm_contrast",
+                 public=False,
+diff --git a/src/epykit/_dmc_stages.py b/src/epykit/_dmc_stages.py
+index 14a3257..44c38c5 100644
+--- a/src/epykit/_dmc_stages.py
++++ b/src/epykit/_dmc_stages.py
+@@ -38,6 +38,7 @@ from dataclasses import dataclass
+ from pathlib import Path
+ from typing import Literal
+ 
++import numpy as np
+ import polars as pl
+ 
+ from ._dmc_config import DMCConfig
+@@ -53,7 +54,7 @@ from .methyldata import MethylData
+ 
+ logger = logging.getLogger(__name__)
+ 
+-Mode = Literal["binary", "contrast"]
++Mode = Literal["binary", "contrast", "count_score"]
+ 
+ _LOG2_ODDS_RATIO_NOTICE = (
+     "The 'log2_odds_ratio' column is deprecated and is slated for removal "
+@@ -206,6 +207,11 @@ def plan_run(md: MethylData, cfg: DMCConfig) -> DMCPlan:
+     unite_info = md.uns.get("unite")
+     unite = (unite_info is not None) and (unite_info.get("type") == "intersect")
+ 
++    if cfg.test == "bb_score":
++        cfg.validate_resolved()
++        return DMCPlan(cfg=cfg,mode="count_score",selected_test="bb_score",
++            chromosomes=chromosomes,unite=unite,smooth_method=None,key="dmc_bb_score",tsv=tsv)
++
+     if cfg.formula is not None or cfg.contrast is not None:
+         _refuse_contrast_knobs(cfg)
+         return DMCPlan(
+@@ -583,6 +589,29 @@ def run_contrast(md: MethylData, plan: DMCPlan) -> DMCOutcome:
+     )
+ 
+ 
++def run_count_score(md: MethylData,plan: DMCPlan) -> DMCOutcome:
++    """Resolve the requested design, then run the actual count engine."""
++    from ._glm import build_design,resolve_contrast
++    from ._count_score_store import run_count_score_store
++    cfg = plan.cfg
++    samples = list(md.treatment_ids)+list(md.control_ids)
++    need_treatment = cfg.formula is None or cfg.treatment_col in cfg.formula
++    x,_,_,terms,formula_used,info = build_design(md.obs,samples_ordered=samples,
++        formula=cfg.formula,covariates=cfg.covariates,treatment_col=cfg.treatment_col,
++        require_treatment_col=need_treatment,return_design_info=True,reference_level=cfg.reference_level)
++    specification = cfg.contrast if cfg.contrast is not None else cfg.treatment_col
++    if isinstance(specification,str) and any(op in specification for op in '=+-*'):
++        constraint = info.linear_constraint(specification)
++        if np.any(constraint.constants!=0):
++            raise ValueError('bb_score supports homogeneous contrasts c beta=0 only')
++    c,label = resolve_contrast(specification,terms,design_info=info)
++    store = run_count_score_store(md,cfg,design=x,contrast=c)
++    resumed = bool(store._manifest.pop('_cache_hit',False))
++    return DMCOutcome(result=store.to_dataframe() if cfg.materialize else None,store=store,
++        resumed=resumed,design=ContrastDesign(formula_used=formula_used,
++            contrast_label=label,design_terms=terms))
++
++
+ def publish(md: MethylData, plan: DMCPlan, outcome: DMCOutcome) -> None:
+     """Write ``md.varm[plan.key]`` and ``md.uns["dmc"]``.
+ 
+diff --git a/src/epykit/cli/_dmc.py b/src/epykit/cli/_dmc.py
+index 8aafc05..7554a1a 100644
+--- a/src/epykit/cli/_dmc.py
++++ b/src/epykit/cli/_dmc.py
+@@ -51,6 +51,32 @@ def _cmd_dmc(args: argparse.Namespace):
+     canonical_only = bool(getattr(args, "canonical_only", False))
+     smoothing, smoothing_span_bp = _smoothing_opts(args)
+ 
++    if args.test == 'bb_score':
++        import polars as pl
++        from ..methyldata import MethylData
++        from .. import tl
++        obs = pl.read_csv(args.samplesheet)
++        obs = obs.filter(pl.col('group').is_in([args.treatment_group,args.control_group]))
++        obs = obs.with_columns((pl.col('group')==args.treatment_group).cast(pl.Int32).alias('treatment'))
++        md = MethylData(obs=obs,store=str(args.methylstore))
++        md.uns['unite'] = {'type':'intersect' if args.unite else 'union'}
++        covariates = [c.strip() for c in args.covariates.split(',')] if args.covariates else None
++        tl.dmc(md,test='bb_score',formula=args.formula,contrast=args.contrast,covariates=covariates,
++            min_samples_treatment=args.min_samples_treatment,min_samples_control=args.min_samples_control,
++            fdr_method=args.fdr_method,canonical_only=canonical_only,smoothing=smoothing,
++            score_dispersion=args.score_dispersion,score_ci=args.score_ci,
++            score_reference=args.score_reference,score_block_size=args.score_block_size,tsv=False)
++        results = md.dmc
++        results.write_parquet(args.output)
++        print(f'DMC bb_score experimental results written to {args.output}')
++        tsv_suppressed,tsv_path,tsv_full,tsv_alpha = _cli_tsv_opts(args)
++        if not tsv_suppressed:
++            from ..export import dmc_to_tsv
++            dmc_to_tsv(md,tsv_path or _auto_tsv_path(args.output,suffix='.significant'),alpha=tsv_alpha)
++            if tsv_full:
++                dmc_to_tsv(md,_auto_tsv_path(args.output),full=True)
++        return
++
+     # formula/contrast path uses ALL samples from the
+     # samplesheet rather than binary case/control. We build a tiny
+     # MethylData on the fly so tl.dmc can resolve the contrast against
+@@ -176,6 +202,10 @@ def register(sub: argparse._SubParsersAction[argparse.ArgumentParser]) -> None:
+     """Add ``dmc`` to ``sub``."""
+     # dmc
+     p_dmc = sub.add_parser("dmc", help="Differential methylation calling (per-CpG)")
++    p_dmc.add_argument('--score-dispersion',choices=['shared','group'],default='shared')
++    p_dmc.add_argument('--no-score-ci',dest='score_ci',action='store_false',default=True)
++    p_dmc.add_argument('--score-reference',choices=['normal'],default='normal')
++    p_dmc.add_argument('--score-block-size',type=int,default=32768)
+     p_dmc.add_argument("--methylstore", required=True)
+     p_dmc.add_argument("--samplesheet", required=True, help="CSV: sample_id, group, path")
+     p_dmc.add_argument("--treatment-group", required=True)
+diff --git a/src/epykit/dmc.py b/src/epykit/dmc.py
+index b4b1c23..07421a9 100644
+--- a/src/epykit/dmc.py
++++ b/src/epykit/dmc.py
+@@ -1618,7 +1618,15 @@ def _run_beta_binomial(inp: EngineInput) -> EngineResult:
+     if inp.beta_binomial_prior_dir is not None:
+         inp.beta_binomial_prior_dir.mkdir(parents=True,exist_ok=True)
+         _cache.write_json(inp.beta_binomial_prior_dir/(_chrom_filename(inp.chrom).removesuffix('.parquet')+'.json'),metadata)
+-    names = ['pvalue','mu_case','mu_control','rho','lr','df']
++    diagnostics = {
++        'rho_objective_evaluations':'bb_rho_evaluations',
++        'rho_search_converged':'bb_rho_search_converged',
++        'rho_search_boundary':'bb_rho_boundary',
++        'rho_objective_gap':'bb_rho_objective_gap',
++        'rho_fallback_used':'bb_rho_fallback_used',
++        'rho_bracket_width':'bb_rho_bracket_width',
++    }
++    names = ['pvalue','mu_case','mu_control','rho','lr','df',*diagnostics]
+     if inp.beta_binomial_ci:
+         names += ['ci_lo','ci_hi']
+     arrays = {key:np.empty(inp.n_sites) for key in names}
+@@ -1634,6 +1642,7 @@ def _run_beta_binomial(inp: EngineInput) -> EngineResult:
+     log2_or = (np.log(a/(1-a))-np.log(b/(1-b)))/np.log(2)
+     return EngineResult(pvals=arrays['pvalue'],log2_ors=log2_or,welford_case=w_case,welford_ctrl=w_ctrl,
+         extras={'bb_rho':arrays['rho'],'bb_lr':arrays['lr'],'bb_df':arrays['df'],
++                **{column:arrays[key] for key,column in diagnostics.items()},
+                 'bb_ci_lo':arrays.get('ci_lo',np.full(inp.n_sites,np.nan)),
+                 'bb_ci_hi':arrays.get('ci_hi',np.full(inp.n_sites,np.nan))})
+ 
+@@ -1911,7 +1920,7 @@ def _run_glm_contrast(inp: EngineInput) -> EngineResult:
+     )
+ 
+ 
+-# One runner per registry engine; a test asserts the key sets match.
++# One runner per chromosome registry engine; blockwise stores dispatch earlier.
+ _ENGINE_RUNNERS: dict[str, Callable[[EngineInput], EngineResult]] = {
+     "fisher": _run_fisher,
+     "lr": _run_lr,
+@@ -2164,9 +2173,15 @@ def _finalise_chromosome(inp: EngineInput, res: EngineResult) -> pl.DataFrame:
+     if "coef_treatment" in extras and "coef_se" in extras:
+         out_cols["coef_treatment"] = pl.Series(extras["coef_treatment"])
+         out_cols["coef_se"] = pl.Series(extras["coef_se"])
+-    for key in ('bb_rho','bb_lr','bb_df'):
++    for key in ('bb_rho','bb_lr','bb_df','bb_rho_evaluations','bb_rho_search_converged',
++                'bb_rho_boundary','bb_rho_objective_gap','bb_rho_fallback_used','bb_rho_bracket_width'):
+         if key in extras:
+-            out_cols[key] = pl.Series(extras[key])
++            value = pl.Series(extras[key])
++            if key in ('bb_rho_search_converged','bb_rho_boundary','bb_rho_fallback_used'):
++                value = value.cast(pl.Boolean)
++            elif key == 'bb_rho_evaluations':
++                value = value.cast(pl.UInt32)
++            out_cols[key] = value
+     if res.multigroup is not None:
+         mg = res.multigroup
+         out_cols["f_stat"] = pl.Series(mg.f_stat)
+@@ -2344,6 +2359,12 @@ def process_chromosomes_dmc(
+     sep_threshold: float = 0.9,
+     canonical_only: bool = False,
+     beta_binomial_ci: bool = True,
++    score_dispersion: str = "shared",
++    score_ci: bool = True,
++    score_reference: str = "normal",
++    score_block_size: int = 32768,
++    score_prior_max_groups: int = 4096,
++    score_prior_seed: int = 20261009,
+ ) -> pl.DataFrame | DMCStore:
+     """Process differential methylation for all chromosomes.
+ 
+@@ -2434,6 +2455,40 @@ def process_chromosomes_dmc(
+     # without DMCConfig, so the name is checked here too, before the store
+     # directory is resolved or created.
+     engine_spec(test)
++    if test == 'bb_score':
++        from ._count_score_store import run_count_score_store
++        from ._dmc_config import DMCConfig
++        from .methyldata import MethylData
++        samples = list(samples_treatment)+list(samples_control)
++        nc = len(samples_treatment)
++        md = MethylData(obs=pl.DataFrame({'sample_id':samples,
++            'treatment':[1]*nc+[0]*len(samples_control)}),store=str(methylstore_path))
++        md.uns['unite'] = {'type':'intersect' if unite else 'union'}
++        cfg = DMCConfig(test='bb_score',chromosomes=chromosomes,
++            min_samples_treatment=min_samples_treatment,min_samples_control=min_samples_control,
++            backend=backend,n_workers=n_workers,glm_backend=glm_backend,
++            smoothing=smoothing,sep_fallback=sep_fallback,canonical_only=canonical_only,
++            score_dispersion=score_dispersion,score_ci=score_ci,score_reference=score_reference,
++            score_block_size=score_block_size,score_prior_max_groups=score_prior_max_groups,
++            score_prior_seed=score_prior_seed)
++        x = np.column_stack([np.ones(len(samples)),np.r_[np.ones(nc),np.zeros(len(samples_control))]])
++        c = np.array([0.,1.])
++        if design_full is not None:
++            x = np.asarray(design_full)
++            if samples_all_ordered is not None:
++                order = [list(samples_all_ordered).index(s) for s in samples]
++                x = x[order]
++            if contrast_matrix is not None:
++                c = np.asarray(contrast_matrix)
++            elif coef_idx is not None:
++                c = np.zeros(x.shape[1])
++                c[coef_idx] = 1.
++            else:
++                raise ValueError('bb_score explicit design requires contrast_matrix or coef_idx')
++        elif contrast_matrix is not None:
++            c = np.asarray(contrast_matrix)
++        score_store = run_count_score_store(md,cfg,design=x,contrast=c,out_dir=out_dir)
++        return score_store if return_store else score_store.to_dataframe()
+     if test == 'beta_binomial':
+         if (dispersion!='eb' or smoothing or sep_fallback or design_full is not None
+             or design_reduced is not None or contrast_matrix is not None):
+diff --git a/src/epykit/dmr.py b/src/epykit/dmr.py
+index 49c3f62..14f9568 100644
+--- a/src/epykit/dmr.py
++++ b/src/epykit/dmr.py
+@@ -41,6 +41,7 @@ from ._chroms import filter_canonical_logged
+ from ._dmc_store import DMCStore
+ 
+ logger = logging.getLogger(__name__)
++REGIONAL_SCORE_REVISION = "signed-stouffer-v2-retain-zero-finite-inputs"
+ 
+ 
+ def _dmr_sliding_cache_key(
+@@ -62,6 +63,7 @@ def _dmr_sliding_cache_key(
+     return _cache.fingerprint(
+         [
+             ("base", base_sig),
++            ("regional_score", REGIONAL_SCORE_REVISION),
+             ("win", str(int(window_bp))),
+             ("mincp", str(int(min_cpgs))),
+             ("minsig", str(int(min_sites_significant))),
+@@ -91,6 +93,7 @@ def _dmr_chain_merge_cache_key(
+         [
+             ("base", base_sig),
+             ("region_correction", "complete-interval-family-by-v1"),
++            ("regional_score", REGIONAL_SCORE_REVISION),
+             ("alpha", f"{float(alpha):.10g}"),
+             ("delta", f"{float(min_abs_meth_diff):.10g}"),
+             ("dismerge", str(int(dis_merge_bp))),
+@@ -246,7 +249,9 @@ def _stouffer_combine_signed(
+     pvals = np.asarray(pvals, dtype=np.float64)
+     meth_diffs = np.asarray(meth_diffs, dtype=np.float64)
+ 
+-    valid = ~np.isnan(pvals) & (pvals > 0.0) & (pvals <= 1.0) & ~np.isnan(meth_diffs)
++    # Zero is a valid numerical underflow, and must be clipped rather than
++    # discarded. A nonfinite effect cannot supply a defensible direction.
++    valid = np.isfinite(pvals) & (pvals >= 0.0) & (pvals <= 1.0) & np.isfinite(meth_diffs)
+     if not np.any(valid):
+         return float("nan")
+ 
+@@ -1706,8 +1711,8 @@ def _warn_if_region_underpowered(fdr_method: str, n_treat: int, n_ctrl: int, *,
+             f"{label}: permutation FDR at n={min(n_treat, n_ctrl)} per group is "
+             f"underpowered. Only a handful of distinct label assignments exist "
+             f"and draws adjacent to the true split leak signal into the null, "
+-            f"so the empirical FDR is conservative (biased high). Treat the "
+-            f"result as a floor.",
++            f"so count-ratio estimates have limited independent information. "
++            f"Report Monte Carlo uncertainty and validate the resampling design.",
+             UserWarning,
+             stacklevel=3,
+         )
+@@ -1757,9 +1762,9 @@ def _region_count_ratio_fdr(
+         fdr(t) = V(t) / R(t)
+ 
+     The per-region q-value is the monotone suffix-min of ``fdr(t)`` for
+-    ``t >= p_j``, clipped to ``[0, 1]``. Because decoys inherit the same
+-    overdispersion as the observed scan, the inflation that makes the
+-    asymptotic per-region p-value anti-conservative cancels in the ratio.
++    ``t >= p_j``, clipped to ``[0, 1]``. This is an estimate whose validity
++    depends on exchangeability and comparable observed/null discovery
++    procedures; miscalibration does not automatically cancel in the ratio.
+ 
+     Parameters
+     ----------
+@@ -1768,8 +1773,8 @@ def _region_count_ratio_fdr(
+         output is returned in the same order).
+     null_pools
+         One array per usable permutation, holding that permutation's null
+-        survivor p-values. Self/mirror permutations and failed runs must be
+-        excluded by the caller. A clean zero-survivor permutation is passed
++        survivor p-values. Self/mirror permutations are excluded by this
++        estimator; failed scans must abort inference. A clean zero-survivor permutation is passed
+         as an empty array: it contributes 0 to ``V`` and stays counted in
+         ``n_perm_used``.
+     n_perm_used
+@@ -1846,8 +1851,8 @@ def _aggregate_region_perm_results(
+     Complete-null family-wise control requires exchangeable sample labels.
+ 
+     ``fdr_method="region"`` is the count-ratio target-decoy FDR of
+-    :func:`_region_count_ratio_fdr`: self/mirror assignments and failed
+-    runs are excluded, a clean zero-survivor run counts as a zero
++    :func:`_region_count_ratio_fdr`: self/mirror assignments are excluded,
++    failed runs abort inference, a clean zero-survivor run counts as a zero
+     contribution, and zero usable assignments yield NaN estimates with a
+     ``UserWarning``.
+     """
+@@ -1856,22 +1861,24 @@ def _aggregate_region_perm_results(
+     obs_safe = np.where(obs_finite_mask, obs_p, 1.0)
+ 
+     if fdr_method == "region":
++        if len(results) != n_perm or any(arr is None for is_self, arr in results if not is_self):
++            raise RuntimeError("Incomplete permutation scan; refusing biased inference")
+         n_self = sum(1 for is_self, _ in results if is_self)
+-        n_failed = sum(1 for is_self, arr in results if (not is_self) and arr is None)
+         null_pools = [arr for is_self, arr in results if (not is_self) and arr is not None]
++        if any(np.any(~np.isfinite(arr)) or np.any((arr < 0) | (arr > 1)) for arr in null_pools):
++            raise ValueError("Invalid permutation region scores")
+         n_perm_used = len(null_pools)
+-        if n_self or n_failed:
++        if n_self:
+             logger.info(
+-                "%s[region]: excluded %d self/mirror and %d failed permutation(s); n_perm_used=%d.",
++                "%s[region]: excluded %d self/mirror permutation(s); n_perm_used=%d.",
+                 label,
+                 n_self,
+-                n_failed,
+                 n_perm_used,
+             )
+         if n_perm_used == 0:
+             warnings.warn(
+-                f"{label}: all {n_perm} permutations were self/mirror assignments "
+-                f"or failed; the region empirical FDR is undefined and is "
++                f"{label}: all {n_perm} permutations were self/mirror assignments; "
++                f"the region empirical FDR is undefined and is "
+                 f"reported as NaN. Raise n_perm or use larger groups.",
+                 UserWarning,
+                 stacklevel=3,
+@@ -1909,6 +1916,32 @@ def _aggregate_region_perm_results(
+     return emp_p, emp_p.copy(), float("nan")
+ 
+ 
++def _region_permutation_diagnostics(observed_pvalues, results, fdr_method):
++    """Scan counts and MC error of the untruncated set-level count ratio.
++
++    This standard error describes variability across sampled assignments,
++    not uncertainty of each selection-adjusted q-value or an FDR bound.
++    In particular, zero observed null counts do not establish zero error.
++    """
++    pools = [np.asarray(arr) for is_self, arr in results
++             if arr is not None and (fdr_method != "region" or not is_self)]
++    sizes = np.array([arr.size for arr in pools], dtype=float)
++    n_obs = int(np.isfinite(observed_pvalues).sum())
++    mc_se = float("nan")
++    if fdr_method == "region" and len(sizes) > 1 and n_obs:
++        mc_se = float(sizes.std(ddof=1) / np.sqrt(len(sizes)) / n_obs)
++    return {
++        "empirical_n_perm_requested": len(results),
++        "empirical_n_perm_used": len(pools),
++        "empirical_null_regions": int(sizes.sum()),
++        "empirical_fdr_set_mc_se": mc_se,
++        "empirical_inference": (
++            "count-ratio estimate; not a finite-sample FDR guarantee" if fdr_method == "region"
++            else "complete-scan max-T; complete-null FWER under exchangeability"
++        ),
++    }
++
++
+ def empirical_fdr_for_dmr(
+     methylstore_path: str,
+     samples_treatment: list[str],
+@@ -2066,6 +2099,8 @@ def empirical_fdr_for_dmr(
+             pl.Series("empirical_pvalue", emp_p),
+             pl.Series("empirical_qvalue", emp_q),
+             pl.lit(fdr_set, dtype=pl.Float64).alias("empirical_fdr_set"),
++            *[pl.lit(value).alias(key) for key, value in _region_permutation_diagnostics(
++                observed_dmr.get_column("pvalue").to_numpy(), results, fdr_method).items()],
+         ]
+     )
+ 
+@@ -2316,6 +2351,8 @@ def empirical_fdr_for_chain_merge(
+             pl.Series("empirical_pvalue", emp_p),
+             pl.Series("empirical_qvalue", emp_q),
+             pl.lit(fdr_set, dtype=pl.Float64).alias("empirical_fdr_set"),
++            *[pl.lit(value).alias(key) for key, value in _region_permutation_diagnostics(
++                observed_dmr.get_column("combined_pvalue").to_numpy(), results, fdr_method).items()],
+         ]
+     )
+ 
+diff --git a/src/epykit/tl.py b/src/epykit/tl.py
+index c0234eb..c4c17b2 100644
+--- a/src/epykit/tl.py
++++ b/src/epykit/tl.py
+@@ -492,9 +492,31 @@ def dmc(
+     csv_full: bool = False,
+     csv_alpha: float = 0.05,
+     beta_binomial_ci: bool = True,
++    score_dispersion: str = "shared",
++    score_ci: bool = True,
++    score_reference: str = "normal",
++    score_block_size: int = 32768,
++    score_prior_max_groups: int = 4096,
++    score_prior_seed: int = 20261009,
+ ) -> None:
+     """Run DMC calling and store result in md.varm['dmc_<test>'].
+ 
++    Experimental count score
++    ------------------------
++    ``test="bb_score"`` uses raw replicate counts, biological rho shrinkage
++    and depth-saturating quasi-score weights. It supports formulas, donor/batch
++    covariates and one scalar contrast, including ``materialize=False``.
++    ``score_dispersion="shared"`` or ``"group"`` chooses the nuisance model;
++    ``score_reference="normal"`` is the conditional analytical approximation.
++    The legacy ``reference`` field is unused on this path. Development null
++    diagnostics found anti-conservative small-sample tails; this engine remains
++    experimental and does not replace the corrected comparison baseline.
++    ``score_ci`` requests interior conditional response intervals; boundary
++    intervals are unavailable. ``score_block_size`` must be 1..32768; bounded
++    observed-count prior training uses ``score_prior_max_groups`` and a recorded
++    ``score_prior_seed``. Canonical p/q outputs retain untestable sites as p=1
++    in the global correction, while their reported p/statistic status is absent.
++
+     New count engine
+     ----------------
+     ``test="beta_binomial"`` fits a genuine per-replicate beta-binomial
+@@ -590,7 +612,7 @@ def dmc(
+         treatment/control sample lists.
+     test : str
+         One of ``"auto"``, ``"lr"``, ``"welch_t"``, ``"fisher"``, or
+-        ``"glm"`` or ``"beta_binomial"``. ``"auto"`` resolves to ``"fisher"`` at n<2 and ``"lr"``
++        ``"glm"``, ``"beta_binomial"`` or experimental ``"bb_score"``. ``"auto"`` resolves to ``"fisher"`` at n<2 and ``"lr"``
+         (the recommended default) at n>=2.
+ 
+         Engines removed in 0.7.5 (raise ``ValueError`` with a migration
+@@ -599,7 +621,7 @@ def dmc(
+         ``formula='~ group + batch'``).
+ 
+         When ``formula`` and/or ``contrast`` are supplied, the test is
+-        forced to a GLM-based path; ``beta_binomial`` explicitly refuses
++        forced to a GLM-based path unless ``test="bb_score"``; ``beta_binomial`` explicitly refuses
+         formula, contrast and covariate requests.
+     formula : str, optional
+         patsy formula on ``md.obs`` columns, e.g. ``"~ group"`` for a
+@@ -672,6 +694,12 @@ def dmc(
+         dispersion=dispersion,
+         reference=reference,
+         beta_binomial_ci=beta_binomial_ci,
++        score_dispersion=score_dispersion,
++        score_ci=score_ci,
++        score_reference=score_reference,
++        score_block_size=score_block_size,
++        score_prior_max_groups=score_prior_max_groups,
++        score_prior_seed=score_prior_seed,
+         allow_n1=allow_n1,
+         formula=formula,
+         contrast=contrast,
+@@ -712,6 +740,13 @@ def dmc(
+     # finish (the transitional-column warning and the TSV export).
+     plan = plan_run(md, cfg)
+ 
++    if plan.mode == "count_score":
++        from ._dmc_stages import run_count_score
++        outcome = run_count_score(md,plan)
++        publish(md,plan,outcome)
++        finish(md,plan,outcome)
++        return
++
+     if plan.mode == "contrast":
+         outcome = run_contrast(md, plan)
+         publish(md, plan, outcome)
+@@ -1308,6 +1343,7 @@ def dmr(
+         md.uns["dmr"] = dmr_df
+         md.uns["dmr_params"] = {
+             "method": "sliding_window",
++            "inference_status": "exploratory selected-span ranking; selection and CpG covariance uncalibrated",
+             "window_bp": window_bp,
+             "step_bp": step_bp,
+             "min_cpgs": sw_min_cpgs,
+@@ -1339,6 +1375,7 @@ def dmr(
+         md.uns["dmr"] = dmr_df
+         md.uns["dmr_params"] = {
+             "method": "segment",
++            "inference_status": "exploratory selected-segment ranking; per-chromosome BH is not genome-wide region FDR",
+             "min_cpgs": seg_min_cpgs,
+             "min_abs_meth_diff": min_abs_meth_diff,
+             "alpha": alpha,
+diff --git a/tests/test_bb_relative_likelihood.py b/tests/test_bb_relative_likelihood.py
+new file mode 100644
+index 0000000..3c3a5c5
+--- /dev/null
++++ b/tests/test_bb_relative_likelihood.py
+@@ -0,0 +1,78 @@
++"""Independent oracles for removal of count-only likelihood constants."""
++import numpy as np
++import pytest
++from scipy.special import gammaln
++from scipy.stats import betabinom, binom
++
++from epykit import _beta_binomial as bb
++
++
++@pytest.mark.parametrize('rho', [0., 1e-8, .01, .4])
++def test_relative_group_likelihood_matches_normalized_oracle(rho):
++    assert hasattr(bb, '_relative_group_loglik')
++    n = np.array([0, 5, 20, 300], dtype=np.int64)
++    m = np.array([0, 1, 7, 271], dtype=np.int64)
++    mu = .31
++    if rho == 0:
++        normalized = binom.logpmf(m, n, mu).sum()
++    else:
++        k = (1-rho)/rho
++        normalized = betabinom.logpmf(m, n, mu*k, (1-mu)*k).sum()
++    constants = (gammaln(n+1)-gammaln(m+1)-gammaln(n-m+1)).sum()
++    actual = bb._relative_group_loglik(m, n, mu, rho, 0, len(m))
++    np.testing.assert_allclose(actual, normalized-constants, atol=3e-6, rtol=1e-8)
++
++
++@pytest.mark.parametrize('mu,m', [(0., [0,0]), (1., [5,300])])
++def test_relative_group_endpoints_remain_exact(mu, m):
++    assert hasattr(bb, '_relative_group_loglik')
++    n = np.array([5,300], dtype=np.int64)
++    assert bb._relative_group_loglik(np.array(m),n,mu,.1,0,2) == 0.
++
++
++def test_public_loglik_and_intervals_keep_normalized_contract():
++    m = np.array([[1,3,7,18,17,1,2,4,6,9]])
++    n = np.full_like(m,20)
++    prior = {'log_rho_mean':np.log(.06), 'log_rho_sd':1.2}
++    result = bb.test_lognormal(m,n,5,prior=prior,intervals=True)
++    rho = result['rho'][0]
++    k = (1-rho)/rho
++    a,b = result['mu_case'][0],result['mu_control'][0]
++    expected = (betabinom.logpmf(m[0,:5],n[0,:5],a*k,(1-a)*k).sum()
++                +betabinom.logpmf(m[0,5:],n[0,5:],b*k,(1-b)*k).sum())
++    np.testing.assert_allclose(result['loglik_full'],[expected],atol=1e-9)
++    assert result['ci_lo'][0] <= a-b <= result['ci_hi'][0]
++    assert result['ci_hi'][0]-result['ci_lo'][0] < 2
++
++
++def test_optimizer_diagnostics_cover_rho_search():
++    result = bb.test_lognormal(np.array([[1,3,7,18,17,1,2,4,6,9]]),
++        np.full((1,10),20),5,prior={'log_rho_mean':np.log(.06),'log_rho_sd':1.2})
++    for key in ['rho_objective_evaluations','rho_search_converged',
++                'rho_search_boundary','rho_objective_gap','rho_fallback_used']:
++        assert key in result, key
++        assert np.shape(result[key]) == (1,)
++    assert result['rho_objective_evaluations'][0] >= 17
++    assert result['rho_search_converged'][0]
++    assert result['rho_objective_gap'][0] >= 0
++
++
++def test_endpoint_dispersion_search_has_explicit_prior_only_diagnostics():
++    result = bb.test_lognormal(np.zeros((1,4),dtype=int),np.full((1,4),20),2,
++        prior={'log_rho_mean':np.log(.06),'log_rho_sd':1.2})
++    assert 'rho_objective_evaluations' in result
++    assert result['rho_objective_evaluations'][0] <= 3
++    assert result['rho_search_converged'][0]
++    assert not result['rho_fallback_used'][0]
++
++
++def test_optimizer_diagnostics_reach_public_dmc_store(synth_md_filtered):
++    import epykit as ep
++    md = synth_md_filtered
++    ep.tl.dmc(md, test='beta_binomial', chromosomes=['chr1'],
++              beta_binomial_ci=False, tsv=False)
++    assert {'bb_rho_evaluations','bb_rho_search_converged',
++            'bb_rho_boundary','bb_rho_fallback_used','bb_rho_bracket_width'}.issubset(md.dmc.columns)
++    assert md.dmc['bb_rho_evaluations'].min() >= 1
++    assert md.dmc['bb_rho_search_converged'].all()
++    assert 'local bracket' in md.uns['dmc']['beta_binomial_optimization']
+diff --git a/tests/test_count_dispersion_prior.py b/tests/test_count_dispersion_prior.py
+new file mode 100644
+index 0000000..f6761d9
+--- /dev/null
++++ b/tests/test_count_dispersion_prior.py
+@@ -0,0 +1,234 @@
++"""Observed-count prior and estimated-rho contracts, with independent oracles."""
++
++import importlib
++import importlib.util
++
++import numpy as np
++import pytest
++from scipy.special import logsumexp
++from scipy.stats import betabinom, binom
++
++
++def prior_module():
++    assert importlib.util.find_spec("epykit._dispersion_prior") is not None, (
++        "Count prior is missing"
++    )
++    return importlib.import_module("epykit._dispersion_prior")
++
++
++def counts(seed=710, sites=120):
++    rng = np.random.default_rng(seed)
++    n = rng.integers(10, 81, size=(sites, 10))
++    latent = rng.beta(2.0, 5.0, size=n.shape)
++    return rng.binomial(n, latent), n
++
++
++def simple_prior():
++    return dict(
++        rho_grid=[0.0, 0.05, 0.2],
++        pooled_rho_weights=[0.2, 0.5, 0.3],
++        rho_weights_by_bin=[[0.2, 0.5, 0.3]] * 4,
++        mean_bin_edges=[0.0, 0.05, 0.15, 0.3, 0.5],
++        algorithm_revision="independent-fixture",
++    )
++
++
++def design():
++    return np.column_stack([np.ones(10), np.r_[np.ones(5), np.zeros(5)]])
++
++
++def test_bounded_prior_preserves_binomial_component_and_is_serializable():
++    import json
++
++    m, n = counts()
++    prior = prior_module().fit_dispersion_prior(m, n, 5, max_training=80, seed=22)
++    assert prior["rho_grid"][0] == 0.0
++    assert prior["n_training_groups"] <= 80
++    assert np.isfinite(prior["rho_weights_by_bin"]).all()
++    np.testing.assert_allclose(np.sum(prior["rho_weights_by_bin"], axis=1), 1.0)
++    assert prior["algorithm_revision"] and prior["training_digest"]
++    assert "truth" not in prior
++    json.dumps(prior)
++
++
++def test_training_is_group_swap_row_order_and_seed_reproducible():
++    m, n = counts()
++    pm = prior_module()
++    a = pm.fit_dispersion_prior(m, n, 5, max_training=80, seed=22)
++    order = np.random.default_rng(91).permutation(len(m))
++    b = pm.fit_dispersion_prior(
++        m[order][:, np.r_[5:10, 0:5]], n[order][:, np.r_[5:10, 0:5]], 5, max_training=80, seed=22
++    )
++    assert a["training_digest"] == b["training_digest"]
++    np.testing.assert_allclose(a["rho_weights_by_bin"], b["rho_weights_by_bin"], atol=1e-12)
++    c = pm.fit_dispersion_prior(m, n, 5, max_training=80, seed=23)
++    assert a["training_digest"] != c["training_digest"]
++
++
++def test_unequal_group_sizes_preserve_count_prior_on_group_swap():
++    m, n = counts(sites=80)
++    m, n = m[:, :8], n[:, :8]
++    pm = prior_module()
++    a = pm.fit_dispersion_prior(m, n, 3, max_training=80, seed=22)
++    order = np.r_[3:8, 0:3]
++    b = pm.fit_dispersion_prior(m[:, order], n[:, order], 5, max_training=80, seed=22)
++    assert a["training_digest"] == b["training_digest"]
++    np.testing.assert_allclose(a["rho_weights_by_bin"], b["rho_weights_by_bin"], atol=1e-12)
++
++
++def test_missing_coverage_contributes_no_likelihood_or_training_observation():
++    m, n = counts(sites=80)
++    m[:, 0], n[:, 0] = 0, 0
++    pm = prior_module()
++    a = pm.posterior_dispersion(m, n, np.full(m.shape, 0.3), simple_prior())
++    b = pm.posterior_dispersion(m[:, 1:], n[:, 1:], np.full(m[:, 1:].shape, 0.3), simple_prior())
++    np.testing.assert_allclose(a["weights"], b["weights"], atol=1e-12)
++    # An entirely absent site's group must not enter the training bound.
++    c = pm.fit_dispersion_prior(
++        np.vstack([m, np.zeros((1, 10), int)]),
++        np.vstack([n, np.zeros((1, 10), int)]),
++        5,
++        max_training=1000,
++    )
++    d = pm.fit_dispersion_prior(m, n, 5, max_training=1000)
++    assert c["training_digest"] == d["training_digest"]
++
++
++def test_conditional_posterior_matches_normalized_scipy_count_likelihood():
++    pm = prior_module()
++    m = np.array([[1, 8, 0], [3, 6, 12]])
++    n = np.array([[10, 20, 0], [8, 20, 30]])
++    mu = np.array([[0.1, 0.4, np.nan], [0.3, 0.3, 0.5]])
++    p = simple_prior()
++    actual = pm.posterior_dispersion(m, n, mu, p)
++    likelihood = []
++    for rho in p["rho_grid"]:
++        if rho == 0:
++            logp = binom.logpmf(m, n, mu)
++        else:
++            k = 1 / rho - 1
++            logp = betabinom.logpmf(m, n, mu * k, (1 - mu) * k)
++        likelihood.append(np.where(n > 0, logp, 0.0).sum(axis=1))
++    logw = np.array(likelihood).T + np.log(p["pooled_rho_weights"])
++    expected = np.exp(logw - logsumexp(logw, axis=1)[:, None])
++    np.testing.assert_allclose(actual["weights"], expected, rtol=1e-9, atol=1e-12)
++    np.testing.assert_allclose(actual["rho_mean"], expected @ p["rho_grid"])
++    np.testing.assert_allclose(
++        actual["rho_variance"],
++        expected @ (np.array(p["rho_grid"]) ** 2) - (expected @ p["rho_grid"]) ** 2,
++    )
++
++
++def test_uninformative_endpoint_posterior_retains_prior_and_no_coverage_status():
++    m, n = np.zeros((2, 6), int), np.array([[20] * 6, [0] * 6])
++    r = prior_module().posterior_dispersion(m, n, np.zeros((2, 6)), simple_prior())
++    np.testing.assert_allclose(r["weights"], [simple_prior()["pooled_rho_weights"]] * 2)
++    assert r["valid_counts"].tolist() == [6, 0]
++
++
++def test_near_zero_rho_posterior_matches_exact_two_read_probabilities():
++    pm = prior_module()
++    m, n = np.array([[1, 0, 2]]), np.full((1, 3), 2)
++    mu = np.array([[0.4, 0.6, 0.3]])
++    p = simple_prior()
++    p["rho_grid"] = [0.0, 1e-12, 0.2]
++    products = []
++    for rho in p["rho_grid"]:
++        products.append(
++            2 * 0.4 * 0.6 * (1 - rho) * (0.4 * (1 - 0.6 * (1 - rho))) * (0.3 * (0.3 + 0.7 * rho))
++        )
++    expected = np.array(products) * p["pooled_rho_weights"]
++    expected /= expected.sum()
++    actual = pm.posterior_dispersion(m, n, mu, p)
++    np.testing.assert_allclose(actual["weights"][0], expected, atol=1e-12, rtol=1e-12)
++
++
++def test_mean_dependent_training_recovers_dispersion_ordering_better_than_pooled():
++    rng = np.random.default_rng(122)
++    size = 500
++    means = np.r_[np.full(size, 0.1), np.full(size, 0.4)]
++    rho = np.r_[np.full(size, 0.008), np.full(size, 0.18)]
++    k = 1 / rho - 1
++    n = np.full((2 * size, 10), 60)
++    m = rng.binomial(n, rng.beta((means * k)[:, None], ((1 - means) * k)[:, None], size=n.shape))
++    p = prior_module().fit_dispersion_prior(m, n, 5, max_training=1600, seed=29)
++    trend = np.array(p["rho_weights_by_bin"]) @ p["rho_grid"]
++    pooled = np.array(p["pooled_rho_weights"]) @ p["rho_grid"]
++    assert trend[1] < trend[3]
++    assert abs(trend[1] - 0.008) + abs(trend[3] - 0.18) < abs(pooled - 0.008) + abs(pooled - 0.18)
++    assert not p["bin_fallback"][1] and not p["bin_fallback"][3]
++
++
++def test_general_design_prior_records_conditional_per_sample_mean_approximation():
++    m, n = counts(sites=70)
++    x = np.column_stack([design(), np.tile(np.arange(5), 2)])
++    p = prior_module().fit_dispersion_prior(m, n, 5, design=x, max_training=100, seed=23)
++    assert p["training_method"] == "conditional fitted per-sample means"
++    assert "uncertainty" in p["limitations"]
++    assert p["design_columns"] == 3
++
++
++@pytest.mark.parametrize("mode", ["shared", "group"])
++def test_estimated_dispersion_score_refits_and_preserves_swap(mode):
++    prior_module()
++    cs = importlib.import_module("epykit._count_score")
++    assert hasattr(cs, "test_counts"), "Estimated-dispersion score wrapper is missing"
++    m, n = counts(sites=20)
++    a = cs.test_counts(
++        m, n, design(), [0.0, 1.0], prior=simple_prior(), n_case=5, dispersion_mode=mode
++    )
++    order = np.r_[5:10, 0:5]
++    b = cs.test_counts(
++        m[:, order],
++        n[:, order],
++        design(),
++        [0.0, 1.0],
++        prior=simple_prior(),
++        n_case=5,
++        dispersion_mode=mode,
++    )
++    np.testing.assert_allclose(a["pvalue"], b["pvalue"], atol=1e-10, rtol=1e-7)
++    np.testing.assert_allclose(a["effect"], -b["effect"], atol=1e-8)
++    assert np.all(a["rho"] >= 0) and np.all(a["rho"] < 1)
++    assert np.all(a["rho_uncertainty"] >= 0)
++    assert np.all(a["dispersion_iterations"] <= 4)
++    assert "conditional" in a["reference"] and a["experimental"]
++
++
++def test_conditional_prior_mean_fits_are_bounded_before_training_selection(monkeypatch):
++    pm = prior_module()
++    cs = importlib.import_module("epykit._count_score")
++    m, n = counts(sites=300)
++    x = np.column_stack([design(), np.tile(np.arange(5), 2)])
++    observed = []
++    original = cs.fit_quasi_means
++
++    def capture(m, n, *args, **kwargs):
++        observed.append(len(m))
++        return original(m, n, *args, **kwargs)
++
++    monkeypatch.setattr(cs, "fit_quasi_means", capture)
++    pm.fit_dispersion_prior(m, n, 5, design=x, max_training=40, seed=12)
++    assert observed and max(observed) <= 40
++
++
++def test_group_specific_fit_uses_explicit_shared_fallback_for_low_support():
++    prior_module()
++    cs = importlib.import_module("epykit._count_score")
++    assert hasattr(cs, "test_counts"), "Estimated-dispersion score wrapper is missing"
++    m, n = counts(sites=3)
++    m[1, :4], n[1, :4] = 0, 0
++    r = cs.test_counts(
++        m, n, design(), [0.0, 1.0], prior=simple_prior(), n_case=5, dispersion_mode="group"
++    )
++    assert r["dispersion_fallback"][1]
++    assert r["rho_case"][1] == pytest.approx(r["rho_control"][1])
++
++
++@pytest.mark.parametrize("kwargs", [{"max_training": 0}, {"n_case": 0}, {"n_case": 10}])
++def test_invalid_training_configuration_is_refused(kwargs):
++    m, n = counts(sites=3)
++    options = dict(n_case=5, max_training=80)
++    options.update(kwargs)
++    with pytest.raises(ValueError):
++        prior_module().fit_dispersion_prior(m, n, **options)
+diff --git a/tests/test_count_score_engine.py b/tests/test_count_score_engine.py
+new file mode 100644
+index 0000000..4bac160
+--- /dev/null
++++ b/tests/test_count_score_engine.py
+@@ -0,0 +1,284 @@
++"""Actual block/store/API/CLI execution of the experimental count score."""
++
++import importlib
++import importlib.util
++from pathlib import Path
++
++import numpy as np
++import polars as pl
++import pytest
++from scipy.stats import false_discovery_control
++
++import epykit as ep
++from epykit.methyldata import MethylData
++
++
++def make_md(root, sites=80, samples=8, sparse=False):
++    root = Path(root)
++    rng = np.random.default_rng(713)
++    pos = np.arange(1, sites + 1, dtype=np.int32) * 10
++    ids = [f"s{i}" for i in range(samples)]
++    n = rng.integers(8, 61, size=(sites, samples))
++    m = rng.binomial(n, rng.beta(3, 7, size=n.shape))
++    if sparse:
++        n[:4, : samples // 2], m[:4, : samples // 2] = 0, 0
++    for i, sample in enumerate(ids):
++        p = root / f"sample={sample}" / "chrom=chr1"
++        p.mkdir(parents=True)
++        pl.DataFrame(
++            {"pos": pos, "strand": ["*"] * sites, "N_meth": m[:, i], "coverage": n[:, i]}
++        ).write_parquet(p / "part-0.parquet", row_group_size=4096)
++    obs = pl.DataFrame(
++        {
++            "sample_id": ids,
++            "treatment": [1] * (samples // 2) + [0] * (samples // 2),
++            "group": ["case"] * (samples // 2) + ["control"] * (samples // 2),
++            "donor": [f"d{i}" for i in range(samples // 2)] * 2,
++            "batch": ([0, 1] * (samples // 4)) * 2,
++        }
++    )
++    md = MethylData(obs=obs, store=str(root))
++    md.uns["unite"] = {"type": "union" if sparse else "intersect"}
++    return md, pos, m, n
++
++
++def run(md, **kwargs):
++    # Keep actual prior training and fitting, using a bounded test fixture.
++    return ep.tl.dmc(md, test="bb_score", score_prior_max_groups=80, tsv=False, **kwargs)
++
++
++@pytest.mark.parametrize(
++    "formula,contrast",
++    [
++        (None, None),
++        ("~ donor + group", "group"),
++        ("~ batch + group", "group"),
++        ("~ treatment + batch", np.array([0.0, 1.0, 0.0])),
++    ],
++)
++def test_public_api_uses_count_kernel_for_binary_and_nuisance_designs(
++    tmp_path, monkeypatch, formula, contrast
++):
++    assert importlib.util.find_spec("epykit._count_score_store") is not None, (
++        "Count store runner missing"
++    )
++    cs = importlib.import_module("epykit._count_score")
++    observed = []
++    original = cs.test_counts
++
++    def capture(*args, **kwargs):
++        observed.append(np.asarray(args[2]).shape[1])
++        return original(*args, **kwargs)
++
++    monkeypatch.setattr(cs, "test_counts", capture)
++    md, _, _, _ = make_md(tmp_path / "input")
++    run(md, formula=formula, contrast=contrast, score_ci=False, materialize=False)
++    assert observed and observed[0] >= 2
++    assert md.uns["dmc"]["test_used"] == "bb_score"
++    assert md.uns["dmc"]["last_key"] == "dmc_bb_score"
++    assert not md.uns["dmc"]["materialized"]
++    assert "dmc_glm_contrast" not in md.varm
++    assert md.uns["dmc"]["reference"] is None
++    assert md.uns["dmc"]["score_reference"] == "normal"
++    assert md.uns["dmc"]["inference_status"] == "experimental"
++    assert md.dmc_store.test == "bb_score"
++    result = md.dmc_store.read_chrom("chr1")
++    assert {
++        "score_stat",
++        "score_variance",
++        "rho",
++        "rho_uncertainty",
++        "score_valid_samples",
++        "score_converged",
++        "meth_diff_raw",
++        "interval_available",
++    }.issubset(result.columns)
++    assert result["meth_diff_ci_lo"].is_nan().all()
++    assert md.dmc_store._manifest["chroms"][0]["prior_sha256"]
++
++
++def test_block_loader_aligns_sparse_union_without_zero_methylation_substitution(tmp_path):
++    assert importlib.util.find_spec("epykit._count_blocks") is not None, "Count blocks missing"
++    blocks = importlib.import_module("epykit._count_blocks")
++    md, pos, m, n = make_md(tmp_path / "input", sites=37, sparse=True)
++    # Entire absent rows, not just zero depth records, must align properly.
++    path = Path(md.store) / "sample=s0/chrom=chr1/part-0.parquet"
++    frame = pl.read_parquet(path).filter(pl.col("pos") % 30 != 0)
++    frame.write_parquet(path)
++    expected_m, expected_n = m.copy(), n.copy()
++    expected_m[pos % 30 == 0, 0], expected_n[pos % 30 == 0, 0] = 0, 0
++    outputs = list(
++        blocks.iter_count_blocks(md.store, "chr1", md.obs["sample_id"].to_list(), pos, block_size=7)
++    )
++    assert max(len(p) for p, _, _ in outputs) <= 7
++    np.testing.assert_array_equal(np.concatenate([p for p, _, _ in outputs]), pos)
++    np.testing.assert_array_equal(np.vstack([a for _, a, _ in outputs]), expected_m)
++    np.testing.assert_array_equal(np.vstack([b for _, _, b in outputs]), expected_n)
++
++
++def test_duplicate_input_coordinates_are_refused(tmp_path):
++    assert importlib.util.find_spec("epykit._count_blocks") is not None, "Count blocks missing"
++    blocks = importlib.import_module("epykit._count_blocks")
++    md, pos, _, _ = make_md(tmp_path / "input", sites=20)
++    path = Path(md.store) / "sample=s0/chrom=chr1/part-0.parquet"
++    frame = pl.read_parquet(path)
++    pl.concat([frame.head(1), frame]).write_parquet(path)
++    with pytest.raises(ValueError, match="duplicate|strictly increasing"):
++        list(blocks.iter_count_blocks(md.store, "chr1", ["s0"], pos, block_size=7))
++
++
++def test_large_chromosome_fitting_is_bounded_and_chunk_invariant(tmp_path, monkeypatch):
++    assert importlib.util.find_spec("epykit._count_score_store") is not None, "Count store missing"
++    cs = importlib.import_module("epykit._count_score")
++    observed = []
++    original = cs.test_counts
++
++    def capture(m, n, *args, **kwargs):
++        observed.append(m.shape)
++        return original(m, n, *args, **kwargs)
++
++    monkeypatch.setattr(cs, "test_counts", capture)
++    md, _, _, _ = make_md(tmp_path / "input", sites=33001, samples=8)
++    run(md, score_ci=False, materialize=False, score_block_size=32768)
++    first = md.dmc_store
++    a = first.read_chrom("chr1")
++    assert sum(s[0] for s in observed) == 33001 and max(s[0] for s in observed) <= 32768
++    observed.clear()
++    run(md, score_ci=False, materialize=False, score_block_size=4096)
++    second = md.dmc_store
++    b = second.read_chrom("chr1")
++    assert max(s[0] for s in observed) <= 4096
++    for column in ("pvalue", "qvalue", "rho", "meth_diff"):
++        np.testing.assert_allclose(a[column], b[column], atol=1e-9, rtol=1e-7, equal_nan=True)
++    assert first.manifest["prior_sha256"] == second.manifest["prior_sha256"]
++
++
++def test_correction_retains_unestimable_sites_in_complete_family(tmp_path):
++    md, _, _, _ = make_md(tmp_path / "input", sites=80, sparse=True)
++    run(md, score_ci=False, materialize=False)
++    frame = md.dmc_store.read_chrom("chr1")
++    p = frame["pvalue"].to_numpy()
++    assert np.isnan(p[:4]).all()
++    expected = false_discovery_control(np.nan_to_num(p, nan=1.0), method="bh")
++    np.testing.assert_allclose(frame["qvalue"], expected, rtol=1e-10, atol=1e-12)
++    assert md.dmc_store.manifest["hypothesis_count"] == 80
++    assert md.dmc_store.manifest["untestable_sites"] >= 4
++
++
++def test_model_prior_eligibility_and_inference_parameters_invalidate_store_cache(
++    tmp_path, monkeypatch
++):
++    assert importlib.util.find_spec("epykit._count_score_store") is not None, "Count store missing"
++    prior_module = importlib.import_module("epykit._dispersion_prior")
++    md, _, _, _ = make_md(tmp_path / "input")
++    run(md, score_ci=False, materialize=False)
++    first = md.dmc_store.path
++    run(md, score_ci=False, materialize=False)
++    assert md.dmc_store.path == first and md.uns["dmc"]["resumed"]
++    run(md, score_ci=True, materialize=False)
++    assert md.dmc_store.path != first
++    run(md, score_ci=False, materialize=False, formula="~ treatment + batch", contrast="treatment")
++    assert md.dmc_store.path != first
++    run(md, score_ci=False, materialize=False, min_samples_treatment=3)
++    assert md.dmc_store.path != first
++    monkeypatch.setattr(prior_module, "ALGORITHM_REVISION", "changed-prior-revision")
++    run(md, score_ci=False, materialize=False)
++    assert md.dmc_store.path != first
++
++
++@pytest.mark.parametrize(
++    "kwargs",
++    [
++        {"score_block_size": 0},
++        {"score_block_size": 32769},
++        {"score_dispersion": "invalid"},
++        {"score_reference": "chi2"},
++        {"score_prior_max_groups": 0},
++        {"smoothing": True},
++        {"neighbour_combine": True},
++        {"sep_fallback": True},
++        {"empirical_fdr": True},
++        {"glm_backend": "gpu"},
++    ],
++)
++def test_invalid_score_requests_are_refused_before_output(tmp_path, kwargs):
++    from epykit._dmc_config import DMCConfig
++
++    with pytest.raises(ValueError, match="score|bb_score"):
++        DMCConfig(test="bb_score", **kwargs).validate()
++
++
++def test_cli_score_options_parse_and_execute_actual_engine(tmp_path):
++    from epykit.cli import build_parser
++
++    md, _, _, _ = make_md(tmp_path / "input")
++    sheet = tmp_path / "samples.csv"
++    md.obs.write_csv(sheet)
++    output = tmp_path / "out.parquet"
++    args = build_parser().parse_args(
++        [
++            "dmc",
++            "--methylstore",
++            md.store,
++            "--samplesheet",
++            str(sheet),
++            "--treatment-group",
++            "case",
++            "--control-group",
++            "control",
++            "--output",
++            str(output),
++            "--test",
++            "bb_score",
++            "--formula",
++            "~ donor + group",
++            "--contrast",
++            "group",
++            "--score-dispersion",
++            "group",
++            "--no-score-ci",
++            "--score-reference",
++            "normal",
++            "--score-block-size",
++            "32",
++            "--no-tsv",
++        ]
++    )
++    args.func(args)
++    assert output.is_file()
++    frame = pl.read_parquet(output)
++    assert "score_stat" in frame.columns and frame["meth_diff_ci_lo"].is_nan().all()
++
++
++def test_nonzero_contrast_null_is_refused_instead_of_ignored(tmp_path):
++    md, _, _, _ = make_md(tmp_path / "input")
++    with pytest.raises(ValueError, match="homogeneous"):
++        run(md, formula="~ treatment", contrast="treatment = 1")
++    assert "dmc" not in md.uns
++
++
++def test_registry_distinguishes_blockwise_store_dispatch():
++    from epykit._dmc_engines import engine_spec
++    from epykit.dmc import _ENGINE_RUNNERS
++
++    assert engine_spec("bb_score").blockwise_store
++    assert "bb_score" not in _ENGINE_RUNNERS
++
++
++def test_direct_process_api_accepts_score_and_bounded_controls(tmp_path):
++    from epykit.dmc import process_chromosomes_dmc
++
++    md, _, _, _ = make_md(tmp_path / "input")
++    store = process_chromosomes_dmc(
++        md.store,
++        md.treatment_ids,
++        md.control_ids,
++        test="bb_score",
++        score_ci=False,
++        score_prior_max_groups=80,
++        score_block_size=32,
++        return_store=True,
++        out_dir=tmp_path / "direct-output",
++    )
++    assert store.test == "bb_score" and store.path == tmp_path / "direct-output"
++    assert "score_stat" in store.read_chrom("chr1").columns
+diff --git a/tests/test_count_score_oracles.py b/tests/test_count_score_oracles.py
+new file mode 100644
+index 0000000..dc59c65
+--- /dev/null
++++ b/tests/test_count_score_oracles.py
+@@ -0,0 +1,178 @@
++"""Known-dispersion quasi-score checks derived independently of the kernel."""
++
++import importlib
++import importlib.util
++
++import numpy as np
++import pytest
++from scipy.special import expit
++from scipy.stats import norm
++
++
++def core():
++    assert importlib.util.find_spec("epykit._count_score") is not None, (
++        "Count-score kernel is missing"
++    )
++    return importlib.import_module("epykit._count_score")
++
++
++def design(n_case=3):
++    return np.column_stack([np.ones(2 * n_case), np.r_[np.ones(n_case), np.zeros(n_case)]])
++
++
++@pytest.mark.parametrize("rho", [0.0, 0.1, 0.4])
++def test_efficient_score_matches_hand_computed_binomial_inflation(rho):
++    m = np.array([[16, 15, 17, 4, 5, 3]])
++    n = np.full_like(m, 20)
++    r = core().test_score(m, n, design(), np.array([0.0, 1.0]), rho)
++    inflation = 1 + 19 * rho
++    # Null mu=.5; treatment score=18/inflation. Removing intercept
++    # information leaves 7.5/inflation, giving statistic 43.2/inflation.
++    np.testing.assert_allclose(r["score"], [18 / inflation], rtol=1e-8)
++    np.testing.assert_allclose(r["variance"], [7.5 / inflation], rtol=1e-8)
++    np.testing.assert_allclose(r["statistic"], [43.2 / inflation], rtol=1e-8)
++    np.testing.assert_allclose(r["pvalue"], [2 * norm.sf(np.sqrt(43.2 / inflation))], rtol=1e-8)
++    np.testing.assert_allclose(r["effect"], [0.6], atol=1e-7)
++    assert r["ci_lo"][0] < 0.6 < r["ci_hi"][0]
++
++
++def test_quasi_mean_uses_saturating_read_weights():
++    n = np.array([[5, 5, 5, 5, 100, 5, 5, 5, 5, 100]])
++    m = np.array([[1, 1, 1, 1, 90, 1, 1, 1, 1, 10]])
++    rho = 0.1
++    r = core().fit_quasi_means(m, n, design(5), rho)
++    weights = n[0] / (1 + (n[0] - 1) * rho)
++    np.testing.assert_allclose(r["effective_weights"][0], weights)
++    assert weights[4] / weights[0] == pytest.approx((100 / 10.9) / (5 / 1.4))
++    a = (4 / 1.4 + 90 / 10.9) / (20 / 1.4 + 100 / 10.9)
++    b = (4 / 1.4 + 10 / 10.9) / (20 / 1.4 + 100 / 10.9)
++    np.testing.assert_allclose(r["mu"][0], [a] * 5 + [b] * 5, atol=1e-8)
++    assert abs(a - m[0, :5].sum() / n[0, :5].sum()) > 0.25
++
++
++def test_donor_adjusted_mean_matches_weighted_statsmodels():
++    import statsmodels.api as sm
++
++    x = np.column_stack(
++        [np.ones(8), np.r_[np.ones(4), np.zeros(4)], np.tile(np.eye(4)[:, 1:], (2, 1))]
++    )
++    n = np.array([[10, 20, 30, 40, 15, 25, 35, 45]])
++    m = np.array([[8, 12, 21, 29, 4, 9, 14, 22]])
++    rho = 0.07
++    oracle = sm.GLM(
++        np.column_stack([m[0], n[0] - m[0]]),
++        x,
++        family=sm.families.Binomial(),
++        var_weights=1 / (1 + (n[0] - 1) * rho),
++    ).fit()
++    r = core().fit_quasi_means(m, n, x, rho)
++    np.testing.assert_allclose(r["coefficients"][0], oracle.params, atol=1e-7)
++    np.testing.assert_allclose(r["mu"][0], oracle.fittedvalues, atol=1e-8)
++
++
++def test_nuisance_adjusted_score_matches_independent_null_glm_projection():
++    import statsmodels.api as sm
++
++    group = np.r_[np.ones(4), np.zeros(4)]
++    batch = np.array([0.0, 1.0, 2.0, 1.0, 1.0, 0.0, 2.0, 0.0])
++    nuisance = np.column_stack([np.ones(8), batch])
++    x = np.column_stack([nuisance, group])
++    n = np.array([[10, 20, 30, 40, 15, 25, 35, 45]])
++    m = np.array([[8, 12, 21, 29, 4, 9, 14, 22]])
++    rho = np.array([0.05, 0.08, 0.06, 0.12, 0.04, 0.1, 0.09, 0.07])
++    d = 1 + (n[0] - 1) * rho
++    null = sm.GLM(
++        np.column_stack([m[0], n[0] - m[0]]),
++        nuisance,
++        family=sm.families.Binomial(),
++        var_weights=1 / d,
++    ).fit()
++    residual = (m[0] - n[0] * null.fittedvalues) / d
++    w = n[0] * null.fittedvalues * (1 - null.fittedvalues) / d
++    projection = np.linalg.solve(nuisance.T @ (w[:, None] * nuisance), nuisance.T @ (w * group))
++    adjusted = group - nuisance @ projection
++    expected_score = adjusted @ residual
++    expected_variance = np.sum(w * adjusted**2)
++    r = core().test_score(m, n, x, np.array([0.0, 0.0, 1.0]), rho)
++    np.testing.assert_allclose(r["score"], expected_score, atol=1e-8)
++    np.testing.assert_allclose(r["variance"], expected_variance, atol=1e-8)
++    np.testing.assert_allclose(
++        r["pvalue"], 2 * norm.sf(abs(expected_score) / np.sqrt(expected_variance)), rtol=1e-7
++    )
++
++
++def test_group_swap_preserves_p_and_reverses_response_effect():
++    m = np.array([[16, 12, 17, 4, 5, 7]])
++    n = np.array([[20, 18, 22, 19, 24, 20]])
++    a = core().test_score(m, n, design(), np.array([0.0, 1.0]), 0.08)
++    order = [3, 4, 5, 0, 1, 2]
++    b = core().test_score(m[:, order], n[:, order], design(), np.array([0.0, 1.0]), 0.08)
++    np.testing.assert_allclose(a["pvalue"], b["pvalue"], rtol=1e-7, atol=1e-12)
++    np.testing.assert_allclose(a["effect"], -b["effect"], atol=1e-8)
++
++
++def test_signed_and_scaled_treatment_contrast_preserves_observed_counterfactuals():
++    m, n = np.array([[16, 12, 17, 4, 5, 7]]), np.full((1, 6), 20)
++    positive = core().test_score(m, n, design(), [0.0, 1.0], 0.08)
++    negative = core().test_score(m, n, design(), [0.0, -1.0], 0.08)
++    scaled = core().test_score(m, n, design(), [0.0, 2.0], 0.08)
++    np.testing.assert_allclose(positive["pvalue"], negative["pvalue"], rtol=1e-10)
++    np.testing.assert_allclose(positive["pvalue"], scaled["pvalue"], rtol=1e-10)
++    np.testing.assert_allclose(positive["effect"], -negative["effect"], atol=1e-8)
++    np.testing.assert_allclose(positive["effect"], scaled["effect"], atol=1e-8)
++
++
++def test_local_missing_coverage_masks_unestimable_contrast():
++    n = np.array([[20] * 6, [0, 0, 0, 20, 20, 20]])
++    m = np.array([[16, 12, 17, 4, 5, 7], [0, 0, 0, 4, 5, 7]])
++    r = core().test_score(m, n, design(), np.array([0.0, 1.0]), 0.08)
++    assert np.isfinite(r["pvalue"][0])
++    assert np.isnan(r["pvalue"][1])
++    assert not r["estimable"][1]
++
++
++def test_zero_coverage_observation_equals_removing_that_row():
++    x = design()
++    m = np.array([[0, 12, 17, 4, 5, 7]])
++    n = np.array([[0, 18, 22, 19, 24, 20]])
++    a = core().test_score(m, n, x, np.array([0.0, 1.0]), 0.08)
++    b = core().test_score(m[:, 1:], n[:, 1:], x[1:], np.array([0.0, 1.0]), 0.08)
++    np.testing.assert_allclose(a["pvalue"], b["pvalue"], atol=1e-12)
++    np.testing.assert_allclose(a["effect"], b["effect"], atol=1e-8)
++
++
++def test_endpoint_groups_do_not_get_artificially_narrow_intervals():
++    m = np.array([[0] * 6, [20] * 6, [20, 20, 20, 0, 0, 0]])
++    n = np.full_like(m, 20)
++    r = core().test_score(m, n, design(), np.array([0.0, 1.0]), 0.1)
++    np.testing.assert_allclose(r["pvalue"][:2], [1.0, 1.0])
++    assert r["pvalue"][2] < 0.01
++    assert not r["interval_available"].any()
++    assert np.isnan(r["ci_lo"]).all() and np.isnan(r["ci_hi"]).all()
++
++
++@pytest.mark.parametrize(
++    "m,n,rho",
++    [([[2]], [[1]], 0.1), ([[0.5]], [[10]], 0.1), ([[0]], [[0]], 1.0), ([[0]], [[0]], -0.1)],
++)
++def test_invalid_count_or_dispersion_is_refused(m, n, rho):
++    with pytest.raises(ValueError):
++        core().fit_quasi_means(np.array(m), np.array(n), np.ones((1, 1)), rho)
++
++
++def test_aliased_design_and_zero_contrast_are_refused():
++    cs = core()
++    m, n = np.array([[1, 2, 3, 1, 2, 3]]), np.full((1, 6), 10)
++    with pytest.raises(ValueError, match="rank"):
++        cs.fit_quasi_means(m, n, np.ones((6, 2)), 0.1)
++    with pytest.raises(ValueError, match="contrast"):
++        cs.test_score(m, n, design(), np.zeros(2), 0.1)
++
++
++def test_high_depth_information_saturates_with_positive_rho():
++    n = np.full((1, 6), 1000000, dtype=np.int64)
++    m = np.array([[600000, 700000, 650000, 300000, 400000, 350000]])
++    fit = core().fit_quasi_means(m, n, design(), 0.1)
++    assert fit["effective_weights"].max() <= 10.0
++    r = core().test_score(m, n, design(), np.array([0.0, 1.0]), 0.1)
++    assert np.isfinite(r["pvalue"][0]) and r["pvalue"][0] > 0.001
+diff --git a/tests/test_dmc_engines.py b/tests/test_dmc_engines.py
+index e3ad716..bee9eb0 100644
+--- a/tests/test_dmc_engines.py
++++ b/tests/test_dmc_engines.py
+@@ -35,7 +35,7 @@ def _tree(md) -> list[Path]:
+ 
+ 
+ def test_public_engines_are_both_cli_choice_lists_in_order():
+-    assert PUBLIC_ENGINES == ("lr", "glm", "welch_t", "fisher", "beta_binomial")
++    assert PUBLIC_ENGINES == ("lr", "glm", "welch_t", "fisher", "beta_binomial", "bb_score")
+     assert set(ENGINES) == {*PUBLIC_ENGINES, "glm_contrast"}
+     parser = build_parser()
+     for command in ("dmc", "dmr"):
+diff --git a/tests/test_dmc_runners.py b/tests/test_dmc_runners.py
+index 1be0bf3..822ed13 100644
+--- a/tests/test_dmc_runners.py
++++ b/tests/test_dmc_runners.py
+@@ -28,7 +28,7 @@ from epykit.dmc import (
+ 
+ 
+ def test_runner_table_matches_the_registry():
+-    assert set(_ENGINE_RUNNERS) == set(ENGINES)
++    assert set(_ENGINE_RUNNERS) == {name for name,spec in ENGINES.items() if not spec.blockwise_store}
+ 
+ 
+ def _engine_input(md, test: str, joint: bool = False) -> EngineInput:
+diff --git a/tests/test_dmr_region_fdr_mode.py b/tests/test_dmr_region_fdr_mode.py
+index 65b6365..aba4eae 100644
+--- a/tests/test_dmr_region_fdr_mode.py
++++ b/tests/test_dmr_region_fdr_mode.py
+@@ -92,29 +92,11 @@ def test_max_t_is_the_default(monkeypatch):
+     assert np.all(np.isnan(implicit.get_column("empirical_fdr_set").to_numpy()))
+ 
+ 
+-def test_max_t_with_failed_and_empty_permutations_matches_main(monkeypatch):
+-    """One permutation raises, one yields zero survivors, three succeed.
+-    Main's max_t excluded both kinds from the denominator, so
+-    emp_p = (#successful perms with min null p <= p_obs + 1) / (3 + 1)."""
+-    script = [
+-        RuntimeError("engine blew up"),
+-        None,
+-        [0.5, 0.9],  # min 0.5
+-        [0.05, 0.7],  # min 0.05
+-        [0.001],  # min 0.001
+-    ]
+-    observed = _observed(pvalues=[0.01, 0.3, 1e-5])
++def test_max_t_with_failed_scan_refuses_inference(monkeypatch):
++    script = [RuntimeError("engine blew up"), None, [0.5, 0.9], [0.05], [0.001]]
+     monkeypatch.setattr(dmr_mod, "call_dmr_tile_based", _scripted_engine(script))
+-    implicit = _run(observed, n_perm=5)
+-    monkeypatch.setattr(dmr_mod, "call_dmr_tile_based", _scripted_engine(script))
+-    explicit = _run(observed, n_perm=5, fdr_method="max_t")
+-    assert implicit.equals(explicit)
+-
+-    emp_p = implicit.get_column("empirical_pvalue").to_numpy()
+-    # p_obs=0.01: one min null (0.001) <= it -> (1+1)/4; p_obs=0.3: two
+-    # (0.05, 0.001) -> (2+1)/4; p_obs=1e-5: none -> (0+1)/4.
+-    assert emp_p == pytest.approx([2 / 4, 3 / 4, 1 / 4])
+-    assert np.all(np.isnan(implicit.get_column("empirical_fdr_set").to_numpy()))
++    with pytest.raises(RuntimeError, match="Incomplete"):
++        _run(_observed(pvalues=[0.01, 0.3, 1e-5]), n_perm=5)
+ 
+ 
+ def test_max_t_does_not_exclude_self_or_mirror(monkeypatch):
+@@ -161,34 +143,25 @@ def test_region_mode_significant_where_maxt_saturates(monkeypatch):
+     assert out.get_column("empirical_fdr_set")[0] == pytest.approx(0.04, abs=1e-6)
+ 
+ 
+-def test_region_distinguishes_failed_empty_and_excluded(monkeypatch):
+-    """Failed runs and self/mirror assignments leave the null; a clean
+-    zero-survivor run stays as a zero contribution."""
+-    seen: list[bool] = []
+-
++def test_region_distinguishes_empty_and_excluded(monkeypatch):
++    seen = []
+     def fake(**kw):
+         is_self = set(kw["samples_treatment"]) in (set(_TREAT), set(_CTRL))
+         seen.append(is_self)
+         if is_self:
+-            # Would poison the null if counted: a decoy that beats every target.
+             return pl.DataFrame({"pvalue": [1e-12] * 100})
+-        idx = len(seen) - 1
+-        if idx % 3 == 1:
+-            raise RuntimeError("engine failure")
+-        if idx % 3 == 2:
++        if (len(seen)-1) % 2:
+             return pl.DataFrame({"pvalue": []}, schema={"pvalue": pl.Float64})
+         return pl.DataFrame({"pvalue": [0.5]})
+-
+     monkeypatch.setattr(dmr_mod, "call_dmr_tile_based", fake)
+     out = _run(_observed(pvalues=[0.01, 0.02]), n_perm=30, fdr_method="region")
+-    assert any(seen), "seed 0 draws no self/mirror assignment; adjust n_perm"
+-    non_self = [i for i, s in enumerate(seen) if not s]
+-    n_used = sum(1 for i in non_self if i % 3 != 1)
+-    n_with_null = sum(1 for i in non_self if i % 3 == 0)
+-    # Every usable null (0.5) is above both observed p-values: q = 0 and the
+-    # set-level FDR is the mean survivor count over the usable runs only.
+-    assert out.get_column("empirical_qvalue").to_numpy() == pytest.approx([0.0, 0.0])
+-    assert out.get_column("empirical_fdr_set")[0] == pytest.approx(n_with_null / n_used / 2)
++    n_used = sum(not x for x in seen)
++    n_with_null = sum(not x and i % 2 == 0 for i,x in enumerate(seen))
++    assert any(seen)
++    np.testing.assert_allclose(out["empirical_qvalue"].to_numpy(), [0., 0.])
++    assert out["empirical_fdr_set"][0] == pytest.approx(n_with_null/n_used/2)
++    assert out["empirical_n_perm_used"][0] == n_used
++    assert out["empirical_n_perm_requested"][0] == 30
+ 
+ 
+ def test_region_zero_usable_assignments_returns_nan_with_warning(monkeypatch):
+@@ -198,11 +171,8 @@ def test_region_zero_usable_assignments_returns_nan_with_warning(monkeypatch):
+         raise RuntimeError("no engine")
+ 
+     monkeypatch.setattr(dmr_mod, "call_dmr_tile_based", fake)
+-    with pytest.warns(UserWarning, match="undefined"):
+-        out = _run(_observed(pvalues=[0.01, 0.02]), n_perm=4, fdr_method="region")
+-    assert np.all(np.isnan(out.get_column("empirical_qvalue").to_numpy()))
+-    assert np.all(np.isnan(out.get_column("empirical_pvalue").to_numpy()))
+-    assert np.all(np.isnan(out.get_column("empirical_fdr_set").to_numpy()))
++    with pytest.raises(RuntimeError, match="Incomplete"):
++        _run(_observed(pvalues=[0.01, 0.02]), n_perm=4, fdr_method="region")
+ 
+ 
+ def test_region_preserves_nonfinite_observed_as_nan(monkeypatch):
+diff --git a/tests/test_engine_oracles.py b/tests/test_engine_oracles.py
+index 72e8b30..d2b342d 100644
+--- a/tests/test_engine_oracles.py
++++ b/tests/test_engine_oracles.py
+@@ -12,7 +12,7 @@ Oracles
+ * welch_t  -> scipy.stats.ttest_ind(equal_var=False) on the per-replicate betas
+ * lr       -> the 2x2 G-test (likelihood-ratio), scipy.stats.chi2_contingency
+               with lambda_="log-likelihood", at the dispersion-clamped (phi=1)
+-              regime where the adaptive reference is chi2(1)
++              regime using the explicit chi2(1) reference; adaptive remains F(1, residual df)
+ * glm      -> statsmodels GLM(Binomial): coefficient SE and the deviance-LR
+               statistic of full-vs-reduced
+ """
+@@ -56,7 +56,7 @@ def test_welch_t_matches_scipy_ttest_ind():
+ 
+ # --- lr quasi-binomial LRT vs the 2x2 G-test --------------------------------
+ 
+-def _score_p(meth_cov_case, meth_cov_ctrl):
++def _score_p(meth_cov_case, meth_cov_ctrl, reference="adaptive"):
+     """Build _score_finalize accumulators from per-replicate counts and return
+     the lr p-value at site 0."""
+     sn_c = np.array([sum(c for _, c in meth_cov_case)], dtype=np.float64)
+@@ -69,7 +69,7 @@ def _score_p(meth_cov_case, meth_cov_ctrl):
+     nv_k = np.array([len(meth_cov_ctrl)], dtype=np.int32)
+     out = _score_finalize(
+         sn_c, sm_c, s2_c, nv_c, sn_k, sm_k, s2_k, nv_k,
+-        dispersion="site", statistic="lr", reference="adaptive",
++        dispersion="site", statistic="lr", reference=reference,
+     )
+     pvals, _log2or, _pc, _pk, _phi_hat, phi_eff, _df_phi = out
+     return float(pvals[0]), float(phi_eff[0])
+@@ -77,18 +77,20 @@ def _score_p(meth_cov_case, meth_cov_ctrl):
+ 
+ def test_lr_matches_g_test_at_unit_dispersion():
+     # Identical replicates within each group -> zero between-replicate
+-    # variance -> per-site dispersion clamps to phi=1 -> adaptive reference is
+-    # chi2(1), so the lr statistic is exactly the 2x2 G-test (LRT).
++    # variance -> per-site dispersion clamps to phi=1. The explicit chi2
++    # reference matches the 2x2 G-test; adaptive retains estimated-scale df.
+     case = [(8, 10), (8, 10), (8, 10)]   # pooled 24 / 30
+     ctrl = [(2, 10), (2, 10), (2, 10)]   # pooled  6 / 30
+-    p_epykit, phi_eff = _score_p(case, ctrl)
++    p_epykit, phi_eff = _score_p(case, ctrl, reference="chi2")
+     assert phi_eff == pytest.approx(1.0), "fixture must clamp dispersion to 1"
+ 
+     table = [[24, 6], [6, 24]]  # [meth, unmeth] x [case, ctrl]
+-    _g, p_gtest, _dof, _exp = sp_stats.chi2_contingency(
++    g, p_gtest, _dof, _exp = sp_stats.chi2_contingency(
+         table, lambda_="log-likelihood", correction=False
+     )
+     assert np.isclose(p_epykit, p_gtest, rtol=1e-9, atol=1e-12)
++    p_adaptive, _ = _score_p(case, ctrl)
++    assert np.isclose(p_adaptive, sp_stats.f.sf(g, 1, 4), rtol=1e-9, atol=1e-12)
+ 
+ 
+ def test_lr_null_table_is_nonsignificant():
+diff --git a/tests/test_statistical_contracts.py b/tests/test_statistical_contracts.py
+new file mode 100644
+index 0000000..d282b54
+--- /dev/null
++++ b/tests/test_statistical_contracts.py
+@@ -0,0 +1,70 @@
++"""Regression checks for dropped extreme evidence and incomplete null scans."""
++import numpy as np
++import pytest
++
++from epykit import dmr
++from types import SimpleNamespace
++
++
++def test_zero_tail_is_retained():
++    p = dmr._stouffer_combine_signed(np.array([0., .5]), np.ones(2))
++    assert np.isfinite(p) and p < 1e-100
++    assert np.isfinite(dmr._stouffer_combine_signed(np.zeros(2), np.ones(2)))
++
++
++def test_invalid_probabilities_and_effects_are_excluded():
++    assert np.isnan(dmr._stouffer_combine_signed(
++        np.array([np.nan, -.1, 1.1, np.inf]), np.ones(4)))
++    assert dmr._stouffer_combine_signed(
++        np.array([.5, 1e-20]), np.array([1., np.inf])) == pytest.approx(.5)
++
++
++def test_invalid_weights_do_not_add_evidence():
++    assert dmr._stouffer_combine_signed(
++        np.array([.5, 1e-20]), np.ones(2), np.array([1., np.nan])) == pytest.approx(.5)
++    assert np.isnan(dmr._stouffer_combine_signed(
++        np.array([.5, .5]), np.ones(2), np.array([-1., np.inf])))
++
++
++@pytest.mark.parametrize('results,n_perm', [([(False, None)], 1), ([], 1)])
++def test_region_count_ratio_refuses_failed_or_missing_scan(results, n_perm):
++    with pytest.raises(RuntimeError, match='Incomplete'):
++        dmr._aggregate_region_perm_results(observed_pvalues=np.array([.01]),
++            results=results, n_perm=n_perm, fdr_method='region')
++
++
++def test_clean_empty_and_self_scans_keep_their_distinct_contracts():
++    p, q, set_fdr = dmr._aggregate_region_perm_results(
++        observed_pvalues=np.array([.01, .02]),
++        results=[(False, np.array([.005])), (False, np.array([])),
++                 (True, np.array([1e-9]))], n_perm=3, fdr_method='region')
++    np.testing.assert_allclose(q, [.25, .25])
++    assert set_fdr == pytest.approx(.25)
++
++
++def test_permutation_diagnostics_report_used_scans_and_uncertainty():
++    assert hasattr(dmr, '_region_permutation_diagnostics')
++    result = dmr._region_permutation_diagnostics(
++        np.array([.01, .02, .03, .04]),
++        [(False, np.array([])), (False, np.full(4, .1)),
++         (False, np.full(8, .1)), (True, np.array([1e-9]))], 'region')
++    assert result['empirical_n_perm_requested'] == 4
++    assert result['empirical_n_perm_used'] == 3
++    assert result['empirical_null_regions'] == 12
++    assert result['empirical_fdr_set_mc_se'] == pytest.approx(1/np.sqrt(3))
++    assert result['empirical_inference'] == 'count-ratio estimate; not a finite-sample FDR guarantee'
++
++
++def test_invalid_null_scores_cannot_disappear_from_region_pool():
++    with pytest.raises(ValueError, match='Invalid'):
++        dmr._aggregate_region_perm_results(observed_pvalues=np.array([.01]),
++            results=[(False, np.array([np.nan]))], n_perm=1, fdr_method='region')
++
++
++def test_changed_regional_score_invalidates_both_caches(monkeypatch):
++    store = SimpleNamespace(manifest={'input_sig': 'same-count-data'})
++    sliding = lambda: dmr._dmr_sliding_cache_key(store, 500, 5, 3, .05, .1, 'pvalue')
++    chain = lambda: dmr._dmr_chain_merge_cache_key(store, .05, .1, 500, 5, .5, 50, 'pvalue')
++    old = sliding(), chain()
++    monkeypatch.setattr(dmr, 'REGIONAL_SCORE_REVISION', 'different-score', raising=False)
++    assert (sliding(), chain()) != old

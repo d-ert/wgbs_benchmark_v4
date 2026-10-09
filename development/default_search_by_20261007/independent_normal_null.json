@@ -1,0 +1,16 @@
+{
+  "seed": 2026100719,
+  "model": "Independent standard normal signed site scores, 1000 CpGs; ideal calibrated-site diagnostic, not biological validation",
+  "results": {
+    "original": {
+      "trials": 500,
+      "trials_with_false_calls": 12,
+      "total_false_calls": 12
+    },
+    "revised": {
+      "trials": 500,
+      "trials_with_false_calls": 0,
+      "total_false_calls": 0
+    }
+  }
+}

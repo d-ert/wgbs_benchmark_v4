@@ -1,0 +1,196 @@
+{
+  "status": "verified",
+  "timings": [
+    {
+      "tool": "epykit_original",
+      "dataset": "genome_autosomes_signal",
+      "read_filter_s": 184.09496547840536,
+      "dml_s": 112.05783570930362,
+      "dmr_s": 73.9518907405436
+    },
+    {
+      "tool": "epykit_original",
+      "dataset": "genome_autosomes_null",
+      "read_filter_s": 177.17508348450065,
+      "dml_s": 109.59606346487999,
+      "dmr_s": 75.67751408740878
+    },
+    {
+      "tool": "epykit_original",
+      "dataset": "real",
+      "read_filter_s": 90.36679380573332,
+      "dml_s": 143.68778448924422,
+      "dmr_s": 20.740707010030746
+    },
+    {
+      "tool": "epykit_region_fix",
+      "dataset": "genome_autosomes_signal",
+      "read_filter_s": 181.8424259312451,
+      "dml_s": 113.90399467200041,
+      "dmr_s": 79.2113289795816
+    },
+    {
+      "tool": "epykit_region_fix",
+      "dataset": "genome_autosomes_null",
+      "read_filter_s": 182.56818961910903,
+      "dml_s": 113.89723833277822,
+      "dmr_s": 75.93920401111245
+    },
+    {
+      "tool": "epykit_region_fix",
+      "dataset": "real",
+      "read_filter_s": 73.8652885556221,
+      "dml_s": 151.35412628389895,
+      "dmr_s": 21.413706628605723
+    },
+    {
+      "tool": "epykit_beta_binomial",
+      "dataset": "genome_autosomes_signal",
+      "read_filter_s": 182.47800037637353,
+      "dml_s": 3319.1707101128995,
+      "dmr_s": 36.251517532393336
+    },
+    {
+      "tool": "epykit_beta_binomial",
+      "dataset": "genome_autosomes_null",
+      "read_filter_s": 176.5415097475052,
+      "dml_s": 3139.1297953277826,
+      "dmr_s": 32.939111372455955
+    },
+    {
+      "tool": "epykit_beta_binomial",
+      "dataset": "real",
+      "read_filter_s": 70.31584880314767,
+      "dml_s": 2394.3888952173293,
+      "dmr_s": 21.647937059402466
+    }
+  ],
+  "tails": [
+    {
+      "tool": "epykit_region_fix",
+      "dataset": "genome_autosomes_signal",
+      "sites": 16070989,
+      "min_p": 4.808368622996216e-17,
+      "min_q": 7.727523924811734e-10,
+      "bh_calls": 398,
+      "p_zero": 0,
+      "p_below_0.05": 967670,
+      "p_below_0.001": 28015,
+      "p_below_1e-05": 1083,
+      "p_below_1e-07": 139
+    },
+    {
+      "tool": "epykit_region_fix",
+      "dataset": "genome_autosomes_null",
+      "sites": 16070397,
+      "min_p": 1.1115111602606175e-11,
+      "min_q": 0.00011315064284921352,
+      "bh_calls": 239,
+      "p_zero": 0,
+      "p_below_0.05": 949604,
+      "p_below_0.001": 25160,
+      "p_below_1e-05": 970,
+      "p_below_1e-07": 77
+    },
+    {
+      "tool": "epykit_region_fix",
+      "dataset": "real",
+      "sites": 21790268,
+      "min_p": 3.632695541654435e-12,
+      "min_q": 7.91574094150553e-05,
+      "bh_calls": 1,
+      "p_zero": 0,
+      "p_below_0.05": 713897,
+      "p_below_0.001": 4590,
+      "p_below_1e-05": 139,
+      "p_below_1e-07": 9
+    },
+    {
+      "tool": "epykit_beta_binomial",
+      "dataset": "genome_autosomes_signal",
+      "sites": 16070989,
+      "min_p": 2.2425226568922552e-05,
+      "min_q": 0.93744948349003,
+      "bh_calls": 0,
+      "p_zero": 0,
+      "p_below_0.05": 634767,
+      "p_below_0.001": 1369,
+      "p_below_1e-05": 0,
+      "p_below_1e-07": 0
+    },
+    {
+      "tool": "epykit_beta_binomial",
+      "dataset": "genome_autosomes_null",
+      "sites": 16070397,
+      "min_p": 1.0466773623738775e-05,
+      "min_q": 0.9391388137745371,
+      "bh_calls": 0,
+      "p_zero": 0,
+      "p_below_0.05": 622696,
+      "p_below_0.001": 1019,
+      "p_below_1e-05": 0,
+      "p_below_1e-07": 0
+    },
+    {
+      "tool": "epykit_beta_binomial",
+      "dataset": "real",
+      "sites": 21790268,
+      "min_p": 3.068603375443767e-06,
+      "min_q": 0.9618244561611419,
+      "bh_calls": 0,
+      "p_zero": 0,
+      "p_below_0.05": 622984,
+      "p_below_0.001": 958,
+      "p_below_1e-05": 12,
+      "p_below_1e-07": 0
+    }
+  ],
+  "search_families": [
+    {
+      "dataset": "genome_autosomes_signal",
+      "family_size": 776121901,
+      "harmonic": 21.04703582027361,
+      "candidates": 10785,
+      "calls": 980
+    },
+    {
+      "dataset": "genome_autosomes_null",
+      "family_size": 773337755,
+      "harmonic": 21.04344211716067,
+      "candidates": 9274,
+      "calls": 0
+    },
+    {
+      "dataset": "real",
+      "family_size": 2764516062,
+      "harmonic": 22.31734709890002,
+      "candidates": 789,
+      "calls": 56
+    }
+  ],
+  "geometry_summary": {
+    "truth_regions": 2893,
+    "fewer_than_5_eligible_cpgs": 369,
+    "eligible_span_below_50bp": 156
+  },
+  "byte_equality": [
+    {
+      "dataset": "genome_autosomes_signal",
+      "original_sha256": "b2cfa576d002e801555b8943d1ace1deb07caa43fad420e2f0b4834d8daaacdd",
+      "revised_sha256": "b2cfa576d002e801555b8943d1ace1deb07caa43fad420e2f0b4834d8daaacdd",
+      "identical": true
+    },
+    {
+      "dataset": "genome_autosomes_null",
+      "original_sha256": "a45b0fe67230cd747cf3b678f4413a855a6188b403933a84b2bcadcc679b480f",
+      "revised_sha256": "a45b0fe67230cd747cf3b678f4413a855a6188b403933a84b2bcadcc679b480f",
+      "identical": true
+    },
+    {
+      "dataset": "real",
+      "original_sha256": "b33b3b0d1fd36bf2fba1575683c15490f18bc76a139c0826b1edf3ec8efb38af",
+      "revised_sha256": "b33b3b0d1fd36bf2fba1575683c15490f18bc76a139c0826b1edf3ec8efb38af",
+      "identical": true
+    }
+  ]
+}

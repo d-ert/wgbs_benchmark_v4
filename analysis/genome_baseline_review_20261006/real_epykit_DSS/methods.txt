@@ -1,0 +1,6 @@
+Genome build: hg19/GRCh37; gene model: TxDb.Hsapiens.UCSC.hg19.knownGene.
+Promoter: 2 kb upstream and 500 bp downstream of each gene TSS; gene body uses gene boundaries.
+DMR matches: >=50% reciprocal base-pair overlap, greedy one-to-one by interval Jaccard.
+Gene concordance: Jaccard of Entrez gene IDs touched by promoter or gene body DMRs.
+These descriptive overlaps do not estimate biological truth, FDR, or independent replication.
+Only default tool directories are compared; exploratory epykit profiles are excluded.

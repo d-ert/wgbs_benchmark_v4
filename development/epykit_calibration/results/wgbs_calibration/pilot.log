@@ -1,0 +1,15 @@
+/scratch/epykit-calibration/benchmark/scripts/pilot_wgbs_region_calibration.py:37: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+  ep.tl.dmc(md,test='lr',dispersion='eb',reference='adaptive',backend='sequential',smoothing=False,chromosomes=['chr22'])
+signal observed candidates 98
+signal complete
+/scratch/epykit-calibration/benchmark/scripts/pilot_wgbs_region_calibration.py:37: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+  ep.tl.dmc(md,test='lr',dispersion='eb',reference='adaptive',backend='sequential',smoothing=False,chromosomes=['chr22'])
+null observed candidates 47
+null complete
+dataset     method  called_regions  matched_regions  region_precision  region_recall  region_f1
+ signal asymptotic              98               28          0.285714       0.444444   0.347826
+ signal     region              33               25          0.757576       0.396825   0.520833
+ signal      max_t               8                8          1.000000       0.126984   0.225352
+   null asymptotic              47                0          0.000000            NaN   0.000000
+   null     region               0                0               NaN            NaN        NaN
+   null      max_t               0                0               NaN            NaN        NaN

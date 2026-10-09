@@ -1,0 +1,12 @@
+Checking original input and harness hashes...
+Registered S3 methods overwritten by 'backports':
+  method                    from 
+  as.character.Rconcordance tools
+  print.Rconcordance        tools
+Setting options('download.file.method.GEOquery'='auto')
+Setting options('GEOquery.inmemory.gpl'=FALSE)
+
+R dependencies OK
+Running epykit on both full simulations...
+Running epykit on all twelve GSE64177 samples...
+Complete: /scratch/wgbs_benchmark_v4/results/default_search_by_20261007

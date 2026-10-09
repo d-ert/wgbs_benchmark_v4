@@ -1,0 +1,4 @@
+direction,total,median_length_bp,below_50bp,fewer_than_5_cpgs,length_ge50_and_cpg_ge5
+all,3271,119.0,746,2479,733
+hypo,1714,142.0,327,1222,465
+hyper,1557,100.0,419,1257,268

@@ -1,0 +1,9 @@
+{
+  "status": "verified",
+  "scope": "first 5000 coverage rows per real sample; same 12 sample labels",
+  "byte_identical_tables": [
+    "dml.tsv",
+    "dmr.tsv",
+    "dmr_candidates.tsv"
+  ]
+}

@@ -1,0 +1,29 @@
+Validated clone16: 23,225,501 CpGs
+Validated clone20: 24,551,348 CpGs
+Validated clone21: 23,834,222 CpGs
+Validated Sbp009_1: 23,843,979 CpGs
+Validated Sbp009_2: 23,850,936 CpGs
+Validated Sbp009_3: 24,069,112 CpGs
+Dataset prepared and verified
+Starting DSS (paper_aligned), no memory/time cap
+DSS: ok
+tool  calls  one_to_one_matches  one_to_one_precision  one_to_one_recall
+ DSS    922                 659              0.714751           0.810578
+Starting epykit (paper_aligned), no memory/time cap
+epykit: ok
+  tool  calls  one_to_one_matches  one_to_one_precision  one_to_one_recall
+   DSS    922                 659              0.714751           0.810578
+epykit     51                  15              0.294118           0.018450
+Starting DMRcate (paper_aligned), no memory/time cap
+DMRcate: ok
+   tool  calls  one_to_one_matches  one_to_one_precision  one_to_one_recall
+    DSS    922                 659              0.714751           0.810578
+ epykit     51                  15              0.294118           0.018450
+DMRcate    223                  27              0.121076           0.033210
+Starting BSmooth (paper_aligned), no memory/time cap
+BSmooth: failed
+   tool  calls  one_to_one_matches  one_to_one_precision  one_to_one_recall
+    DSS    922                 659              0.714751           0.810578
+ epykit     51                  15              0.294118           0.018450
+DMRcate    223                  27              0.121076           0.033210
+Starting methylKit (paper_aligned), no memory/time cap

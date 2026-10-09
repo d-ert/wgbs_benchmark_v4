@@ -1,0 +1,90 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+__ test_boundary_site_does_not_borrow_chromosome_residual_degrees_of_freedom ___
+
+    def test_boundary_site_does_not_borrow_chromosome_residual_degrees_of_freedom():
+        small = _boundary_site(100)
+        large = _boundary_site(1000)
+        # Adding identical background leaves the learned scale and prior weight
+        # unchanged; it cannot turn a five-vs-five test into thousands of replicates.
+>       np.testing.assert_allclose(small[-1][0], large[-1][0])
+
+tests/test_default_eb_uncertainty.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<function assert_allclose.<locals>.compare at 0x7747ccfe7400>, array(800.), array(8000.))
+kwds = {'equal_nan': True, 'err_msg': '', 'header': 'Not equal to tolerance rtol=1e-07, atol=0', 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Not equal to tolerance rtol=1e-07, atol=0
+E           
+E           Mismatched elements: 1 / 1 (100%)
+E           Max absolute difference: 7200.
+E           Max relative difference: 0.9
+E            x: array(800.)
+E            y: array(8000.)
+
+/usr/lib/python3.10/contextlib.py:79: AssertionError
+_________ test_one_informative_group_contributes_only_its_residual_df __________
+
+    def test_one_informative_group_contributes_only_its_residual_df():
+        # Identical background gives the implementation's fixed prior weight=4.
+        # Only the five case replicates contribute an estimable Pearson residual.
+        result = _boundary_site(100)
+>       assert result[-1][0] == 4 + 4
+E       assert 800.0 == (4 + 4)
+
+tests/test_default_eb_uncertainty.py:33: AssertionError
+____________ test_no_informative_group_uses_prior_uncertainty_only _____________
+
+    def test_no_informative_group_uses_prior_uncertainty_only():
+        background = np.tile([3,4,5,6,7], (100,1))
+        case = np.vstack([[20]*5,background])
+        control = np.vstack([[0]*5,background])
+        result = _score_finalize(*_group(case), *_group(control), dispersion='eb')
+>       assert result[-1][0] == 4
+E       assert 800.0 == 4
+
+tests/test_default_eb_uncertainty.py:42: AssertionError
+______ test_informative_boundary_group_retains_its_large_pearson_variance ______
+
+    def test_informative_boundary_group_retains_its_large_pearson_variance():
+        background = np.tile([3,4,5,6,7], (100,1))
+        case = np.vstack([[0,0,0,0,15],background])
+        control = np.vstack([[0]*5,background])
+        result = _score_finalize(*_group(case), *_group(control), dispersion='eb')
+        # Q=(225/20 - 15**2/100)/(.15*.85), df=4, prior scale=1, weight=4.
+        q = 9 / (.15*.85)
+        expected_scale = (q + 4) / 8
+>       np.testing.assert_allclose(result[5][0], expected_scale)
+
+tests/test_default_eb_uncertainty.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<function assert_allclose.<locals>.compare at 0x7747bf4d9630>, array(1.), array(9.32352941))
+kwds = {'equal_nan': True, 'err_msg': '', 'header': 'Not equal to tolerance rtol=1e-07, atol=0', 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Not equal to tolerance rtol=1e-07, atol=0
+E           
+E           Mismatched elements: 1 / 1 (100%)
+E           Max absolute difference: 8.32352941
+E           Max relative difference: 0.89274448
+E            x: array(1.)
+E            y: array(9.323529)
+
+/usr/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_default_eb_uncertainty.py::test_boundary_site_does_not_borrow_chromosome_residual_degrees_of_freedom
+FAILED tests/test_default_eb_uncertainty.py::test_one_informative_group_contributes_only_its_residual_df
+FAILED tests/test_default_eb_uncertainty.py::test_no_informative_group_uses_prior_uncertainty_only
+FAILED tests/test_default_eb_uncertainty.py::test_informative_boundary_group_retains_its_large_pearson_variance
+4 failed in 0.24s

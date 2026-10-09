@@ -1,0 +1,129 @@
+Complete benchmark confirmed; analyzing all tool comparisons...
+Held-out figures written to /scratch/wgbs_benchmark_v4/development/beta_binomial_20261007/holdout_v3
+  24 genes were dropped because they have exons located on both strands of the
+  same reference sequence or on more than one reference sequence, so cannot be
+  represented by a single genomic range.
+  Use 'single.strand.genes.only=FALSE' to get all the genes in a GRangesList
+  object, or use suppressMessages() to suppress this message.
+'select()' returned 1:1 mapping between keys and columns
+Warning message:
+In `[.data.table`(support, , `:=`(n_tools, rowSums(.SD)), .SDcols = tools) :
+  A shallow copy of this data.table was taken so that := can add or remove 1 columns by reference. At an earlier point, this data.table was copied by R (or was created manually using structure() or similar). Avoid names<- and attr<- which in R currently (and oddly) may copy the whole data.table. Use set* syntax instead to avoid copying: ?set, ?setnames and ?setattr. It's also not unusual for data.table-agnostic packages to produce tables affected by this issue. If this message doesn't help, please report your use case to the data.table issue tracker so the root cause can be fixed or this message improved.
+Warning message:
+In .merge_two_Seqinfo_objects(x, y) :
+  Each of the 2 combined objects has sequence levels not in the other:
+  - in 'x': chr13, chr14, chr3
+  - in 'y': chrX
+  Make sure to always combine/compare objects based on the same reference
+  genome (use suppressWarnings() to suppress this warning).
+/scratch/wgbs_benchmark_v4/development/beta_binomial_20261007/analyze.py:163: UserWarning: Pandas requires version '3.0.5' or newer of 'xlsxwriter' (version '1.4.5' currently installed).
+  with pd.ExcelWriter(out/'comparison.xlsx') as writer:
+                dataset                 tool matching  called_regions  matched_regions  region_precision  region_recall  region_f1    runtime_s  peak_rss_gib
+genome_autosomes_signal      epykit_original      dmr            3623             1202          0.331769       0.415486   0.368938   370.962971      6.108704
+genome_autosomes_signal      epykit_original   dmr_80            3623              689          0.190174       0.238161   0.211479   370.962971      6.108704
+genome_autosomes_signal    epykit_region_fix      dmr             980              891          0.909184       0.307985   0.460108   375.908535      6.144253
+genome_autosomes_signal    epykit_region_fix   dmr_80             980              587          0.598980       0.202904   0.303124   375.908535      6.144253
+genome_autosomes_signal epykit_beta_binomial      dmr             853              779          0.913247       0.269271   0.415910  3539.102254      6.133255
+genome_autosomes_signal epykit_beta_binomial   dmr_80             853              558          0.654162       0.192879   0.297918  3539.102254      6.133255
+genome_autosomes_signal                  DSS      dmr            1816             1020          0.561674       0.352575   0.433213  3010.682573     22.403843
+genome_autosomes_signal                  DSS   dmr_80            1816              363          0.199890       0.125475   0.154173  3010.682573     22.403843
+genome_autosomes_signal            methylKit      dmr            4315              513          0.118888       0.177325   0.142342 10733.258473     35.595623
+genome_autosomes_signal            methylKit   dmr_80            4315              136          0.031518       0.047010   0.037736 10733.258473     35.595623
+genome_autosomes_signal              BSmooth      dmr            1300              547          0.420769       0.189077   0.260911  7640.582038     17.572758
+genome_autosomes_signal              BSmooth   dmr_80            1300              189          0.145385       0.065330   0.090150  7640.582038     17.572758
+genome_autosomes_signal               dmrseq      dmr            1448             1213          0.837707       0.419288   0.558857 29105.360476     11.619980
+genome_autosomes_signal               dmrseq   dmr_80            1448              407          0.281077       0.140684   0.187514 29105.360476     11.619980
+genome_autosomes_signal              DMRcate      dmr               1                0          0.000000       0.000000   0.000000   660.842335     32.052563
+genome_autosomes_signal              DMRcate   dmr_80               1                0          0.000000       0.000000   0.000000   660.842335     32.052563
+  genome_autosomes_null      epykit_original      dmr            1869                0          0.000000            NaN   0.000000   363.431200      6.121384
+  genome_autosomes_null      epykit_original   dmr_80            1869                0          0.000000            NaN   0.000000   363.431200      6.121384
+  genome_autosomes_null    epykit_region_fix      dmr               0                0               NaN            NaN        NaN   373.348503      6.120346
+  genome_autosomes_null    epykit_region_fix   dmr_80               0                0               NaN            NaN        NaN   373.348503      6.120346
+  genome_autosomes_null epykit_beta_binomial      dmr               0                0               NaN            NaN        NaN  3349.759933      6.104877
+  genome_autosomes_null epykit_beta_binomial   dmr_80               0                0               NaN            NaN        NaN  3349.759933      6.104877
+  genome_autosomes_null                  DSS      dmr              73                0          0.000000            NaN   0.000000  2990.866666     22.464417
+  genome_autosomes_null                  DSS   dmr_80              73                0          0.000000            NaN   0.000000  2990.866666     22.464417
+  genome_autosomes_null            methylKit      dmr            3047                0          0.000000            NaN   0.000000 10765.614854     35.539108
+  genome_autosomes_null            methylKit   dmr_80            3047                0          0.000000            NaN   0.000000 10765.614854     35.539108
+  genome_autosomes_null              BSmooth      dmr             193                0          0.000000            NaN   0.000000  7657.542863     16.770405
+  genome_autosomes_null              BSmooth   dmr_80             193                0          0.000000            NaN   0.000000  7657.542863     16.770405
+  genome_autosomes_null               dmrseq      dmr               0                0               NaN            NaN        NaN 28849.983259     11.552441
+  genome_autosomes_null               dmrseq   dmr_80               0                0               NaN            NaN        NaN 28849.983259     11.552441
+  genome_autosomes_null              DMRcate      dmr               0                0               NaN            NaN        NaN   656.887604     31.987862
+  genome_autosomes_null              DMRcate   dmr_80               0                0               NaN            NaN        NaN   656.887604     31.987862
+                tool  reciprocal_threshold  calls  paper_total  calls_overlapping_paper  caller_overlap_fraction  paper_regions_covered  one_to_one_matches  discordant_pairs
+     epykit_original                   0.0    431         3271                      158                 0.366589                    160                 158                 0
+     epykit_original                   0.5    431         3271                       99                 0.229698                     99                  99                 0
+     epykit_original                   0.8    431         3271                       30                 0.069606                     30                  30                 0
+   epykit_region_fix                   0.0     56         3271                       52                 0.928571                     53                  52                 0
+   epykit_region_fix                   0.5     56         3271                       39                 0.696429                     39                  39                 0
+   epykit_region_fix                   0.8     56         3271                       10                 0.178571                     10                  10                 0
+epykit_beta_binomial                   0.0     48         3271                       46                 0.958333                     47                  46                 0
+epykit_beta_binomial                   0.5     48         3271                       35                 0.729167                     35                  35                 0
+epykit_beta_binomial                   0.8     48         3271                        8                 0.166667                      8                   8                 0
+                 DSS                   0.0    253         3271                      180                 0.711462                    180                 179                 0
+                 DSS                   0.5    253         3271                      130                 0.513834                    130                 130                 0
+                 DSS                   0.8    253         3271                       60                 0.237154                     60                  60                 0
+Independent GenomicRanges paper-overlap counts passed for all four call sets and all thresholds.
+{
+  "status": "verified",
+  "datasets": [
+    {
+      "dataset": "genome_autosomes_signal",
+      "cpg": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 34889,
+        "tn": 16036100,
+        "n_eligible": 16070989,
+        "n_truth": 54619,
+        "n_scored": 15950516
+      },
+      "average_precision": 0.05987984723739322,
+      "regions": {
+        "dmr": {
+          "called": 853,
+          "true": 2893,
+          "matched": 779
+        },
+        "dmr_80": {
+          "called": 853,
+          "true": 2893,
+          "matched": 558
+        }
+      },
+      "bh_max_absolute_difference": 4.440892098500626e-16,
+      "scorer_functions_called": false
+    },
+    {
+      "dataset": "genome_autosomes_null",
+      "cpg": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 0,
+        "tn": 16070397,
+        "n_eligible": 16070397,
+        "n_truth": 0,
+        "n_scored": 15949185
+      },
+      "average_precision": null,
+      "regions": {
+        "dmr": {
+          "called": 0,
+          "true": 0,
+          "matched": 0
+        },
+        "dmr_80": {
+          "called": 0,
+          "true": 0,
+          "matched": 0
+        }
+      },
+      "bh_max_absolute_difference": 4.440892098500626e-16,
+      "scorer_functions_called": false
+    }
+  ],
+  "validator_sha256": "52376a0e8dbfc720436160bca0d1685ce59a8ba8f17f6fe998e65cb04ee2039c"
+}
+The experimental beta-binomial engine has region precision 91.3%, recall 26.9% and F1 0.416. Original epykit F1 was 0.369; the accepted region-only fix was 0.460. The new null run calls 0 regions and 0 CpGs. Its signal CpG calls contain 0 true and 0 false sites.
+Comparison artifacts ready: /scratch/wgbs_benchmark_v4/results/beta_binomial_20261007_full/comparison/report.html

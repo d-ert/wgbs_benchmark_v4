@@ -1,0 +1,92 @@
+{
+  "goal": "Implement reviewed epykit improvements and evaluate on simulations and both real cohorts",
+  "stage": "benchmark_only_evaluation",
+  "implementation_started": true,
+  "spec": "docs/superpowers/specs/2026-10-09-epykit-statistical-improvements-design.md",
+  "spec_sha256": "2ec4eff7425332da1a31394a1d4c9ae4b83aca7e4de0285fe2c36b3040da20a1",
+  "base_source": "/scratch/epykit-calibration-fresh_20261007",
+  "baseline_source_hashes": {
+    "dmc.py": "37e3b509191058bd4d2e9d8c12a4bb0a5eaad408d95ab863f436c58a32efe829",
+    "dmr.py": "490964047d052ced5baa4601e519790b2df771f75ad9fc0a0e0c6c40a6961467",
+    "_beta_binomial.py": "09ab9a8da96973d1e901339253803f10c2705a85a6645a5c9e7e5c6f1b2a1037",
+    "_region_search.py": "41ca6f15dc629918f68512a680b2ee67977a240630f9b78269186413fe24f2b3",
+    "_dmc_config.py": "185b3d24f7325dd05fdbe399fa6969de830f8b510cf647783cb589a670c97290"
+  },
+  "baseline_collection": {
+    "collected": 820,
+    "optional_module_skips": 5,
+    "log": "collection.log"
+  },
+  "baseline_tests": {
+    "passed": 37,
+    "deselected": 28,
+    "elapsed_seconds": 111.44,
+    "log": "baseline-tests.log",
+    "scope": "chain_merge, segmentation, scan permutation denominators, BB likelihood and public BB engine; smoothing module is slow and was deselected"
+  },
+  "spatial_holdout": "Existing spatial_correlation field is present: fitted_length_bp=2000 and validated=false. Original simulator explicitly refuses correlated scenarios until validated.",
+  "remaining": [
+    "Run updated legacy, optimized BB and new count score on recorded signal/null",
+    "Run current updates on GSE64177 and GSE263850",
+    "Compare against recorded epykit versions and other callers using unchanged scorers",
+    "Report completed benchmark results and limitations"
+  ],
+  "baseline_full_run": {
+    "status": "finished",
+    "exit_code": 1,
+    "passed": 791,
+    "failed": 28,
+    "skipped": 6,
+    "elapsed_seconds": 391.724,
+    "log": "baseline-full.log",
+    "junit": "baseline-full.xml",
+    "summary": "baseline-summary.json"
+  },
+  "baseline_environment_issue": {
+    "dependency": "bioframe",
+    "error": "ModuleNotFoundError",
+    "reproduction": "baseline-annotation-failure.log",
+    "package_change": false
+  },
+  "data_readiness": "data-readiness.json",
+  "baseline_full_source_unchanged": true,
+  "consecutive_goal_turns_pending_spec_review": 0,
+  "last_turn_classification": "User explicitly requested a pause and status; full simulation and real-data benchmarks have not run on the new implementation.",
+  "spec_approved": true,
+  "approval_message": "i approve /goal resume",
+  "plans": [
+    {
+      "path": "docs/superpowers/plans/2026-10-09-epykit-count-inference.md",
+      "sha256": "8188373aad468a566f7a955b102d00f35d6ae5be33385e936b8fad0dd3b6d215"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-10-09-epykit-regions-and-evaluation.md",
+      "sha256": "9e4301d8c9b0e1f6fce04b44a955f53f0c124be423c653534014bd330ab48a76"
+    }
+  ],
+  "execution_method": "native",
+  "plan_review_pending_goal_turns": 0,
+  "plan_approved": true,
+  "plan_approval_message": "i approve",
+  "source_checkout": "/scratch/wgbs_benchmark_v4/development/statistical_improvements_20261009/epykit",
+  "tasks": {
+    "count_inference_1": "complete",
+    "count_inference_2": "complete",
+    "count_inference_3": "complete",
+    "count_inference_4": "complete",
+    "count_inference_5": "complete",
+    "regional_plan": "paused by scope change: geometry exists but regional inference is unfinished and will not be described as benchmarked"
+  },
+  "source_head": "0e89ab6a6b81344cfe7eb151b66b62c4c6a0584b",
+  "count_score_status": "Experimental: estimated-rho development diagnostics show small-sample and trend-misspecification tail inflation; no promotion.",
+  "supported_full_tests": {
+    "passed": 868,
+    "skipped": 6,
+    "deselected_known_dependencies": 26,
+    "failed": 0,
+    "summary": "supported-full-summary.json"
+  },
+  "count_source_manifest": "count-source-manifest.json",
+  "count_patch": "count-inference.patch",
+  "user_override": "Do not run or rely on package/internal tests or new synthetic diagnostic simulations. Evaluate current updates only on recorded full signal/null benchmark and real cohorts."
+}

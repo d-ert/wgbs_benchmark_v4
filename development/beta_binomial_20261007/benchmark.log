@@ -1,0 +1,11 @@
+Verifying frozen input and original harness hashes...
+Registered S3 methods overwritten by 'backports':
+  method                    from 
+  as.character.Rconcordance tools
+  print.Rconcordance        tools
+Setting options('download.file.method.GEOquery'='auto')
+Setting options('GEOquery.inmemory.gpl'=FALSE)
+
+R dependencies OK
+Source frozen. Waiting for held-out validation and package checks before timing...
+Running full genome_autosomes_signal...

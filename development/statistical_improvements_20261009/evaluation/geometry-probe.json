@@ -1,0 +1,19 @@
+{
+  "scope": "coordinate-only 100000-site dense geometry probe; not a biological power evaluation",
+  "source_revision": "coordinate-parent-nested-halfstep-v1",
+  "positions_sha256": "50ac5f0d6026f777885509dff4a4d879977a3604bd4a33230e3e20813a0319fc",
+  "sites": 100000,
+  "counts": {
+    "intervals": 170000,
+    "parents": 2500
+  },
+  "by_scale": {
+    "3": 95000,
+    "5": 47500,
+    "10": 17500,
+    "20": 7500,
+    "40": 2500
+  },
+  "elapsed_warm_seconds": 0.014232223853468895,
+  "retained_geometry_bytes": 10310000
+}

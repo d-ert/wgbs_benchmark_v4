@@ -1,0 +1,14 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__ test_continuous_log_dispersion_shrinkage_matches_numerical_profile_oracle ___
+
+    def test_continuous_log_dispersion_shrinkage_matches_numerical_profile_oracle():
+>       assert hasattr(bb,'test_lognormal'), 'Continuous dispersion shrinkage is missing'
+E       AssertionError: Continuous dispersion shrinkage is missing
+E       assert False
+E        +  where False = hasattr(bb, 'test_lognormal')
+
+tests/test_beta_binomial_inference.py:95: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_inference.py::test_continuous_log_dispersion_shrinkage_matches_numerical_profile_oracle
+1 failed in 0.32s

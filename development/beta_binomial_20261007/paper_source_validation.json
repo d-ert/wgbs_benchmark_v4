@@ -1,0 +1,10 @@
+{
+  "normalized_regions_match_original_workbook": true,
+  "n_regions": 3271,
+  "duplicates": 0,
+  "direction_counts": {
+    "hypo": 1714,
+    "hyper": 1557
+  },
+  "assembly": "hg19"
+}

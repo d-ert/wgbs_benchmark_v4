@@ -1,0 +1,83 @@
+diff --git a/src/epykit/dmc.py b/src/epykit/dmc.py
+index 5fede8e..a5d677b 100644
+--- a/src/epykit/dmc.py
++++ b/src/epykit/dmc.py
+@@ -120,7 +120,7 @@ def _dmc_input_signature(
+     """
+     msp = Path(methylstore_path).resolve()
+     fields: list[tuple[str, str]] = [
+-        ("variance_revision", "2026-09-depth-aware-F-v1"),
++        ("variance_revision", "2026-10-eb-local-df-v2"),
+         ("store", str(msp)),
+         ("case", ",".join(samples_case)),
+         ("ctrl", ",".join(samples_control)),
+@@ -788,24 +788,21 @@ def _score_finalize(
+             # Per-site phi is estimated from this site's 4 df Pearson sum.
+             df_phi = df_i_safe.copy()
+         elif dispersion == "eb":
+-            # Empirical-Bayes shrinkage with data-driven shrinkage weight.
+-            # Treat phi_site_i as a noisy estimator of an unknown true phi_i,
+-            # and assume phi_i ~ inverse-Gamma(a, b) across sites with a, b
+-            # estimated by method of moments from the chromosome-wide
+-            # distribution of phi_site values. The posterior mean of phi_i
+-            # given phi_site_i and df_i is the same weighted-average form as
+-            # `shrink`, but the weight on phi_chrom is now
+-            #     w_eb = 2 * a   (the implied pseudo-df from the IG prior)
+-            # rather than the fixed 4 of `shrink`. When the per-site phi
+-            # estimates have high variance relative to phi_chrom, w_eb grows
+-            # large (shrink toward mean); when low variance, w_eb -> 0
+-            # (trust the site).
++            # Empirical moderation with a data-driven prior weight. The
++            # weight is learned from noisy, floored site estimates, not a
++            # deconvolved latent-dispersion distribution. It remains a
++            # working approximation that needs count-level calibration.
++            # Under IG(shape=w/2, scale=w*phi_hat/2), the weighted average is
++            # the predictive scale beta_post/alpha_post (not the posterior
++            # mean), paired with F df=2*alpha_post. Greater observed
++            # heterogeneity decreases the prior weight.
+             valid_phi = sites_dispers & (df_i > 0)
+             if int(np.sum(valid_phi)) >= min_disp_sites:
+                 phi_obs = phi_site[valid_phi]
+-                # Method-of-moments on inverse-Gamma:
++                # Moment heuristic for the prior shape only:
+                 #   mean = b / (a - 1),  var = b^2 / ((a-1)^2 (a-2))
+-                # => a = mean^2 / var + 2,  b = mean * (a - 1)
++                # => a = mean^2 / var + 2. The working prior scale is
++                # anchored separately at phi_hat, as documented above.
+                 m = float(np.mean(phi_obs))
+                 v = float(np.var(phi_obs))
+                 if v > 1e-9 and m > 0:
+@@ -815,17 +812,23 @@ def _score_finalize(
+                     w_eb = float(shrink_pseudo_df)
+             else:
+                 w_eb = float(shrink_pseudo_df)
+-            num = df_i_safe * phi_site + w_eb * phi_hat
+-            den = df_i_safe + w_eb
+-            phi_eff = np.maximum(num / den, min_dispersion)
+-            phi_eff = np.where(sites_dispers & (df_i > 0), phi_eff, phi_hat)
+-            # Weighted-average phi has effective df = (df_i + w_eb). Where we
+-            # fell back to phi_chrom, the df is the chrom-pool df.
+-            df_phi = np.where(
+-                sites_dispers & (df_i > 0),
+-                df_i_safe + float(w_eb),
+-                max(df_chrom, 1.0),
++            # A group whose fitted mean is exactly 0 or 1 has no estimable
++            # Pearson denominator. Retain the other group's information,
++            # using only its nv-1 residual degrees of freedom. If neither
++            # group is informative, use the prior alone; chromosome df must
++            # never stand in for this CpG's local uncertainty.
++            local_df = (
++                np.where(den_case > 0, np.maximum(nv_case - 1, 0), 0)
++                + np.where(den_ctrl > 0, np.maximum(nv_ctrl - 1, 0), 0)
++            ).astype(np.float64)
++            local_phi = np.maximum(
++                (chi_case + chi_ctrl) / np.maximum(local_df, 1.0),
++                min_dispersion,
+             )
++            num = local_df * local_phi + w_eb * phi_hat
++            den = local_df + w_eb
++            phi_eff = np.maximum(num / den, min_dispersion)
++            df_phi = den
+             logger.info(
+                 "%s: empirical-Bayes shrinkage with w_eb=%.2f (phi_chrom=%.3f, "
+                 "phi_site var=%.2g over %d sites).",

@@ -1,0 +1,28 @@
+...........................................                              [100%]
+=============================== warnings summary ===============================
+tests/test_dmr_chain_merge.py::test_tl_dmr_method_chain_merge
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmr_chain_merge.py:287: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr")
+
+tests/test_dmr_chain_merge.py::test_tl_dmr_unknown_method_message_includes_chain_merge
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmr_chain_merge.py:307: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr")
+
+tests/test_dmr_min_cpgs_parity.py::test_tl_dmr_chain_merge_preset_min_cpgs_not_suppressed
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmr_min_cpgs_parity.py:123: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr")
+
+tests/test_dmr_min_cpgs_parity.py::test_tl_dmr_chain_merge_bare_default_preserved
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmr_min_cpgs_parity.py:138: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr")
+
+tests/test_dmr_min_cpgs_parity.py::test_cli_api_bare_chain_merge_parity
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmr_min_cpgs_parity.py:266: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr")
+
+tests/test_dmr_min_cpgs_parity.py::test_tl_dmr_invalid_preset_friendly_error
+  /scratch/epykit-calibration-fresh_20261007/tests/test_dmr_min_cpgs_parity.py:283: FutureWarning: The 'log2_odds_ratio' column is deprecated and is slated for removal in a future major release. Use 'log2_odds_ratio_pooled' for pooled-count tests (lr, fisher) or 'coef_treatment_log2' for the glm backend. The transitional column is NaN-filled.
+    ep.tl.dmc(md, test="lr")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+43 passed, 6 warnings in 6.06s

@@ -1,0 +1,352 @@
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFF                                            [100%]
+=================================== FAILURES ===================================
+_______________________ test_chrom_name_mismatch_raises ________________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:86: in test_chrom_name_mismatch_raises
+    annotate_features(_sites([1500]), str(gtf))
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+____________________ test_matching_chrom_names_do_not_raise ____________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:91: in test_matching_chrom_names_do_not_raise
+    out = annotate_features(_sites([1500]), synth_gtf)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_______________ test_intron_does_not_overextend_into_nested_exon _______________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:107: in test_intron_does_not_overextend_into_nested_exon
+    out = annotate_features(_sites([500]), str(gtf), multi_annotation=True)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+__________ test_equal_priority_overlap_breaks_ties_deterministically ___________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:123: in test_equal_priority_overlap_breaks_ties_deterministically
+    out = annotate_features(_sites([2000]), str(gtf))
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+___________________ test_default_now_includes_multi_columns ____________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:132: in test_default_now_includes_multi_columns
+    out = annotate_features(sites, synth_gtf)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+__________________ test_multi_false_opts_out_of_extra_columns __________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:146: in test_multi_false_opts_out_of_extra_columns
+    out = annotate_features(sites, synth_gtf, multi_annotation=False)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_______________ test_multi_adds_four_columns_with_correct_dtypes _______________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:158: in test_multi_adds_four_columns_with_correct_dtypes
+    out = annotate_features(sites, synth_gtf, multi_annotation=True)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+__________________ test_nearest_tss_can_differ_from_best_pick __________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:190: in test_nearest_tss_can_differ_from_best_pick
+    out = annotate_features(
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+___________________ test_nearest_tss_minus_strand_sign_flip ____________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:213: in test_nearest_tss_minus_strand_sign_flip
+    out = annotate_features(sites, synth_gtf, multi_annotation=True)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+__________________ test_all_overlapping_captures_one_to_many ___________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:223: in test_all_overlapping_captures_one_to_many
+    out = annotate_features(sites, synth_gtf, multi_annotation=True)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+________ test_no_overlap_site_gets_empty_lists_and_still_finds_nearest _________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:235: in test_no_overlap_site_gets_empty_lists_and_still_finds_nearest
+    out = annotate_features(sites, synth_gtf, multi_annotation=True)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+______________ test_multi_annotation_reuses_built_features_cache _______________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:252: in test_multi_annotation_reuses_built_features_cache
+    _ = annotate_features(sites, synth_gtf, multi_annotation=True)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+___________ test_gene_type_filter_excludes_lincrna_from_nearest_tss ____________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:297: in test_gene_type_filter_excludes_lincrna_from_nearest_tss
+    out_unfiltered = annotate_features(
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+______________ test_gene_type_filter_string_or_list_both_accepted ______________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:312: in test_gene_type_filter_string_or_list_both_accepted
+    s = annotate_features(sites, synth_gtf_mixed_types,
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_______________ test_gene_type_filter_makes_distinct_cache_entry _______________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:323: in test_gene_type_filter_makes_distinct_cache_entry
+    _ = annotate_features(sites, synth_gtf_mixed_types,
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_________________ test_refgene_source_produces_legacy_columns __________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:360: in test_refgene_source_produces_legacy_columns
+    out = annotate_features(sites, synth_refgene)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+________________ test_refgene_source_supports_multi_annotation _________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:382: in test_refgene_source_supports_multi_annotation
+    out = annotate_features(
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_____________________ test_refgene_gene_type_filter_works ______________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:395: in test_refgene_gene_type_filter_works
+    out_unfilt = annotate_features(
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+___________________ test_refgene_and_gtf_caches_dont_collide ___________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:413: in test_refgene_and_gtf_caches_dont_collide
+    _ = annotate_features(sites, synth_gtf, multi_annotation=True)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_________________________ test_source_auto_detects_gtf _________________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:430: in test_source_auto_detects_gtf
+    out = annotate_features(sites, synth_gtf)  # no source= passed
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_______________________ test_source_auto_detects_refgene _______________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:438: in test_source_auto_detects_refgene
+    out = annotate_features(sites, synth_refgene)  # no source= passed
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+______________ test_source_explicit_override_for_unusual_filename ______________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:455: in test_source_explicit_override_for_unusual_filename
+    out = annotate_features(sites, str(odd), source="refgene")
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+___________________ test_default_surfaces_utr_tts_noncoding ____________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_annotate_multi.py:540: in test_default_surfaces_utr_tts_noncoding
+    out = annotate_features(sites, synth_gtf_with_utrs_tts_noncoding)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+_________________ test_one_based_cov_annotates_to_correct_gene _________________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1236: in annotate_features
+    import bioframe  # noqa: F401  (presence-check; used inside _annotate_chromosome_chunk)
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_coordinate_convention.py:130: in test_one_based_cov_annotates_to_correct_gene
+    out = annotate_features(sites, str(gtf))
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/annotate.py:1238: in annotate_features
+    raise ImportError("bioframe is required. pip install bioframe") from exc
+E   ImportError: bioframe is required. pip install bioframe
+__________ test_max_t_with_failed_and_empty_permutations_matches_main __________
+tests/test_dmr_region_fdr_mode.py:108: in test_max_t_with_failed_and_empty_permutations_matches_main
+    implicit = _run(observed, n_perm=5)
+tests/test_dmr_region_fdr_mode.py:50: in _run
+    return dmr_mod.empirical_fdr_for_dmr(
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/dmr.py:2050: in empirical_fdr_for_dmr
+    emp_p, emp_q, fdr_set = _aggregate_region_perm_results(
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/dmr.py:1890: in _aggregate_region_perm_results
+    raise RuntimeError("Incomplete permutation scan; refusing biased inference")
+E   RuntimeError: Incomplete permutation scan; refusing biased inference
+------------------------------ Captured log call -------------------------------
+WARNING  epykit.dmr:dmr.py:2043 permutation 0 failed: engine blew up
+__________________ test_lr_matches_g_test_at_unit_dispersion ___________________
+tests/test_engine_oracles.py:91: in test_lr_matches_g_test_at_unit_dispersion
+    assert np.isclose(p_epykit, p_gtest, rtol=1e-9, atol=1e-12)
+E   assert False
+E    +  where False = <function isclose at 0x73e7457550b0>(0.008589689937437557, 1.5145940806898643e-06, rtol=1e-09, atol=1e-12)
+E    +    where <function isclose at 0x73e7457550b0> = np.isclose
+_________ test_blacklist_drops_exactly_the_sites_inside_bed_intervals __________
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/filter.py:91: in _apply_blacklist
+    import bioframe
+E   ModuleNotFoundError: No module named 'bioframe'
+
+The above exception was the direct cause of the following exception:
+tests/test_filter.py:92: in test_blacklist_drops_exactly_the_sites_inside_bed_intervals
+    filter_sites(str(raw_store), str(out), blacklist_bed=str(bed), **_KEEP_ALL)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/filter.py:302: in filter_sites
+    chrom_df = _apply_blacklist(chrom_df, blacklist_bed)
+../wgbs_benchmark_v4/results/genome_baseline/source_snapshot/epykit/filter.py:94: in _apply_blacklist
+    raise ImportError(
+E   ImportError: bioframe is required for blacklist filtering. Install it with: pip install bioframe
+____________ test_sex_check_unimodal_cohort_falls_back_to_threshold ____________
+tests/test_qc_clinical.py:128: in test_sex_check_unimodal_cohort_falls_back_to_threshold
+    assert all(v == "female" for v in result.values()), (
+E   AssertionError: Expected all-female assignment; got {'S0': 'female', 'S1': 'female', 'S2': 'female', 'S3': 'female', 'S4': 'male', 'S5': 'female', 'S6': 'female', 'S7': 'female'}
+E   assert False
+E    +  where False = all(<generator object test_sex_check_unimodal_cohort_falls_back_to_threshold.<locals>.<genexpr> at 0x73e7210b35a0>)
+______________________ test_pl_umap_returns_axes_or_skips ______________________
+tests/test_viz_new.py:145: in test_pl_umap_returns_axes_or_skips
+    pytest.importorskip("umap")
+/home/mlegrand/.local/lib/python3.10/site-packages/umap/__init__.py:2: in <module>
+    from .umap_ import UMAP
+/home/mlegrand/.local/lib/python3.10/site-packages/umap/umap_.py:42: in <module>
+    from umap.layouts import (
+/home/mlegrand/.local/lib/python3.10/site-packages/umap/layouts.py:42: in <module>
+    def rdist(x, y):
+/home/mlegrand/.local/lib/python3.10/site-packages/numba/core/decorators.py:227: in wrapper
+    disp.enable_caching()
+/home/mlegrand/.local/lib/python3.10/site-packages/numba/core/dispatcher.py:811: in enable_caching
+    self._cache = FunctionCache(self.py_func)
+/home/mlegrand/.local/lib/python3.10/site-packages/numba/core/caching.py:687: in __init__
+    self._impl = self._impl_class(py_func)
+/home/mlegrand/.local/lib/python3.10/site-packages/numba/core/caching.py:423: in __init__
+    raise RuntimeError("cannot cache function %r: no locator available "
+E   RuntimeError: cannot cache function 'rdist': no locator available for file '/home/mlegrand/.local/lib/python3.10/site-packages/umap/layouts.py'
+=========================== short test summary info ============================
+FAILED tests/test_annotate_multi.py::test_chrom_name_mismatch_raises - Import...
+FAILED tests/test_annotate_multi.py::test_matching_chrom_names_do_not_raise
+FAILED tests/test_annotate_multi.py::test_intron_does_not_overextend_into_nested_exon
+FAILED tests/test_annotate_multi.py::test_equal_priority_overlap_breaks_ties_deterministically
+FAILED tests/test_annotate_multi.py::test_default_now_includes_multi_columns
+FAILED tests/test_annotate_multi.py::test_multi_false_opts_out_of_extra_columns
+FAILED tests/test_annotate_multi.py::test_multi_adds_four_columns_with_correct_dtypes
+FAILED tests/test_annotate_multi.py::test_nearest_tss_can_differ_from_best_pick
+FAILED tests/test_annotate_multi.py::test_nearest_tss_minus_strand_sign_flip
+FAILED tests/test_annotate_multi.py::test_all_overlapping_captures_one_to_many
+FAILED tests/test_annotate_multi.py::test_no_overlap_site_gets_empty_lists_and_still_finds_nearest
+FAILED tests/test_annotate_multi.py::test_multi_annotation_reuses_built_features_cache
+FAILED tests/test_annotate_multi.py::test_gene_type_filter_excludes_lincrna_from_nearest_tss
+FAILED tests/test_annotate_multi.py::test_gene_type_filter_string_or_list_both_accepted
+FAILED tests/test_annotate_multi.py::test_gene_type_filter_makes_distinct_cache_entry
+FAILED tests/test_annotate_multi.py::test_refgene_source_produces_legacy_columns
+FAILED tests/test_annotate_multi.py::test_refgene_source_supports_multi_annotation
+FAILED tests/test_annotate_multi.py::test_refgene_gene_type_filter_works - Im...
+FAILED tests/test_annotate_multi.py::test_refgene_and_gtf_caches_dont_collide
+FAILED tests/test_annotate_multi.py::test_source_auto_detects_gtf - ImportErr...
+FAILED tests/test_annotate_multi.py::test_source_auto_detects_refgene - Impor...
+FAILED tests/test_annotate_multi.py::test_source_explicit_override_for_unusual_filename
+FAILED tests/test_annotate_multi.py::test_default_surfaces_utr_tts_noncoding
+FAILED tests/test_coordinate_convention.py::test_one_based_cov_annotates_to_correct_gene
+FAILED tests/test_dmr_region_fdr_mode.py::test_max_t_with_failed_and_empty_permutations_matches_main
+FAILED tests/test_engine_oracles.py::test_lr_matches_g_test_at_unit_dispersion
+FAILED tests/test_filter.py::test_blacklist_drops_exactly_the_sites_inside_bed_intervals
+FAILED tests/test_qc_clinical.py::test_sex_check_unimodal_cohort_falls_back_to_threshold
+FAILED tests/test_viz_new.py::test_pl_umap_returns_axes_or_skips - RuntimeErr...
+29 failed in 2.39s

@@ -1,0 +1,90 @@
+{
+  "zero_p_probe": {
+    "p_zero_and_half": 0.5,
+    "p_tiny_and_half": 8.559120251088502e-161,
+    "all_zero_is_nan": true
+  },
+  "current_matches_baseline_dmc.py": true,
+  "current_matches_baseline_dmr.py": true,
+  "region_rows_arithmetic_checked": 16,
+  "tails_at_statistic_30": {
+    "F_1_8": 0.0005893879768047376,
+    "chi2_1": 4.3204630578274955e-08
+  },
+  "separate_22_chromosome_tests_global_null_fdr_example": 0.676466455026291,
+  "two_sided_mirror_invariant_exact_minima": {
+    "six_pairs": 0.03125,
+    "five_plus_five": 0.007936507936507936
+  },
+  "known_rho_inverse_variance_example": {
+    "depths": [
+      5.0,
+      5.0,
+      5.0,
+      5.0,
+      100.0
+    ],
+    "rho": 0.1,
+    "pooled_to_optimal_variance_ratio": 1.8214103684287168,
+    "effective_read_weights": [
+      3.5714285714285716,
+      3.5714285714285716,
+      3.5714285714285716,
+      3.5714285714285716,
+      9.174311926605505
+    ],
+    "note": "Exact variance comparison for independent replicate proportions at a common mean and known rho; not a fitted-method benchmark."
+  },
+  "average_count_smoothing_floor_example": {
+    "K": 10,
+    "N": 20,
+    "rho": 0.1,
+    "theoretical_pseudo_count_scale": 0.29000000000000004,
+    "empirical_mean_raw_scale": 0.29116204003906426,
+    "fraction_raw_scale_below_one": 0.9996,
+    "variance_inflation_from_floor_against_known_model": 3.4482758620689653,
+    "scope": "Controlled homogeneous independent-CpG model; not an estimate of the effect in GSE263850."
+  },
+  "signal_search_correction": {
+    "chromosomes": 22,
+    "family": 776121901,
+    "harmonic": 21.047035820273607,
+    "candidates": 10785,
+    "calls": 980
+  },
+  "GSE263850_candidates": {
+    "before_q": 51,
+    "after_q": 51,
+    "config": {
+      "profile": "paper_aligned",
+      "dmc": {
+        "test": "lr",
+        "allow_n1": false,
+        "dispersion": "eb",
+        "reference": "adaptive",
+        "fdr_method": "fdr_bh",
+        "backend": "sequential",
+        "smoothing": true,
+        "smoothing_span_bp": 500
+      },
+      "dmr": {
+        "method": "chain_merge",
+        "alpha": 1e-05,
+        "min_abs_meth_diff": 0.0,
+        "minlen_bp": 51,
+        "min_cpgs": 4,
+        "dis_merge_bp": 100,
+        "pct_sig": 0.5,
+        "min_mean_qvalue": null,
+        "use_q_for_sig": false,
+        "empirical_fdr": false
+      },
+      "coverage_contract": "coverage >=1 in every sample; no high-coverage trimming",
+      "runner_sha256": "4c5881fd653be3561181ba56ebe88ea05ee6731d20dc9255d8fc20b496ddbc5b",
+      "coordinate_system": "1-based inclusive regions; native epykit end minus one",
+      "assembly": "hg38",
+      "input_strand_collapsed": true,
+      "region_qvalue_note": "asymptotic ranking only; not demonstrated region FDR control"
+    }
+  }
+}

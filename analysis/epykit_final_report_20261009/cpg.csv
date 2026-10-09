@@ -1,0 +1,17 @@
+dataset,tool,source_run,reused,available,tp,fp,fn,tn,precision,recall_eligible,recall_full_truth,f1,mcc,false_discovery_proportion,average_precision,auroc,n_eligible,n_truth,n_scored
+genome_autosomes_signal,epykit_original,genome_baseline,True,True,75.0,323.0,34814.0,16035777.0,0.1884422110552764,0.0021496746825647,0.0013731485380545,0.0042508572562133,0.0199168419555802,0.8115577889447236,0.0356531638445028,0.8384678913321338,16070989.0,54619.0,15918718.0
+genome_autosomes_signal,epykit_region_fix,default_search_by_20261007,True,True,75.0,323.0,34814.0,16035777.0,0.1884422110552764,0.0021496746825647,0.0013731485380545,0.0042508572562133,0.0199168419555802,0.8115577889447236,0.0356531638445028,0.8384678913321338,16070989.0,54619.0,15918718.0
+genome_autosomes_signal,epykit_beta_binomial,beta_binomial_20261007_full,False,True,0.0,0.0,34889.0,16036100.0,,0.0,0.0,0.0,0.0,0.0,0.0598798472373933,0.8571346836620851,16070989.0,54619.0,15950516.0
+genome_autosomes_signal,DSS,genome_baseline,True,True,24313.0,112195.0,10576.0,15923905.0,0.1781067776247546,0.6968672074292757,0.4451381387429283,0.2837039154710992,0.3498753871953258,0.8218932223752454,0.3751434150470329,0.9611341017510832,16070989.0,54619.0,16070927.0
+genome_autosomes_signal,methylKit,genome_baseline,True,True,3428.0,37146.0,31461.0,15998954.0,0.0844876028984078,0.0982544641577574,0.0627620425126787,0.0908524707472536,0.0889791598438829,0.9155123971015922,0.0450833896795564,0.8135122450285611,16070989.0,54619.0,15932815.0
+genome_autosomes_signal,BSmooth,genome_baseline,True,False,,,,,,,,,,,,,,,
+genome_autosomes_signal,dmrseq,genome_baseline,True,False,,,,,,,,,,,,,,,
+genome_autosomes_signal,DMRcate,genome_baseline,True,True,1.0,0.0,34888.0,16036100.0,1.0,2.8662329100862736e-05,1.830864717406031e-05,5.732301519059902e-05,0.0053479067826915,0.0,0.0621093577834274,0.8713012271518976,16070989.0,54619.0,16070838.0
+genome_autosomes_null,epykit_original,genome_baseline,True,True,0.0,239.0,0.0,16070158.0,0.0,,,0.0,0.0,1.0,,,16070397.0,0.0,15917070.0
+genome_autosomes_null,epykit_region_fix,default_search_by_20261007,True,True,0.0,239.0,0.0,16070158.0,0.0,,,0.0,0.0,1.0,,,16070397.0,0.0,15917070.0
+genome_autosomes_null,epykit_beta_binomial,beta_binomial_20261007_full,False,True,0.0,0.0,0.0,16070397.0,,,,0.0,0.0,0.0,,,16070397.0,0.0,15949185.0
+genome_autosomes_null,DSS,genome_baseline,True,True,0.0,82940.0,0.0,15987457.0,0.0,,,0.0,0.0,1.0,,,16070397.0,0.0,16070334.0
+genome_autosomes_null,methylKit,genome_baseline,True,True,0.0,35031.0,0.0,16035366.0,0.0,,,0.0,0.0,1.0,,,16070397.0,0.0,15931311.0
+genome_autosomes_null,BSmooth,genome_baseline,True,False,,,,,,,,,,,,,,,
+genome_autosomes_null,dmrseq,genome_baseline,True,False,,,,,,,,,,,,,,,
+genome_autosomes_null,DMRcate,genome_baseline,True,True,0.0,0.0,0.0,16070397.0,,,,0.0,0.0,0.0,,,16070397.0,0.0,16070209.0

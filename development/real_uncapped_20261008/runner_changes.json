@@ -1,0 +1,9 @@
+{
+  "original_sha256": "bc69efcd59039a35fe94992bdd857cfa977ec140c6f6366af55bffab7e27202a",
+  "effective_sha256": "9cfc53c3220113d3f7f3fa161a2d1079d7c89f38752a9d98af45eafd9c6f5b05",
+  "changes": [
+    "Free methylKit raw sample objects after unite",
+    "Free exported methylKit CpG result objects before window tests"
+  ],
+  "statistical_settings_changed": false
+}

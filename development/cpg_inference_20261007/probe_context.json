@@ -1,0 +1,7 @@
+{
+  "seed_base": 731003,
+  "n_sites": 100000,
+  "models": "Independent beta-binomial counts; heterogeneous means and rho; Poisson depths; 1% signal with delta .2",
+  "source": "/scratch/epykit-calibration-fresh_20261007/src",
+  "purpose": "Development diagnosis only; separate evaluation seeds required"
+}

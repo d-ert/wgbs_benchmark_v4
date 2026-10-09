@@ -1,0 +1,18 @@
+{
+  "paper_sha256": "c141f9e9e344f642cad588d2cee2d98e76c07d26df170a015af95998d36cf9fc",
+  "caller_sha256": {
+    "epykit": "644805dbe222e2df889509124899706ab91b59bc41e5dd04f6833dcfd3d70371",
+    "DSS": "736bc7779505f46dc82018f1a644f1c2b40bc3109990d528122693d83cd91c7b"
+  },
+  "assembly": "hg19",
+  "coordinates": "1-based inclusive; paper lengths exactly match end-start+1",
+  "paper_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4665002/",
+  "excluded_rows": [
+    "1 Significant fraction of hypermethylated regions are likely to be false positives. ",
+    "a Log2 fold changes in expression between the untreated and MTB-infected DCs. Positive numbers refers to the associated gene that were up-regulated and negative number to genes that were down-regulated.  ",
+    "b False Discovery Rate. "
+  ],
+  "interpretation": "Paper concordance, not truth-based precision/FDR. Expression columns are not DMR significance.",
+  "same_direction": "MTB relative to NI; use paper Direction, never expression log2FCa",
+  "matching": "Any overlap and reciprocal base-pair overlap; unique call/paper counts permit many-to-many. Separate maximum-cardinality one-to-one matches maximize total interval Jaccard as a tie-break."
+}

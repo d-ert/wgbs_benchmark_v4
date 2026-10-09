@@ -1,0 +1,88 @@
+usage: epykit dmc [-h] --methylstore METHYLSTORE --samplesheet SAMPLESHEET
+                  --treatment-group TREATMENT_GROUP --control-group
+                  CONTROL_GROUP --output OUTPUT
+                  [--test {lr,glm,welch_t,fisher,beta_binomial}]
+                  [--formula FORMULA] [--contrast CONTRAST]
+                  [--covariates COVARIATES] [--unite] [--no-unite]
+                  [--min-samples-treatment MIN_SAMPLES_TREATMENT]
+                  [--min-samples-control MIN_SAMPLES_CONTROL] [--allow-n1]
+                  [--dispersion {site,eb,shrink,chrom}]
+                  [--reference {adaptive,F,chi2}] [--fdr-method FDR_METHOD]
+                  [--smoothing] [--smoothing-span-bp SMOOTHING_SPAN_BP]
+                  [--canonical-only] [--no-tsv] [--tsv TSV_PATH]
+                  [--tsv-alpha TSV_ALPHA] [--tsv-full]
+
+options:
+  -h, --help            show this help message and exit
+  --methylstore METHYLSTORE
+  --samplesheet SAMPLESHEET
+                        CSV: sample_id, group, path
+  --treatment-group TREATMENT_GROUP
+  --control-group CONTROL_GROUP
+  --output OUTPUT
+  --test {lr,glm,welch_t,fisher,beta_binomial}
+                        Statistical test (default: lr). lr -- Quasi-binomial
+                        likelihood-ratio chi-square with per-site McCullagh-
+                        Nelder dispersion. Closed-form on streaming
+                        accumulators; recommended default at n>=2. glm --
+                        Binomial GLM with covariates (requires a design via
+                        --formula). welch_t -- Welch t on raw betas. fisher --
+                        Fisher exact on reads pooled across replicates (anti-
+                        conservative, kept for backward compatibility; warns).
+  --formula FORMULA     patsy formula on md.obs columns (e.g. '~ group').
+                        Triggers the GLM-contrast path; pair with --contrast.
+  --contrast CONTRAST   contrast specification. Either a single column name
+                        (continuous covariate primary effect), a factor name
+                        for a joint F-test (e.g. 'group'), or a patsy linear
+                        combination ('group[T.KO] - group[T.WT]').
+  --covariates COVARIATES
+                        Comma-separated list of nuisance covariate columns on
+                        md.obs.
+  --unite               Intersect: restrict to sites covered in ALL samples
+                        (default: union -- sites in at least one sample,
+                        matching ep.tl.dmc).
+  --no-unite            Union: include sites covered in at least one sample
+                        (the default).
+  --min-samples-treatment MIN_SAMPLES_TREATMENT
+                        Per-site minimum number of treatment samples with non-
+                        zero coverage. Sites failing the threshold are NaN'd
+                        before FDR. Useful with --no-unite .
+  --min-samples-control MIN_SAMPLES_CONTROL
+                        Per-site minimum number of control samples with non-
+                        zero coverage.
+  --allow-n1            Permit n=1 per group. The pooled Fisher exact engine
+                        is used automatically in this case (it is anti-
+                        conservative -- do not trust borderline calls).
+                        Default is to refuse, since between-replicate variance
+                        is ignored under this fallback.
+  --dispersion {site,eb,shrink,chrom}
+                        Dispersion estimator for lr/glm (default: eb, matching
+                        ep.tl.dmc).
+  --reference {adaptive,F,chi2}
+                        Reference distribution for the lr statistic (default:
+                        adaptive).
+  --fdr-method FDR_METHOD
+                        Multiple-testing correction method (default: fdr_bh).
+  --smoothing           DSS-style per-sample count smoothing for --test lr:
+                        replace each sample's raw counts by a uniform-box
+                        average over the CpGs within +/- half the span before
+                        the test (DMLfit.multiFactor(smoothing=TRUE)).
+                        Default: off. Not accepted with the other engines or
+                        with --formula / --contrast.
+  --smoothing-span-bp SMOOTHING_SPAN_BP
+                        Full smoothing window in bp for --smoothing (default:
+                        500, the DSS default).
+  --canonical-only      Test only the fixed human-style chromosome set (1-22,
+                        X, Y, M/MT, with or without a chr prefix) of the
+                        store's partitions; other contigs are dropped before
+                        the test and the FDR correction. Applies to the binary
+                        and the --formula / --contrast path. Default: test
+                        every partition.
+  --no-tsv              Suppress the sibling .significant.tsv auto-emit.
+  --tsv TSV_PATH        Override sibling table path. Suffix .csv selects comma
+                        delimiter; otherwise tab. Implies the file is written.
+  --tsv-alpha TSV_ALPHA
+                        qvalue threshold for the significant-only table.
+                        Default 0.05.
+  --tsv-full            Also write the full (unfiltered) table next to the
+                        parquet.

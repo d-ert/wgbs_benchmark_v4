@@ -1,0 +1,101 @@
+{
+  "GSE64177": {
+    "sample_count": 12,
+    "donors": {
+      "DC81": [
+        "treatment",
+        "control"
+      ],
+      "DC82": [
+        "treatment",
+        "control"
+      ],
+      "DC83": [
+        "treatment",
+        "control"
+      ],
+      "DC87": [
+        "treatment",
+        "control"
+      ],
+      "DC89": [
+        "treatment",
+        "control"
+      ],
+      "DC91": [
+        "treatment",
+        "control"
+      ]
+    },
+    "assembly": "hg19",
+    "all_count_paths_exist": true,
+    "formula": "~ donor + group"
+  },
+  "GSE263850": {
+    "sample_count": 6,
+    "group_counts": {
+      "control": 3,
+      "treatment": 3
+    },
+    "assembly": "hg38",
+    "paired": false,
+    "common_parental_line": "SBP009",
+    "all_count_paths_exist": true
+  },
+  "scope": "Sample metadata and path checks; full count file integrity is recorded in existing manifests and has not been rehashed in this check.",
+  "simulation_catalogue": {
+    "manifest": "data/genome_autosomes_preparation/calibration/manifest.json",
+    "catalogue_files": 290,
+    "missing_files": 0,
+    "spatial_correlation": {
+      "gap_edges_bp": [
+        0,
+        25,
+        50,
+        100,
+        200,
+        500,
+        1000,
+        2000
+      ],
+      "mean_residual_correlation": [
+        0.46585119189295376,
+        0.40860636532958144,
+        0.3881255719942953,
+        0.3617492633078309,
+        0.3526082009847004,
+        0.36079015030738587,
+        0.3787992505034521
+      ],
+      "pairs": [
+        1725321502,
+        855470259,
+        746534196,
+        608399335,
+        486066444,
+        115931818,
+        15588136
+      ],
+      "fitted_length_bp": 2000.0,
+      "validated": false
+    },
+    "reference_validation": {
+      "reference_sha256": "1e74081a49ceb9739cc14c812fbb8b3db978eb80ba8e5350beb80d8ad8dfef3b",
+      "calibration_sha256": "73f886e10efa1df53ae5eaa29af20992a024d41c65608ea3ebadc9b61512ecb6",
+      "checked": 25923286,
+      "non_cpg": 0,
+      "examples": [],
+      "passed": true
+    },
+    "implication": "Reference coordinates are validated, but empirical spatial decay is explicitly unvalidated; a correlated holdout cannot use the original simulator until validation is implemented."
+  },
+  "R_comparators": {
+    "DSS": "2.58.0",
+    "edgeR": "4.8.2",
+    "dmrseq": "1.30.0",
+    "bsseq": "1.46.0",
+    "DMRcate": "3.6.0",
+    "methylKit": "1.36.0",
+    "scope": "R packageVersion availability checks; no new R caller run."
+  }
+}

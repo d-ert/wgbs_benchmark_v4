@@ -1,0 +1,14 @@
+{
+  "purpose": "Development only; hold-out validation must use different seeds",
+  "sites": 50000,
+  "seed_base": 9721001,
+  "source": "/scratch/epykit-calibration-fresh_20261007/src",
+  "counts": "Independent beta-binomial; Poisson depths",
+  "references": [
+    "F(1,nvalid-2)",
+    "chi2(1) diagnostic",
+    "frozen legacy lr"
+  ],
+  "region_correction": "f73e66d unchanged",
+  "truth_used_by_inference": false
+}

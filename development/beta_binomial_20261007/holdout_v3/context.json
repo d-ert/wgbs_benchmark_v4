@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "seed_base": 71082001,
+  "algorithm": "count-likelihood-eb-bb-lognormal-F-v3-experimental",
+  "source_sha256": "09ab9a8da96973d1e901339253803f10c2705a85a6645a5c9e7e5c6f1b2a1037",
+  "truth_used_by_inference": false,
+  "purpose": "Held-out calibration and prior-start sensitivity; no retuning",
+  "sites_total": 1275000,
+  "repeated_null_trials": 9,
+  "repeated_null_trials_with_rejection": 0,
+  "null_any_rejection_95ci": [
+    0.0,
+    0.33626711687994293
+  ]
+}

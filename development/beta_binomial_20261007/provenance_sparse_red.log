@@ -1,0 +1,44 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____ test_separate_output_stores_preserve_group_specific_prior_provenance _____
+
+synth_md_filtered = MethylData [raw, filtered, united]
+  assembly : synth
+  n_samples: 8 (control (n=4)  treatment (n=4))
+  n_sites  : 78,...  : _store_history, epykit_version, filter, n_sites_filtered, n_sites_raw, pipeline, samplesheet, source_format, unite
+
+tmp_path = PosixPath('/tmp/pytest-of-mlegrand/pytest-44/test_separate_output_stores_pr0')
+
+    def test_separate_output_stores_preserve_group_specific_prior_provenance(synth_md_filtered,tmp_path):
+        from epykit.dmc import process_chromosomes_dmc
+        import hashlib
+        md = synth_md_filtered
+        chrom = next(Path(md.store).glob('sample=*/chrom=*')).name.removeprefix('chrom=')
+        case,control = list(md.treatment_ids),list(md.control_ids)
+        def run(a,b,out):
+            return process_chromosomes_dmc(md.store,a,b,test='beta_binomial',dispersion='eb',
+                chromosomes=[chrom],beta_binomial_ci=False,out_dir=out,return_store=True)
+        first = run(case,control,tmp_path/'first')
+        entry = first._manifest['chroms'][0]
+>       assert 'prior_file' in entry, 'Learned prior must belong to its output store'
+E       AssertionError: Learned prior must belong to its output store
+E       assert 'prior_file' in {'file': 'chrom=chr3.parquet', 'n_sites': 1707, 'name': 'chr3'}
+
+tests/test_beta_binomial_engine.py:73: AssertionError
+____ test_sparse_union_training_samples_eligible_groups_before_subsampling _____
+
+    def test_sparse_union_training_samples_eligible_groups_before_subsampling():
+        m = np.zeros((100000,4),dtype=int)
+        n = np.zeros_like(m)
+        n[:,0] = 20
+        n[-100:] = 20
+        m[-100:] = np.tile([2,8,3,7],(100,1))
+        prior = bb.estimate_prior(m,n,2)
+>       assert prior['n_groups'] == 200
+E       assert 2 == 200
+
+tests/test_beta_binomial_inference.py:142: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_engine.py::test_separate_output_stores_preserve_group_specific_prior_provenance
+FAILED tests/test_beta_binomial_inference.py::test_sparse_union_training_samples_eligible_groups_before_subsampling
+2 failed in 6.44s

@@ -1,0 +1,775 @@
+tool	dmr_id	chrom	start	end	direction	gene_id	symbol	relation
+epykit	epykit_6	chr1	21619470	21619581	-1	100506801	ECE1-AS1	promoter
+epykit	epykit_51	chr10	134255604	134255845	1	105378568	LINC03068	promoter
+epykit	epykit_51	chr10	134255604	134255845	1	170393	LINC02870	promoter
+epykit	epykit_52	chr11	12694585	12694679	-1	7003	TEAD1	promoter
+epykit	epykit_74	chr12	47611981	47612318	-1	100233209	PCED1B-AS1	promoter
+epykit	epykit_113	chr14	105532917	105533021	-1	29933	GPR132	promoter
+epykit	epykit_114	chr15	26360876	26360997	1	503519	LINC00929	promoter
+epykit	epykit_123	chr16	609678	609795	-1	146325	PRR35	promoter
+epykit	epykit_124	chr16	1935900	1936108	1	254528	MEIOB	promoter
+epykit	epykit_124	chr16	1935900	1936108	1	64735	LINC00254	promoter
+epykit	epykit_148	chr17	5524329	5524666	-1	22861	NLRP1	promoter
+epykit	epykit_159	chr17	63053928	63054063	-1	10672	GNA13	promoter
+epykit	epykit_191	chr19	45427822	45427947	-1	342	APOC1P1	promoter
+epykit	epykit_222	chr2	173419735	173419824	-1	5163	PDK1	promoter
+epykit	epykit_318	chr5	131999388	131999990	-1	101927761	TH2LCRR	promoter
+epykit	epykit_319	chr5	140710475	140710524	1	56114	PCDHGA1	promoter
+epykit	epykit_347	chr7	95951924	95952269	-1	10165	SLC25A13	promoter
+epykit	epykit_413	chrX	45710567	45710656	-1	104457406	MIR222HG	promoter
+epykit	epykit_415	chrX	49028369	49028464	-1	5355	PLP2	promoter
+epykit	epykit_416	chrX	49056825	49056885	-1	6855	SYP	promoter
+epykit	epykit_424	chrX	80457014	80457401	-1	6451	SH3BGRL	promoter
+epykit	epykit_424	chrX	80457014	80457401	-1	79366	HMGN5	promoter
+epykit	epykit_1	chr1	8266569	8266713	-1	102724539	LINC01714	gene_body
+epykit	epykit_2	chr1	11889502	11889822	-1	1185	CLCN6	gene_body
+epykit	epykit_3	chr1	12475183	12475833	-1	55187	VPS13D	gene_body
+epykit	epykit_4	chr1	15786681	15787038	-1	63036	CELA2A	gene_body
+epykit	epykit_5	chr1	16274937	16275044	-1	7709	ZBTB17	gene_body
+epykit	epykit_6	chr1	21619470	21619581	-1	1889	ECE1	gene_body
+epykit	epykit_7	chr1	24284927	24285168	1	55629	PNRC2	gene_body
+epykit	epykit_10	chr1	27165400	27165673	-1	84243	ZDHHC18	gene_body
+epykit	epykit_11	chr1	29536818	29537081	-1	51102	MECR	gene_body
+epykit	epykit_12	chr1	63514288	63514608	1	105378769	LINC01739	gene_body
+epykit	epykit_13	chr1	78313632	78313756	1	374986	MIGA1	gene_body
+epykit	epykit_15	chr1	85435509	85435645	-1	255231	MCOLN2	gene_body
+epykit	epykit_16	chr1	85461162	85462032	-1	255231	MCOLN2	gene_body
+epykit	epykit_18	chr1	111065568	111065916	-1	3737	KCNA2	gene_body
+epykit	epykit_20	chr1	117129151	117129712	-1	3321	IGSF3	gene_body
+epykit	epykit_21	chr1	151029326	151029975	-1	56882	CDC42SE1	gene_body
+epykit	epykit_22	chr1	153704879	153705023	-1	65123	INTS3	gene_body
+epykit	epykit_25	chr1	201373045	201373542	-1	7135	TNNI1	gene_body
+epykit	epykit_26	chr1	212954269	212954617	-1	25936	NSL1	gene_body
+epykit	epykit_28	chr1	235994232	235994829	-1	1130	LYST	gene_body
+epykit	epykit_29	chr1	236323242	236323387	-1	7107	GPR137B	gene_body
+epykit	epykit_30	chr1	240073229	240073459	1	100873984	CHRM3-AS1	gene_body
+epykit	epykit_30	chr1	240073229	240073459	1	1131	CHRM3	gene_body
+epykit	epykit_31	chr1	245778963	245779052	1	55083	KIF26B	gene_body
+epykit	epykit_33	chr10	3492971	3493286	-1	101927880	LINC02669	gene_body
+epykit	epykit_33	chr10	3492971	3493286	-1	105376360	LOC105376360	gene_body
+epykit	epykit_36	chr10	6053792	6053945	1	3559	IL2RA	gene_body
+epykit	epykit_37	chr10	6437522	6437802	1	399715	LINC02649	gene_body
+epykit	epykit_38	chr10	11318022	11318734	-1	10659	CELF2	gene_body
+epykit	epykit_38	chr10	11318022	11318734	-1	414196	CELF2-AS1	gene_body
+epykit	epykit_39	chr10	12677243	12677404	-1	57118	CAMK1D	gene_body
+epykit	epykit_40	chr10	24295917	24296634	1	56243	KIAA1217	gene_body
+epykit	epykit_41	chr10	34795888	34796371	-1	56288	PARD3	gene_body
+epykit	epykit_43	chr10	56449920	56450503	-1	65217	PCDH15	gene_body
+epykit	epykit_45	chr10	74303593	74303922	1	10367	MICU1	gene_body
+epykit	epykit_46	chr10	80672010	80672467	-1	283050	ZMIZ1-AS1	gene_body
+epykit	epykit_47	chr10	102147386	102147978	-1	90271	OLMALINC	gene_body
+epykit	epykit_49	chr10	112170583	112170771	-1	105378481	DUSP5-DT	gene_body
+epykit	epykit_49	chr10	112170583	112170771	-1	105378482	LOC105378482	gene_body
+epykit	epykit_50	chr10	114859409	114859492	1	6934	TCF7L2	gene_body
+epykit	epykit_51	chr10	134255604	134255845	1	105378568	LINC03068	gene_body
+epykit	epykit_53	chr11	34252994	34253328	-1	25841	ABTB2	gene_body
+epykit	epykit_54	chr11	34265241	34265888	-1	25841	ABTB2	gene_body
+epykit	epykit_56	chr11	59950065	59950175	1	64231	MS4A6A	gene_body
+epykit	epykit_58	chr11	63375986	63376684	-1	11145	PLAAT3	gene_body
+epykit	epykit_59	chr11	65904221	65904511	-1	55690	PACS1	gene_body
+epykit	epykit_60	chr11	66697125	66697552	-1	5091	PC	gene_body
+epykit	epykit_62	chr11	83853258	83853593	1	1740	DLG2	gene_body
+epykit	epykit_64	chr11	110220484	110220681	-1	105369486	LINC02732	gene_body
+epykit	epykit_68	chr12	788291	788571	-1	105369597	LINC02455	gene_body
+epykit	epykit_71	chr12	11977107	11977296	-1	2120	ETV6	gene_body
+epykit	epykit_72	chr12	15841214	15841499	1	2059	EPS8	gene_body
+epykit	epykit_73	chr12	39538659	39538741	-1	105369730	LINC02406	gene_body
+epykit	epykit_74	chr12	47611981	47612318	-1	91523	PCED1B	gene_body
+epykit	epykit_75	chr12	58120241	58120294	-1	100130776	AGAP2-AS1	gene_body
+epykit	epykit_75	chr12	58120241	58120294	-1	116986	AGAP2	gene_body
+epykit	epykit_76	chr12	73575049	73575256	-1	101928137	LINC02444	gene_body
+epykit	epykit_77	chr12	92458830	92459111	-1	256021	LINC01619	gene_body
+epykit	epykit_83	chr12	109372192	109372853	-1	55530	SVOP	gene_body
+epykit	epykit_84	chr12	112587380	112587724	-1	10906	TRAFD1	gene_body
+epykit	epykit_87	chr12	120450059	120450268	-1	92558	BICDL1	gene_body
+epykit	epykit_89	chr12	131576001	131576216	-1	283383	ADGRD1	gene_body
+epykit	epykit_91	chr12	133069334	133069455	-1	57666	FBRSL1	gene_body
+epykit	epykit_92	chr12	133335500	133335569	-1	23141	ANKLE2	gene_body
+epykit	epykit_93	chr13	27705063	27705647	-1	100874070	USP12-AS1	gene_body
+epykit	epykit_93	chr13	27705063	27705647	-1	219333	USP12	gene_body
+epykit	epykit_94	chr13	50702913	50703043	-1	10301	DLEU1	gene_body
+epykit	epykit_95	chr13	70659720	70660115	-1	57626	KLHL1	gene_body
+epykit	epykit_99	chr14	28150904	28151122	1	728755	MIR3171HG	gene_body
+epykit	epykit_100	chr14	30284732	30285150	1	5587	PRKD1	gene_body
+epykit	epykit_102	chr14	57457814	57457885	1	100309464	OTX2-AS1	gene_body
+epykit	epykit_103	chr14	61657311	61657491	-1	5583	PRKCH	gene_body
+epykit	epykit_104	chr14	68733856	68734007	-1	5890	RAD51B	gene_body
+epykit	epykit_105	chr14	73893913	73894044	1	101928143	LOC101928143	gene_body
+epykit	epykit_105	chr14	73893913	73894044	1	8650	NUMB	gene_body
+epykit	epykit_107	chr14	93977030	93977465	-1	57578	UNC79	gene_body
+epykit	epykit_109	chr14	102302574	102302770	-1	5527	PPP2R5C	gene_body
+epykit	epykit_112	chr14	104758349	104758533	-1	145195	LINC02691	gene_body
+epykit	epykit_113	chr14	105532917	105533021	-1	102723354	LINC02298	gene_body
+epykit	epykit_114	chr15	26360876	26360997	1	503519	LINC00929	gene_body
+epykit	epykit_116	chr15	38852679	38853002	-1	10125	RASGRP1	gene_body
+epykit	epykit_117	chr15	56018323	56018493	1	283659	PRTG	gene_body
+epykit	epykit_118	chr15	66209557	66209978	-1	84465	MEGF11	gene_body
+epykit	epykit_120	chr15	92490074	92490150	-1	28232	SLCO3A1	gene_body
+epykit	epykit_122	chr15	101529052	101529592	-1	79705	LRRK1	gene_body
+epykit	epykit_124	chr16	1935900	1936108	1	105371048	LINC02124	gene_body
+epykit	epykit_125	chr16	10869071	10869476	-1	780776	TVP23A	gene_body
+epykit	epykit_126	chr16	11253357	11254048	-1	23274	CLEC16A	gene_body
+epykit	epykit_128	chr16	16214725	16215144	1	4363	ABCC1	gene_body
+epykit	epykit_130	chr16	17121549	17121806	-1	102723692	LOC102723692	gene_body
+epykit	epykit_133	chr16	27263033	27263386	-1	197370	NSMCE1	gene_body
+epykit	epykit_134	chr16	31006606	31006790	-1	112755	STX1B	gene_body
+epykit	epykit_135	chr16	34740253	34740437	-1	100130700	TP53TG3HP	gene_body
+epykit	epykit_136	chr16	50117731	50118093	-1	55027	HEATR3	gene_body
+epykit	epykit_137	chr16	67345492	67346127	-1	146212	KCTD19	gene_body
+epykit	epykit_138	chr16	70819029	70819211	-1	55697	VAC14	gene_body
+epykit	epykit_140	chr16	81553482	81553618	1	80790	CMIP	gene_body
+epykit	epykit_142	chr16	88651087	88651424	-1	124245	ZC3H18	gene_body
+epykit	epykit_143	chr17	1848939	1849061	1	146760	RTN4RL1	gene_body
+epykit	epykit_144	chr17	1911702	1911755	1	146760	RTN4RL1	gene_body
+epykit	epykit_145	chr17	2703729	2703898	-1	23108	RAP1GAP2	gene_body
+epykit	epykit_146	chr17	3488906	3488994	1	23729	SHPK	gene_body
+epykit	epykit_146	chr17	3488906	3488994	1	7442	TRPV1	gene_body
+epykit	epykit_147	chr17	3989565	3990051	-1	23140	ZZEF1	gene_body
+epykit	epykit_149	chr17	8283246	8283917	-1	124751	KRABD2	gene_body
+epykit	epykit_149	chr17	8283246	8283917	-1	6154	RPL26	gene_body
+epykit	epykit_150	chr17	17108823	17108889	1	201163	FLCN	gene_body
+epykit	epykit_150	chr17	17108823	17108889	1	201164	PLD6	gene_body
+epykit	epykit_150	chr17	17108823	17108889	1	23164	MPRIP	gene_body
+epykit	epykit_151	chr17	18012704	18012822	1	51168	MYO15A	gene_body
+epykit	epykit_152	chr17	18229094	18229363	-1	140775	SMCR8	gene_body
+epykit	epykit_154	chr17	38717232	38717305	-1	1236	CCR7	gene_body
+epykit	epykit_156	chr17	43227941	43228322	-1	10614	HEXIM1	gene_body
+epykit	epykit_156	chr17	43227941	43228322	-1	112268203	HEXIM2-AS1	gene_body
+epykit	epykit_157	chr17	46163243	46163323	-1	10951	CBX1	gene_body
+epykit	epykit_160	chr17	64360782	64361456	-1	5578	PRKCA	gene_body
+epykit	epykit_161	chr17	65574314	65574407	-1	26207	PITPNC1	gene_body
+epykit	epykit_162	chr17	71024443	71024703	-1	201266	SLC39A11	gene_body
+epykit	epykit_163	chr17	73959725	73960171	1	51	ACOX1	gene_body
+epykit	epykit_164	chr17	75301492	75301643	-1	10801	SEPTIN9	gene_body
+epykit	epykit_165	chr17	77034710	77035169	-1	114897	C1QTNF1	gene_body
+epykit	epykit_166	chr17	78560780	78560853	1	57521	RPTOR	gene_body
+epykit	epykit_167	chr18	2854832	2855076	-1	84034	EMILIN2	gene_body
+epykit	epykit_168	chr18	13223382	13223674	-1	753	LDLRAD4	gene_body
+epykit	epykit_169	chr18	21631588	21631824	-1	125488	TTC39C	gene_body
+epykit	epykit_172	chr18	46327062	46327153	-1	9811	CTIF	gene_body
+epykit	epykit_175	chr18	60924813	60925089	-1	596	BCL2	gene_body
+epykit	epykit_177	chr18	72704100	72704589	-1	55628	ZNF407	gene_body
+epykit	epykit_179	chr18	74180282	74180664	1	9658	ZNF516	gene_body
+epykit	epykit_180	chr19	2622717	2622811	1	2788	GNG7	gene_body
+epykit	epykit_181	chr19	4719618	4720282	-1	91039	DPP9	gene_body
+epykit	epykit_182	chr19	6020648	6020743	1	5990	RFX2	gene_body
+epykit	epykit_183	chr19	13118542	13118679	1	4784	NFIX	gene_body
+epykit	epykit_184	chr19	16688458	16688591	-1	79086	SMIM7	gene_body
+epykit	epykit_184	chr19	16688458	16688591	-1	9441	MED26	gene_body
+epykit	epykit_185	chr19	17542730	17543368	1	93343	MVB12A	gene_body
+epykit	epykit_186	chr19	18175708	18175835	1	3594	IL12RB1	gene_body
+epykit	epykit_187	chr19	29013924	29014134	1	100420587	LOC100420587	gene_body
+epykit	epykit_192	chr19	45491621	45491769	-1	1209	CLPTM1	gene_body
+epykit	epykit_194	chr19	49107000	49107068	1	54854	FAM83E	gene_body
+epykit	epykit_195	chr19	49982276	49982651	1	2323	FLT3LG	gene_body
+epykit	epykit_196	chr19	51046529	51046775	-1	94030	LRRC4B	gene_body
+epykit	epykit_197	chr2	3226904	3227230	-1	7260	EIPR1	gene_body
+epykit	epykit_198	chr2	7576415	7576772	-1	100506274	LOC100506274	gene_body
+epykit	epykit_199	chr2	8915456	8915582	-1	57498	KIDINS220	gene_body
+epykit	epykit_201	chr2	25318550	25318815	-1	22979	EFR3B	gene_body
+epykit	epykit_202	chr2	25461583	25461916	1	1788	DNMT3A	gene_body
+epykit	epykit_204	chr2	30372599	30373186	-1	51646	YPEL5	gene_body
+epykit	epykit_205	chr2	33756448	33756655	-1	25780	RASGRP3	gene_body
+epykit	epykit_207	chr2	50345255	50346276	-1	9378	NRXN1	gene_body
+epykit	epykit_208	chr2	52017563	52017987	-1	730100	NRXN1-DT	gene_body
+epykit	epykit_210	chr2	71057518	71057902	-1	50489	CD207	gene_body
+epykit	epykit_211	chr2	78504286	78505111	-1	101927967	LOC101927967	gene_body
+epykit	epykit_212	chr2	86464455	86464603	-1	65055	REEP1	gene_body
+epykit	epykit_213	chr2	98274876	98274971	1	10120	ACTR1B	gene_body
+epykit	epykit_214	chr2	100898115	100898486	-1	164832	LONRF2	gene_body
+epykit	epykit_215	chr2	101011803	101012031	-1	9486	CHST10	gene_body
+epykit	epykit_217	chr2	112493403	112493531	-1	64682	ANAPC1	gene_body
+epykit	epykit_222	chr2	173419735	173419824	-1	124900513	PDK1-AS1	gene_body
+epykit	epykit_224	chr2	179392999	179393122	-1	100506866	TTN-AS1	gene_body
+epykit	epykit_224	chr2	179392999	179393122	-1	101927055	LOC101927055	gene_body
+epykit	epykit_224	chr2	179392999	179393122	-1	7273	TTN	gene_body
+epykit	epykit_225	chr2	185876754	185877004	-1	105373782	LOC105373782	gene_body
+epykit	epykit_228	chr2	206611829	206612345	-1	8828	NRP2	gene_body
+epykit	epykit_229	chr2	208199169	208199865	-1	101927865	MYOSLID-AS1	gene_body
+epykit	epykit_230	chr2	214180154	214180601	-1	79582	SPAG16	gene_body
+epykit	epykit_231	chr2	218499043	218499497	-1	729582	DIRC3	gene_body
+epykit	epykit_232	chr2	231670531	231670600	-1	51719	CAB39	gene_body
+epykit	epykit_233	chr2	231838859	231839246	-1	348761	SPATA3-AS1	gene_body
+epykit	epykit_235	chr2	238809774	238810121	-1	10267	RAMP1	gene_body
+epykit	epykit_236	chr20	15939851	15940236	-1	140733	MACROD2	gene_body
+epykit	epykit_236	chr20	15939851	15940236	-1	613266	LOC613266	gene_body
+epykit	epykit_238	chr20	24932695	24932870	1	8530	CST7	gene_body
+epykit	epykit_239	chr20	25127997	25128210	-1	284798	LOC284798	gene_body
+epykit	epykit_240	chr20	25990463	25990541	1	100134868	LOC100134868	gene_body
+epykit	epykit_240	chr20	25990463	25990541	1	284800	FAM182A	gene_body
+epykit	epykit_241	chr20	30674379	30674559	-1	3055	HCK	gene_body
+epykit	epykit_242	chr20	31000968	31001523	-1	171023	ASXL1	gene_body
+epykit	epykit_244	chr20	40133892	40134172	-1	84181	CHD6	gene_body
+epykit	epykit_248	chr20	62870522	62870864	-1	4661	MYT1	gene_body
+epykit	epykit_251	chr21	32710820	32711153	-1	7074	TIAM1	gene_body
+epykit	epykit_252	chr21	43683982	43684133	1	9619	ABCG1	gene_body
+epykit	epykit_253	chr21	43832003	43832216	-1	53347	UBASH3A	gene_body
+epykit	epykit_254	chr21	45604896	45605082	-1	8209	GATD3	gene_body
+epykit	epykit_255	chr21	45722067	45722262	1	5211	PFKL	gene_body
+epykit	epykit_256	chr21	47581023	47581111	1	84221	SPATC1L	gene_body
+epykit	epykit_257	chr22	18565828	18566088	-1	51807	TUBA8	gene_body
+epykit	epykit_257	chr22	18565828	18566088	-1	55670	PEX26	gene_body
+epykit	epykit_258	chr22	26039219	26039555	-1	157	GRK3	gene_body
+epykit	epykit_259	chr22	30744577	30745110	-1	10291	SF3A1	gene_body
+epykit	epykit_260	chr22	32889122	32889193	-1	25793	FBXO7	gene_body
+epykit	epykit_261	chr22	36054501	36054805	-1	80830	APOL6	gene_body
+epykit	epykit_262	chr22	39095377	39095570	1	9929	JOSD1	gene_body
+epykit	epykit_263	chr22	39495663	39496163	-1	164668	APOBEC3H	gene_body
+epykit	epykit_264	chr22	43622027	43622458	1	80274	SCUBE1	gene_body
+epykit	epykit_265	chr22	45984286	45984715	1	2192	FBLN1	gene_body
+epykit	epykit_266	chr22	46625614	46625989	1	5465	PPARA	gene_body
+epykit	epykit_267	chr3	1295005	1295409	1	27255	CNTN6	gene_body
+epykit	epykit_268	chr3	9800139	9800836	1	4968	OGG1	gene_body
+epykit	epykit_268	chr3	9800139	9800836	1	8536	CAMK1	gene_body
+epykit	epykit_270	chr3	11482966	11483284	-1	10533	ATG7	gene_body
+epykit	epykit_271	chr3	12944258	12944315	1	9922	IQSEC1	gene_body
+epykit	epykit_272	chr3	16551739	16552337	-1	23180	RFTN1	gene_body
+epykit	epykit_273	chr3	53216989	53217094	1	5580	PRKCD	gene_body
+epykit	epykit_274	chr3	62352133	62352852	-1	100506994	PTPRG-AS1	gene_body
+epykit	epykit_277	chr3	85212505	85212701	1	253559	CADM2	gene_body
+epykit	epykit_282	chr3	151878221	151878734	-1	101928166	LOC101928166	gene_body
+epykit	epykit_282	chr3	151878221	151878734	-1	121832814	LINC02917	gene_body
+epykit	epykit_283	chr3	154037702	154038133	-1	170506	DHX36	gene_body
+epykit	epykit_284	chr3	196749820	196749949	-1	4241	MELTF	gene_body
+epykit	epykit_285	chr3	197115185	197115437	1	105374308	LOC105374308	gene_body
+epykit	epykit_286	chr4	873391	873760	-1	2580	GAK	gene_body
+epykit	epykit_287	chr4	2335879	2335982	1	57732	ZFYVE28	gene_body
+epykit	epykit_288	chr4	26874742	26875277	-1	57620	STIM2	gene_body
+epykit	epykit_293	chr4	88041435	88041727	-1	4299	AFF1	gene_body
+epykit	epykit_294	chr4	96137436	96137784	1	8633	UNC5C	gene_body
+epykit	epykit_295	chr4	98946827	98947267	-1	285555	STPG2	gene_body
+epykit	epykit_296	chr4	100573750	100573849	1	285556	C4orf54	gene_body
+epykit	epykit_297	chr4	103517412	103517999	-1	4790	NFKB1	gene_body
+epykit	epykit_298	chr4	103520169	103520553	-1	4790	NFKB1	gene_body
+epykit	epykit_307	chr5	343703	343764	1	116412618	PDCD6-AHRR	gene_body
+epykit	epykit_307	chr5	343703	343764	1	57491	AHRR	gene_body
+epykit	epykit_308	chr5	14446179	14446293	1	7204	TRIO	gene_body
+epykit	epykit_310	chr5	36679704	36679941	-1	6507	SLC1A3	gene_body
+epykit	epykit_311	chr5	55454957	55455410	1	79722	ANKRD55	gene_body
+epykit	epykit_312	chr5	68728481	68728785	-1	153562	MARVELD2	gene_body
+epykit	epykit_313	chr5	70819776	70820059	-1	55814	BDP1	gene_body
+epykit	epykit_316	chr5	106745347	106745791	1	1946	EFNA5	gene_body
+epykit	epykit_317	chr5	121721360	121721589	-1	9627	SNCAIP	gene_body
+epykit	epykit_318	chr5	131999388	131999990	-1	101927761	TH2LCRR	gene_body
+epykit	epykit_319	chr5	140710475	140710524	1	56114	PCDHGA1	gene_body
+epykit	epykit_320	chr5	142412848	142413436	-1	23092	ARHGAP26	gene_body
+epykit	epykit_321	chr5	142586012	142586180	-1	23092	ARHGAP26	gene_body
+epykit	epykit_322	chr5	142593452	142593645	-1	23092	ARHGAP26	gene_body
+epykit	epykit_330	chr6	16564018	16564172	1	6310	ATXN1	gene_body
+epykit	epykit_332	chr6	39193211	39193871	1	8645	KCNK5	gene_body
+epykit	epykit_334	chr6	86260376	86261004	-1	10492	SYNCRIP	gene_body
+epykit	epykit_334	chr6	86260376	86261004	-1	57231	SNX14	gene_body
+epykit	epykit_336	chr6	114449222	114449695	-1	101927768	HDAC2-AS2	gene_body
+epykit	epykit_336	chr6	114449222	114449695	-1	222537	HS3ST5	gene_body
+epykit	epykit_337	chr6	114862125	114862261	1	105377959	LNCPOIR	gene_body
+epykit	epykit_338	chr6	143521719	143522060	-1	51390	AIG1	gene_body
+epykit	epykit_339	chr6	167878870	167879084	-1	105378127	LOC105378127	gene_body
+epykit	epykit_341	chr7	2089965	2090180	-1	8379	MAD1L1	gene_body
+epykit	epykit_342	chr7	4047189	4047321	-1	221935	SDK1	gene_body
+epykit	epykit_343	chr7	5408449	5408705	1	84629	TNRC18	gene_body
+epykit	epykit_344	chr7	28519089	28519453	-1	9586	CREB5	gene_body
+epykit	epykit_346	chr7	92431003	92431276	1	1021	CDK6	gene_body
+epykit	epykit_348	chr7	98739495	98739626	-1	57154	SMURF1	gene_body
+epykit	epykit_349	chr7	101629035	101629309	-1	1523	CUX1	gene_body
+epykit	epykit_350	chr7	105429260	105429604	-1	222255	ATXN7L1	gene_body
+epykit	epykit_351	chr7	128235077	128235458	1	402483	LINC01000	gene_body
+epykit	epykit_352	chr7	130716301	130716465	-1	378805	LINC-PINT	gene_body
+epykit	epykit_353	chr7	139353944	139354371	-1	28996	HIPK2	gene_body
+epykit	epykit_355	chr7	147906626	147906986	-1	26047	CNTNAP2	gene_body
+epykit	epykit_357	chr8	1378431	1378975	-1	9228	DLGAP2	gene_body
+epykit	epykit_358	chr8	3804398	3804980	-1	64478	CSMD1	gene_body
+epykit	epykit_359	chr8	11436047	11436130	-1	83655	LINC00208	gene_body
+epykit	epykit_360	chr8	11600145	11600276	-1	2626	GATA4	gene_body
+epykit	epykit_361	chr8	11709251	11709331	1	1508	CTSB	gene_body
+epykit	epykit_362	chr8	13691480	13692008	-1	105379292	LOC105379292	gene_body
+epykit	epykit_363	chr8	22105571	22105787	-1	661	POLR3D	gene_body
+epykit	epykit_365	chr8	32873229	32873771	-1	105379362	LOC105379362	gene_body
+epykit	epykit_366	chr8	38376268	38377090	1	389649	LINC03042	gene_body
+epykit	epykit_368	chr8	56901471	56902059	-1	4067	LYN	gene_body
+epykit	epykit_370	chr8	93014002	93014339	1	862	RUNX1T1	gene_body
+epykit	epykit_371	chr8	101339216	101339958	-1	25897	RNF19A	gene_body
+epykit	epykit_372	chr8	103567601	103567706	-1	4956	ODF1	gene_body
+epykit	epykit_374	chr8	123982838	123983023	-1	22882	ZHX2	gene_body
+epykit	epykit_376	chr8	131077980	131078200	-1	50807	ASAP1	gene_body
+epykit	epykit_377	chr8	131091945	131092149	-1	50807	ASAP1	gene_body
+epykit	epykit_378	chr8	134083066	134083411	-1	6503	SLA	gene_body
+epykit	epykit_378	chr8	134083066	134083411	-1	7038	TG	gene_body
+epykit	epykit_379	chr8	137686852	137687039	-1	107986980	LINC02055	gene_body
+epykit	epykit_380	chr8	142416334	142416549	-1	11156	PTP4A3	gene_body
+epykit	epykit_381	chr8	144665987	144666168	1	1936	EEF1D	gene_body
+epykit	epykit_385	chr9	72056133	72056752	1	320	APBA1	gene_body
+epykit	epykit_386	chr9	72877562	72877931	-1	23137	SMC5	gene_body
+epykit	epykit_388	chr9	77715735	77716397	-1	26578	OSTF1	gene_body
+epykit	epykit_391	chr9	114791016	114791415	-1	105376220	LINC02977	gene_body
+epykit	epykit_392	chr9	114836650	114837142	-1	64420	SUSD1	gene_body
+epykit	epykit_393	chr9	117762469	117762658	-1	50514	DELEC1	gene_body
+epykit	epykit_394	chr9	124658791	124658889	1	158135	TTLL11	gene_body
+epykit	epykit_395	chr9	126345354	126345518	-1	57706	DENND1A	gene_body
+epykit	epykit_396	chr9	130310711	130310931	-1	64855	NIBAN2	gene_body
+epykit	epykit_397	chr9	130979974	130980204	1	1759	DNM1	gene_body
+epykit	epykit_398	chr9	131552933	131553284	-1	54662	TBC1D13	gene_body
+epykit	epykit_399	chr9	132820552	132820803	1	57720	GPR107	gene_body
+epykit	epykit_401	chr9	136821612	136821799	-1	7410	VAV2	gene_body
+epykit	epykit_402	chr9	136822389	136822656	-1	7410	VAV2	gene_body
+epykit	epykit_403	chr9	138651009	138651251	1	57582	KCNT1	gene_body
+epykit	epykit_404	chr9	140655553	140655654	-1	79813	EHMT1	gene_body
+epykit	epykit_405	chr9	140720287	140720614	1	79813	EHMT1	gene_body
+epykit	epykit_407	chrX	9555230	9555285	1	6907	TBL1X	gene_body
+epykit	epykit_410	chrX	37347122	37347863	1	5638	PRRG1	gene_body
+epykit	epykit_410	chrX	37347122	37347863	1	7102	TSPAN7	gene_body
+epykit	epykit_412	chrX	41437392	41437759	1	8573	CASK	gene_body
+epykit	epykit_413	chrX	45710567	45710656	-1	104457406	MIR222HG	gene_body
+epykit	epykit_413	chrX	45710567	45710656	-1	401585	LINC02595	gene_body
+epykit	epykit_414	chrX	47051027	47051109	-1	7317	UBA1	gene_body
+epykit	epykit_415	chrX	49028369	49028464	-1	5355	PLP2	gene_body
+epykit	epykit_416	chrX	49056825	49056885	-1	100873921	SYP-AS1	gene_body
+epykit	epykit_417	chrX	53197355	53197955	1	102723508	KANTR	gene_body
+epykit	epykit_418	chrX	54948324	54948699	-1	7216	TRO	gene_body
+epykit	epykit_419	chrX	56258960	56259021	-1	11279	KLF8	gene_body
+epykit	epykit_421	chrX	64327698	64328354	1	340554	ZC3H12B	gene_body
+epykit	epykit_422	chrX	74351802	74352216	1	22	ABCB7	gene_body
+epykit	epykit_424	chrX	80457014	80457401	-1	79366	HMGN5	gene_body
+epykit	epykit_425	chrX	102195437	102195897	-1	100287765	LINC00630	gene_body
+epykit	epykit_426	chrX	117061215	117061535	1	90293	KLHL13	gene_body
+epykit	epykit_428	chrX	128902025	128902281	1	7512	XPNPEP2	gene_body
+epykit	epykit_429	chrX	134974753	134974965	-1	55511	SAGE1	gene_body
+epykit	epykit_430	chrX	153046217	153046374	-1	26576	SRPK3	gene_body
+epykit	epykit_431	chrX	154444993	154445067	-1	7411	VBP1	gene_body
+epykit	epykit_8	chr1	25297008	25297157	-1			intergenic
+epykit	epykit_9	chr1	26906020	26906493	-1			intergenic
+epykit	epykit_14	chr1	84727284	84727941	-1			intergenic
+epykit	epykit_17	chr1	107334046	107334177	-1			intergenic
+epykit	epykit_19	chr1	116744299	116745025	1			intergenic
+epykit	epykit_23	chr1	165341882	165342205	-1			intergenic
+epykit	epykit_24	chr1	192535446	192535921	-1			intergenic
+epykit	epykit_27	chr1	221948688	221948970	-1			intergenic
+epykit	epykit_32	chr10	2132176	2133047	1			intergenic
+epykit	epykit_34	chr10	3929018	3929366	-1			intergenic
+epykit	epykit_35	chr10	3944752	3944858	-1			intergenic
+epykit	epykit_42	chr10	39143244	39143348	1			intergenic
+epykit	epykit_44	chr10	70813672	70813817	-1			intergenic
+epykit	epykit_48	chr10	112084386	112084804	-1			intergenic
+epykit	epykit_55	chr11	35880804	35881557	-1			intergenic
+epykit	epykit_57	chr11	62673813	62674162	-1			intergenic
+epykit	epykit_61	chr11	69355671	69355756	-1			intergenic
+epykit	epykit_63	chr11	87198620	87199321	-1			intergenic
+epykit	epykit_65	chr11	116451953	116452039	-1			intergenic
+epykit	epykit_66	chr11	119812037	119812358	-1			intergenic
+epykit	epykit_67	chr12	778340	778537	-1			intergenic
+epykit	epykit_69	chr12	4085678	4086104	-1			intergenic
+epykit	epykit_70	chr12	4255524	4255678	-1			intergenic
+epykit	epykit_78	chr12	92896721	92897318	-1			intergenic
+epykit	epykit_79	chr12	92947266	92947451	-1			intergenic
+epykit	epykit_80	chr12	102933687	102933917	-1			intergenic
+epykit	epykit_81	chr12	108307905	108308336	1			intergenic
+epykit	epykit_82	chr12	109011201	109011363	-1			intergenic
+epykit	epykit_85	chr12	115660940	115661450	-1			intergenic
+epykit	epykit_86	chr12	116863330	116863701	1			intergenic
+epykit	epykit_88	chr12	123205282	123205784	-1			intergenic
+epykit	epykit_90	chr12	132409114	132409292	-1			intergenic
+epykit	epykit_96	chr13	85828585	85828935	-1			intergenic
+epykit	epykit_97	chr13	100047927	100048060	-1			intergenic
+epykit	epykit_98	chr13	104286927	104287082	-1			intergenic
+epykit	epykit_101	chr14	42590625	42591288	-1			intergenic
+epykit	epykit_106	chr14	76017631	76017870	-1			intergenic
+epykit	epykit_108	chr14	101992056	101992174	1			intergenic
+epykit	epykit_110	chr14	103230617	103230871	-1			intergenic
+epykit	epykit_111	chr14	103558541	103558841	1			intergenic
+epykit	epykit_115	chr15	27878251	27878764	-1			intergenic
+epykit	epykit_119	chr15	85909568	85909895	-1			intergenic
+epykit	epykit_121	chr15	93790917	93791030	1			intergenic
+epykit	epykit_127	chr16	11277167	11277375	-1			intergenic
+epykit	epykit_129	chr16	17002013	17002383	-1			intergenic
+epykit	epykit_131	chr16	18985581	18985891	1			intergenic
+epykit	epykit_132	chr16	20613051	20613623	1			intergenic
+epykit	epykit_139	chr16	80614165	80614604	-1			intergenic
+epykit	epykit_141	chr16	88511863	88511918	-1			intergenic
+epykit	epykit_153	chr17	38630274	38630486	-1			intergenic
+epykit	epykit_155	chr17	38755602	38755860	-1			intergenic
+epykit	epykit_158	chr17	62735838	62736094	-1			intergenic
+epykit	epykit_170	chr18	27336967	27337504	1			intergenic
+epykit	epykit_171	chr18	31415220	31415496	-1			intergenic
+epykit	epykit_173	chr18	57576652	57576999	-1			intergenic
+epykit	epykit_174	chr18	60770890	60771310	1			intergenic
+epykit	epykit_176	chr18	61694885	61695379	-1			intergenic
+epykit	epykit_178	chr18	72834248	72834583	1			intergenic
+epykit	epykit_188	chr19	34626377	34626543	1			intergenic
+epykit	epykit_189	chr19	35480225	35480459	-1			intergenic
+epykit	epykit_190	chr19	35481389	35481960	-1			intergenic
+epykit	epykit_193	chr19	46760260	46760487	1			intergenic
+epykit	epykit_200	chr2	20639008	20639300	1			intergenic
+epykit	epykit_203	chr2	30359847	30360082	-1			intergenic
+epykit	epykit_206	chr2	43082021	43082218	-1			intergenic
+epykit	epykit_209	chr2	65521245	65521486	-1			intergenic
+epykit	epykit_216	chr2	102246843	102246985	-1			intergenic
+epykit	epykit_218	chr2	127980695	127981099	1			intergenic
+epykit	epykit_219	chr2	131507777	131508425	-1			intergenic
+epykit	epykit_220	chr2	137067633	137068481	-1			intergenic
+epykit	epykit_221	chr2	154143585	154143723	1			intergenic
+epykit	epykit_223	chr2	177752832	177753022	1			intergenic
+epykit	epykit_226	chr2	191657775	191658419	-1			intergenic
+epykit	epykit_227	chr2	204450732	204451511	-1			intergenic
+epykit	epykit_234	chr2	235399668	235399819	-1			intergenic
+epykit	epykit_237	chr20	21422059	21422164	-1			intergenic
+epykit	epykit_243	chr20	31553169	31553364	-1			intergenic
+epykit	epykit_245	chr20	49093893	49094354	1			intergenic
+epykit	epykit_246	chr20	54796739	54797128	-1			intergenic
+epykit	epykit_247	chr20	56566754	56567079	-1			intergenic
+epykit	epykit_249	chr21	18733315	18733528	1			intergenic
+epykit	epykit_250	chr21	20338889	20339101	1			intergenic
+epykit	epykit_269	chr3	9906090	9906403	1			intergenic
+epykit	epykit_275	chr3	71922555	71923072	-1			intergenic
+epykit	epykit_276	chr3	75445586	75445779	1			intergenic
+epykit	epykit_278	chr3	90211564	90212063	1			intergenic
+epykit	epykit_279	chr3	119281437	119281927	-1			intergenic
+epykit	epykit_280	chr3	119290610	119290875	-1			intergenic
+epykit	epykit_281	chr3	134125815	134125865	1			intergenic
+epykit	epykit_289	chr4	33751278	33751818	-1			intergenic
+epykit	epykit_290	chr4	38732484	38732622	-1			intergenic
+epykit	epykit_291	chr4	42255924	42256385	-1			intergenic
+epykit	epykit_292	chr4	56207521	56207688	-1			intergenic
+epykit	epykit_299	chr4	111940499	111940816	-1			intergenic
+epykit	epykit_300	chr4	139221175	139221422	-1			intergenic
+epykit	epykit_301	chr4	160841844	160842363	-1			intergenic
+epykit	epykit_302	chr4	164097113	164097498	-1			intergenic
+epykit	epykit_303	chr4	165603247	165603401	-1			intergenic
+epykit	epykit_304	chr4	167064357	167064735	-1			intergenic
+epykit	epykit_305	chr4	188094775	188095005	1			intergenic
+epykit	epykit_306	chr4	190522152	190522386	1			intergenic
+epykit	epykit_309	chr5	26774211	26774723	1			intergenic
+epykit	epykit_314	chr5	78884696	78884925	-1			intergenic
+epykit	epykit_315	chr5	79388492	79388613	-1			intergenic
+epykit	epykit_323	chr5	146484970	146485412	1			intergenic
+epykit	epykit_324	chr5	157038757	157039264	-1			intergenic
+epykit	epykit_325	chr5	172242737	172243002	-1			intergenic
+epykit	epykit_326	chr6	357056	357502	-1			intergenic
+epykit	epykit_327	chr6	1257703	1258198	1			intergenic
+epykit	epykit_328	chr6	3209729	3210233	-1			intergenic
+epykit	epykit_329	chr6	14954202	14954689	-1			intergenic
+epykit	epykit_331	chr6	30495425	30496112	-1			intergenic
+epykit	epykit_333	chr6	78151838	78151991	-1			intergenic
+epykit	epykit_335	chr6	89723004	89723525	-1			intergenic
+epykit	epykit_340	chr7	440715	441042	1			intergenic
+epykit	epykit_345	chr7	34237376	34237479	-1			intergenic
+epykit	epykit_354	chr7	145220707	145220914	1			intergenic
+epykit	epykit_356	chr7	155939246	155939772	1			intergenic
+epykit	epykit_364	chr8	29357592	29357817	-1			intergenic
+epykit	epykit_367	chr8	49241624	49241684	1			intergenic
+epykit	epykit_369	chr8	92063506	92064038	1			intergenic
+epykit	epykit_373	chr8	103750820	103750899	-1			intergenic
+epykit	epykit_375	chr8	126655094	126655494	-1			intergenic
+epykit	epykit_382	chr9	21659547	21659911	-1			intergenic
+epykit	epykit_383	chr9	29270100	29270364	1			intergenic
+epykit	epykit_384	chr9	31470286	31470690	1			intergenic
+epykit	epykit_387	chr9	73045759	73046389	-1			intergenic
+epykit	epykit_389	chr9	90078612	90079161	-1			intergenic
+epykit	epykit_390	chr9	93418235	93418829	-1			intergenic
+epykit	epykit_400	chr9	135871518	135871782	1			intergenic
+epykit	epykit_406	chrX	5469382	5470001	1			intergenic
+epykit	epykit_408	chrX	20689139	20689629	1			intergenic
+epykit	epykit_409	chrX	28447166	28447452	1			intergenic
+epykit	epykit_411	chrX	41143197	41143699	1			intergenic
+epykit	epykit_420	chrX	58289722	58289780	1			intergenic
+epykit	epykit_423	chrX	78951572	78952157	-1			intergenic
+epykit	epykit_427	chrX	121130679	121131509	1			intergenic
+DSS	DSS_4	chr7	5632707	5632954	1	6624	FSCN1	promoter
+DSS	DSS_7	chrX	153775481	153775813	-1	2539	G6PD	promoter
+DSS	DSS_10	chrX	134556245	134556505	-1	399668	SMIM10L2A	promoter
+DSS	DSS_12	chr11	61734807	61735079	1	2495	FTH1	promoter
+DSS	DSS_12	chr11	61734807	61735079	1	399900	LOC399900	promoter
+DSS	DSS_15	chrX	68724300	68724497	-1	27112	NALF2	promoter
+DSS	DSS_29	chrX	153991450	153991716	-1	1736	DKC1	promoter
+DSS	DSS_62	chrX	136116174	136116260	-1	83550	GPR101	promoter
+DSS	DSS_74	chrX	11776529	11776721	-1	10943	MSL3	promoter
+DSS	DSS_85	chr11	102216819	102217151	-1	329	BIRC2	promoter
+DSS	DSS_87	chr17	63053862	63054049	-1	10672	GNA13	promoter
+DSS	DSS_95	chr5	138090844	138091169	-1	105379194	CTNNA1-AS1	promoter
+DSS	DSS_134	chrX	48398418	48398528	-1	4943	TBC1D25	promoter
+DSS	DSS_137	chrX	128657224	128657297	-1	6594	SMARCA1	promoter
+DSS	DSS_147	chr5	131999808	132000045	-1	101927761	TH2LCRR	promoter
+DSS	DSS_155	chrX	136649977	136650032	-1	122965335	LINC02931	promoter
+DSS	DSS_165	chr7	130132637	130132690	1	317751	MESTIT1	promoter
+DSS	DSS_177	chrX	48958468	48958534	-1	11152	WDR45	promoter
+DSS	DSS_183	chrX	146993523	146993665	-1	100126270	FMR1-AS1	promoter
+DSS	DSS_183	chrX	146993523	146993665	-1	2332	FMR1	promoter
+DSS	DSS_186	chrX	54556488	54556538	-1	54552	GNL3L	promoter
+DSS	DSS_203	chr6	138113203	138113530	-1	100507406	LINC02539	promoter
+DSS	DSS_207	chr4	26163874	26164047	-1	3516	RBPJ	promoter
+DSS	DSS_210	chrX	153991307	153991395	-1	1736	DKC1	promoter
+DSS	DSS_1	chrX	54070313	54070699	-1	23133	PHF8	gene_body
+DSS	DSS_2	chr17	7311620	7311919	-1	57555	NLGN2	gene_body
+DSS	DSS_3	chr11	72533063	72533379	1	89849	ATG16L2	gene_body
+DSS	DSS_4	chr7	5632707	5632954	1	6624	FSCN1	gene_body
+DSS	DSS_5	chrX	119149280	119149721	-1	101928941	RHOXF1P1	gene_body
+DSS	DSS_6	chr16	10868996	10869477	-1	780776	TVP23A	gene_body
+DSS	DSS_7	chrX	153775481	153775813	-1	2539	G6PD	gene_body
+DSS	DSS_7	chrX	153775481	153775813	-1	8517	IKBKG	gene_body
+DSS	DSS_8	chr19	4719606	4720103	-1	91039	DPP9	gene_body
+DSS	DSS_9	chr11	46369047	46369195	1	8525	DGKZ	gene_body
+DSS	DSS_10	chrX	134556245	134556505	-1	399668	SMIM10L2A	gene_body
+DSS	DSS_11	chrX	139014581	139014740	-1	286410	ATP11C	gene_body
+DSS	DSS_12	chr11	61734807	61735079	1	2495	FTH1	gene_body
+DSS	DSS_14	chr2	208199030	208199687	-1	101927865	MYOSLID-AS1	gene_body
+DSS	DSS_15	chrX	68724300	68724497	-1	27112	NALF2	gene_body
+DSS	DSS_16	chr4	58061752	58061991	-1	255130	IGFBP7-AS1	gene_body
+DSS	DSS_17	chr17	42431414	42431502	1	284069	FAM171A2	gene_body
+DSS	DSS_18	chr14	45267631	45267899	-1	101927351	LINC02302	gene_body
+DSS	DSS_18	chr14	45267631	45267899	-1	101927418	LOC101927418	gene_body
+DSS	DSS_19	chr21	32710715	32711202	-1	7074	TIAM1	gene_body
+DSS	DSS_20	chrX	142722546	142722814	-1	139065	SLITRK4	gene_body
+DSS	DSS_21	chr22	36054502	36055036	-1	80830	APOL6	gene_body
+DSS	DSS_22	chr1	201372948	201373427	-1	7135	TNNI1	gene_body
+DSS	DSS_24	chr5	142593453	142593846	-1	23092	ARHGAP26	gene_body
+DSS	DSS_25	chr9	126345355	126345519	-1	57706	DENND1A	gene_body
+DSS	DSS_26	chr4	873423	873900	-1	2580	GAK	gene_body
+DSS	DSS_27	chr2	101011804	101012179	-1	9486	CHST10	gene_body
+DSS	DSS_28	chr10	11318312	11318867	-1	10659	CELF2	gene_body
+DSS	DSS_28	chr10	11318312	11318867	-1	414196	CELF2-AS1	gene_body
+DSS	DSS_29	chrX	153991450	153991716	-1	1736	DKC1	gene_body
+DSS	DSS_30	chrX	136114156	136114420	-1	83550	GPR101	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56100	PCDHGB6	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56101	PCDHGB5	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56102	PCDHGB3	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56103	PCDHGB2	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56104	PCDHGB1	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56106	PCDHGA10	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56107	PCDHGA9	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56108	PCDHGA7	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56109	PCDHGA6	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56110	PCDHGA5	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56111	PCDHGA4	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56112	PCDHGA3	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56113	PCDHGA2	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	56114	PCDHGA1	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	8641	PCDHGB4	gene_body
+DSS	DSS_31	chr5	140794434	140794642	1	9708	PCDHGA8	gene_body
+DSS	DSS_32	chr5	70819777	70820154	-1	55814	BDP1	gene_body
+DSS	DSS_33	chr11	46369284	46369418	1	8525	DGKZ	gene_body
+DSS	DSS_34	chr7	28518986	28519570	-1	9586	CREB5	gene_body
+DSS	DSS_35	chr16	50117750	50118229	-1	55027	HEATR3	gene_body
+DSS	DSS_36	chr1	27165289	27165674	-1	84243	ZDHHC18	gene_body
+DSS	DSS_38	chr9	114836611	114836976	-1	64420	SUSD1	gene_body
+DSS	DSS_41	chr2	33756408	33756796	-1	25780	RASGRP3	gene_body
+DSS	DSS_42	chr12	92458831	92459112	-1	256021	LINC01619	gene_body
+DSS	DSS_43	chrX	70503821	70503962	-1	4841	NONO	gene_body
+DSS	DSS_44	chr12	11976967	11977358	-1	2120	ETV6	gene_body
+DSS	DSS_45	chr2	162197787	162197845	1	10213	PSMD14	gene_body
+DSS	DSS_46	chr12	121972412	121972795	-1	84678	KDM2B	gene_body
+DSS	DSS_47	chr3	188016899	188017246	-1	4026	LPP	gene_body
+DSS	DSS_48	chr22	26039122	26039653	-1	157	GRK3	gene_body
+DSS	DSS_52	chr8	103567423	103567707	-1	4956	ODF1	gene_body
+DSS	DSS_55	chr7	5568056	5568260	1	60	ACTB	gene_body
+DSS	DSS_57	chr1	245851740	245851828	-1	55083	KIF26B	gene_body
+DSS	DSS_59	chr7	105429261	105429605	-1	222255	ATXN7L1	gene_body
+DSS	DSS_61	chr10	12677044	12677477	-1	57118	CAMK1D	gene_body
+DSS	DSS_63	chr9	132649657	132650022	-1	23048	FNBP1	gene_body
+DSS	DSS_66	chr19	18888364	18888472	1	23373	CRTC1	gene_body
+DSS	DSS_67	chr9	114790866	114791182	-1	105376220	LINC02977	gene_body
+DSS	DSS_68	chr12	112587246	112587888	-1	10906	TRAFD1	gene_body
+DSS	DSS_69	chr11	48125215	48125639	-1	5795	PTPRJ	gene_body
+DSS	DSS_71	chr9	131552809	131553285	-1	54662	TBC1D13	gene_body
+DSS	DSS_72	chr8	22105572	22105999	-1	661	POLR3D	gene_body
+DSS	DSS_73	chr4	103520170	103520661	-1	4790	NFKB1	gene_body
+DSS	DSS_74	chrX	11776529	11776721	-1	10943	MSL3	gene_body
+DSS	DSS_77	chrX	150565525	150565607	-1	203547	VMA21	gene_body
+DSS	DSS_79	chr11	110220485	110220902	-1	105369486	LINC02732	gene_body
+DSS	DSS_80	chr9	134497560	134497713	-1	2889	RAPGEF1	gene_body
+DSS	DSS_81	chr2	8915457	8915583	-1	57498	KIDINS220	gene_body
+DSS	DSS_82	chr13	113572487	113572752	-1	23263	MCF2L	gene_body
+DSS	DSS_83	chrX	153626253	153626333	-1	6134	RPL10	gene_body
+DSS	DSS_84	chr9	77715865	77716167	-1	26578	OSTF1	gene_body
+DSS	DSS_86	chr5	179554198	179554274	1	255426	RASGEF1C	gene_body
+DSS	DSS_89	chr14	102302575	102302771	-1	5527	PPP2R5C	gene_body
+DSS	DSS_91	chr4	103517236	103518013	-1	4790	NFKB1	gene_body
+DSS	DSS_92	chr12	131575945	131576217	-1	283383	ADGRD1	gene_body
+DSS	DSS_93	chr2	70745089	70745568	-1	7039	TGFA	gene_body
+DSS	DSS_94	chr7	148853940	148854354	-1	57541	ZNF398	gene_body
+DSS	DSS_95	chr5	138090844	138091169	-1	1495	CTNNA1	gene_body
+DSS	DSS_96	chr1	25913026	25913076	1	26119	LDLRAP1	gene_body
+DSS	DSS_97	chr18	72704386	72704590	-1	55628	ZNF407	gene_body
+DSS	DSS_99	chr17	3989566	3989933	-1	23140	ZZEF1	gene_body
+DSS	DSS_100	chr19	18771327	18771468	1	55295	KLHL26	gene_body
+DSS	DSS_101	chr4	14845741	14845942	-1	201853	LINC00504	gene_body
+DSS	DSS_104	chr12	120449887	120450289	-1	92558	BICDL1	gene_body
+DSS	DSS_105	chr3	16551503	16551978	-1	23180	RFTN1	gene_body
+DSS	DSS_106	chr10	11241875	11242187	-1	10659	CELF2	gene_body
+DSS	DSS_109	chr8	142416335	142416550	-1	11156	PTP4A3	gene_body
+DSS	DSS_110	chrX	153362179	153362312	-1	4204	MECP2	gene_body
+DSS	DSS_111	chr10	80674407	80674734	-1	283050	ZMIZ1-AS1	gene_body
+DSS	DSS_112	chr19	45491622	45491796	-1	1209	CLPTM1	gene_body
+DSS	DSS_113	chr14	90742366	90742555	-1	55051	NRDE2	gene_body
+DSS	DSS_114	chr10	63761762	63761997	-1	84159	ARID5B	gene_body
+DSS	DSS_116	chr1	16274790	16274938	-1	7709	ZBTB17	gene_body
+DSS	DSS_117	chr16	11702133	11702408	-1	9516	LITAF	gene_body
+DSS	DSS_118	chr9	140655519	140655655	-1	79813	EHMT1	gene_body
+DSS	DSS_119	chr1	85435400	85435646	-1	255231	MCOLN2	gene_body
+DSS	DSS_120	chr11	74316587	74316926	-1	10714	POLD3	gene_body
+DSS	DSS_121	chr12	2977058	2977457	-1	2305	FOXM1	gene_body
+DSS	DSS_122	chr12	133069237	133069456	-1	57666	FBRSL1	gene_body
+DSS	DSS_123	chr2	86464456	86464604	-1	65055	REEP1	gene_body
+DSS	DSS_124	chr10	116307363	116307440	-1	3983	ABLIM1	gene_body
+DSS	DSS_127	chr14	61657105	61657492	-1	5583	PRKCH	gene_body
+DSS	DSS_128	chr8	101339217	101339758	-1	25897	RNF19A	gene_body
+DSS	DSS_130	chr17	65574194	65574408	-1	26207	PITPNC1	gene_body
+DSS	DSS_131	chrX	117061013	117061158	1	90293	KLHL13	gene_body
+DSS	DSS_132	chr11	65824120	65824333	-1	10992	SF3B2	gene_body
+DSS	DSS_133	chr9	113014489	113014751	-1	7295	TXN	gene_body
+DSS	DSS_134	chrX	48398418	48398528	-1	10682	EBP	gene_body
+DSS	DSS_134	chrX	48398418	48398528	-1	4943	TBC1D25	gene_body
+DSS	DSS_136	chr1	170010686	170010943	-1	22920	KIFAP3	gene_body
+DSS	DSS_137	chrX	128657224	128657297	-1	6594	SMARCA1	gene_body
+DSS	DSS_138	chr9	102272277	102272454	-1	100996569	NAMA	gene_body
+DSS	DSS_138	chr9	102272277	102272454	-1	101928438	LOC101928438	gene_body
+DSS	DSS_138	chr9	102272277	102272454	-1	441461	STX17-DT	gene_body
+DSS	DSS_139	chr13	27705445	27705648	-1	100874070	USP12-AS1	gene_body
+DSS	DSS_139	chr13	27705445	27705648	-1	219333	USP12	gene_body
+DSS	DSS_140	chr16	79135540	79135764	-1	51741	WWOX	gene_body
+DSS	DSS_141	chr1	112145772	112145997	-1	100129269	LINC01160	gene_body
+DSS	DSS_141	chr1	112145772	112145997	-1	5906	RAP1A	gene_body
+DSS	DSS_145	chr22	27707423	27707491	1	100507657	LINC02554	gene_body
+DSS	DSS_146	chr16	70824357	70824623	-1	55697	VAC14	gene_body
+DSS	DSS_147	chr5	131999808	132000045	-1	101927761	TH2LCRR	gene_body
+DSS	DSS_148	chr1	211513156	211513602	-1	7188	TRAF5	gene_body
+DSS	DSS_149	chr9	109744110	109744373	-1	340512	LOC340512	gene_body
+DSS	DSS_149	chr9	109744110	109744373	-1	58499	ZNF462	gene_body
+DSS	DSS_150	chr3	188063108	188063376	-1	4026	LPP	gene_body
+DSS	DSS_151	chr4	103443187	103443731	-1	4790	NFKB1	gene_body
+DSS	DSS_152	chr7	98739627	98739782	-1	57154	SMURF1	gene_body
+DSS	DSS_154	chr6	137493729	137493847	-1	116379	IL22RA2	gene_body
+DSS	DSS_155	chrX	136649977	136650032	-1	7547	ZIC3	gene_body
+DSS	DSS_156	chr7	50420101	50420385	-1	10320	IKZF1	gene_body
+DSS	DSS_157	chr1	85461631	85461896	-1	255231	MCOLN2	gene_body
+DSS	DSS_159	chr7	158597180	158597250	-1	57488	ESYT2	gene_body
+DSS	DSS_164	chr7	130716302	130716519	-1	378805	LINC-PINT	gene_body
+DSS	DSS_165	chr7	130132637	130132690	1	4232	MEST	gene_body
+DSS	DSS_167	chr12	94602072	94602316	-1	10154	PLXNC1	gene_body
+DSS	DSS_168	chr7	98739399	98739539	-1	57154	SMURF1	gene_body
+DSS	DSS_170	chr1	11889599	11889823	-1	1185	CLCN6	gene_body
+DSS	DSS_171	chr4	36328611	36328855	-1	401124	DTHD1	gene_body
+DSS	DSS_175	chr3	4637431	4637767	-1	3708	ITPR1	gene_body
+DSS	DSS_176	chr13	28590055	28590468	-1	2322	FLT3	gene_body
+DSS	DSS_178	chr11	35993538	35993896	-1	143458	LDLRAD3	gene_body
+DSS	DSS_180	chr5	95513363	95513651	-1	101929710	LOC101929710	gene_body
+DSS	DSS_180	chr5	95513363	95513651	-1	831	CAST	gene_body
+DSS	DSS_181	chr15	74722405	74722641	-1	8482	SEMA7A	gene_body
+DSS	DSS_183	chrX	146993523	146993665	-1	2332	FMR1	gene_body
+DSS	DSS_185	chr16	20931550	20931940	-1	57149	LYRM1	gene_body
+DSS	DSS_187	chr2	225902739	225903147	-1	55619	DOCK10	gene_body
+DSS	DSS_189	chr7	138349560	138349615	-1	136306	SVOPL	gene_body
+DSS	DSS_190	chr5	142585961	142586113	-1	23092	ARHGAP26	gene_body
+DSS	DSS_191	chr1	95508282	95508506	-1	101928098	ALG14-AS1	gene_body
+DSS	DSS_191	chr1	95508282	95508506	-1	199857	ALG14	gene_body
+DSS	DSS_193	chr18	60924743	60925050	-1	596	BCL2	gene_body
+DSS	DSS_194	chr8	630481	630574	-1	157697	ERICH1	gene_body
+DSS	DSS_195	chr16	11253438	11253834	-1	23274	CLEC16A	gene_body
+DSS	DSS_197	chr9	132696625	132696722	-1	23048	FNBP1	gene_body
+DSS	DSS_198	chr1	236323313	236323558	-1	7107	GPR137B	gene_body
+DSS	DSS_199	chr16	47009912	47010083	-1	119545626	DNAJA2-DT	gene_body
+DSS	DSS_200	chr20	40133826	40134120	-1	84181	CHD6	gene_body
+DSS	DSS_201	chr2	7576537	7576889	-1	100506274	LOC100506274	gene_body
+DSS	DSS_203	chr6	138113203	138113530	-1	100507406	LINC02539	gene_body
+DSS	DSS_205	chr11	63376472	63376685	-1	11145	PLAAT3	gene_body
+DSS	DSS_206	chr21	39030094	39030231	-1	105372799	KCNJ6-AS1	gene_body
+DSS	DSS_206	chr21	39030094	39030231	-1	3763	KCNJ6	gene_body
+DSS	DSS_208	chr2	214022013	214022390	-1	105373863	LINC01953	gene_body
+DSS	DSS_209	chr9	116692317	116692561	-1	114991	ZNF618	gene_body
+DSS	DSS_210	chrX	153991307	153991395	-1	1736	DKC1	gene_body
+DSS	DSS_211	chr22	38624139	38624198	-1	25829	TMEM184B	gene_body
+DSS	DSS_212	chr11	66697279	66697553	-1	5091	PC	gene_body
+DSS	DSS_213	chr12	788358	788572	-1	105369597	LINC02455	gene_body
+DSS	DSS_217	chr3	71399738	71400148	-1	27086	FOXP1	gene_body
+DSS	DSS_217	chr3	71399738	71400148	-1	317649	EIF4E3	gene_body
+DSS	DSS_218	chr18	46281430	46281682	-1	9811	CTIF	gene_body
+DSS	DSS_221	chr18	21631659	21631825	-1	125488	TTC39C	gene_body
+DSS	DSS_224	chr11	60712076	60712280	-1	51296	SLC15A3	gene_body
+DSS	DSS_226	chr1	173267119	173267258	-1	100506023	LOC100506023	gene_body
+DSS	DSS_226	chr1	173267119	173267258	-1	7292	TNFSF4	gene_body
+DSS	DSS_227	chr22	18586932	18587005	-1	51807	TUBA8	gene_body
+DSS	DSS_227	chr22	18586932	18587005	-1	55670	PEX26	gene_body
+DSS	DSS_228	chr10	11315565	11315845	-1	10659	CELF2	gene_body
+DSS	DSS_229	chr22	25862056	25862231	-1	1416	CRYBB2P1	gene_body
+DSS	DSS_235	chr10	120921456	120921507	-1	119559	SFXN4	gene_body
+DSS	DSS_236	chr8	125726575	125726737	-1	9788	MTSS1	gene_body
+DSS	DSS_237	chr4	8422805	8422886	-1	8310	ACOX3	gene_body
+DSS	DSS_239	chr16	73872642	73872696	-1	463	ZFHX3	gene_body
+DSS	DSS_244	chr2	62176206	62176530	-1	150684	COMMD1	gene_body
+DSS	DSS_245	chr2	206612280	206612346	-1	8828	NRP2	gene_body
+DSS	DSS_247	chr7	141285961	141286140	-1	55750	AGK	gene_body
+DSS	DSS_248	chr1	156691446	156691538	-1	81875	ISG20L2	gene_body
+DSS	DSS_251	chr12	94179109	94179216	-1	8738	CRADD	gene_body
+DSS	DSS_253	chr5	36679822	36679892	-1	6507	SLC1A3	gene_body
+DSS	DSS_13	chr17	38755491	38755933	-1			intergenic
+DSS	DSS_23	chr10	3929019	3929367	-1			intergenic
+DSS	DSS_37	chr2	65521133	65521487	-1			intergenic
+DSS	DSS_39	chr8	29357593	29357818	-1			intergenic
+DSS	DSS_40	chr21	44727095	44727470	-1			intergenic
+DSS	DSS_49	chr16	11277096	11277453	-1			intergenic
+DSS	DSS_50	chr1	25297009	25297315	-1			intergenic
+DSS	DSS_51	chr11	102164027	102164533	-1			intergenic
+DSS	DSS_53	chr2	191657719	191658420	-1			intergenic
+DSS	DSS_54	chr12	92947110	92947537	-1			intergenic
+DSS	DSS_56	chr10	112127652	112127915	-1			intergenic
+DSS	DSS_58	chr12	92896722	92897399	-1			intergenic
+DSS	DSS_60	chr10	5624500	5624861	-1			intergenic
+DSS	DSS_64	chr14	76017536	76017964	-1			intergenic
+DSS	DSS_65	chr6	14072394	14072637	-1			intergenic
+DSS	DSS_70	chr15	62637220	62637302	-1			intergenic
+DSS	DSS_75	chr5	78884600	78884926	-1			intergenic
+DSS	DSS_76	chr12	123205661	123205946	-1			intergenic
+DSS	DSS_78	chr19	35481688	35482127	-1			intergenic
+DSS	DSS_88	chr7	150517855	150518338	-1			intergenic
+DSS	DSS_90	chr13	100047829	100048178	-1			intergenic
+DSS	DSS_98	chr22	22471906	22471969	1			intergenic
+DSS	DSS_102	chr6	14110329	14110582	-1			intergenic
+DSS	DSS_103	chr1	158363477	158363705	-1			intergenic
+DSS	DSS_107	chr9	90078613	90078794	-1			intergenic
+DSS	DSS_108	chr19	35480226	35480460	-1			intergenic
+DSS	DSS_115	chr3	75445381	75445477	1			intergenic
+DSS	DSS_125	chr12	4255525	4255832	-1			intergenic
+DSS	DSS_126	chr12	4085679	4085933	-1			intergenic
+DSS	DSS_129	chr17	38737573	38737993	-1			intergenic
+DSS	DSS_135	chr19	10496862	10497273	-1			intergenic
+DSS	DSS_142	chr20	22710661	22711079	-1			intergenic
+DSS	DSS_143	chr7	67653	68014	-1			intergenic
+DSS	DSS_144	chr2	204450733	204451082	-1			intergenic
+DSS	DSS_153	chr1	64660653	64660805	-1			intergenic
+DSS	DSS_158	chr17	62735839	62736051	-1			intergenic
+DSS	DSS_160	chr6	89723140	89723526	-1			intergenic
+DSS	DSS_161	chr3	75445724	75445845	1			intergenic
+DSS	DSS_162	chr10	30799659	30800044	-1			intergenic
+DSS	DSS_163	chr8	59700877	59701080	-1			intergenic
+DSS	DSS_166	chr11	102422166	102422347	-1			intergenic
+DSS	DSS_169	chr8	29381280	29381501	-1			intergenic
+DSS	DSS_172	chr5	157039261	157039406	-1			intergenic
+DSS	DSS_173	chr9	117365671	117365996	-1			intergenic
+DSS	DSS_174	chr17	14277022	14277237	-1			intergenic
+DSS	DSS_179	chr7	41345792	41346145	-1			intergenic
+DSS	DSS_182	chr11	88218087	88218470	-1			intergenic
+DSS	DSS_184	chr17	38733911	38734162	-1			intergenic
+DSS	DSS_188	chr18	9911271	9911548	-1			intergenic
+DSS	DSS_192	chr7	114556443	114556701	-1			intergenic
+DSS	DSS_196	chr5	179894247	179894339	-1			intergenic
+DSS	DSS_202	chr15	80282723	80282906	-1			intergenic
+DSS	DSS_204	chr4	139221176	139221423	-1			intergenic
+DSS	DSS_214	chr8	126655095	126655272	-1			intergenic
+DSS	DSS_215	chr9	117370068	117370235	-1			intergenic
+DSS	DSS_216	chr6	3804371	3804585	-1			intergenic
+DSS	DSS_219	chr2	235399700	235399794	-1			intergenic
+DSS	DSS_220	chr12	88693480	88693696	-1			intergenic
+DSS	DSS_222	chrX	108744487	108744884	-1			intergenic
+DSS	DSS_223	chr5	173281284	173281507	-1			intergenic
+DSS	DSS_225	chr7	21578427	21578885	-1			intergenic
+DSS	DSS_230	chr12	778419	778548	-1			intergenic
+DSS	DSS_231	chr20	44741520	44741710	-1			intergenic
+DSS	DSS_232	chr12	116978537	116978646	-1			intergenic
+DSS	DSS_233	chr2	175556014	175556591	-1			intergenic
+DSS	DSS_234	chrX	40876294	40876449	-1			intergenic
+DSS	DSS_238	chr3	104273395	104273489	-1			intergenic
+DSS	DSS_240	chr1	168479138	168479330	-1			intergenic
+DSS	DSS_241	chr2	235399547	235399637	-1			intergenic
+DSS	DSS_242	chr3	119290611	119290823	-1			intergenic
+DSS	DSS_243	chr6	6861924	6862230	-1			intergenic
+DSS	DSS_246	chr11	102423422	102423694	-1			intergenic
+DSS	DSS_249	chr3	59051225	59051278	-1			intergenic
+DSS	DSS_250	chr3	16783584	16783749	-1			intergenic
+DSS	DSS_252	chr3	41002705	41002953	-1			intergenic

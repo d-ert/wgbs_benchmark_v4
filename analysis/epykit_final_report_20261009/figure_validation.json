@@ -1,0 +1,19 @@
+{
+  "figures": [
+    "region_f1.svg",
+    "recall_decomposition.png",
+    "null_by_depth.png",
+    "recall_decomposition.svg",
+    "runtime_phases.svg",
+    "region_f1.png",
+    "runtime_phases.png",
+    "null_by_depth.svg"
+  ],
+  "sources": [
+    "region_comparison.csv",
+    "candidate_ceiling.csv",
+    "timing_comparison.csv",
+    "strata.csv"
+  ],
+  "checked": "All charts generated from reviewed rows; visual inspection required before delivery."
+}

@@ -1,0 +1,34 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__ test_boundary_site_does_not_borrow_chromosome_residual_degrees_of_freedom ___
+
+    def test_boundary_site_does_not_borrow_chromosome_residual_degrees_of_freedom():
+        small = _boundary_site(100)
+        large = _boundary_site(1000)
+        # Adding identical background leaves the learned scale and prior weight
+        # unchanged; it cannot turn a five-vs-five test into thousands of replicates.
+>       np.testing.assert_allclose(small[-1][0], large[-1][0])
+
+tests/test_default_eb_uncertainty.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+args = (<function assert_allclose.<locals>.compare at 0x740810bf3370>, array(800.), array(8000.))
+kwds = {'equal_nan': True, 'err_msg': '', 'header': 'Not equal to tolerance rtol=1e-07, atol=0', 'verbose': True}
+
+    @wraps(func)
+    def inner(*args, **kwds):
+        with self._recreate_cm():
+>           return func(*args, **kwds)
+E           AssertionError: 
+E           Not equal to tolerance rtol=1e-07, atol=0
+E           
+E           Mismatched elements: 1 / 1 (100%)
+E           Max absolute difference: 7200.
+E           Max relative difference: 0.9
+E            x: array(800.)
+E            y: array(8000.)
+
+/usr/lib/python3.10/contextlib.py:79: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_default_eb_uncertainty.py::test_boundary_site_does_not_borrow_chromosome_residual_degrees_of_freedom
+1 failed in 0.21s

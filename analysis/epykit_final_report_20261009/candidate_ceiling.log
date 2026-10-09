@@ -1,0 +1,13 @@
+      tool    stage  threshold  calls  matched  truth_regions_with_any_overlap  truth_regions_with_qualifying_overlap   recall
+  original before_q        0.5  10785     1208                            1431                                   1208 0.417560
+  original before_q        0.8  10785      689                            1431                                    689 0.238161
+  original  after_q        0.5   3623     1202                            1409                                   1202 0.415486
+  original  after_q        0.8   3623      689                            1409                                    689 0.238161
+region_fix before_q        0.5  10785     1208                            1431                                   1208 0.417560
+region_fix before_q        0.8  10785      689                            1431                                    689 0.238161
+region_fix  after_q        0.5    980      891                             954                                    891 0.307985
+region_fix  after_q        0.8    980      587                             954                                    587 0.202904
+      BB_F before_q        0.5   3771     1169                            1390                                   1169 0.404079
+      BB_F before_q        0.8   3771      705                            1390                                    705 0.243692
+      BB_F  after_q        0.5    853      779                             835                                    779 0.269271
+      BB_F  after_q        0.8    853      558                             835                                    558 0.192879

@@ -1,0 +1,78 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_high_coverage_endpoint_fits_have_finite_information[m0-0.0] _______
+
+m = [0, 0], mu = 0.0
+
+    @pytest.mark.parametrize('m,mu', [([0,0],0.),([300,300],1.)])
+    def test_high_coverage_endpoint_fits_have_finite_information(m,mu):
+        bb = _core()
+>       fitted,ll,information = bb.fit_mean(np.array(m),np.array([300,300]),.1)
+
+tests/test_beta_binomial_likelihood.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+m = array([0, 0]), n = array([300, 300]), rho = 0.1
+
+    def fit_mean(m,n,rho):
+        m,n = _counts(m,n,1)
+        rho = float(_check_rho(rho))
+>       mu,ll,information,converged = _fit_mean(m,n,rho,0,len(m))
+E       ZeroDivisionError: division by zero
+
+src/epykit/_beta_binomial.py:218: ZeroDivisionError
+_______ test_high_coverage_endpoint_fits_have_finite_information[m1-1.0] _______
+
+m = [300, 300], mu = 1.0
+
+    @pytest.mark.parametrize('m,mu', [([0,0],0.),([300,300],1.)])
+    def test_high_coverage_endpoint_fits_have_finite_information(m,mu):
+        bb = _core()
+>       fitted,ll,information = bb.fit_mean(np.array(m),np.array([300,300]),.1)
+
+tests/test_beta_binomial_likelihood.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+m = array([300, 300]), n = array([300, 300]), rho = 0.1
+
+    def fit_mean(m,n,rho):
+        m,n = _counts(m,n,1)
+        rho = float(_check_rho(rho))
+>       mu,ll,information,converged = _fit_mean(m,n,rho,0,len(m))
+E       ZeroDivisionError: division by zero
+
+src/epykit/_beta_binomial.py:218: ZeroDivisionError
+_______ test_high_depth_zero_group_runs_through_shrinkage_and_intervals ________
+
+    def test_high_depth_zero_group_runs_through_shrinkage_and_intervals():
+>       result = bb.test_lognormal(np.array([[0,0,30,30]]),np.full((1,4),300),2,
+            prior={'log_rho_mean':np.log(.05),'log_rho_sd':1.},intervals=True)
+
+tests/test_beta_binomial_inference.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+m = array([[ 0,  0, 30, 30]]), n = array([[300, 300, 300, 300]]), n_case = 2
+
+    def test_lognormal(m,n,n_case,*,prior,reference='adaptive',intervals=False):
+        """True BB profile likelihood with a continuous normal prior on log rho.
+    
+        The mode is in log-rho coordinates, as in log-dispersion shrinkage.
+        F remains a small-sample approximation; intervals condition on fitted rho.
+        """
+        m,n = _counts(m,n,2)
+        if not isinstance(n_case,(int,np.integer)) or not 0<n_case<m.shape[1]:
+            raise ValueError('n_case must split columns into two nonempty groups')
+        center,sd = float(prior['log_rho_mean']),float(prior['log_rho_sd'])
+        if not np.isfinite(center) or not np.isfinite(sd) or sd<=0:
+            raise ValueError('Log-dispersion prior requires a finite center and positive sd')
+        if reference not in {'adaptive','F','chi2'}:
+            raise ValueError('reference must be adaptive, F or chi2')
+>       output,converged = _lognormal_batch(m,n,n_case,center,sd)
+E       ZeroDivisionError: division by zero
+
+src/epykit/_beta_binomial.py:543: ZeroDivisionError
+=========================== short test summary info ============================
+FAILED tests/test_beta_binomial_likelihood.py::test_high_coverage_endpoint_fits_have_finite_information[m0-0.0]
+FAILED tests/test_beta_binomial_likelihood.py::test_high_coverage_endpoint_fits_have_finite_information[m1-1.0]
+FAILED tests/test_beta_binomial_inference.py::test_high_depth_zero_group_runs_through_shrinkage_and_intervals
+3 failed in 0.54s
